@@ -23,7 +23,7 @@ public class GameBoard {
         int colums = 32;
 
         int[][] board = new int[rows][colums];
-        levelSelected.close();
+        //levelSelected.close();
 
         levelSelected = new Scanner(new File("src/sample/level1.txt"));
         for (int i=0; i<rows; i++){
