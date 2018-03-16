@@ -1,5 +1,8 @@
 package sample;
 
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -12,35 +15,14 @@ public class GameBoard {
         this.level = level;
     }
 
-    public int[][] board() throws IOException{
-        Scanner levelSelected = readFile(this.level);
-        int[][] levelToDraw = initiateLevel(levelSelected);
-        return levelToDraw;
-}
 
-    private int[][] initiateLevel(Scanner levelSelected) throws IOException{
-        int rows = 18;
-        int colums = 32;
+    public void drawBoard(Pane pane)throws IOException{
+        Scanner input = null;
 
-        int[][] board = new int[rows][colums];
-        //levelSelected.close();
-
-        levelSelected = new Scanner(new File("src/sample/level1.txt"));
-        for (int i=0; i<rows; i++){
-            for(int j=0; j<colums; j++){
-                if(levelSelected.hasNextInt()){
-                    board[i][j] = levelSelected.nextInt();
-                }
-            }
-        }
-        return board;
-    }
-
-    public Scanner readFile(int selectedLevel) throws IOException{
-        switch (selectedLevel) {
+        //Select case for every possible selected level
+        switch (this.level) {
             case 1:
-                Scanner input = new Scanner(new File("src/sample/level1.txt"));
-                return input;
+                input = new Scanner(new File("src/sample/level1.txt"));
             case 2:
                 break;
             case 3:
@@ -62,7 +44,44 @@ public class GameBoard {
             default:
                 break;
         }
-        return null;
+
+        //Initiates rows and colums for the board
+        int rows = 18;
+        int colums = 32;
+        int[][] board = new int[rows][colums];
+
+        //reads the txt file to board 2D array
+        for (int i=0; i<rows; i++){
+            for(int j=0; j<colums; j++){
+                if(input.hasNextInt()){
+                    board[i][j] = input.nextInt();
+                }
+            }
+        }
+
+        //draws the objects into pane
+        for (int i=0; i<rows; i++){
+            for(int j=0; j<colums; j++){
+
+                switch (board[i][j]){
+                    case 1:
+
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
 }

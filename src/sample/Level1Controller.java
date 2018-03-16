@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import javax.swing.*;
@@ -22,12 +23,15 @@ public class Level1Controller {
     protected Canvas canvas;
     @FXML
     protected AnchorPane anchor;
+    @FXML
+    protected Pane pane;
     protected GraphicsContext gc;
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException{
        gc = canvas.getGraphicsContext2D();
        GameBoard level1 = new GameBoard(1);
+       level1.drawBoard(pane);
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(e -> {
