@@ -31,7 +31,7 @@ public class Level1Controller {
     private void initialize() throws IOException{
        gc = canvas.getGraphicsContext2D();
        GameBoard level1 = new GameBoard(1);
-       level1.drawBoard(pane);
+       level1.drawBoard(gc);
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(e -> {

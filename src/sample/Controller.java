@@ -24,7 +24,10 @@ public class Controller {
 
 
     public void level1Selected()throws IOException{
-        main.root = FXMLLoader.load(getClass().getResource("level1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("level1.fxml"));
+        Level1Controller controller = new Level1Controller();
+        loader.setController(controller);
+        main.root = loader.load();
         anchor.getChildren().setAll(main.root);
     }
 }

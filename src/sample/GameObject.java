@@ -1,8 +1,8 @@
 package sample;
 
 public abstract class GameObject {
-    private double x;
-    private double y;
+    protected double x;
+    protected double y;
     int h;
     int w;
 

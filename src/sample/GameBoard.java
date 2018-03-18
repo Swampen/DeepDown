@@ -1,10 +1,15 @@
 package sample;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
 
 public class GameBoard {
@@ -16,13 +21,14 @@ public class GameBoard {
     }
 
 
-    public void drawBoard(Pane pane)throws IOException{
+    public void drawBoard(GraphicsContext gc)throws IOException{
         Scanner input = null;
 
         //Select case for every possible selected level
         switch (this.level) {
             case 1:
                 input = new Scanner(new File("src/sample/level1.txt"));
+                break;
             case 2:
                 break;
             case 3:
@@ -66,6 +72,9 @@ public class GameBoard {
                 switch (board[i][j]){
                     case 1:
 
+                        Wall wall = new Wall(j*40, i*40, 40, 40);
+                        Image image = new Image(new FileInputStream("src/sample/TestSprite.png"));
+                        gc.drawImage(image, wall.x, wall.y);
                         break;
                     case 2:
                         break;
