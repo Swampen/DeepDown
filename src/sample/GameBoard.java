@@ -73,8 +73,8 @@ public class GameBoard {
                     case 1:
 
                         Wall wall = new Wall(j*40, i*40, 40, 40);
-                        Image image = new Image(new FileInputStream("src/sample/TestSprite.png"));
-                        gc.drawImage(image, wall.x, wall.y);
+                        Image image = new Image(new FileInputStream("src/sample/TestSprite2.png"));
+                        gc.drawImage(image, 0, 0, 40, 40, wall.x,wall.y,40,40);
                         break;
                     case 2:
                         break;
