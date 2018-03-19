@@ -81,12 +81,20 @@ public class GameBoard {
                         gc.drawImage(image, 40, 0,40,40, pickup.x, pickup.y, 40, 40);
                         break;
                     case 3:
+                        Enemy enemy = new Enemy(j*40, i*40, 40, 40);
+                        //gc.drawImage(image, 80, 0, 40, 40, enemy.x,enemy.y,40,40);
                         break;
                     case 4:
+                        Avatar player = new Avatar(j*40, i*40, 40, 40, 3, true);
+                        //gc.drawImage(image, 0, 40, 40, 40, player.x,player.y,40,40);
                         break;
                     case 5:
+                        Key key = new Key(j*40,i*40,40,40, false, false);
+                        //gc.drawImage(image, 40, 40, 40, 40, key.x,key.y,40,40);
                         break;
                     case 6:
+                        //Exit exit = new Exit(j*40, i*40, 40, 40, false)
+                        //gc.drawImage(image, 40, 80, 40, 40, exit.x,exit.y,40,40);
                         break;
                     default:
                         break;
