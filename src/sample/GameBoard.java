@@ -23,6 +23,8 @@ public class GameBoard {
 
     public void drawBoard(GraphicsContext gc)throws IOException{
         Scanner input = null;
+        Image image = new Image(new FileInputStream("src/sample/TestSprite2.png"));
+
 
         //Select case for every possible selected level
         switch (this.level) {
@@ -71,12 +73,12 @@ public class GameBoard {
 
                 switch (board[i][j]){
                     case 1:
-
                         Wall wall = new Wall(j*40, i*40, 40, 40);
-                        Image image = new Image(new FileInputStream("src/sample/TestSprite2.png"));
                         gc.drawImage(image, 0, 0, 40, 40, wall.x,wall.y,40,40);
                         break;
                     case 2:
+                        Pickup pickup = new Pickup(j*40, i*40, 40, 40, false);
+                        gc.drawImage(image, 40, 0,40,40, pickup.x, pickup.y, 40, 40);
                         break;
                     case 3:
                         break;
