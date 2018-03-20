@@ -35,7 +35,11 @@ public class Avatar extends GameObject{
 
     public void posUpdate(double time) {
         x += xVelo * time;
-        y += xVelo *time;
+        y += yVelo * time;
+    }
+
+    public double getyVelo(){
+        return yVelo;
     }
 
 

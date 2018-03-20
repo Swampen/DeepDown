@@ -1,7 +1,9 @@
 package sample;
 
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -16,9 +18,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.net.URL;
 import java.security.Key;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class Level1Controller {
+import static javafx.scene.input.KeyCode.W;
+
+public class Level1Controller implements Initializable{
 
     @FXML
     protected Canvas canvas;
@@ -28,24 +35,52 @@ public class Level1Controller {
     protected Pane pane;
     protected GraphicsContext gc;
 
-    @FXML
-    private void initialize() throws IOException{
-       gc = canvas.getGraphicsContext2D();
-       GameBoard level1 = new GameBoard(1);
-       Avatar player = level1.drawBoard(gc);
-
-       update(player);
+/*    @FXML
+    private void initialize() throws IOException {
+        gc = canvas.getGraphicsContext2D();
+        GameBoard level1 = new GameBoard(1);
+        Avatar player = level1.drawBoard(gc);
 
 
+        final long time = System.nanoTime()/1000000000;
+
+        canvas.setFocusTraversable(true);
+        canvas.setOnKeyPressed(e ->{
+            if (e.getCode() == W){
+                System.out.println("w");
+                player.addVelocity(0,50);
+                player.posUpdate(time);
+                System.out.println(player.getyVelo());
+            }
+        });
+    }*/
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) throws IOException{
+        gc = canvas.getGraphicsContext2D();
+        GameBoard level1 = new GameBoard(1);
+        Avatar player = level1.drawBoard(gc);
 
 
+        final long time = System.nanoTime()/1000000000;
+
+        canvas.setFocusTraversable(true);
+        canvas.setOnKeyPressed(e -> {
+            if (e.getCode() == W) {
+                System.out.println("w");
+                player.addVelocity(0, 50);
+                player.posUpdate(time);
+                System.out.println(player.getyVelo());
+            }
+        });
     }
-    public void update(Avatar player) {
+
+    /*public void update(Avatar player) {
         final long timeStart = System.nanoTime();
         new AnimationTimer(){
             public void handle(long currentTime){
                 System.out.println("heihei!");
-                double t = (currentTime - timeStart)/ 1000000000.0;
+                double time = (currentTime - timeStart)/ 1000000000.0;
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(e ->{
@@ -68,11 +103,9 @@ public class Level1Controller {
                 break;
             }
         });
-
-                player.posUpdate(t);
-
+                player.posUpdate(time);
             }
         };
-    }
+    }*/
 }
 

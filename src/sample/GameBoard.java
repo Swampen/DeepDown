@@ -92,7 +92,7 @@ public class GameBoard {
                         break;
                     case 4:
                         player = new Avatar(j*40, i*40, 40, 40, 3, true, 0, 0);
-                        //gc.drawImage(image, 0, 40, 40, 40, player.x,player.y,40,40);
+                        //gc.drawImage(image, 0, 0, 40, 40, player.x,player.y,40,40);
                         break;
                     case 5:
                         Key key = new Key(j*40,i*40,40,40, false, false);
