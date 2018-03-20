@@ -21,7 +21,7 @@ public class GameBoard {
     }
 
 
-    public void drawBoard(GraphicsContext gc)throws IOException{
+    public Avatar drawBoard(GraphicsContext gc)throws IOException{
         Scanner input = null;
         Image image = new Image(new FileInputStream("src/sample/TestSprite2.png"));
 
@@ -32,14 +32,19 @@ public class GameBoard {
                 input = new Scanner(new File("src/sample/level1.txt"));
                 break;
             case 2:
+                //input = new Scanner(new File("src/sample/level2.txt"));
                 break;
             case 3:
+                //input = new Scanner(new File("src/sample/level3.txt"));
                 break;
             case 4:
+                //input = new Scanner(new File("src/sample/level4.txt"));
                 break;
             case 5:
+                //input = new Scanner(new File("src/sample/level5.txt"));
                 break;
             case 6:
+                //input = new Scanner(new File("src/sample/level6.txt"));
                 break;
             case 7:
                 break;
@@ -67,6 +72,7 @@ public class GameBoard {
             }
         }
 
+        Avatar player = null;
         //draws the objects into pane
         for (int i=0; i<rows; i++){
             for(int j=0; j<colums; j++){
@@ -85,7 +91,7 @@ public class GameBoard {
                         //gc.drawImage(image, 80, 0, 40, 40, enemy.x,enemy.y,40,40);
                         break;
                     case 4:
-                        Avatar player = new Avatar(j*40, i*40, 40, 40, 3, true);
+                        player = new Avatar(j*40, i*40, 40, 40, 3, true, 0, 0);
                         //gc.drawImage(image, 0, 40, 40, 40, player.x,player.y,40,40);
                         break;
                     case 5:
@@ -101,6 +107,7 @@ public class GameBoard {
                 }
             }
         }
+        return player;
     }
 
 }

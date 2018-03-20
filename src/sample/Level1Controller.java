@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -31,29 +32,47 @@ public class Level1Controller {
     private void initialize() throws IOException{
        gc = canvas.getGraphicsContext2D();
        GameBoard level1 = new GameBoard(1);
-       level1.drawBoard(gc);
+       Avatar player = level1.drawBoard(gc);
+
+       update(player);
+
+
+
+
+    }
+    public void update(Avatar player) {
+        final long timeStart = System.nanoTime();
+        new AnimationTimer(){
+            public void handle(long currentTime){
+                System.out.println("heihei!");
+                double t = (currentTime - timeStart)/ 1000000000.0;
 
         canvas.setFocusTraversable(true);
-        canvas.setOnKeyPressed(e -> {
-            switch (e.getCode()){
+        canvas.setOnKeyPressed(e ->{
+            switch(e.getCode()){
                 case W:
-                    System.out.println("W");
-                    break;
-                case A:
-                    System.out.println("A");
-                    break;
-                case S:
-                    System.out.println("S");
-                    break;
-                case D:
-                    System.out.println("D");
-                    break;
-                default:
-                    System.out.println("other key");
-                    break;
-
+                System.out.println("W");
+                break;
+            case A:
+                System.out.println("A");
+                break;
+            case S:
+                System.out.println("S");
+                break;
+            case D:
+                player.addVelocity(50,0);
+                System.out.println("D");
+                break;
+            default:
+                System.out.println("other key");
+                break;
             }
         });
+
+                player.posUpdate(t);
+
+            }
+        };
     }
 }
 

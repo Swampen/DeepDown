@@ -3,11 +3,15 @@ package sample;
 public class Avatar extends GameObject{
     private int lives;
     private boolean isAlive;
+    private double xVelo;
+    private double yVelo;
 
-    public Avatar(double x, double y, int height, int width, int lives, boolean isAlive) {
+    public Avatar(double x, double y, int height, int width, int lives, boolean isAlive, double xVelo, double yVelo) {
         super(x, y, height, width);
         this.lives = lives;
         this.isAlive = isAlive;
+        this.xVelo = xVelo;
+        this.yVelo = yVelo;
     }
 
     public int getLives() {
@@ -22,6 +26,16 @@ public class Avatar extends GameObject{
     }
     public void setAlive(boolean alive) {
         isAlive = alive;
+    }
+
+    public void addVelocity(double x, double y) {
+        xVelo += x;
+        yVelo += y;
+    }
+
+    public void posUpdate(double time) {
+        x += xVelo * time;
+        y += xVelo *time;
     }
 
 
