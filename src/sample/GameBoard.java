@@ -23,7 +23,7 @@ public class GameBoard {
 
     public Avatar drawBoard(GraphicsContext gc)throws IOException{
         Scanner input = null;
-        Image image = new Image(new FileInputStream("src/sample/TestSprite2.png"));
+        Image image = new Image(new FileInputStream("src/sample/DeepDownTileSet.png"));
 
 
         //Select case for every possible selected level
@@ -88,7 +88,7 @@ public class GameBoard {
                         break;
                     case 3:
                         Enemy enemy = new Enemy(j*40, i*40, 40, 40);
-                        //gc.drawImage(image, 80, 0, 40, 40, enemy.x,enemy.y,40,40);
+                        gc.drawImage(image, 80, 0, 40, 40, enemy.x,enemy.y,40,40);
                         break;
                     case 4:
                         player = new Avatar(j*40, i*40, 40, 40, 3, true, 0, 0);
@@ -96,7 +96,7 @@ public class GameBoard {
                         break;
                     case 5:
                         Key key = new Key(j*40,i*40,40,40, false, false);
-                        //gc.drawImage(image, 40, 40, 40, 40, key.x,key.y,40,40);
+                        gc.drawImage(image, 120, 0, 40, 40, key.x,key.y,40,40);
                         break;
                     case 6:
                         //Exit exit = new Exit(j*40, i*40, 40, 40, false)

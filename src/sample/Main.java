@@ -23,10 +23,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        Level1Controller en = new Level1Controller();
         try {
+            Controller controller = new Controller();
             URL url = getClass().getResource("levelSelect.fxml");
-            root = FXMLLoader.load(url);
+            FXMLLoader loader = new FXMLLoader(url);
+            loader.setController(controller);
+            root = loader.load();
+
 
             scene = new Scene(root);
             stage.setScene(scene);
