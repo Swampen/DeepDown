@@ -68,8 +68,12 @@ public class Level1Controller implements Initializable{
         }
 
 
+<<<<<<< HEAD
 /*
         final long time = System.nanoTime()/1000000000;
+=======
+        /*final long time = System.nanoTime()/1000000000;
+>>>>>>> b67f3e54bacd1c14453a5bd172a62bc151193567
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(e -> {

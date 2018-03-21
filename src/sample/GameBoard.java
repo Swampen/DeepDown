@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -109,5 +110,6 @@ public class GameBoard {
         }
         return player;
     }
+    // Tests
 
 }

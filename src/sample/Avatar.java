@@ -1,5 +1,6 @@
 package sample;
 
+
 public class Avatar extends GameObject{
     private int lives;
     private boolean isAlive;
@@ -42,5 +43,10 @@ public class Avatar extends GameObject{
         return yVelo;
     }
 
+    //Tests
+
 
 }
+
+
+
