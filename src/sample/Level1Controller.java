@@ -56,13 +56,19 @@ public class Level1Controller implements Initializable{
     }*/
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) throws IOException{
+    public void initialize(URL location, ResourceBundle resources){
         gc = canvas.getGraphicsContext2D();
         GameBoard level1 = new GameBoard(1);
-        Avatar player = level1.drawBoard(gc);
+        Avatar player = null;
+        try{
+            player = level1.drawBoard(gc);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
 
 
-        final long time = System.nanoTime()/1000000000;
+        /*final long time = System.nanoTime()/1000000000;
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(e -> {
@@ -72,7 +78,7 @@ public class Level1Controller implements Initializable{
                 player.posUpdate(time);
                 System.out.println(player.getyVelo());
             }
-        });
+        });*/
     }
 
     /*public void update(Avatar player) {
