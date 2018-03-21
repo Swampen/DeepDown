@@ -35,26 +35,6 @@ public class Level1Controller implements Initializable{
     protected Pane pane;
     protected GraphicsContext gc;
 
-/*    @FXML
-    private void initialize() throws IOException {
-        gc = canvas.getGraphicsContext2D();
-        GameBoard level1 = new GameBoard(1);
-        Avatar player = level1.drawBoard(gc);
-
-
-        final long time = System.nanoTime()/1000000000;
-
-        canvas.setFocusTraversable(true);
-        canvas.setOnKeyPressed(e ->{
-            if (e.getCode() == W){
-                System.out.println("w");
-                player.addVelocity(0,50);
-                player.posUpdate(time);
-                System.out.println(player.getyVelo());
-            }
-        });
-    }*/
-
     @Override
     public void initialize(URL location, ResourceBundle resources){
         gc = canvas.getGraphicsContext2D();
@@ -67,8 +47,6 @@ public class Level1Controller implements Initializable{
             e.printStackTrace();
         }
 
-
-<<<<<<< HEAD
 /*
         final long time = System.nanoTime()/1000000000;
 =======
