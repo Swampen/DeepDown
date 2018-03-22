@@ -39,13 +39,14 @@ public class Avatar extends GameObject{
         y += yVelo * time;
     }
 
+    public void setVelo(double xVelo, double yVelo){
+        this.xVelo = xVelo;
+        this.yVelo = yVelo;
+    }
+
     public double getyVelo(){
         return yVelo;
     }
-
-    //Tests
-
-
 }
 
 

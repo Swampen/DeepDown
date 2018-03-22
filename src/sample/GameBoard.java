@@ -22,7 +22,7 @@ public class GameBoard {
     }
 
 
-    public Avatar drawBoard(GraphicsContext gc)throws IOException{
+    public void drawBoard(GraphicsContext gc)throws IOException{
         Scanner input = null;
         Image image = new Image(new FileInputStream("src/sample/DeepDownTileSet.png"));
 
@@ -92,7 +92,7 @@ public class GameBoard {
                         gc.drawImage(image, 80, 0, 40, 40, enemy.x,enemy.y,40,40);
                         break;
                     case 4:
-                        player = new Avatar(j*40, i*40, 40, 40, 3, true, 0, 0);
+                        //player = new Avatar(j*40, i*40, 40, 40, 3, true, 0, 0);
                         //gc.drawImage(image, 0, 0, 40, 40, player.x,player.y,40,40);
                         break;
                     case 5:
@@ -108,7 +108,6 @@ public class GameBoard {
                 }
             }
         }
-        return player;
     }
     // Tests
 
