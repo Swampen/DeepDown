@@ -74,22 +74,22 @@ public class GameBoard {
         }
 
         Avatar player = null;
-        //draws the objects into pane
+        //draws the objects into canvas
         for (int i=0; i<rows; i++){
             for(int j=0; j<colums; j++){
 
                 switch (board[i][j]){
                     case 1:
                         Wall wall = new Wall(j*40, i*40, 40, 40);
-                        gc.drawImage(image, 0, 0, 40, 40, wall.x,wall.y,40,40);
+                        gc.drawImage(image, 0, 0, 40, 40, wall.getX(),wall.getY(),40,40);
                         break;
                     case 2:
                         Pickup pickup = new Pickup(j*40, i*40, 40, 40, false);
-                        gc.drawImage(image, 40, 0,40,40, pickup.x, pickup.y, 40, 40);
+                        gc.drawImage(image, 40, 0,40,40, pickup.getX(), pickup.getY(), 40, 40);
                         break;
                     case 3:
                         Enemy enemy = new Enemy(j*40, i*40, 40, 40);
-                        gc.drawImage(image, 80, 0, 40, 40, enemy.x,enemy.y,40,40);
+                        gc.drawImage(image, 80, 0, 40, 40, enemy.getX(),enemy.getY(),40,40);
                         break;
                     case 4:
                         //player = new Avatar(j*40, i*40, 40, 40, 3, true, 0, 0);
@@ -97,7 +97,7 @@ public class GameBoard {
                         break;
                     case 5:
                         Key key = new Key(j*40,i*40,40,40, false, false);
-                        gc.drawImage(image, 120, 0, 40, 40, key.x,key.y,40,40);
+                        gc.drawImage(image, 120, 0, 40, 40, key.getX(),key.getY(),40,40);
                         break;
                     case 6:
                         //Exit exit = new Exit(j*40, i*40, 40, 40, false)
@@ -109,6 +109,4 @@ public class GameBoard {
             }
         }
     }
-    // Tests
-
 }

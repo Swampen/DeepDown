@@ -1,7 +1,7 @@
 package sample;
 
 
-public class Avatar extends GameObject{
+public class Avatar extends GameObject {
     private int lives;
     private boolean isAlive;
     private double xVelo;
@@ -18,6 +18,7 @@ public class Avatar extends GameObject{
     public int getLives() {
         return lives;
     }
+
     public void setLives(int lives) {
         this.lives = lives;
     }
@@ -25,6 +26,7 @@ public class Avatar extends GameObject{
     public boolean isAlive() {
         return isAlive;
     }
+
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
@@ -34,18 +36,14 @@ public class Avatar extends GameObject{
         yVelo += y;
     }
 
-    public void posUpdate(double time) {
-        x += xVelo * time;
-        y += yVelo * time;
+    public void posUpdate() {
+        this.setX(xVelo);
+        this.setY(yVelo);
     }
 
-    public void setVelo(double xVelo, double yVelo){
+    public void setVelo(double xVelo, double yVelo) {
         this.xVelo = xVelo;
         this.yVelo = yVelo;
-    }
-
-    public double getyVelo(){
-        return yVelo;
     }
 }
 
