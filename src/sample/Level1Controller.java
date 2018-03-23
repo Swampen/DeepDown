@@ -75,6 +75,7 @@ public class Level1Controller {
             public void handle(long currentTime){
                 double t = (currentTime - startTime ) / 1000000000.0;
 
+
                 player.setVelo(0,0);
                 if (input.contains("UP")){
                     player.setVelo(0,-5);
@@ -88,17 +89,17 @@ public class Level1Controller {
 
                 player.posUpdate();
 
+                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
                 try {
                     level1.drawBoard(gc);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-                System.out.println(input);
-
+                System.out.println("x: " + player.getX() + ", y: " + player.getY() + input);
                 gc.clearRect(player.getX(), player.getY(), 40, 40);
                 gc.drawImage(finalImage, 80, 0, 40, 40, player.getX(), player.getY(),40,40);
-                System.out.println(player.getX());
-                System.out.println(player.getY());
+
             }
         }.start();
 
