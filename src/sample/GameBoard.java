@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameBoard {
@@ -22,7 +23,7 @@ public class GameBoard {
     }
 
 
-    public void drawBoard(GraphicsContext gc)throws IOException{
+    public ArrayList<Sprite> drawBoard(GraphicsContext gc)throws IOException{
         Scanner input = null;
         Image image = new Image(new FileInputStream("src/sample/DeepDownTileSet.png"));
 
@@ -74,6 +75,7 @@ public class GameBoard {
         }
 
         Avatar player = null;
+        ArrayList<Sprite> sprites = new ArrayList<Sprite>();
         //draws the objects into canvas
         for (int i=0; i<rows; i++){
             for(int j=0; j<colums; j++){
@@ -81,32 +83,41 @@ public class GameBoard {
                 switch (board[i][j]){
                     case 1:
                         Wall wall = new Wall(j*40, i*40, 40, 40);
-                        gc.drawImage(image, 0, 0, 40, 40, wall.getX(),wall.getY(),40,40);
+                        Sprite wallSprite = new Sprite(image, wall);
+                        wallSprite.render(gc, 0, 0);
+                        sprites.add(wallSprite);
                         break;
                     case 2:
                         Pickup pickup = new Pickup(j*40, i*40, 40, 40, false);
-                        gc.drawImage(image, 40, 0,40,40, pickup.getX(), pickup.getY(), 40, 40);
+                        Sprite pickupSprite = new Sprite(image, pickup);
+                        pickupSprite.render(gc, 40, 0);
+                        sprites.add(pickupSprite);
                         break;
                     case 3:
                         Enemy enemy = new Enemy(j*40, i*40, 40, 40);
-                        gc.drawImage(image, 80, 0, 40, 40, enemy.getX(),enemy.getY(),40,40);
+                        Sprite enemySprite = new Sprite(image, enemy);
+                        enemySprite.render(gc, 80, 0);
+                        sprites.add(enemySprite);
                         break;
                     case 4:
                         //player = new Avatar(j*40, i*40, 40, 40, 3, true, 0, 0);
-                        //gc.drawImage(image, 0, 0, 40, 40, player.x,player.y,40,40);
+                        //Sprite avatarSprite = new Sprite(image, Avatar);
+                        //avatarSprite.render(gc, 80, 0);
                         break;
                     case 5:
                         Key key = new Key(j*40,i*40,40,40, false, false);
-                        gc.drawImage(image, 120, 0, 40, 40, key.getX(),key.getY(),40,40);
+                        Sprite keySprite = new Sprite(image, key);
+                        keySprite.render(gc, 120, 0);
+                        sprites.add(keySprite);
                         break;
                     case 6:
-                        //Exit exit = new Exit(j*40, i*40, 40, 40, false)
-                        //gc.drawImage(image, 40, 80, 40, 40, exit.x,exit.y,40,40);
+                        //Exit exit = new Exit(j*40, i*40, 40, 40, false);
                         break;
                     default:
                         break;
                 }
             }
         }
+        return sprites;
     }
 }
