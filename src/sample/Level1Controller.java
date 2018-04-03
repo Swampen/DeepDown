@@ -4,6 +4,8 @@ import com.sun.jdi.LongValue;
 import com.sun.jdi.Type;
 import com.sun.jdi.VirtualMachine;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,11 +16,13 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Level1Controller {
@@ -27,22 +31,27 @@ public class Level1Controller {
     protected Canvas canvas;
     @FXML
     protected AnchorPane anchor;
-    @FXML
-    protected Pane pane;
     protected GraphicsContext gc;
+
+    final BooleanProperty upPressed = new SimpleBooleanProperty(false);
+    final BooleanProperty downPressed = new SimpleBooleanProperty(false);
+    final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
+    final BooleanProperty rightPressed = new SimpleBooleanProperty(false);
 
     @FXML
     public void initialize() throws IOException{
         gc = canvas.getGraphicsContext2D();
         GameBoard level1 = new GameBoard(1);
-        Image image = null;
-        ArrayList<Sprite> sprites = null;
-        try {
+        Image image;
+        ArrayList<Sprite> sprites;
+        sprites = level1.drawBoard(gc);
+        image = new Image(new FileInputStream("src/sample/DeepDownTileSet.png"));
+        /*try {
             sprites = level1.drawBoard(gc);
             image = new Image(new FileInputStream("src/sample/DeepDownTileSet.png"));
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         Avatar player = new Avatar(1*40, 16*40, 40, 40, 3, true, 0, 0);
         gc.drawImage(image, 80, 0, 40, 40, player.getX(),player.getY(),40,40);
 
@@ -56,18 +65,40 @@ public class Level1Controller {
         canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e) {
-                String key = e.getCode().toString();
+
+                if (e.getCode() == KeyCode.UP ){
+                    upPressed.set(true);
+                }if (e.getCode() == KeyCode.DOWN){
+                    downPressed.set(true);
+                }if (e.getCode() == KeyCode.LEFT){
+                    leftPressed.set(true);
+                }if (e.getCode() == KeyCode.RIGHT){
+                    rightPressed.set(true);
+                }
+
+                /*String key = e.getCode().toString();
                 if(!input.contains(key)){
                     input.add(key);
-                }
+                }*/
             }
         });
 
         canvas.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e) {
-                String key = e.getCode().toString();
-                input.remove(key);
+                if (e.getCode() == KeyCode.UP){
+                    upPressed.set(false);
+                }if (e.getCode() == KeyCode.DOWN){
+                    downPressed.set(false);
+                }if (e.getCode() == KeyCode.LEFT){
+                    leftPressed.set(false);
+                }if (e.getCode() == KeyCode.RIGHT){
+                    rightPressed.set(false);
+                }
+
+
+                /*String key = e.getCode().toString();
+                input.remove(key);*/
             }
         });
 
@@ -75,16 +106,45 @@ public class Level1Controller {
             public void handle(long currentTime){
                 double t = (currentTime - startTime ) / 1000000000.0;
 
-                player.setVelo(0,0);
-                if (input.contains("UP")){
-                    player.setVelo(0,-3);
-                }else if (input.contains("DOWN")){
-                    player.setVelo(0,3);
-                }else if (input.contains("RIGHT")){
-                    player.setVelo(3,0);
-                }else if (input.contains("LEFT")){
-                    player.setVelo(-3,0);
+                Sprite playerSprite = new Sprite(finalImage, player);
+                for (int i = 0; i < sprites.size(); i++) {
+                    if(playerSprite.collision(sprites.get(i))){
+                        double currentXVelo = player.getXVelo();
+                        double currentYVelo = player.getYVelo();
+                        if (currentXVelo < 0){
+                            upPressed.setValue(false);
+                        }else if (currentXVelo > 0){
+                            downPressed.setValue(false);
+                        }else if(currentYVelo < 0) {
+                            leftPressed.setValue(false);
+                        }else if(currentYVelo > 0){
+                            rightPressed.setValue(false);
+                        }
+                    }
                 }
+                System.out.println(upPressed.get());
+                player.setVelo(0,0);
+                if (upPressed.getValue()){
+                    player.setVelo(0,-3);
+                }if (downPressed.getValue()){
+                    player.setVelo(0,3);
+                }if (leftPressed.getValue()){
+                    player.setVelo(-3,0);
+                }if (rightPressed.getValue()){
+                    player.setVelo(3,0);
+                }
+
+                /*if (input.contains("UP")){
+                    player.setVelo(0,-3);
+                }if (input.contains("DOWN")){
+                    player.setVelo(0,3);
+                }if (input.contains("RIGHT")){
+                    player.setVelo(3,0);
+                } if (input.contains("LEFT")){
+                    player.setVelo(-3,0);
+                }*/
+
+
                 player.posUpdate();
 
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -96,12 +156,9 @@ public class Level1Controller {
                 }
                 System.out.println("x: " + player.getX() + ", y: " + player.getY() + input);
                 gc.clearRect(player.getX(), player.getY(), 40, 40);
-                Sprite playerSprite = new Sprite(finalImage, player);
                 playerSprite.render(gc, 80, 0);
 
-                for (int i = 0; i < sprites.size(); i++) {
-                    System.out.println(playerSprite.collision(sprites.get(i)));
-                }
+
             }
         }.start();
     }
