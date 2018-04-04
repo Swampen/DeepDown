@@ -29,6 +29,10 @@ public class Sprite {
     }
 
     public boolean collision(Sprite sprite){
+
+        if( sprite.getBoundary().intersects(this.getBoundary())){
+            System.out.println(sprite);
+        }
         return sprite.getBoundary().intersects(this.getBoundary());
     }
 

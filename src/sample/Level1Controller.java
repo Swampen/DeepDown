@@ -33,6 +33,8 @@ public class Level1Controller {
     protected AnchorPane anchor;
     protected GraphicsContext gc;
 
+
+
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
     final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
