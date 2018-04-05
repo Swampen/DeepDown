@@ -31,10 +31,6 @@ public class Avatar extends GameObject {
         isAlive = alive;
     }
 
-    public void addVelocity(double x, double y) {
-        xVelo += x;
-        yVelo += y;
-    }
 
     public void posUpdate() {
         this.setX(xVelo);
