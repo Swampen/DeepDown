@@ -33,6 +33,8 @@ public class Level1Controller {
     protected AnchorPane anchor;
     protected GraphicsContext gc;
 
+
+
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
     final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
@@ -95,8 +97,6 @@ public class Level1Controller {
                 }if (e.getCode() == KeyCode.RIGHT){
                     rightPressed.set(false);
                 }
-
-
                 /*String key = e.getCode().toString();
                 input.remove(key);*/
             }
@@ -111,18 +111,11 @@ public class Level1Controller {
                     if(playerSprite.collision(sprites.get(i))){
                         double currentXVelo = player.getXVelo();
                         double currentYVelo = player.getYVelo();
-                        if (currentXVelo < 0){
-                            upPressed.setValue(false);
-                        }else if (currentXVelo > 0){
-                            downPressed.setValue(false);
-                        }else if(currentYVelo < 0) {
-                            leftPressed.setValue(false);
-                        }else if(currentYVelo > 0){
-                            rightPressed.setValue(false);
-                        }
+                        System.out.println(playerSprite.getBoundary());
                     }
                 }
-                System.out.println(upPressed.get());
+
+
                 player.setVelo(0,0);
                 if (upPressed.getValue()){
                     player.setVelo(0,-3);
@@ -154,8 +147,7 @@ public class Level1Controller {
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-                System.out.println("x: " + player.getX() + ", y: " + player.getY() + input);
-                gc.clearRect(player.getX(), player.getY(), 40, 40);
+                //System.out.println("x: " + player.getX() + ", y: " + player.getY() + input);
                 playerSprite.render(gc, 80, 0);
 
 

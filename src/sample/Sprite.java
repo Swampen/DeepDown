@@ -1,8 +1,10 @@
 package sample;
 
+import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
 
 public class Sprite {
 
@@ -28,8 +30,11 @@ public class Sprite {
         return new Rectangle2D(positionX, positionY, width,height);
     }
 
+
+
+
+
     public boolean collision(Sprite sprite){
         return sprite.getBoundary().intersects(this.getBoundary());
     }
-
 }
