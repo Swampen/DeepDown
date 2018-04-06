@@ -13,13 +13,15 @@ public class Sprite {
     private double positionY;
     private double width;
     private double height;
+    private int type;
 
-    public Sprite (Image image, GameObject go){
+    public Sprite (Image image, GameObject go, int type){
         this.image = image;
         this.positionX = go.getX();
         this.positionY = go.getY();
         this.width = go.getW();
         this.height = go.getH();
+        this.type = type;
     }
 
     public void render (GraphicsContext gc, double sx, double sy){
@@ -36,9 +38,14 @@ public class Sprite {
 
     public boolean collision(Sprite sprite){
 
-        if( sprite.getBoundary().intersects(this.getBoundary())){
-            System.out.println(sprite);
+        if( sprite.getBoundary().intersects(this.getBoundary()) && sprite.type == 1){
+            System.out.println("wall collision");
+        } else if( sprite.getBoundary().intersects(this.getBoundary()) && sprite.type == 2) {
+            System.out.println("Coin collision");
+        } else if( sprite.getBoundary().intersects(this.getBoundary()) && sprite.type == 3){
+            System.out.println("Enemy Collision");
         }
+
         return sprite.getBoundary().intersects(this.getBoundary());
     }
 }

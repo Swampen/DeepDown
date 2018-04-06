@@ -74,7 +74,6 @@ public class GameBoard {
             }
         }
 
-        Avatar player = null;
         ArrayList<Sprite> sprites = new ArrayList<Sprite>();
         //draws the objects into canvas
         for (int i=0; i<rows; i++){
@@ -83,19 +82,19 @@ public class GameBoard {
                 switch (board[i][j]){
                     case 1:
                         Wall wall = new Wall(j*40, i*40, 40, 40);
-                        Sprite wallSprite = new Sprite(image, wall);
+                        Sprite wallSprite = new Sprite(image, wall, 1);
                         wallSprite.render(gc, 0, 0);
                         sprites.add(wallSprite);
                         break;
                     case 2:
                         Pickup pickup = new Pickup(j*40, i*40, 40, 40, false);
-                        Sprite pickupSprite = new Sprite(image, pickup);
+                        Sprite pickupSprite = new Sprite(image, pickup, 2);
                         pickupSprite.render(gc, 40, 0);
                         sprites.add(pickupSprite);
                         break;
                     case 3:
                         Enemy enemy = new Enemy(j*40, i*40, 40, 40);
-                        Sprite enemySprite = new Sprite(image, enemy);
+                        Sprite enemySprite = new Sprite(image, enemy, 3);
                         enemySprite.render(gc, 80, 0);
                         sprites.add(enemySprite);
                         break;
@@ -106,7 +105,7 @@ public class GameBoard {
                         break;
                     case 5:
                         Key key = new Key(j*40,i*40,40,40, false, false);
-                        Sprite keySprite = new Sprite(image, key);
+                        Sprite keySprite = new Sprite(image, key, 5);
                         keySprite.render(gc, 120, 0);
                         sprites.add(keySprite);
                         break;
