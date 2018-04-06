@@ -28,6 +28,7 @@ public class Level1Controller {
     @FXML
     protected Label scoreLabel;
     private int score = 2000;
+    private Image image;
 
 
 
@@ -49,9 +50,6 @@ public class Level1Controller {
         gc.drawImage(image, 80, 0, 40, 40, player.getX(),player.getY(),40,40);
 
         final long startTime = System.nanoTime();
-
-        Image finalImage = image;
-
 
         ArrayList<String> input = new ArrayList<String>();
         canvas.setFocusTraversable(true);
@@ -96,7 +94,7 @@ public class Level1Controller {
 
                 boolean canMove = true;
 
-                Sprite playerSprite = new Sprite(finalImage, player, 4);
+                Sprite playerSprite = new Sprite(image, player, 4);
                 for (int i = 0; i < sprites.size(); i++) {
                     if(playerSprite.collision(sprites.get(i))){
                         canMove = false;
