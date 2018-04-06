@@ -12,14 +12,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,10 +32,8 @@ public class Level1Controller {
     @FXML
     protected AnchorPane anchor;
     protected GraphicsContext gc;
-    @FXML
-    protected Text scoreText;
-    protected int score = 20000;
-    protected Image image;
+
+
 
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
@@ -48,7 +44,7 @@ public class Level1Controller {
     public void initialize() throws IOException{
         gc = canvas.getGraphicsContext2D();
         GameBoard level1 = new GameBoard(1);
-
+        Image image;
         ArrayList<Sprite> sprites;
         sprites = level1.drawBoard(gc);
         image = new Image(new FileInputStream("src/sample/DeepDownTileSet.png"));
@@ -62,6 +58,8 @@ public class Level1Controller {
         gc.drawImage(image, 80, 0, 40, 40, player.getX(),player.getY(),40,40);
 
         final long startTime = System.nanoTime();
+
+        Image finalImage = image;
 
 
         ArrayList<String> input = new ArrayList<String>();
@@ -108,10 +106,7 @@ public class Level1Controller {
             public void handle(long currentTime){
                 double t = (currentTime - startTime ) / 1000000000.0;
 
-                score -= t;
-                scoreText.setText(Integer.toString(score));
-
-                Sprite playerSprite = new Sprite(image, player);
+                Sprite playerSprite = new Sprite(finalImage, player);
                 for (int i = 0; i < sprites.size(); i++) {
                     if(playerSprite.collision(sprites.get(i))){
                         double currentXVelo = player.getXVelo();
@@ -142,6 +137,7 @@ public class Level1Controller {
                     player.setVelo(-3,0);
                 }*/
 
+
                 player.posUpdate();
 
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -153,6 +149,7 @@ public class Level1Controller {
                 }
                 //System.out.println("x: " + player.getX() + ", y: " + player.getY() + input);
                 playerSprite.render(gc, 80, 0);
+
 
             }
         }.start();
