@@ -110,7 +110,10 @@ public class GameBoard {
                         sprites.add(keySprite);
                         break;
                     case 6:
-                        //Exit exit = new Exit(j*40, i*40, 40, 40, false);
+                        Exit exit = new Exit(j*40,i*40,40,40, false);
+                        Sprite exitSprite = new Sprite(image, exit, 6);
+                        exitSprite.render(gc, 160, 0);
+                        sprites.add(exitSprite);
                         break;
                     default:
                         break;
