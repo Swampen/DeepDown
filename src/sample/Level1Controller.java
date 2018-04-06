@@ -96,7 +96,7 @@ public class Level1Controller {
 
                 boolean canMove = true;
 
-                Sprite playerSprite = new Sprite(finalImage, player);
+                Sprite playerSprite = new Sprite(finalImage, player, 4);
                 for (int i = 0; i < sprites.size(); i++) {
                     if(playerSprite.collision(sprites.get(i))){
                         canMove = false;
