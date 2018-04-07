@@ -29,7 +29,7 @@ public class Sprite {
     }
 
     public void renderPlayer (GraphicsContext gc, double sx, double sy){
-        gc.drawImage(image, sx, sy, width, height, positionX, positionY, 40, 40);
+        gc.drawImage(image, sx, sy, width, height, positionX, positionY, 30, 30);
     }
 
     public Rectangle2D getBoundary(){

@@ -132,7 +132,7 @@ public class Level1Controller {
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-                playerSprite.render(gc, 80, 0);
+                playerSprite.renderPlayer(gc, 0, 40);
 
 
             }
