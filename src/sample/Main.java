@@ -4,11 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import sample.menu.LevelSelectController;
+import sample.menu.StartMenuController;
 
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 
@@ -18,26 +17,25 @@ public class Main extends Application {
         launch(args);
     }
 
-    protected Scene scene;
-    protected Parent root;
+    private Scene scene;
+    private Parent root;
 
     @Override
-    public void start(Stage stage) {
-        try {
-            Controller controller = new Controller();
-            URL url = getClass().getResource("levelSelect.fxml");
-            FXMLLoader loader = new FXMLLoader(url);
-            loader.setController(controller);
-            root = loader.load();
+    public void start(Stage stage) throws IOException{
 
+        LevelSelectController levelSelect = new LevelSelectController();
+        URL url = getClass().getResource("/sample/resource/levelSelect.fxml");
+        FXMLLoader loader = new FXMLLoader(url);
+        loader.setController(levelSelect);
+        root = loader.load();
 
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Deep Down");
-            stage.show();
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Deep Down");
+        stage.show();
+    }
+
+    public Parent getRoot(){
+        return root;
     }
 }
