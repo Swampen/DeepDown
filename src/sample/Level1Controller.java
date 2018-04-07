@@ -46,8 +46,8 @@ public class Level1Controller {
         sprites = level1.drawBoard(gc);
         image = new Image(new FileInputStream("src/sample/DeepDownTileSet.png"));
 
-        Avatar player = new Avatar(1*40, 16*40, 40, 40, 3, true, 0, 0);
-        gc.drawImage(image, 80, 0, 40, 40, player.getX(),player.getY(),40,40);
+        Avatar player = new Avatar(1*40, 16*40, 30, 30, 3, true, 0, 0);
+        //gc.drawImage(image, 80, 0, 40, 40, player.getX(),player.getY(),40,40);
 
         final long startTime = System.nanoTime();
 
@@ -92,21 +92,25 @@ public class Level1Controller {
 
                 scoreLabel.setText(Integer.toString(currentScore));
 
-                boolean canMove = true;
 
                 Sprite playerSprite = new Sprite(image, player, 4);
                 for (int i = 0; i < sprites.size(); i++) {
-                    if(playerSprite.collision(sprites.get(i))){
-                        canMove = false;
+                    if(playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == 1){
+                        player.setVelo(0,0);
+                        player.setPos(player.getPrevX(),player.getPrevY());
                         break;
 
                         //System.out.println(playerSprite.getBoundary());
+                    }
+
+                    if (playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == 2){
+                        System.out.println("DING! you got a coin!");
+                        sprites.remove(sprites.get(i));
                     }
                 }
 
 
                     player.setVelo(0, 0);
-                //if (canMove) {
                     if (upPressed.getValue()) {
                         player.setyVelo(-3);
                     }
@@ -119,7 +123,6 @@ public class Level1Controller {
                     if (rightPressed.getValue()) {
                         player.setxVelo(3);
                     }
-                //}
                 player.posUpdate();
 
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());

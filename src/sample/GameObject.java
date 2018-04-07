@@ -5,6 +5,8 @@ public abstract class GameObject {
     private double y;
     private int h;
     private int w;
+    private double prevX;
+    private double prevY;
 
     public GameObject (double x, double y, int height, int width){
         this.x = x;
@@ -22,11 +24,34 @@ public abstract class GameObject {
     }
 
     public void setX(double x) {
+        setPrevX(this.x);
         this.x += x;
     }
 
     public void setY(double y) {
+        setPrevY(this.y);
         this.y += y;
+    }
+
+    public void setPrevX(double x) {
+        this.prevX = x;
+    }
+
+    public void setPrevY(double y) {
+        this.prevY = y;
+    }
+
+    public double getPrevX(){
+        return prevX;
+    }
+
+    public double getPrevY() {
+        return prevY;
+    }
+
+    public void setPos(double x, double y){
+        this.x = prevX;
+        this.y = prevY;
     }
 
     public int getH() {

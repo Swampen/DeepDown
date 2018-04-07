@@ -38,14 +38,17 @@ public class Sprite {
 
     public boolean collision(Sprite sprite){
 
-        if( sprite.getBoundary().intersects(this.getBoundary()) && sprite.type == 1){
+       /* if( sprite.getBoundary().intersects(this.getBoundary()) && sprite.type == 1){
             System.out.println("wall collision");
         } else if( sprite.getBoundary().intersects(this.getBoundary()) && sprite.type == 2) {
             System.out.println("Coin collision");
         } else if( sprite.getBoundary().intersects(this.getBoundary()) && sprite.type == 3){
             System.out.println("Enemy Collision");
-        }
+        }*/
 
         return sprite.getBoundary().intersects(this.getBoundary());
+    }
+    public int getType() {
+        return type;
     }
 }
