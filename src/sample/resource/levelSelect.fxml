@@ -74,7 +74,7 @@
                   </GridPane>
                </children>
                <BorderPane.margin>
-                  <Insets left="100.0" right="100.0" />
+                  <Insets bottom="200.0" left="100.0" right="100.0" />
                </BorderPane.margin>
             </VBox>
          </center>

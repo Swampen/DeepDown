@@ -23,10 +23,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException{
 
-        LevelSelectController levelSelect = new LevelSelectController();
-        URL url = getClass().getResource("/sample/resource/levelSelect.fxml");
+        StartMenuController startMenu = new StartMenuController();
+        URL url = getClass().getResource("/sample/resource/startMenu.fxml");
         FXMLLoader loader = new FXMLLoader(url);
-        loader.setController(levelSelect);
+        loader.setController(startMenu);
         root = loader.load();
 
         scene = new Scene(root);

@@ -14,22 +14,26 @@ public class Sprite {
     private double width;
     private double height;
     private int type;
+    private int tileX;
+    private int tileY;
 
-    public Sprite (Image image, GameObject go, int type){
+    public Sprite (Image image, GameObject go, int type, int tileX, int tileY){
         this.image = image;
         this.positionX = go.getX();
         this.positionY = go.getY();
         this.width = go.getW();
         this.height = go.getH();
         this.type = type;
+        this.tileX = tileX;
+        this.tileY = tileY;
     }
 
-    public void render (GraphicsContext gc, double sx, double sy){
-        gc.drawImage(image, sx, sy, width, height, positionX, positionY, 40, 40);
+    public void render (GraphicsContext gc){
+        gc.drawImage(image, tileX, tileY, width, height, positionX, positionY, 40, 40);
     }
 
-    public void renderPlayer (GraphicsContext gc, double sx, double sy){
-        gc.drawImage(image, sx, sy, width, height, positionX, positionY, 30, 30);
+    public void renderPlayer (GraphicsContext gc){
+        gc.drawImage(image, tileX, tileY, width, height, positionX, positionY, 30, 30);
     }
 
     public Rectangle2D getBoundary(){

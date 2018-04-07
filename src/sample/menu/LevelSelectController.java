@@ -25,8 +25,8 @@ public class LevelSelectController {
 
     public void level1Selected()throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/resource/level1.fxml"));
-        Level1Controller controller = new Level1Controller();
-        loader.setController(controller);
+        Level1Controller level1 = new Level1Controller();
+        loader.setController(level1);
         Parent root = main.getRoot();
         root = loader.load();
         anchor.getChildren().setAll(root);

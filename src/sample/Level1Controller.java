@@ -93,7 +93,7 @@ public class Level1Controller {
                 scoreLabel.setText(Integer.toString(currentScore));
 
 
-                Sprite playerSprite = new Sprite(image, player, 4);
+                Sprite playerSprite = new Sprite(image, player, 4, 0, 40);
                 for (int i = 0; i < sprites.size(); i++) {
                     if(playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == 1){
                         player.setVelo(0,0);
@@ -127,12 +127,13 @@ public class Level1Controller {
 
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-                try {
+                /*try {
                     level1.drawBoard(gc);
                 }catch (Exception e){
                     e.printStackTrace();
-                }
-                playerSprite.renderPlayer(gc, 0, 40);
+                }*/
+                level1.renderSprite(sprites, gc);
+                playerSprite.renderPlayer(gc);
 
 
             }
