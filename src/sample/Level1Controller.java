@@ -30,6 +30,9 @@ public class Level1Controller {
     private int score = 2000;
     private Image image;
 
+    //private boolean xWall = false;
+    //private boolean yWall = false;
+
 
 
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
@@ -93,24 +96,48 @@ public class Level1Controller {
                 scoreLabel.setText(Integer.toString(currentScore));
 
 
-                Sprite playerSprite = new Sprite(image, player, 4, 0, 40);
-                for (int i = 0; i < sprites.size(); i++) {
-                    if(playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == 1){
-                        player.setVelo(0,0);
-                        player.setPos(player.getPrevX(),player.getPrevY());
-                        break;
 
-                        //System.out.println(playerSprite.getBoundary());
+                Sprite playerSprite = new Sprite(image, player, Type.AVATAR, 0, 40);
+                for (int i = 0; i < sprites.size(); i++) {
+                    if(playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.WALL ){
+
+                        if(player.getXVelo() != 0) {
+                            player.setXVelo(0);
+                            player.setXPos(player.getPrevX());
+                        }
+
+                        if (player.getYVelo() != 0) {
+                            player.setYVelo(0);
+                            player.setYPos(player.getPrevY());
+                        }
+
+
                     }
 
-                    if (playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == 2){
+                    /*if(playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.WALL && player.getYVelo() != 0){
+                        player.setYVelo(0);
+                        player.setYPos(player.getPrevY());
+                    }*/
+
+
+                    if (playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.PICKUP){
                         System.out.println("DING! you got a coin!");
                         sprites.remove(sprites.get(i));
+                    }
+
+                    if(playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.KEY){
+                        System.out.println("Exit is now open");
+                        sprites.remove(sprites.get(i));
+                    }
+
+                    if(playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.EXIT /*&& sprites.contains(keySprite)*/){
+                        System.out.println("Find the key");
                     }
                 }
 
 
-                    player.setVelo(0, 0);
+                    player.setXVelo(0);
+                    player.setYVelo(0);
                     if (upPressed.getValue()) {
                         player.setyVelo(-3);
                     }

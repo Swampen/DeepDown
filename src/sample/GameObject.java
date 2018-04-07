@@ -49,8 +49,11 @@ public abstract class GameObject {
         return prevY;
     }
 
-    public void setPos(double x, double y){
+    public void setXPos(double x){
         this.x = prevX;
+    }
+
+    public void setYPos(double y){
         this.y = prevY;
     }
 

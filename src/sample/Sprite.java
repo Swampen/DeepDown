@@ -6,18 +6,18 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
-public class Sprite {
+public class Sprite{
 
     private Image image;
     private double positionX;
     private double positionY;
     private double width;
     private double height;
-    private int type;
+    private Type type;
     private int tileX;
     private int tileY;
 
-    public Sprite (Image image, GameObject go, int type, int tileX, int tileY){
+    public Sprite (Image image, GameObject go, Type type, int tileX, int tileY){
         this.image = image;
         this.positionX = go.getX();
         this.positionY = go.getY();
@@ -56,7 +56,7 @@ public class Sprite {
 
         return sprite.getBoundary().intersects(this.getBoundary());
     }
-    public int getType() {
+    public Type getType() {
         return type;
     }
 }

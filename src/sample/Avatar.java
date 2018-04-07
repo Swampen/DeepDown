@@ -37,8 +37,11 @@ public class Avatar extends GameObject {
         this.setY(yVelo);
     }
 
-    public void setVelo(double xVelo, double yVelo) {
+    public void setXVelo(double xVelo) {
         this.xVelo = xVelo;
+    }
+
+    public void setYVelo(double yVelo) {
         this.yVelo = yVelo;
     }
 
