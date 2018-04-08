@@ -1,4 +1,4 @@
-package sample;
+package deepDown.gameObjects;
 
 public class Exit extends GameObject {
 

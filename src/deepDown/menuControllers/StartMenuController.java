@@ -1,21 +1,18 @@
-package sample.menu;
+package deepDown.menuControllers;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import sample.Level1Controller;
-import sample.Main;
+import deepDown.Main;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 
 public class StartMenuController {
 
@@ -30,7 +27,7 @@ public class StartMenuController {
 
         Image image = null;
         try {
-            image = new Image(new FileInputStream("src/sample/test.png"));
+            image = new Image(new FileInputStream("src/deepDown/resource/test.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -42,7 +39,7 @@ public class StartMenuController {
                     if(newGameButton.isHover()){
                         Image image = null;
                         try {
-                            image = new Image(new FileInputStream("src/sample/test1.png"));
+                            image = new Image(new FileInputStream("src/deepDown/resource/test1.png"));
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }
@@ -50,7 +47,7 @@ public class StartMenuController {
                     }else {
                         Image image = null;
                         try {
-                            image = new Image(new FileInputStream("src/sample/test.png"));
+                            image = new Image(new FileInputStream("src/deepDown/resource/test.png"));
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }
@@ -61,11 +58,23 @@ public class StartMenuController {
     }
 
     public void newGameClicked() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/resource/levelSelect.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelSelect.fxml"));
         LevelSelectController levelSelect = new LevelSelectController();
         loader.setController(levelSelect);
         Parent root = main.getRoot();
         root = loader.load();
         anchor.getChildren().setAll(root);
+    }
+
+    public void levelSelectClicked(){
+
+    }
+
+    public void loadGameClicked(){
+
+    }
+
+    public void quitClicked(){
+
     }
 }

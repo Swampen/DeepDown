@@ -1,12 +1,11 @@
-package sample;
+package deepDown;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.menu.LevelSelectController;
-import sample.menu.StartMenuController;
+import deepDown.menuControllers.StartMenuController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +23,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException{
 
         StartMenuController startMenu = new StartMenuController();
-        URL url = getClass().getResource("/sample/resource/startMenu.fxml");
+        URL url = getClass().getResource("/deepDown/resource/FXML/startMenu.fxml");
         FXMLLoader loader = new FXMLLoader(url);
         loader.setController(startMenu);
         root = loader.load();

@@ -1,5 +1,5 @@
 import org.junit.Test;
-import sample.Pickup;
+import deepDown.gameObjects.Pickup;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package sample;
+package deepDown.gameObjects;
 
 public class Enemy extends GameObject {
 

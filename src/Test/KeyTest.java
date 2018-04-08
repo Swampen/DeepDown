@@ -1,5 +1,5 @@
 import org.junit.Test;
-import sample.Key;
+import deepDown.gameObjects.Key;
 
 import static org.junit.Assert.*;
 

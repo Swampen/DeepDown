@@ -1,4 +1,4 @@
-package sample;
+package deepDown.gameObjects;
 
 public abstract class GameObject {
     private double x;

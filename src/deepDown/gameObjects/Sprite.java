@@ -1,10 +1,8 @@
-package sample;
+package deepDown.gameObjects;
 
-import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.shape.Rectangle;
 
 public class Sprite{
 

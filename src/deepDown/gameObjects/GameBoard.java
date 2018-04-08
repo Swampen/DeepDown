@@ -1,22 +1,18 @@
-package sample;
+package deepDown.gameObjects;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameBoard {
 
     private int level;
+    Scanner input;
 
     public GameBoard (int level){
         this.level = level;
@@ -24,29 +20,29 @@ public class GameBoard {
 
 
     public ArrayList<Sprite> drawBoard(GraphicsContext gc)throws IOException{
-        Scanner input = null;
-        Image image = new Image(new FileInputStream("src/sample/DeepDownTileSet.png"));
+
+        Image image = new Image(new FileInputStream("src/deepDown/resource/DeepDownTileSet.png"));
 
 
         //Select case for every possible selected level
         switch (this.level) {
             case 1:
-                input = new Scanner(new File("src/sample/level1.txt"));
+                input = new Scanner(new File("src/deepDown/levels/level1.txt"));
                 break;
             case 2:
-                //input = new Scanner(new File("src/sample/level2.txt"));
+                input = new Scanner(new File("src/deepDown/levels/level2.txt"));
                 break;
             case 3:
-                //input = new Scanner(new File("src/sample/level3.txt"));
+                //input = new Scanner(new File("src/deepDown/level3.txt"));
                 break;
             case 4:
-                //input = new Scanner(new File("src/sample/level4.txt"));
+                //input = new Scanner(new File("src/deepDown/level4.txt"));
                 break;
             case 5:
-                //input = new Scanner(new File("src/sample/level5.txt"));
+                //input = new Scanner(new File("src/deepDown/level5.txt"));
                 break;
             case 6:
-                //input = new Scanner(new File("src/sample/level6.txt"));
+                //input = new Scanner(new File("src/deepDown/level6.txt"));
                 break;
             case 7:
                 break;
