@@ -1,5 +1,5 @@
 package deepDown.gameObjects;
 
 public enum Type {
-    WALL, PICKUP, ENEMY, AVATAR, KEY, EXIT
+    WALL, COIN, ENEMY, AVATAR, KEY, DOOR
 }

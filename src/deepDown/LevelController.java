@@ -124,7 +124,7 @@ public class LevelController {
                             }
                         }
 
-                        if (sprites.get(i).getType() == Type.PICKUP){
+                        if (sprites.get(i).getType() == Type.COIN){
                             System.out.println("DING! you got a coin!");
                             sprites.remove(sprites.get(i));
                         }
@@ -132,7 +132,7 @@ public class LevelController {
                             System.out.println("Exit is now open");
                             sprites.remove(sprites.get(i));
                         }
-                        if(playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.EXIT /*&& sprites.contains(keySprite)*/){
+                        if(playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.DOOR /*&& sprites.contains(keySprite)*/){
                             System.out.println("Find the key");
                         }
                     }

@@ -1,6 +1,6 @@
 package deepDown.gameObjects;
 
-public class Key extends Pickup {
+public class Key extends Coin {
 
     private boolean exitOpen;
 

@@ -83,10 +83,10 @@ public class GameBoard {
                         sprites.add(wallSprite);
                         break;
                     case 2:
-                        Pickup pickup = new Pickup(j*40, i*40, 40, 40, false);
-                        Sprite pickupSprite = new Sprite(image, pickup, Type.PICKUP, 40, 0);
-                        pickupSprite.render(gc);
-                        sprites.add(pickupSprite);
+                        Coin coin = new Coin(j*40, i*40, 40, 40, false);
+                        Sprite coinSprite = new Sprite(image, coin, Type.COIN, 40, 0);
+                        coinSprite.render(gc);
+                        sprites.add(coinSprite);
                         break;
                     case 3:
                         Enemy enemy = new Enemy(j*40, i*40, 40, 40);
@@ -106,10 +106,10 @@ public class GameBoard {
                         sprites.add(keySprite);
                         break;
                     case 6:
-                        Exit exit = new Exit(j*40,i*40,40,40, false);
-                        Sprite exitSprite = new Sprite(image, exit, Type.EXIT, 160, 0);
-                        exitSprite.render(gc);
-                        sprites.add(exitSprite);
+                        Door door = new Door(j*40,i*40,40,40, false);
+                        Sprite doorSprite = new Sprite(image, door, Type.DOOR, 160, 0);
+                        doorSprite.render(gc);
+                        sprites.add(doorSprite);
                         break;
                     default:
                         break;
