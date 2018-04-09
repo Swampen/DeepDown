@@ -36,9 +36,9 @@ public class Avatar extends GameObject {
     }
 
 
-    public void posUpdate() {
-        this.setX(xVelo);
-        this.setY(yVelo);
+    public void posUpdate(double time) {
+        this.setX(xVelo*time);
+        this.setY(yVelo*time);
     }
 
     public void setXVelo(double xVelo) {
