@@ -30,7 +30,7 @@ public class Sprite{
         gc.drawImage(image, tileX, tileY, width, height, positionX, positionY, 40, 40);
     }
 
-    public void renderPlayer (GraphicsContext gc){
+    public void renderAvatar(GraphicsContext gc){
         gc.drawImage(image, tileX, tileY, width, height, positionX, positionY, 30, 30);
     }
 
@@ -38,22 +38,10 @@ public class Sprite{
         return new Rectangle2D(positionX, positionY, width,height);
     }
 
-
-
-
-
     public boolean collision(Sprite sprite){
-
-       /* if( sprite.getBoundary().intersects(this.getBoundary()) && sprite.type == 1){
-            System.out.println("wall collision");
-        } else if( sprite.getBoundary().intersects(this.getBoundary()) && sprite.type == 2) {
-            System.out.println("Coin collision");
-        } else if( sprite.getBoundary().intersects(this.getBoundary()) && sprite.type == 3){
-            System.out.println("Enemy Collision");
-        }*/
-
         return sprite.getBoundary().intersects(this.getBoundary());
     }
+
     public Type getType() {
         return type;
     }

@@ -92,7 +92,7 @@ public class GameBoard {
                         break;
                     case 3:
                         Enemy hEnemy = new HorisontalEnemy(j*40, i*40, 40, 40, 0, 0);
-                        Sprite hEnemySprite = new Sprite(image, hEnemy, Type.ENEMY, 80, 0);
+                        Sprite hEnemySprite = new Sprite(image, hEnemy, Type.HENEMY, 80, 0);
                         hEnemySprite.render(gc);
                         sprites.add(hEnemySprite);
                         break;
@@ -115,7 +115,7 @@ public class GameBoard {
                         break;
                     case 7:
                         Enemy vEnemy = new VerticalEnemy(j*40, i*40, 40, 40, 0, 0);
-                        Sprite vEnemySprite = new Sprite(image, vEnemy, Type.ENEMY, 80, 0);
+                        Sprite vEnemySprite = new Sprite(image, vEnemy, Type.VENEMY, 80, 0);
                         vEnemySprite.render(gc);
                         sprites.add(vEnemySprite);
                         break;

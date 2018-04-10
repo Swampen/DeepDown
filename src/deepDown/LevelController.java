@@ -35,7 +35,7 @@ public class LevelController {
     protected Label scoreLabel;
     private int score = 2000;
     private Image image;
-    long lastNanoTime = System.nanoTime();
+    long lastCurrentTime = System.nanoTime();
 
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
@@ -99,18 +99,18 @@ public class LevelController {
 
         new AnimationTimer(){
             public void handle(long currentTime){
-                double deltaTime = (currentTime - lastNanoTime ) / 1000000000.0;
-                lastNanoTime = currentTime;
+                double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;
+                lastCurrentTime = currentTime;
                 scoreLabel.setText(Integer.toString(score));
 
                 //System.out.println(deltaTime);
                 //score -= (deltaTime/100000000000.0);
                 //scoreLabel.setText(Integer.toString(score));
 
-                Sprite playerSprite = new Sprite(image, avatar, Type.AVATAR, 0, 40);
+                Sprite avatarSprite = new Sprite(image, avatar, Type.AVATAR, 0, 40);
                 for (int i = 0; i < sprites.size(); i++) {
 
-                    if(playerSprite.collision(sprites.get(i))){
+                    if(avatarSprite.collision(sprites.get(i))){
                         if (sprites.get(i).getType() == Type.WALL){
 
                             if(avatar.getXVelo() < 0) {
@@ -139,11 +139,11 @@ public class LevelController {
                             System.out.println("DING! you got a coin!");
                             sprites.remove(sprites.get(i));
                         }
-                        if(playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.KEY){
+                        if(avatarSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.KEY){
                             System.out.println("Exit is now open");
                             sprites.remove(sprites.get(i));
                         }
-                        if(playerSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.DOOR /*&& sprites.contains(keySprite)*/){
+                        if(avatarSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.DOOR /*&& sprites.contains(keySprite)*/){
                             System.out.println("Find the key");
                         }
                     }
@@ -169,7 +169,7 @@ public class LevelController {
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
                 level1.renderSprite(sprites, gc);
-                playerSprite.renderPlayer(gc);
+                avatarSprite.renderAvatar(gc);
             }
         }.start();
     }
