@@ -1,9 +1,6 @@
 package deepDown;
 
-import deepDown.gameObjects.Avatar;
-import deepDown.gameObjects.GameBoard;
-import deepDown.gameObjects.Sprite;
-import deepDown.gameObjects.Type;
+import deepDown.gameObjects.*;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -27,20 +24,34 @@ public class LevelController {
 
     private int level;
     @FXML
-    protected Canvas canvas;
+    private Canvas canvas;
     @FXML
-    protected AnchorPane anchor;
-    protected GraphicsContext gc;
+    private AnchorPane anchor;
+    private GraphicsContext gc;
     @FXML
-    protected Label scoreLabel;
+    private Label scoreLabel;
     private int score = 2000;
     private Image image;
     long lastCurrentTime = System.nanoTime();
+    double enemyVel = 5;
 
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
     final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
     final BooleanProperty rightPressed = new SimpleBooleanProperty(false);
+
+    private Avatar avatar;
+    private Key key;
+    private Door door;
+
+    private Sprite avatarSprite;
+    private Sprite keySprite;
+    private Sprite doorSprite;
+
+    private ArrayList<Sprite> wallSprites;
+    private ArrayList<Sprite> vEnemySprites;
+    private ArrayList<Sprite> hEnemySprites;
+    private ArrayList<Sprite> coinSprites ;
 
     public LevelController(int level){
         this.level = level;
@@ -48,16 +59,30 @@ public class LevelController {
 
     @FXML
     public void initialize() throws IOException{
+
         gc = canvas.getGraphicsContext2D();
-        GameBoard level1 = new GameBoard(this.level);
-        ArrayList<Sprite> sprites;
-        sprites = level1.drawBoard(gc);
-        image = new Image(new FileInputStream("src/deepDown/resource/DeepDownTileSet.png"));
+        GameBoard level = new GameBoard(this.level);
+        level.iniitalizeGameBoard(gc);
 
-        Avatar avatar = new Avatar(1*40, 16*40, 30, 30, 3, true, 0, 0);
+        avatar = level.getAvatar();
+        key = level.getKey();
+        door = level.getDoor();
 
-        ArrayList<String> input = new ArrayList<String>();
+        avatarSprite = level.getAvatarSprite();
+        keySprite = level.getKeySprite();
+        doorSprite = level.getDoorSprite();
+
+        wallSprites = level.getWallSprites();
+        vEnemySprites = level.getVEnemieSprites();
+        hEnemySprites = level.getHEnemieSprites();
+        coinSprites = level.getCoinSprites();
+
+
+
+        //Enables keypresses in Canvas
         canvas.setFocusTraversable(true);
+
+        //Detects KeyPresses in Canvas
         canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e) {
@@ -74,6 +99,7 @@ public class LevelController {
             }
         });
 
+        //Detects KeyReleases in Canvas
         canvas.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e) {
@@ -89,6 +115,7 @@ public class LevelController {
             }
         });
 
+        //Couning down score by one every second
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -97,58 +124,90 @@ public class LevelController {
             }
         }, 0, 1000);
 
+
+        //Starting Animationtimer
         new AnimationTimer(){
             public void handle(long currentTime){
-                double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;
-                lastCurrentTime = currentTime;
-                scoreLabel.setText(Integer.toString(score));
+                double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;  //Time since last frame
+                lastCurrentTime = currentTime;                                      //Saves the time in current frame
+                scoreLabel.setText(Integer.toString(score));                        //Updates score
 
-                //System.out.println(deltaTime);
-                //score -= (deltaTime/100000000000.0);
-                //scoreLabel.setText(Integer.toString(score));
+                for (int j = 0; j < hEnemySprites.size(); j++){
+                    Sprite hEnemySprite = hEnemySprites.get(j);
+                    hEnemySprite.getGo().setX(enemyVel);
+                }
+                /*for (int j = 0; j < vEnemySprites.size(); j++){
+                    Sprite vEnemySprite = vEnemySprites.get(j);
+                    vEnemySprite.getGo().setY(enemyVel);
+                }*/
 
-                Sprite avatarSprite = new Sprite(image, avatar, Type.AVATAR, 0, 40);
-                for (int i = 0; i < sprites.size(); i++) {
+                //Checks for collition with walls
+                for (int i = 0; i < wallSprites.size(); i++) {
 
-                    if(avatarSprite.collision(sprites.get(i))){
-                        if (sprites.get(i).getType() == Type.WALL){
-
-                            if(avatar.getXVelo() < 0) {
-                                avatar.setXVelo(0);
-                                avatar.setXPos(avatar.getPrevX());
-                                avatar.setCanMoveLeft(false);
-                            }
-                            if(avatar.getXVelo() > 0) {
-                                avatar.setXVelo(0);
-                                avatar.setXPos(avatar.getPrevX());
-                                avatar.setCanMoveRight(false);
-                            }
-                            if (avatar.getYVelo() < 0) {
-                                avatar.setYVelo(0);
-                                avatar.setYPos(avatar.getPrevY());
-                                avatar.setCanMoveDown(false);
-                            }
-                            if (avatar.getYVelo() > 0){
-                                avatar.setYVelo(0);
-                                avatar.setYPos(avatar.getPrevY());
-                                avatar.setCanMoveDown(false);
-                            }
+                    if(avatarSprite.collision(wallSprites.get(i))){
+                        if(avatar.getXVelo() < 0) {
+                            avatar.setXVelo(0);
+                            avatar.setXPos(avatar.getPrevX());
+                            avatar.setCanMoveLeft(false);
                         }
+                        if(avatar.getXVelo() > 0) {
+                            avatar.setXVelo(0);
+                            avatar.setXPos(avatar.getPrevX());
+                            avatar.setCanMoveRight(false);
+                        }
+                        if (avatar.getYVelo() < 0) {
+                            avatar.setYVelo(0);
+                            avatar.setYPos(avatar.getPrevY());
+                            avatar.setCanMoveDown(false);
+                        }
+                        if (avatar.getYVelo() > 0){
+                            avatar.setYVelo(0);
+                            avatar.setYPos(avatar.getPrevY());
+                            avatar.setCanMoveDown(false);
+                        }
+                    }
+                    for (int j = 0; j < hEnemySprites.size(); j++){
+                        Sprite hEnemySprite = hEnemySprites.get(j);
+                        if (hEnemySprite.collision(wallSprites.get(i))){
+                            enemyVel = -enemyVel;
+                        }
+                    }
 
-                        if (sprites.get(i).getType() == Type.COIN){
-                            System.out.println("DING! you got a coin!");
-                            sprites.remove(sprites.get(i));
-                        }
-                        if(avatarSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.KEY){
-                            System.out.println("Exit is now open");
-                            sprites.remove(sprites.get(i));
-                        }
-                        if(avatarSprite.collision(sprites.get(i)) && sprites.get(i).getType() == Type.DOOR /*&& sprites.contains(keySprite)*/){
-                            System.out.println("Find the key");
+                    for (int j = 0; j < vEnemySprites.size(); j++){
+                        Sprite vEnemySprite = vEnemySprites.get(j);
+                        if (vEnemySprite.collision(wallSprites.get(i))){
+                            enemyVel = -enemyVel;
                         }
                     }
                 }
 
+                //Checks for avatar collition with coins
+                for (int i = 0; i < coinSprites.size(); i++){
+                    if(avatarSprite.collision(coinSprites.get(i))) {
+                        System.out.println("DING! you got a coin!");
+                        coinSprites.remove(i);
+                    }
+                }
+
+                //Checks for avatar collition with key
+                if (avatarSprite.collision(keySprite) && !key.isPickedUp() ){
+                    System.out.println("Picked up key");
+                    key.setPickedUp(true);
+                    door.setOpen(true);
+                }
+
+                //Checks for avatar collition with door
+                if (avatarSprite.collision(doorSprite)) {
+                    if (!door.isOpen()){
+                        System.out.println("Find the key");
+                    }else{
+                        System.out.println("Next level");
+                    }
+
+
+                }
+
+                //Sets avatar velocity on keypresses
                 avatar.setXVelo(0);
                 avatar.setYVelo(0);
                 if (upPressed.getValue() && avatar.getCanMoveUp()) {
@@ -163,14 +222,35 @@ public class LevelController {
                 if (rightPressed.getValue() && avatar.getCanMoveRight()) {
                     avatar.setXVelo(200);
                 }
-                avatar.posUpdate(deltaTime);
+                avatar.posUpdate(deltaTime);        //Updates avatar position depending on time since last frame
 
                 avatar.setMovementState(true);
-                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-                level1.renderSprite(sprites, gc);
-                avatarSprite.renderAvatar(gc);
+                //level1.renderSprite(sprites, gc);
+                gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());      //Clears all of Canvas
+                drawFrame();
             }
         }.start();
+    }
+
+    //Draws the entire frame
+    public void drawFrame(){
+        avatarSprite.renderAvatar(gc);
+        doorSprite.render(gc);
+
+        if (!key.isPickedUp()){
+            keySprite.render(gc);
+        }
+
+        drawArrayOnFrame(wallSprites);
+        drawArrayOnFrame(vEnemySprites);
+        drawArrayOnFrame(hEnemySprites);
+        drawArrayOnFrame(coinSprites);
+    }
+
+    //Draws ArrayLists on the frame
+    public void drawArrayOnFrame(ArrayList<Sprite> sprites){
+        for (int i = 0; i < sprites.size(); i++){
+            sprites.get(i).render(gc);
+        }
     }
 }

@@ -21,7 +21,7 @@ public class LevelSelectController {
     }
 
     public void level1Selected()throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
         LevelController level = new LevelController(1);
         loader.setController(level);
         Parent root = main.getRoot();
@@ -31,7 +31,7 @@ public class LevelSelectController {
 
     public void level2Selected()throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
         LevelController level = new LevelController(2);
         loader.setController(level);
         Parent root = main.getRoot();
@@ -41,7 +41,7 @@ public class LevelSelectController {
 
     public void level3Selected()throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
         LevelController level = new LevelController(3);
         loader.setController(level);
         Parent root = main.getRoot();

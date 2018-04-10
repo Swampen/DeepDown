@@ -1,29 +1,19 @@
 package deepDown.gameObjects;
 
-public class Key extends Coin {
+public class Key extends GameObject {
 
-    private boolean exitOpen;
+    private boolean isPickedUp;
 
-    public Key(double x, double y, int height, int width, boolean isPickedUp, boolean exitOpen) {
-        super(x, y, height, width, isPickedUp);
-        this.exitOpen = exitOpen;
+    public Key(double x, double y, int height, int width, boolean isPickedUp) {
+        super(x, y, height, width);
+        this.isPickedUp = isPickedUp;
     }
 
-
-    public boolean isExitOpen() {
-        return exitOpen;
-    }
-    public void setExitOpen(boolean exitOpen) {
-        this.exitOpen = exitOpen;
+    public boolean isPickedUp(){
+        return isPickedUp;
     }
 
-    @Override
-    public boolean isPickedUp() {
-        return super.isPickedUp();
+    public void setPickedUp(boolean isPickedUp){
+        this.isPickedUp = isPickedUp;
     }
-    @Override
-    public void setPickedUp(boolean pickedUp) {
-        super.setPickedUp(pickedUp);
-    }
-
 }

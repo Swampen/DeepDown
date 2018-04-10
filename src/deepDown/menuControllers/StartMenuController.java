@@ -59,7 +59,7 @@ public class StartMenuController {
     }
 
     public void newGameClicked() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
         LevelController level = new LevelController(1);
         loader.setController(level);
         Parent root = main.getRoot();

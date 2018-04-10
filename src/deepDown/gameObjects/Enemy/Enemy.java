@@ -1,7 +1,6 @@
 package deepDown.gameObjects.Enemy;
 
 import deepDown.gameObjects.DynamicGameObject;
-import deepDown.gameObjects.GameObject;
 
 public class Enemy extends DynamicGameObject {
 

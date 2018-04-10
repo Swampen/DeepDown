@@ -7,35 +7,28 @@ import javafx.scene.image.Image;
 public class Sprite{
 
     private Image image;
-    private double positionX;
-    private double positionY;
-    private double width;
-    private double height;
+    private GameObject go;
     private Type type;
     private int tileX;
     private int tileY;
 
     public Sprite (Image image, GameObject go, Type type, int tileX, int tileY){
         this.image = image;
-        this.positionX = go.getX();
-        this.positionY = go.getY();
-        this.width = go.getW();
-        this.height = go.getH();
+        this.go = go;
         this.type = type;
         this.tileX = tileX;
         this.tileY = tileY;
     }
 
     public void render (GraphicsContext gc){
-        gc.drawImage(image, tileX, tileY, width, height, positionX, positionY, 40, 40);
+        gc.drawImage(image, tileX, tileY, go.getW(), go.getH(), go.getX(), go.getY(), 40, 40);
     }
-
-    public void renderAvatar(GraphicsContext gc){
-        gc.drawImage(image, tileX, tileY, width, height, positionX, positionY, 30, 30);
+    public void renderAvatar (GraphicsContext gc){
+        gc.drawImage(image, tileX, tileY, go.getW(), go.getH(), go.getX(), go.getY(), 30, 30);
     }
 
     public Rectangle2D getBoundary(){
-        return new Rectangle2D(positionX, positionY, width,height);
+        return new Rectangle2D(go.getX(), go.getY(), go.getW(), go.getH());
     }
 
     public boolean collision(Sprite sprite){
@@ -44,5 +37,9 @@ public class Sprite{
 
     public Type getType() {
         return type;
+    }
+
+    public GameObject getGo() {
+        return go;
     }
 }
