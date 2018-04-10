@@ -20,6 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class LevelController {
@@ -34,6 +36,7 @@ public class LevelController {
     protected Label scoreLabel;
     private int score = 2000;
     private Image image;
+    long lastNanoTime = System.nanoTime();
 
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
@@ -54,7 +57,7 @@ public class LevelController {
 
         Avatar player = new Avatar(1*40, 16*40, 30, 30, 3, true, 0, 0);
 
-        final long startTime = System.nanoTime();
+
 
         ArrayList<String> input = new ArrayList<String>();
         canvas.setFocusTraversable(true);
@@ -89,12 +92,30 @@ public class LevelController {
             }
         });
 
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                score--;
+            }
+        }, 0, 1000);
+
+
+
+
         new AnimationTimer(){
             public void handle(long currentTime){
-                double t = (currentTime - startTime ) / 1000000000.0;
+                double deltaTime = (currentTime - lastNanoTime ) / 1000000000.0;
+                lastNanoTime = currentTime;
+                scoreLabel.setText(Integer.toString(score));
 
-                int currentScore = score-(int)t;
-                scoreLabel.setText(Integer.toString(currentScore));
+
+
+
+
+                //System.out.println(deltaTime);
+                //score -= (deltaTime/100000000000.0);
+                //scoreLabel.setText(Integer.toString(score));
 
                 Sprite playerSprite = new Sprite(image, player, Type.AVATAR, 0, 40);
                 for (int i = 0; i < sprites.size(); i++) {
@@ -141,29 +162,24 @@ public class LevelController {
                 player.setXVelo(0);
                 player.setYVelo(0);
                 if (upPressed.getValue() && player.getCanMoveUp()) {
-                    player.setYVelo(-2);
+                    player.setYVelo(-200);
                 }
                 if (downPressed.getValue() && player.getCanMoveDown()) {
-                    player.setYVelo(2);
+                    player.setYVelo(200);
                 }
                 if (leftPressed.getValue() && player.getCanMoveLeft()) {
-                    player.setXVelo(-2);
+                    player.setXVelo(-200);
                 }
                 if (rightPressed.getValue() && player.getCanMoveRight()) {
-                    player.setXVelo(2);
+                    player.setXVelo(200);
                 }
-
-                //if (player.getCanMoveUp() || player.getCanMoveDown() || player.getCanMoveLeft() || player.getCanMoveRight()){
-                    player.posUpdate();
-                //}
+                player.posUpdate(deltaTime);
 
                 player.setMovementState(true);
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
                 level1.renderSprite(sprites, gc);
                 playerSprite.renderPlayer(gc);
-
-
             }
         }.start();
     }
