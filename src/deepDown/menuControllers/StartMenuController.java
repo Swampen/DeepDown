@@ -1,5 +1,6 @@
 package deepDown.menuControllers;
 
+import deepDown.LevelController;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,19 @@ public class StartMenuController {
     }
 
     public void newGameClicked() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level1.fxml"));
+        LevelController level = new LevelController(1);
+        loader.setController(level);
+        Parent root = main.getRoot();
+        root = loader.load();
+        anchor.getChildren().setAll(root);
+    }
+
+    public void loadGameClicked(){
+
+    }
+
+    public void trainingModeClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelSelect.fxml"));
         LevelSelectController levelSelect = new LevelSelectController();
         loader.setController(levelSelect);
@@ -66,11 +80,7 @@ public class StartMenuController {
         anchor.getChildren().setAll(root);
     }
 
-    public void levelSelectClicked(){
-
-    }
-
-    public void loadGameClicked(){
+    public void leaderboardsClicked() {
 
     }
 

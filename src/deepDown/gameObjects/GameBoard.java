@@ -1,5 +1,8 @@
 package deepDown.gameObjects;
 
+import deepDown.gameObjects.Enemy.Enemy;
+import deepDown.gameObjects.Enemy.HorisontalEnemy;
+import deepDown.gameObjects.Enemy.VerticalEnemy;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -17,7 +20,6 @@ public class GameBoard {
     public GameBoard (int level){
         this.level = level;
     }
-
 
     public ArrayList<Sprite> drawBoard(GraphicsContext gc)throws IOException{
 
@@ -89,10 +91,10 @@ public class GameBoard {
                         sprites.add(coinSprite);
                         break;
                     case 3:
-                        Enemy enemy = new Enemy(j*40, i*40, 40, 40);
-                        Sprite enemySprite = new Sprite(image, enemy, Type.ENEMY, 80, 0);
-                        enemySprite.render(gc);
-                        sprites.add(enemySprite);
+                        Enemy hEnemy = new HorisontalEnemy(j*40, i*40, 40, 40, 0, 0);
+                        Sprite hEnemySprite = new Sprite(image, hEnemy, Type.ENEMY, 80, 0);
+                        hEnemySprite.render(gc);
+                        sprites.add(hEnemySprite);
                         break;
                     case 4:
                         //player = new Avatar(j*40, i*40, 40, 40, 3, true, 0, 0);
@@ -110,6 +112,12 @@ public class GameBoard {
                         Sprite doorSprite = new Sprite(image, door, Type.DOOR, 160, 0);
                         doorSprite.render(gc);
                         sprites.add(doorSprite);
+                        break;
+                    case 7:
+                        Enemy vEnemy = new VerticalEnemy(j*40, i*40, 40, 40, 0, 0);
+                        Sprite vEnemySprite = new Sprite(image, vEnemy, Type.ENEMY, 80, 0);
+                        vEnemySprite.render(gc);
+                        sprites.add(vEnemySprite);
                         break;
                     default:
                         break;

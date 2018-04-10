@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchor" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchor" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="720.0" prefWidth="1280.0">
          <top>
@@ -23,7 +23,7 @@
                               <Insets bottom="25.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="levelSelectButton" layoutX="202.0" layoutY="143.0" minHeight="51.0" mnemonicParsing="false" onAction="#levelSelectClicked" prefWidth="264.0">
+                        <Button fx:id="levelSelectButton" layoutX="202.0" layoutY="143.0" minHeight="51.0" mnemonicParsing="false" onAction="#loadGameClicked" prefWidth="264.0" text="Load game">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -31,7 +31,7 @@
                               <Insets bottom="25.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="loadGameButton" layoutX="202.0" layoutY="117.0" minHeight="51.0" mnemonicParsing="false" onAction="#loadGameClicked" prefWidth="264.0">
+                        <Button fx:id="loadGameButton" layoutX="202.0" layoutY="117.0" minHeight="51.0" mnemonicParsing="false" onAction="#trainingModeClicked" prefWidth="264.0" text="Training mode">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -39,7 +39,12 @@
                               <Insets bottom="25.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="quitButton" layoutX="202.0" layoutY="286.0" minHeight="51.0" mnemonicParsing="false" onAction="#quitClicked" prefWidth="264.0">
+                        <Button fx:id="leaderboardsButton" layoutX="202.0" layoutY="286.0" minHeight="51.0" mnemonicParsing="false" onAction="#leaderboardsClicked" prefWidth="264.0" text="Leaderboards">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="quitButton1" layoutX="202.0" layoutY="286.0" minHeight="51.0" mnemonicParsing="false" onAction="#quitClicked" prefWidth="264.0" text="Quit game">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

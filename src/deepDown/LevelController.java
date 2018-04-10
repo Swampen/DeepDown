@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 public class LevelController {
 
     private int level;
@@ -55,9 +54,7 @@ public class LevelController {
         sprites = level1.drawBoard(gc);
         image = new Image(new FileInputStream("src/deepDown/resource/DeepDownTileSet.png"));
 
-        Avatar player = new Avatar(1*40, 16*40, 30, 30, 3, true, 0, 0);
-
-
+        Avatar avatar = new Avatar(1*40, 16*40, 30, 30, 3, true, 0, 0);
 
         ArrayList<String> input = new ArrayList<String>();
         canvas.setFocusTraversable(true);
@@ -100,48 +97,41 @@ public class LevelController {
             }
         }, 0, 1000);
 
-
-
-
         new AnimationTimer(){
             public void handle(long currentTime){
                 double deltaTime = (currentTime - lastNanoTime ) / 1000000000.0;
                 lastNanoTime = currentTime;
                 scoreLabel.setText(Integer.toString(score));
 
-
-
-
-
                 //System.out.println(deltaTime);
                 //score -= (deltaTime/100000000000.0);
                 //scoreLabel.setText(Integer.toString(score));
 
-                Sprite playerSprite = new Sprite(image, player, Type.AVATAR, 0, 40);
+                Sprite playerSprite = new Sprite(image, avatar, Type.AVATAR, 0, 40);
                 for (int i = 0; i < sprites.size(); i++) {
 
                     if(playerSprite.collision(sprites.get(i))){
                         if (sprites.get(i).getType() == Type.WALL){
 
-                            if(player.getXVelo() < 0) {
-                                player.setXVelo(0);
-                                player.setXPos(player.getPrevX());
-                                player.setCanMoveLeft(false);
+                            if(avatar.getXVelo() < 0) {
+                                avatar.setXVelo(0);
+                                avatar.setXPos(avatar.getPrevX());
+                                avatar.setCanMoveLeft(false);
                             }
-                            if(player.getXVelo() > 0) {
-                                player.setXVelo(0);
-                                player.setXPos(player.getPrevX());
-                                player.setCanMoveRight(false);
+                            if(avatar.getXVelo() > 0) {
+                                avatar.setXVelo(0);
+                                avatar.setXPos(avatar.getPrevX());
+                                avatar.setCanMoveRight(false);
                             }
-                            if (player.getYVelo() < 0) {
-                                player.setYVelo(0);
-                                player.setYPos(player.getPrevY());
-                                player.setCanMoveDown(false);
+                            if (avatar.getYVelo() < 0) {
+                                avatar.setYVelo(0);
+                                avatar.setYPos(avatar.getPrevY());
+                                avatar.setCanMoveDown(false);
                             }
-                            if (player.getYVelo() > 0){
-                                player.setYVelo(0);
-                                player.setYPos(player.getPrevY());
-                                player.setCanMoveDown(false);
+                            if (avatar.getYVelo() > 0){
+                                avatar.setYVelo(0);
+                                avatar.setYPos(avatar.getPrevY());
+                                avatar.setCanMoveDown(false);
                             }
                         }
 
@@ -159,23 +149,23 @@ public class LevelController {
                     }
                 }
 
-                player.setXVelo(0);
-                player.setYVelo(0);
-                if (upPressed.getValue() && player.getCanMoveUp()) {
-                    player.setYVelo(-200);
+                avatar.setXVelo(0);
+                avatar.setYVelo(0);
+                if (upPressed.getValue() && avatar.getCanMoveUp()) {
+                    avatar.setYVelo(-200);
                 }
-                if (downPressed.getValue() && player.getCanMoveDown()) {
-                    player.setYVelo(200);
+                if (downPressed.getValue() && avatar.getCanMoveDown()) {
+                    avatar.setYVelo(200);
                 }
-                if (leftPressed.getValue() && player.getCanMoveLeft()) {
-                    player.setXVelo(-200);
+                if (leftPressed.getValue() && avatar.getCanMoveLeft()) {
+                    avatar.setXVelo(-200);
                 }
-                if (rightPressed.getValue() && player.getCanMoveRight()) {
-                    player.setXVelo(200);
+                if (rightPressed.getValue() && avatar.getCanMoveRight()) {
+                    avatar.setXVelo(200);
                 }
-                player.posUpdate(deltaTime);
+                avatar.posUpdate(deltaTime);
 
-                player.setMovementState(true);
+                avatar.setMovementState(true);
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
                 level1.renderSprite(sprites, gc);
