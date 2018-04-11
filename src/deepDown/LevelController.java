@@ -1,6 +1,7 @@
 package deepDown;
 
 import deepDown.gameObjects.*;
+import deepDown.gameObjects.Enemy.Enemy;
 import deepDown.menuControllers.PauseMenuController;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
@@ -37,7 +38,7 @@ public class LevelController {
     private int score = 2000;
     private Image image;
     long lastCurrentTime = System.nanoTime();
-    double enemyVel = 5;
+    double enemyVel = 100;
 
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
@@ -143,6 +144,12 @@ public class LevelController {
             }
         }, 0, 1000);
 
+        for (int j = 0; j < hEnemySprites.size(); j++) {
+            Sprite hEnemySprite = hEnemySprites.get(j);
+            Enemy enemy = (Enemy) hEnemySprite.getGo();
+            enemy.setXVelo(enemyVel);
+        }
+
 
         //Starting Animationtimer
         new AnimationTimer(){
@@ -153,7 +160,8 @@ public class LevelController {
 
                 for (int j = 0; j < hEnemySprites.size(); j++){
                     Sprite hEnemySprite = hEnemySprites.get(j);
-                    hEnemySprite.getGo().setX(enemyVel);
+                    Enemy enemy = (Enemy)hEnemySprite.getGo();
+                    enemy.posUpdate(deltaTime);
                 }
                 /*for (int j = 0; j < vEnemySprites.size(); j++){
                     Sprite vEnemySprite = vEnemySprites.get(j);
@@ -188,14 +196,17 @@ public class LevelController {
                     for (int j = 0; j < hEnemySprites.size(); j++){
                         Sprite hEnemySprite = hEnemySprites.get(j);
                         if (hEnemySprite.collision(wallSprites.get(i))){
-                            enemyVel = -enemyVel;
+                            Enemy enemy = (Enemy) hEnemySprite.getGo();
+                            enemy.reverseVelo();
                         }
                     }
 
                     for (int j = 0; j < vEnemySprites.size(); j++){
                         Sprite vEnemySprite = vEnemySprites.get(j);
                         if (vEnemySprite.collision(wallSprites.get(i))){
-                            enemyVel = -enemyVel;
+                            Sprite hEnemySprite = hEnemySprites.get(j);
+                            Enemy enemy = (Enemy)hEnemySprite.getGo();
+
                         }
                     }
                 }
