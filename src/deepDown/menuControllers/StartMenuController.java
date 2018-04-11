@@ -58,6 +58,7 @@ public class StartMenuController {
         }.start();
     }
 
+    //Opens the first level when New game is clicked
     public void newGameClicked() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
         LevelController level = new LevelController(1);
@@ -67,10 +68,12 @@ public class StartMenuController {
         anchor.getChildren().setAll(root);
     }
 
+    //Loads the level the player has come to before quitting play
     public void loadGameClicked(){
 
     }
 
+    //Opens up the level select for testing of levels
     public void trainingModeClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelSelect.fxml"));
         LevelSelectController levelSelect = new LevelSelectController();
@@ -80,11 +83,13 @@ public class StartMenuController {
         anchor.getChildren().setAll(root);
     }
 
+    //Opens the leaderboards to see the top scores
     public void leaderboardsClicked() {
 
     }
 
+    //Quits the game
     public void quitClicked(){
-
+        System.exit(0);
     }
 }

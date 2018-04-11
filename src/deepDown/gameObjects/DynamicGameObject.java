@@ -1,6 +1,6 @@
 package deepDown.gameObjects;
 
-public class DynamicGameObject extends GameObject {
+public abstract class DynamicGameObject extends GameObject {
     private double xVelo;
     private double yVelo;
 
@@ -26,6 +26,7 @@ public class DynamicGameObject extends GameObject {
         return yVelo;
     }
 
+    //Updates the sprites position
     public void posUpdate(double time) {
         this.setX(xVelo*time);
         this.setY(yVelo*time);

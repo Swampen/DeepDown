@@ -1,6 +1,8 @@
 package deepDown;
 
 import deepDown.gameObjects.*;
+import deepDown.gameObjects.Enemy.HorisontalEnemy;
+import deepDown.gameObjects.Enemy.VerticalEnemy;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -43,6 +45,8 @@ public class LevelController {
     private Avatar avatar;
     private Key key;
     private Door door;
+    private VerticalEnemy vEnemy;
+    private HorisontalEnemy hEnemy;
 
     private Sprite avatarSprite;
     private Sprite keySprite;
@@ -51,7 +55,7 @@ public class LevelController {
     private ArrayList<Sprite> wallSprites;
     private ArrayList<Sprite> vEnemySprites;
     private ArrayList<Sprite> hEnemySprites;
-    private ArrayList<Sprite> coinSprites ;
+    private ArrayList<Sprite> coinSprites;
 
     public LevelController(int level){
         this.level = level;
@@ -67,6 +71,9 @@ public class LevelController {
         avatar = level.getAvatar();
         key = level.getKey();
         door = level.getDoor();
+        vEnemy = level.getVEnemy();
+        hEnemy = level.getHEnemy();
+
 
         avatarSprite = level.getAvatarSprite();
         keySprite = level.getKeySprite();
@@ -79,7 +86,7 @@ public class LevelController {
 
 
 
-        //Enables keypresses in Canvas
+        //Enables key presses in Canvas
         canvas.setFocusTraversable(true);
 
         //Detects KeyPresses in Canvas
@@ -115,7 +122,7 @@ public class LevelController {
             }
         });
 
-        //Couning down score by one every second
+        //Counting down score by one every second
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -141,7 +148,7 @@ public class LevelController {
                     vEnemySprite.getGo().setY(enemyVel);
                 }*/
 
-                //Checks for collition with walls
+                //Checks for collision with walls
                 for (int i = 0; i < wallSprites.size(); i++) {
 
                     if(avatarSprite.collision(wallSprites.get(i))){
@@ -181,7 +188,7 @@ public class LevelController {
                     }
                 }
 
-                //Checks for avatar collition with coins
+                //Checks for avatar collision with coins
                 for (int i = 0; i < coinSprites.size(); i++){
                     if(avatarSprite.collision(coinSprites.get(i))) {
                         System.out.println("DING! you got a coin!");
@@ -189,14 +196,14 @@ public class LevelController {
                     }
                 }
 
-                //Checks for avatar collition with key
+                //Checks for avatar collision with key
                 if (avatarSprite.collision(keySprite) && !key.isPickedUp() ){
                     System.out.println("Picked up key");
                     key.setPickedUp(true);
                     door.setOpen(true);
                 }
 
-                //Checks for avatar collition with door
+                //Checks for avatar collision with door
                 if (avatarSprite.collision(doorSprite)) {
                     if (!door.isOpen()){
                         System.out.println("Find the key");
@@ -207,7 +214,7 @@ public class LevelController {
 
                 }
 
-                //Sets avatar velocity on keypresses
+                //Sets avatar velocity on key press
                 avatar.setXVelo(0);
                 avatar.setYVelo(0);
                 if (upPressed.getValue() && avatar.getCanMoveUp()) {
