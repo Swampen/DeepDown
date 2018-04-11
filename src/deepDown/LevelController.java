@@ -1,11 +1,15 @@
 package deepDown;
 
 import deepDown.gameObjects.*;
+import deepDown.menuControllers.PauseMenuController;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -13,8 +17,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -22,7 +26,7 @@ import java.util.TimerTask;
 
 public class LevelController {
 
-    private int level;
+    private int selectedLevel;
     @FXML
     private Canvas canvas;
     @FXML
@@ -39,6 +43,7 @@ public class LevelController {
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
     final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
     final BooleanProperty rightPressed = new SimpleBooleanProperty(false);
+    final BooleanProperty escapePressed = new SimpleBooleanProperty(false);
 
     private Avatar avatar;
     private Key key;
@@ -53,15 +58,15 @@ public class LevelController {
     private ArrayList<Sprite> hEnemySprites;
     private ArrayList<Sprite> coinSprites ;
 
-    public LevelController(int level){
-        this.level = level;
+    public LevelController(int selectedLevel){
+        this.selectedLevel = selectedLevel;
     }
 
     @FXML
     public void initialize() throws IOException{
 
         gc = canvas.getGraphicsContext2D();
-        GameBoard level = new GameBoard(this.level);
+        GameBoard level = new GameBoard(selectedLevel);
         level.iniitalizeGameBoard(gc);
 
         avatar = level.getAvatar();
@@ -78,14 +83,13 @@ public class LevelController {
         coinSprites = level.getCoinSprites();
 
 
-
         //Enables keypresses in Canvas
         canvas.setFocusTraversable(true);
 
         //Detects KeyPresses in Canvas
         canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
-            public void handle(KeyEvent e) {
+            public void handle(KeyEvent e){
 
                 if (e.getCode() == KeyCode.UP ){
                     upPressed.set(true);
@@ -95,6 +99,21 @@ public class LevelController {
                     leftPressed.set(true);
                 }if (e.getCode() == KeyCode.RIGHT){
                     rightPressed.set(true);
+                }
+                if (e.getCode() == KeyCode.ESCAPE){
+                    escapePressed.set(true);
+                    PauseMenuController controller = new PauseMenuController();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
+                    loader.setController(controller);
+                    Parent root = null;
+                    try {
+                        root = loader.load();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
                 }
             }
         });
@@ -201,11 +220,12 @@ public class LevelController {
                     if (!door.isOpen()){
                         System.out.println("Find the key");
                     }else{
-                        System.out.println("Next level");
+                        System.out.println("Next selectedLevel");
                     }
 
 
                 }
+
 
                 //Sets avatar velocity on keypresses
                 avatar.setXVelo(0);
@@ -228,6 +248,10 @@ public class LevelController {
                 //level1.renderSprite(sprites, gc);
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());      //Clears all of Canvas
                 drawFrame();
+
+                if (escapePressed.get()){
+                    stop();
+                }
             }
         }.start();
     }

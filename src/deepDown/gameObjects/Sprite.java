@@ -40,6 +40,6 @@ public class Sprite{
     }
 
     public GameObject getGo() {
-        return go;
+        return this.go;
     }
 }
