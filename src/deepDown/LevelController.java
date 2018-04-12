@@ -40,6 +40,7 @@ public class LevelController {
     long lastCurrentTime = System.nanoTime();
     double enemyVel = 100;
 
+
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
     final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
