@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,23 +35,23 @@ public class GameBoard {
         this.level = level;
     }
 
-    public void iniitalizeGameBoard(GraphicsContext gc)throws IOException{
+    public void iniitalizeGameBoard(GraphicsContext gc){
         readImage();
         readLevel();
         drawGameBoard(gc);
     }
 
-    public void readImage() throws IOException{
-        image = new Image(new FileInputStream("src/deepDown/resource/DeepDownTileSet.png"));
+    public void readImage(){
+        image = new Image(getClass().getResourceAsStream("/deepDown/resource/DeepDownTileSet.png"));
     }
 
-    private void readLevel() throws IOException{
+    private void readLevel(){
         switch (this.level) {
             case 1:
-                input = new Scanner(new File("src/deepDown/levels/level1.txt"));
+                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level1.txt"));
                 break;
             case 2:
-                input = new Scanner(new File("src/deepDown/levels/level2.txt"));
+                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level2.txt"));
                 break;
             case 3:
                 //input = new Scanner(new File("src/deepDown/level3.txt"));

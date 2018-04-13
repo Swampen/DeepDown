@@ -2,6 +2,8 @@ package deepDown;
 
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.Enemy.Enemy;
+import deepDown.gameObjects.Enemy.HorisontalEnemy;
+import deepDown.gameObjects.Enemy.VerticalEnemy;
 import deepDown.menuControllers.PauseMenuController;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
@@ -67,7 +69,7 @@ public class LevelController {
     }
 
     @FXML
-    public void initialize() throws IOException{
+    public void initialize(){
 
         gc = canvas.getGraphicsContext2D();
         GameBoard level = new GameBoard(selectedLevel);
@@ -155,6 +157,12 @@ public class LevelController {
             enemy.setXVelo(enemyVel);
         }
 
+        for (int j = 0; j < vEnemySprites.size(); j++){
+            Sprite vEnemySprite = vEnemySprites.get(j);
+            VerticalEnemy enemy = (VerticalEnemy)vEnemySprite.getGo();
+            enemy.setYVelo(enemyVel);
+        }
+
 
         //Starting Animationtimer
         animationTimer = new AnimationTimer(){
@@ -162,23 +170,43 @@ public class LevelController {
             public void handle(long currentTime){
                 double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;  //Time since last frame
                 lastCurrentTime = currentTime;                                      //Saves the time in current frame
+                //System.out.println(deltaTime);
                 scoreLabel.setText(Integer.toString(score));                        //Updates score
-                System.out.println(deltaTime);
+
+                //Sets avatar velocity on keypresses
+                avatar.setXVelo(0);
+                avatar.setYVelo(0);
+                if (upPressed.getValue() && avatar.getCanMoveUp()) {
+                    avatar.setYVelo(-200);
+                }
+                if (downPressed.getValue() && avatar.getCanMoveDown()) {
+                    avatar.setYVelo(200);
+                }
+                if (leftPressed.getValue() && avatar.getCanMoveLeft()) {
+                    avatar.setXVelo(-200);
+                }
+                if (rightPressed.getValue() && avatar.getCanMoveRight()) {
+                    avatar.setXVelo(200);
+                }
+                avatar.posUpdate(deltaTime);        //Updates avatar position depending on time since last frame
+                avatar.setMovementState(true);      //Updates the movement state back to true
 
                 for (int j = 0; j < hEnemySprites.size(); j++){
                     Sprite hEnemySprite = hEnemySprites.get(j);
-                    Enemy enemy = (Enemy)hEnemySprite.getGo();
+                    HorisontalEnemy enemy = (HorisontalEnemy)hEnemySprite.getGo();
                     enemy.posUpdate(deltaTime);
                 }
-                /*for (int j = 0; j < vEnemySprites.size(); j++){
+                //
+                for (int j = 0; j < vEnemySprites.size(); j++){
                     Sprite vEnemySprite = vEnemySprites.get(j);
-                    vEnemySprite.getGo().setY(enemyVel);
-                }*/
+                    VerticalEnemy enemy = (VerticalEnemy)vEnemySprite.getGo();
+                    enemy.posUpdate(deltaTime);
+                }
 
                 //Checks for collition with walls
                 for (int i = 0; i < wallSprites.size(); i++) {
 
-                    if(avatarSprite.collision(wallSprites.get(i))){
+                    if(avatar.collision(wallSprites.get(i).getGo())){
                         if(avatar.getXVelo() < 0) {
                             avatar.setXVelo(0);
                             avatar.setXPos();
@@ -200,41 +228,58 @@ public class LevelController {
                             avatar.setCanMoveDown(false);
                         }
                     }
+
+                    //Goes through the ArrayList with Horisontal Enemy sprites
                     for (int j = 0; j < hEnemySprites.size(); j++){
                         Sprite hEnemySprite = hEnemySprites.get(j);
-                        if (hEnemySprite.collision(wallSprites.get(i))){
-                            Enemy enemy = (Enemy) hEnemySprite.getGo();
-                            enemy.reverseVelo();
+                        HorisontalEnemy hEnemy = (HorisontalEnemy) hEnemySprite.getGo();
+
+                        //If the avatar collides with an Horisontal enemy
+                        if (avatar.collision(hEnemy)){
+                            resetLevel();
+                        }
+                        //If a Horisontal enemy collides with a wall
+                        if (hEnemy.collision(wallSprites.get(i).getGo())){
+                            hEnemy.setXPos();
+                            hEnemy.reverseVelo();
                         }
                     }
 
+                    //Goes through the ArrayList with Vertical Enemy sprites
                     for (int j = 0; j < vEnemySprites.size(); j++){
-                        Sprite vEnemySprite = vEnemySprites.get(j);
-                        if (vEnemySprite.collision(wallSprites.get(i))){
-                            Sprite hEnemySprite = hEnemySprites.get(j);
-                            Enemy enemy = (Enemy)hEnemySprite.getGo();
+                        Sprite vEnemySprite =vEnemySprites.get(j);
+                        VerticalEnemy vEnemy = (VerticalEnemy) vEnemySprite.getGo();
 
+                        //If the Avatar collides with an Vertical Enemy
+                        if (avatar.collision(vEnemy)){
+                            resetLevel();
+                        }
+                        //If a Vertical Enemy collides with a Wall
+                        if (vEnemy.collision(wallSprites.get(i).getGo())){
+                            vEnemy.setYPos();
+                            vEnemy.reverseVelo();
                         }
                     }
                 }
 
                 //Checks for avatar collition with coins
                 for (int i = 0; i < coinSprites.size(); i++){
-                    if(avatarSprite.collision(coinSprites.get(i))) {
+                    if(avatar.collision(coinSprites.get(i).getGo())) {
                         System.out.println("DING! you got a coin!");
                         coinSprites.remove(i);
                     }
                 }
 
                 //Checks for avatar collition with key
-                if (avatarSprite.collision(keySprite) && !key.isPickedUp() ){
+                if (avatar.collision(key) && !key.isPickedUp() ){
                     System.out.println("Picked up key");
                     key.setPickedUp(true);
                     door.setOpen(true);
+                    doorSprite.changeSprite(160,40);
                 }
 
                 //Checks for avatar collition with door
-                if (avatarSprite.collision(doorSprite)) {
+                if (avatar.collision(door)) {
                     if (!door.isOpen()){
                         System.out.println("Find the key");
                     }else{
@@ -244,26 +289,6 @@ public class LevelController {
 
                 }
 
-
-                //Sets avatar velocity on keypresses
-                avatar.setXVelo(0);
-                avatar.setYVelo(0);
-                if (upPressed.getValue() && avatar.getCanMoveUp()) {
-                    avatar.setYVelo(-200);
-                }
-                if (downPressed.getValue() && avatar.getCanMoveDown()) {
-                    avatar.setYVelo(200);
-                }
-                if (leftPressed.getValue() && avatar.getCanMoveLeft()) {
-                    avatar.setXVelo(-200);
-                }
-                if (rightPressed.getValue() && avatar.getCanMoveRight()) {
-                    avatar.setXVelo(200);
-                }
-                avatar.posUpdate(deltaTime);        //Updates avatar position depending on time since last frame
-
-                avatar.setMovementState(true);
-                //level1.renderSprite(sprites, gc);
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());      //Clears all of Canvas
                 drawFrame();
 
@@ -273,6 +298,11 @@ public class LevelController {
             }
         };
         animationTimer.start();
+    }
+
+    private void resetLevel() {
+        lastCurrentTime = System.nanoTime();
+        initialize();
     }
 
     //Draws the entire frame

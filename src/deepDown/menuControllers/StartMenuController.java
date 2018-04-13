@@ -2,6 +2,7 @@ package deepDown.menuControllers;
 
 import deepDown.LevelController;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +20,8 @@ public class StartMenuController {
 
     @FXML
     protected AnchorPane anchor;
-    @FXML private Button newGameButton;
+    @FXML
+    private Button newGameButton;
     private Main main;
 
     @FXML
@@ -67,11 +69,16 @@ public class StartMenuController {
         anchor.getChildren().setAll(root);
     }
 
-    public void leaderboardsClicked() {
-
+    public void leaderboardsClicked() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
+        LeaderboardController controller = new LeaderboardController();
+        loader.setController(controller);
+        Parent root = main.getRoot();
+        root = loader.load();
+        anchor.getChildren().setAll(root);
     }
 
     public void quitClicked(){
-
+        Platform.exit();
     }
 }

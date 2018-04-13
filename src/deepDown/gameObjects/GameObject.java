@@ -1,5 +1,7 @@
 package deepDown.gameObjects;
 
+import javafx.geometry.Rectangle2D;
+
 public abstract class GameObject {
     private double x;
     private double y;
@@ -63,5 +65,13 @@ public abstract class GameObject {
 
     public int getW() {
         return w;
+    }
+
+    public Rectangle2D getBoundary(){
+        return new Rectangle2D(this.x, this.y, this.w, this.w);
+    }
+
+    public boolean collision(GameObject go){
+        return go.getBoundary().intersects(this.getBoundary());
     }
 }
