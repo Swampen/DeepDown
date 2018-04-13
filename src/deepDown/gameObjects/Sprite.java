@@ -27,12 +27,9 @@ public class Sprite{
         gc.drawImage(image, tileX, tileY, go.getW(), go.getH(), go.getX(), go.getY(), 30, 30);
     }
 
-    public Rectangle2D getBoundary(){
-        return new Rectangle2D(go.getX(), go.getY(), go.getW(), go.getH());
-    }
-
-    public boolean collision(Sprite sprite){
-        return sprite.getBoundary().intersects(this.getBoundary());
+    public void changeSprite(int tileX, int tileY) {
+        this.tileX = tileX;
+        this.tileY = tileY;
     }
 
     public Type getType() {
@@ -40,6 +37,6 @@ public class Sprite{
     }
 
     public GameObject getGo() {
-        return go;
+        return this.go;
     }
 }

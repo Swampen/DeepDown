@@ -2,6 +2,7 @@ package deepDown.menuControllers;
 
 import deepDown.LevelController;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,39 +20,27 @@ public class StartMenuController {
 
     @FXML
     protected AnchorPane anchor;
-    @FXML private Button newGameButton;
+    @FXML
+    private Button newGameButton;
     private Main main;
 
     @FXML
     public void initialize() {
         main = new Main();
 
-        Image image = null;
-        try {
-            image = new Image(new FileInputStream("src/deepDown/resource/test.png"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/test.png"));
         newGameButton.setGraphic(new ImageView(image));
 
         new AnimationTimer(){
                 public void handle(long now){
 
                     if(newGameButton.isHover()){
-                        Image image = null;
-                        try {
-                            image = new Image(new FileInputStream("src/deepDown/resource/test1.png"));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/test1.png"));
+
                         newGameButton.setGraphic(new ImageView(image));
                     }else {
-                        Image image = null;
-                        try {
-                            image = new Image(new FileInputStream("src/deepDown/resource/test.png"));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/test.png"));
+
                         newGameButton.setGraphic(new ImageView(image));
                     }
                 }
@@ -84,12 +73,17 @@ public class StartMenuController {
     }
 
     //Opens the leaderboards to see the top scores
-    public void leaderboardsClicked() {
-
+    public void leaderboardsClicked() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
+        LeaderboardController controller = new LeaderboardController();
+        loader.setController(controller);
+        Parent root = main.getRoot();
+        root = loader.load();
+        anchor.getChildren().setAll(root);
     }
 
     //Quits the game
     public void quitClicked(){
-        System.exit(0);
+        Platform.exit();
     }
 }

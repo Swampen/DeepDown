@@ -31,4 +31,9 @@ public abstract class DynamicGameObject extends GameObject {
         this.setX(xVelo*time);
         this.setY(yVelo*time);
     }
+
+    public void reverseVelo(){
+        this.xVelo = -xVelo;
+        this.yVelo = -yVelo;
+    }
 }
