@@ -60,6 +60,8 @@ public class LevelController {
     private ArrayList<Sprite> hEnemySprites;
     private ArrayList<Sprite> coinSprites ;
 
+    private AnimationTimer animationTimer;
+
     public LevelController(int selectedLevel){
         this.selectedLevel = selectedLevel;
     }
@@ -115,7 +117,9 @@ public class LevelController {
                     }
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
-                    stage.show();
+                    stage.showAndWait();
+                    escapePressed.set(false);
+                    animationTimer.start();
                 }
             }
         });
@@ -153,11 +157,13 @@ public class LevelController {
 
 
         //Starting Animationtimer
-        new AnimationTimer(){
+        animationTimer = new AnimationTimer(){
+            @Override
             public void handle(long currentTime){
                 double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;  //Time since last frame
                 lastCurrentTime = currentTime;                                      //Saves the time in current frame
                 scoreLabel.setText(Integer.toString(score));                        //Updates score
+                System.out.println(deltaTime);
 
                 for (int j = 0; j < hEnemySprites.size(); j++){
                     Sprite hEnemySprite = hEnemySprites.get(j);
@@ -175,22 +181,22 @@ public class LevelController {
                     if(avatarSprite.collision(wallSprites.get(i))){
                         if(avatar.getXVelo() < 0) {
                             avatar.setXVelo(0);
-                            avatar.setXPos(avatar.getPrevX());
+                            avatar.setXPos();
                             avatar.setCanMoveLeft(false);
                         }
                         if(avatar.getXVelo() > 0) {
                             avatar.setXVelo(0);
-                            avatar.setXPos(avatar.getPrevX());
+                            avatar.setXPos();
                             avatar.setCanMoveRight(false);
                         }
                         if (avatar.getYVelo() < 0) {
                             avatar.setYVelo(0);
-                            avatar.setYPos(avatar.getPrevY());
-                            avatar.setCanMoveDown(false);
+                            avatar.setYPos();
+                            avatar.setCanMoveUp(false);
                         }
                         if (avatar.getYVelo() > 0){
                             avatar.setYVelo(0);
-                            avatar.setYPos(avatar.getPrevY());
+                            avatar.setYPos();
                             avatar.setCanMoveDown(false);
                         }
                     }
@@ -265,12 +271,12 @@ public class LevelController {
                     stop();
                 }
             }
-        }.start();
+        };
+        animationTimer.start();
     }
 
     //Draws the entire frame
     public void drawFrame(){
-        avatarSprite.renderAvatar(gc);
         doorSprite.render(gc);
 
         if (!key.isPickedUp()){
@@ -281,6 +287,8 @@ public class LevelController {
         drawArrayOnFrame(vEnemySprites);
         drawArrayOnFrame(hEnemySprites);
         drawArrayOnFrame(coinSprites);
+        avatarSprite.renderAvatar(gc);
+
     }
 
     //Draws ArrayLists on the frame

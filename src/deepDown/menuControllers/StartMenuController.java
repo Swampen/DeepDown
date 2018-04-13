@@ -26,32 +26,19 @@ public class StartMenuController {
     public void initialize() {
         main = new Main();
 
-        Image image = null;
-        try {
-            image = new Image(new FileInputStream("src/deepDown/resource/test.png"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/test.png"));
         newGameButton.setGraphic(new ImageView(image));
 
         new AnimationTimer(){
                 public void handle(long now){
 
                     if(newGameButton.isHover()){
-                        Image image = null;
-                        try {
-                            image = new Image(new FileInputStream("src/deepDown/resource/test1.png"));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/test1.png"));
+
                         newGameButton.setGraphic(new ImageView(image));
                     }else {
-                        Image image = null;
-                        try {
-                            image = new Image(new FileInputStream("src/deepDown/resource/test.png"));
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/test.png"));
+
                         newGameButton.setGraphic(new ImageView(image));
                     }
                 }
