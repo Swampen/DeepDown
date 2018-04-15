@@ -18,10 +18,12 @@ public class Main extends Application {
 
     private Scene scene;
     private Parent root;
+    private Stage stage = new Stage();
 
     @Override
     public void start(Stage stage) throws IOException{
 
+        this.stage = stage;
         StartMenuController startMenu = new StartMenuController();
         URL url = getClass().getResource("/deepDown/resource/FXML/startMenu.fxml");
         FXMLLoader loader = new FXMLLoader(url);
@@ -36,5 +38,9 @@ public class Main extends Application {
 
     public Parent getRoot(){
         return root;
+    }
+
+    public Stage getStage(){
+        return this.stage;
     }
 }

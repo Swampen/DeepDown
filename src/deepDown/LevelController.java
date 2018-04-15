@@ -31,6 +31,7 @@ import java.util.TimerTask;
 public class LevelController {
 
     private int selectedLevel;
+    private Stage stage;
     @FXML
     private Canvas canvas;
     @FXML
@@ -95,11 +96,12 @@ public class LevelController {
         //Enables key presses in Canvas
         canvas.setFocusTraversable(true);
 
+        ArrayList<String> keyPresses= new ArrayList<String>();
         //Detects KeyPresses in Canvas
         canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e){
-                if (e.getCode() == KeyCode.UP ){
+               /* if (e.getCode() == KeyCode.UP ){
                     upPressed.set(true);
                 }if (e.getCode() == KeyCode.DOWN){
                     downPressed.set(true);
@@ -110,6 +112,11 @@ public class LevelController {
                 }if (e.getCode() == KeyCode.ESCAPE){
                     escapePressed.set(true);
                     showPauseMenu();
+                }*/
+                String code = e.getCode().toString();
+
+                if (!keyPresses.contains(code)){
+                    keyPresses.add(code);
                 }
             }
         });
@@ -118,7 +125,7 @@ public class LevelController {
         canvas.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e) {
-                if (e.getCode() == KeyCode.UP){
+                /*if (e.getCode() == KeyCode.UP){
                     upPressed.set(false);
                 }if (e.getCode() == KeyCode.DOWN){
                     downPressed.set(false);
@@ -126,7 +133,9 @@ public class LevelController {
                     leftPressed.set(false);
                 }if (e.getCode() == KeyCode.RIGHT){
                     rightPressed.set(false);
-                }
+                }*/
+                String code = e.getCode().toString();
+                keyPresses.remove( code );
             }
         });
 
@@ -172,6 +181,12 @@ public class LevelController {
         animationTimer.start();
     }
 
+    private void closeWindow() {
+        animationTimer.stop();
+        System.out.println("closing");
+        stage.close();
+    }
+
     private void showPauseMenu() {
         PauseMenuController controller = new PauseMenuController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
@@ -183,6 +198,7 @@ public class LevelController {
             e1.printStackTrace();
         }
         Stage stage = new Stage();
+        stage.setAlwaysOnTop(true);
         stage.setScene(new Scene(root));
         stage.showAndWait();
         escapePressed.set(false);
