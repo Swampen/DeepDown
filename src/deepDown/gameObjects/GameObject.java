@@ -25,46 +25,30 @@ public abstract class GameObject {
         return y;
     }
 
-    public void setX(double x) {
-        setPrevX(this.x);
-        this.x += x;
-    }
-
-    public void setY(double y) {
-        setPrevY(this.y);
-        this.y += y;
-    }
-
-    public void setPrevX(double x) {
-        this.prevX = x;
-    }
-
-    public void setPrevY(double y) {
-        this.prevY = y;
-    }
-
-    public double getPrevX(){
-        return prevX;
-    }
-
-    public double getPrevY() {
-        return prevY;
-    }
-
-    public void setXPos(){
-        this.x = prevX;
-    }
-
-    public void setYPos(){
-        this.y = prevY;
-    }
-
     public int getH() {
         return h;
     }
 
     public int getW() {
         return w;
+    }
+
+    public void setX(double x) {
+        prevX = this.x;
+        this.x += x;
+    }
+
+    public void setY(double y) {
+        prevY = this.y;
+        this.y += y;
+    }
+
+    public void revertXPos(){
+        this.x = prevX;
+    }
+
+    public void revertYPos(){
+        this.y = prevY;
     }
 
     public Rectangle2D getBoundary(){

@@ -6,7 +6,6 @@ import deepDown.gameObjects.Enemy.HorisontalEnemy;
 import deepDown.gameObjects.Enemy.VerticalEnemy;
 import deepDown.menuControllers.PauseMenuController;
 import javafx.animation.AnimationTimer;
-import javafx.animation.FadeTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
@@ -21,7 +20,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ import java.util.TimerTask;
 
 public class LevelController {
 
-    private int selectedLevel;
+    private int levelProgression;
     private Stage stage;
     @FXML
     private Canvas canvas;
@@ -67,15 +65,15 @@ public class LevelController {
 
     private AnimationTimer animationTimer;
 
-    public LevelController(int selectedLevel){
-        this.selectedLevel = selectedLevel;
+    public LevelController(int levelProgression){
+        this.levelProgression = levelProgression;
     }
 
     @FXML
     public void initialize(){
 
         gc = canvas.getGraphicsContext2D();
-        GameBoard level = new GameBoard(selectedLevel);
+        GameBoard level = new GameBoard(levelProgression);
         level.iniitalizeGameBoard(gc);
 
         avatar = level.getAvatar();
@@ -205,22 +203,22 @@ public class LevelController {
             if(avatar.collision(wallSprites.get(i).getGo())){
                 if(avatar.getXVelo() < 0) {
                     avatar.setXVelo(0);
-                    avatar.setXPos();
+                    avatar.revertXPos();
                     avatar.setCanMoveLeft(false);
                 }
                 if(avatar.getXVelo() > 0) {
                     avatar.setXVelo(0);
-                    avatar.setXPos();
+                    avatar.revertXPos();
                     avatar.setCanMoveRight(false);
                 }
                 if (avatar.getYVelo() < 0) {
                     avatar.setYVelo(0);
-                    avatar.setYPos();
+                    avatar.revertYPos();
                     avatar.setCanMoveUp(false);
                 }
                 if (avatar.getYVelo() > 0){
                     avatar.setYVelo(0);
-                    avatar.setYPos();
+                    avatar.revertYPos();
                     avatar.setCanMoveDown(false);
                 }
                 break;
@@ -236,7 +234,7 @@ public class LevelController {
                 }
                 //If a Horisontal enemy collides with a wall
                 if (hEnemy.collision(wallSprites.get(i).getGo())){
-                    hEnemy.setXPos();
+                    hEnemy.revertXPos();
                     hEnemy.reverseVelo();
                 }
             }
@@ -251,7 +249,7 @@ public class LevelController {
                 }
                 //If a Vertical Enemy collides with a Wall
                 if (vEnemy.collision(wallSprites.get(i).getGo())){
-                    vEnemy.setYPos();
+                    vEnemy.revertYPos();
                     vEnemy.reverseVelo();
                 }
             }
@@ -314,7 +312,7 @@ public class LevelController {
 
     private void loadNextLevel() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-        LevelController controller = new LevelController(selectedLevel+1);
+        LevelController controller = new LevelController(levelProgression +1);
         loader.setController(controller);
         Parent root = main.getRoot();
         try {
