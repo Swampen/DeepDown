@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -172,7 +173,8 @@ public class LevelController {
 
     private void showPauseMenu() {
 
-        PauseMenuController controller = new PauseMenuController();
+        Stage stage = new Stage();
+        PauseMenuController controller = new PauseMenuController(stage);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
         loader.setController(controller);
         Parent root = null;
@@ -181,7 +183,7 @@ public class LevelController {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(new Scene(root));
         stage.showAndWait();
         resetKeypresses();
@@ -201,29 +203,28 @@ public class LevelController {
     private void collisionDetection(double deltaTime) {
         //Checks for collision with walls
         for (int i = 0; i < wallSprites.size(); i++) {
-
-            if(avatar.collision(wallSprites.get(i).getGo())){
-                if(avatar.getXVelo() < 0) {
-                    avatar.setXVelo(0);
-                    avatar.revertXPos();
-                    avatar.setCanMoveLeft(false);
-                }
-                if(avatar.getXVelo() > 0) {
-                    avatar.setXVelo(0);
-                    avatar.revertXPos();
-                    avatar.setCanMoveRight(false);
-                }
-                if (avatar.getYVelo() < 0) {
+            Wall wall = (Wall)wallSprites.get(i).getGo();
+            if(avatar.collision(wall)){
+                if (upPressed.get()){
                     avatar.setYVelo(0);
                     avatar.revertYPos();
                     avatar.setCanMoveUp(false);
                 }
-                if (avatar.getYVelo() > 0){
+                if (downPressed.get()){
                     avatar.setYVelo(0);
                     avatar.revertYPos();
                     avatar.setCanMoveDown(false);
                 }
-                break;
+                if(leftPressed.get()) {
+                    avatar.setXVelo(0);
+                    avatar.revertXPos();
+                    avatar.setCanMoveLeft(false);
+                }
+                if(rightPressed.get()){
+                    avatar.setXVelo(0);
+                    avatar.revertXPos();
+                    avatar.setCanMoveRight(false);
+                }
             }
 
             //Goes through the ArrayList with Horisontal Enemy sprites
@@ -235,7 +236,7 @@ public class LevelController {
                     resetLevel();
                 }
                 //If a Horisontal enemy collides with a wall
-                if (hEnemy.collision(wallSprites.get(i).getGo())){
+                if (hEnemy.collision(wall)){
                     hEnemy.revertXPos();
                     hEnemy.reverseVelo();
                 }
@@ -250,7 +251,7 @@ public class LevelController {
                     resetLevel();
                 }
                 //If a Vertical Enemy collides with a Wall
-                if (vEnemy.collision(wallSprites.get(i).getGo())){
+                if (vEnemy.collision(wall)){
                     vEnemy.revertYPos();
                     vEnemy.reverseVelo();
                 }
@@ -343,7 +344,7 @@ public class LevelController {
         drawArrayOnFrame(vEnemySprites);
         drawArrayOnFrame(hEnemySprites);
         drawArrayOnFrame(coinSprites);
-        avatarSprite.renderAvatar(gc);
+        avatarSprite.render(gc);
     }
 
     //Draws ArrayLists on the frame

@@ -21,10 +21,7 @@ public class Sprite{
     }
 
     public void render (GraphicsContext gc){
-        gc.drawImage(image, tileX, tileY, go.getW(), go.getH(), go.getX(), go.getY(), 40, 40);
-    }
-    public void renderAvatar (GraphicsContext gc){
-        gc.drawImage(image, tileX, tileY, go.getW(), go.getH(), go.getX(), go.getY(), 30, 30);
+        gc.drawImage(image, tileX, tileY, go.getW(), go.getH(), go.getX(), go.getY(), go.getW(), go.getH());
     }
 
     public void changeSprite(int tileX, int tileY) {
