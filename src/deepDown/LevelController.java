@@ -96,12 +96,11 @@ public class LevelController {
         //Enables key presses in Canvas
         canvas.setFocusTraversable(true);
 
-        ArrayList<String> keyPresses= new ArrayList<String>();
         //Detects KeyPresses in Canvas
         canvas.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e){
-               /* if (e.getCode() == KeyCode.UP ){
+                if (e.getCode() == KeyCode.UP ){
                     upPressed.set(true);
                 }if (e.getCode() == KeyCode.DOWN){
                     downPressed.set(true);
@@ -112,11 +111,6 @@ public class LevelController {
                 }if (e.getCode() == KeyCode.ESCAPE){
                     escapePressed.set(true);
                     showPauseMenu();
-                }*/
-                String code = e.getCode().toString();
-
-                if (!keyPresses.contains(code)){
-                    keyPresses.add(code);
                 }
             }
         });
@@ -125,7 +119,7 @@ public class LevelController {
         canvas.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e) {
-                /*if (e.getCode() == KeyCode.UP){
+                if (e.getCode() == KeyCode.UP){
                     upPressed.set(false);
                 }if (e.getCode() == KeyCode.DOWN){
                     downPressed.set(false);
@@ -133,9 +127,7 @@ public class LevelController {
                     leftPressed.set(false);
                 }if (e.getCode() == KeyCode.RIGHT){
                     rightPressed.set(false);
-                }*/
-                String code = e.getCode().toString();
-                keyPresses.remove( code );
+                }
             }
         });
 
@@ -305,15 +297,14 @@ public class LevelController {
         if (rightPressed.getValue() && avatar.getCanMoveRight()) {
             avatar.setXVelo(200);
         }
-        avatar.posUpdate(deltaTime);        //Updates avatar position depending on time since last frame
-        avatar.setMovementState(true);      //Updates the movement state back to true
+        avatar.posUpdate(deltaTime);                                //Updates avatar position depending on time since last frame
+        avatar.setMovementState(true);                              //Updates the movement state back to true
 
         for (int j = 0; j < hEnemySprites.size(); j++){
             Sprite hEnemySprite = hEnemySprites.get(j);
             HorisontalEnemy enemy = (HorisontalEnemy)hEnemySprite.getGo();
             enemy.posUpdate(deltaTime);
         }
-        //
         for (int j = 0; j < vEnemySprites.size(); j++){
             Sprite vEnemySprite = vEnemySprites.get(j);
             VerticalEnemy enemy = (VerticalEnemy)vEnemySprite.getGo();
