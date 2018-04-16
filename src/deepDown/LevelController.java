@@ -29,7 +29,6 @@ import java.util.TimerTask;
 public class LevelController {
 
     private int levelProgression;
-    private Stage stage;
     @FXML
     private Canvas canvas;
     @FXML
@@ -171,13 +170,8 @@ public class LevelController {
         animationTimer.start();
     }
 
-    private void closeWindow() {
-        animationTimer.stop();
-        System.out.println("closing");
-        stage.close();
-    }
-
     private void showPauseMenu() {
+
         PauseMenuController controller = new PauseMenuController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
         loader.setController(controller);
@@ -188,11 +182,19 @@ public class LevelController {
             e1.printStackTrace();
         }
         Stage stage = new Stage();
-        stage.setAlwaysOnTop(true);
         stage.setScene(new Scene(root));
         stage.showAndWait();
-        escapePressed.set(false);
+        resetKeypresses();
+        lastCurrentTime = System.nanoTime();
         animationTimer.start();
+    }
+
+    private void resetKeypresses() {
+        escapePressed.set(false);
+        upPressed.set(false);
+        downPressed.set(false);
+        leftPressed.set(false);
+        rightPressed.set(false);
     }
 
     //Detects collision
