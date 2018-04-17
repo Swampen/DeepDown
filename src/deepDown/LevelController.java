@@ -205,22 +205,27 @@ public class LevelController {
         for (int i = 0; i < wallSprites.size(); i++) {
             Wall wall = (Wall)wallSprites.get(i).getGo();
             if(avatar.collision(wall)){
-                if (upPressed.get()){
+                double distanceTop = wall.getBoundary().getMaxY() - avatar.getBoundary().getMinY();
+                double distanceBottom = avatar.getBoundary().getMaxY() - wall.getBoundary().getMinY();
+                double distanceLeft = wall.getBoundary().getMaxX() - avatar.getBoundary().getMinX();
+                double distanceRight = avatar.getBoundary().getMaxX() - wall.getBoundary().getMinX();
+                System.out.println(distanceRight);
+                if (upPressed.get()&& 5 > distanceTop){
                     avatar.setYVelo(0);
                     avatar.revertYPos();
                     avatar.setCanMoveUp(false);
                 }
-                if (downPressed.get()){
+                if (downPressed.get() && 5 > distanceBottom){
                     avatar.setYVelo(0);
                     avatar.revertYPos();
                     avatar.setCanMoveDown(false);
                 }
-                if(leftPressed.get()) {
+                if(leftPressed.get() && distanceLeft < 5 && distanceLeft > 0){
                     avatar.setXVelo(0);
                     avatar.revertXPos();
                     avatar.setCanMoveLeft(false);
                 }
-                if(rightPressed.get()){
+                if(rightPressed.get() && 5 > distanceRight){
                     avatar.setXVelo(0);
                     avatar.revertXPos();
                     avatar.setCanMoveRight(false);
@@ -287,16 +292,16 @@ public class LevelController {
         avatar.setXVelo(0);
         avatar.setYVelo(0);
         if (upPressed.getValue() && avatar.getCanMoveUp()) {
-            avatar.setYVelo(-200);
+            avatar.setYVelo(-150);
         }
         if (downPressed.getValue() && avatar.getCanMoveDown()) {
-            avatar.setYVelo(200);
+            avatar.setYVelo(150);
         }
         if (leftPressed.getValue() && avatar.getCanMoveLeft()) {
-            avatar.setXVelo(-200);
+            avatar.setXVelo(-150);
         }
         if (rightPressed.getValue() && avatar.getCanMoveRight()) {
-            avatar.setXVelo(200);
+            avatar.setXVelo(150);
         }
         avatar.posUpdate(deltaTime);                                //Updates avatar position depending on time since last frame
         avatar.setMovementState(true);                              //Updates the movement state back to true
