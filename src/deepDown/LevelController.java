@@ -38,7 +38,7 @@ public class LevelController {
     private Label scoreLabel;
     private GraphicsContext gc;
     private Main main = new Main();
-    private int score = 2000;
+    private double score = 2000;
     private long lastCurrentTime = System.nanoTime();
     private double enemyVel = 100;
 
@@ -129,15 +129,6 @@ public class LevelController {
             }
         });
 
-        //Counting down score by one every second
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                score--;
-            }
-        }, 0, 1000);
-
         for (int j = 0; j < hEnemySprites.size(); j++) {
             Sprite hEnemySprite = hEnemySprites.get(j);
             Enemy enemy = (Enemy) hEnemySprite.getGo();
@@ -157,7 +148,8 @@ public class LevelController {
             public void handle(long currentTime){
                 double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;  //Time since last frame
                 lastCurrentTime = currentTime;                                      //Saves the time in current frame
-                scoreLabel.setText(Integer.toString(score));                        //Updates score
+                score = score - deltaTime;
+                scoreLabel.setText(Integer.toString((int)score));                   //Updates score
 
                 update(deltaTime);
                 collisionDetection(deltaTime);
@@ -169,121 +161,6 @@ public class LevelController {
             }
         };
         animationTimer.start();
-    }
-
-    private void showPauseMenu() {
-
-        Stage stage = new Stage();
-        PauseMenuController controller = new PauseMenuController(stage);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
-        loader.setController(controller);
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-        resetKeypresses();
-        lastCurrentTime = System.nanoTime();
-        animationTimer.start();
-    }
-
-    private void resetKeypresses() {
-        escapePressed.set(false);
-        upPressed.set(false);
-        downPressed.set(false);
-        leftPressed.set(false);
-        rightPressed.set(false);
-    }
-
-    //Detects collision
-    private void collisionDetection(double deltaTime) {
-        //Checks for collision with walls
-        for (int i = 0; i < wallSprites.size(); i++) {
-            Wall wall = (Wall)wallSprites.get(i).getGo();
-            if(avatar.collision(wall)){
-                double distanceTop = wall.getBoundary().getMaxY() - avatar.getBoundary().getMinY();
-                double distanceBottom = avatar.getBoundary().getMaxY() - wall.getBoundary().getMinY();
-                double distanceLeft = wall.getBoundary().getMaxX() - avatar.getBoundary().getMinX();
-                double distanceRight = avatar.getBoundary().getMaxX() - wall.getBoundary().getMinX();
-                System.out.println(distanceRight);
-                if (upPressed.get()&& 5 > distanceTop){
-                    avatar.setYVelo(0);
-                    avatar.revertYPos();
-                    avatar.setCanMoveUp(false);
-                }
-                if (downPressed.get() && 5 > distanceBottom){
-                    avatar.setYVelo(0);
-                    avatar.revertYPos();
-                    avatar.setCanMoveDown(false);
-                }
-                if(leftPressed.get() && distanceLeft < 5 && distanceLeft > 0){
-                    avatar.setXVelo(0);
-                    avatar.revertXPos();
-                    avatar.setCanMoveLeft(false);
-                }
-                if(rightPressed.get() && 5 > distanceRight){
-                    avatar.setXVelo(0);
-                    avatar.revertXPos();
-                    avatar.setCanMoveRight(false);
-                }
-            }
-
-            //Goes through the ArrayList with Horisontal Enemy sprites
-            for (int j = 0; j < hEnemySprites.size(); j++){
-                Sprite hEnemySprite = hEnemySprites.get(j);
-                HorisontalEnemy hEnemy = (HorisontalEnemy) hEnemySprite.getGo();
-                //If the avatar collides with an Horisontal enemy
-                if (avatar.collision(hEnemy)){
-                    resetLevel();
-                }
-                //If a Horisontal enemy collides with a wall
-                if (hEnemy.collision(wall)){
-                    hEnemy.revertXPos();
-                    hEnemy.reverseVelo();
-                }
-            }
-            //Goes through the ArrayList with Vertical Enemy sprites
-            for (int j = 0; j < vEnemySprites.size(); j++){
-                Sprite vEnemySprite =vEnemySprites.get(j);
-                VerticalEnemy vEnemy = (VerticalEnemy) vEnemySprite.getGo();
-
-                //If the Avatar collides with an Vertical Enemy
-                if (avatar.collision(vEnemy)){
-                    resetLevel();
-                }
-                //If a Vertical Enemy collides with a Wall
-                if (vEnemy.collision(wall)){
-                    vEnemy.revertYPos();
-                    vEnemy.reverseVelo();
-                }
-            }
-        }
-        //Checks for avatar collision with coins
-        for (int i = 0; i < coinSprites.size(); i++){
-            if(avatar.collision(coinSprites.get(i).getGo())) {
-                System.out.println("DING! you got a coin!");
-                coinSprites.remove(i);
-            }
-        }
-        //Checks for avatar collition with key
-        if (avatar.collision(key) && !key.isPickedUp() ){
-            System.out.println("Picked up key");
-            key.setPickedUp(true);
-            door.setOpen(true);
-            doorSprite.changeSprite(160,40);
-        }
-        //Checks for avatar collition with door
-        if (avatar.collision(door)) {
-            if (!door.isOpen()){
-                System.out.println("Find the key");
-            }else{
-                loadNextLevel();        //Loads the next level
-            }
-        }
     }
 
     //Updates all of DynamicGameObjects
@@ -318,24 +195,89 @@ public class LevelController {
         }
     }
 
-    private void loadNextLevel() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-        LevelController controller = new LevelController(levelProgression +1);
-        loader.setController(controller);
-        Parent root = main.getRoot();
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        anchor.getChildren().setAll(root);
-        animationTimer.stop();
-        resetLevel();
-    }
+    //Detects isColliding
+    private void collisionDetection(double deltaTime) {
+        //Checks for isColliding with walls
+        for (Sprite wallSprite : wallSprites) {
+            Wall wall = (Wall)wallSprite.getGo();
+            if(avatar.isColliding(wall)){
+                //TODO fixing collition
+                double overlapTop = wall.getBoundary().getMaxY() - avatar.getBoundary().getMinY();
+                double overlapBottom = avatar.getBoundary().getMaxY() - wall.getBoundary().getMinY();
+                double overlapLeft =   wall.getBoundary().getMaxX() - avatar.getBoundary().getMinX();
+                double overlapRight = avatar.getBoundary().getMaxX() - wall.getBoundary().getMinX();
 
-    private void resetLevel() {
-        lastCurrentTime = System.nanoTime();
-        initialize();
+                if (overlapTop > 0){
+                    avatar.setYVelo(0);
+                    avatar.revertYPos();
+
+                }
+                else if (overlapBottom > 0){
+                    avatar.setYVelo(0);
+                    avatar.revertYPos();
+
+                }
+                if(overlapLeft > 0){
+                    avatar.setXVelo(0);
+                    avatar.revertXPos();
+
+                }
+                else if(overlapRight > 0){
+                    avatar.setXVelo(0);
+                    avatar.revertXPos();
+
+                }
+            }
+
+            //Goes through the ArrayList with Horisontal Enemy sprites
+            for (Sprite hEnemySprite : hEnemySprites){
+                HorisontalEnemy hEnemy = (HorisontalEnemy) hEnemySprite.getGo();
+                //If the avatar collides with an Horisontal enemy
+                if (avatar.isColliding(hEnemy)){
+                    resetLevel();
+                }
+                //If a Horisontal enemy collides with a wall
+                if (hEnemy.isColliding(wall)){
+                    hEnemy.revertXPos();
+                    hEnemy.reverseVelo();
+                }
+            }
+            //Goes through the ArrayList with Vertical Enemy sprites
+            for (Sprite vEnemySprite : vEnemySprites){
+                VerticalEnemy vEnemy = (VerticalEnemy) vEnemySprite.getGo();
+                //If the Avatar collides with an Vertical Enemy
+                if (avatar.isColliding(vEnemy)){
+                    resetLevel();
+                }
+                //If a Vertical Enemy collides with a Wall
+                if (vEnemy.isColliding(wall)){
+                    vEnemy.revertYPos();
+                    vEnemy.reverseVelo();
+                }
+            }
+        }
+        //Checks for avatar isColliding with coins
+        for (int i = 0; i < coinSprites.size(); i++){
+            if(avatar.isColliding(coinSprites.get(i).getGo())) {
+                System.out.println("DING! you got a coin!");
+                coinSprites.remove(i);
+            }
+        }
+        //Checks for avatar collition with key
+        if (avatar.isColliding(key) && !key.isPickedUp() ){
+            System.out.println("Picked up key");
+            key.setPickedUp(true);
+            door.setOpen(true);
+            doorSprite.changeSprite(160,40);
+        }
+        //Checks for avatar collition with door
+        if (avatar.isColliding(door)) {
+            if (!door.isOpen()){
+                System.out.println("Find the key");
+            }else{
+                loadNextLevel();        //Loads the next level
+            }
+        }
     }
 
     //Draws the entire frame
@@ -358,4 +300,54 @@ public class LevelController {
             sprites.get(i).render(gc);
         }
     }
+
+    private void showPauseMenu() {
+
+        Stage stage = new Stage();
+        PauseMenuController controller = new PauseMenuController(stage);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
+        loader.setController(controller);
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+        resetKeypresses();
+        lastCurrentTime = System.nanoTime();
+        animationTimer.start();
+    }
+
+    private void resetKeypresses() {
+        escapePressed.set(false);
+        upPressed.set(false);
+        downPressed.set(false);
+        leftPressed.set(false);
+        rightPressed.set(false);
+    }
+
+    private void loadNextLevel() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
+        LevelController controller = new LevelController(levelProgression +1);
+        loader.setController(controller);
+        Parent root = main.getRoot();
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        anchor.getChildren().setAll(root);
+        animationTimer.stop();
+        resetLevel();
+    }
+
+    private void resetLevel() {
+        lastCurrentTime = System.nanoTime();
+        initialize();
+    }
+
+
 }

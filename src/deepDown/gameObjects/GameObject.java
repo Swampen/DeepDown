@@ -1,6 +1,10 @@
 package deepDown.gameObjects;
 
+
+import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+
+import java.util.Vector;
 
 public abstract class GameObject {
     private double x;
@@ -52,10 +56,26 @@ public abstract class GameObject {
     }
 
     public Rectangle2D getBoundary(){
-        return new Rectangle2D(this.x, this.y, this.w, this.w);
+        return new Rectangle2D(x, y, w, w);
     }
 
-    public boolean collision(GameObject go){
-        return go.getBoundary().intersects(this.getBoundary());
+    public boolean isColliding(GameObject other){
+        return this.getBoundary().intersects(other.getBoundary());
     }
+
+    public Point2D center(){
+        return new Point2D(x + w / 2, y + h / 2);
+    }
+
+    public boolean isColidingTop(GameObject other){
+
+        if (other.center().getX() > this.center().getX()){
+            return true;
+        }
+
+
+        return false;
+    }
+
+
 }
