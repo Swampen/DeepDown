@@ -37,7 +37,7 @@ public class LevelController {
     private Label scoreLabel;
     private GraphicsContext gc;
     private Main main = new Main();
-    private int score = 2000;
+    private int timeScore = 2000;
     private long lastCurrentTime = System.nanoTime();
     private double enemyVel = 100;
 
@@ -128,12 +128,12 @@ public class LevelController {
             }
         });
 
-        //Counting down score by one every second
+        //Counting down timeScore by one every second
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                score--;
+                timeScore--;
             }
         }, 0, 1000);
 
@@ -156,7 +156,7 @@ public class LevelController {
             public void handle(long currentTime){
                 double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;  //Time since last frame
                 lastCurrentTime = currentTime;                                      //Saves the time in current frame
-                scoreLabel.setText(Integer.toString(score));                        //Updates score
+                scoreLabel.setText("Time: " + Integer.toString(timeScore));                        //Updates timeScore
 
                 update(deltaTime);
                 collisionDetection(deltaTime);
@@ -172,7 +172,7 @@ public class LevelController {
 
     private void showPauseMenu() {
 
-        PauseMenuController controller = new PauseMenuController();
+        PauseMenuController controller = new PauseMenuController(levelProgression);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
         loader.setController(controller);
         Parent root = null;

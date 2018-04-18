@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import deepDown.Main;
 
+import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -58,7 +59,17 @@ public class StartMenuController {
     }
 
     //Loads the level the player has come to before quitting play
-    public void loadGameClicked(){
+    public void loadGameClicked() throws IOException{
+        FileInputStream fis = new FileInputStream("save.txt");
+        DataInputStream dis = new DataInputStream(fis);
+        int i = dis.readInt();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
+        LevelController level = new LevelController(i);
+        loader.setController(level);
+        Parent root = main.getRoot();
+        root = loader.load();
+        anchor.getChildren().setAll(root);
+
 
     }
 
