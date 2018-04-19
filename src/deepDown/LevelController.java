@@ -212,16 +212,15 @@ public class LevelController {
                 //System.out.println("Width : " + widthOverlap + "\n");
 
                 if (widthOverlap > heightOverlap){
-                    avatar.setYVelo(0);
-                    avatar.revertYPos();
+                    avatar.reverseVelo();
+                    avatar.posUpdate(deltaTime);
                     avatar.setCanMoveUp(false);
                     avatar.setCanMoveDown(false);
 
                 }
                 if (widthOverlap < heightOverlap){
-                    System.out.println("left");
-                    avatar.setXVelo(0);
-                    avatar.revertXPos();
+                    avatar.reverseVelo();
+                    avatar.posUpdate(deltaTime);;
                     avatar.setCanMoveLeft(false);
                     avatar.setCanMoveRight(false);
 
