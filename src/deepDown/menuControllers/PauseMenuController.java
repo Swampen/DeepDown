@@ -15,9 +15,13 @@ import java.net.URL;
 public class PauseMenuController {
 
     int levelProgression;
+    int totScore;
+    int avatarLives;
 
-    public PauseMenuController(int levelProgression){
+    public PauseMenuController(int levelProgression, int totScore, int avatarLives){
         this.levelProgression = levelProgression;
+        this.totScore = totScore;
+        this.avatarLives = avatarLives;
     }
 
     @FXML
@@ -37,6 +41,8 @@ public class PauseMenuController {
         FileOutputStream fos = new FileOutputStream(f);
         DataOutputStream dos = new DataOutputStream(fos);
         dos.writeInt(levelProgression);
+        dos.writeInt(totScore);
+        dos.writeInt(avatarLives);
 
     }
 

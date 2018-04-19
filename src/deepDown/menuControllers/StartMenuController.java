@@ -51,7 +51,7 @@ public class StartMenuController {
     //Opens the first level when New game is clicked
     public void newGameClicked() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-        LevelController level = new LevelController(1);
+        LevelController level = new LevelController(1, 0, 3);
         loader.setController(level);
         Parent root = main.getRoot();
         root = loader.load();
@@ -63,8 +63,10 @@ public class StartMenuController {
         FileInputStream fis = new FileInputStream("save.txt");
         DataInputStream dis = new DataInputStream(fis);
         int i = dis.readInt();
+        int ts = dis.readInt();
+        int l = dis.readInt();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-        LevelController level = new LevelController(i);
+        LevelController level = new LevelController(i, ts, l);
         loader.setController(level);
         Parent root = main.getRoot();
         root = loader.load();

@@ -22,7 +22,7 @@ public class LevelSelectController {
 
     public void loadLevel(int level)throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-        LevelController controller = new LevelController(level);
+        LevelController controller = new LevelController(level, 0, 3);
         loader.setController(controller);
         Parent root = main.getRoot();
         root = loader.load();

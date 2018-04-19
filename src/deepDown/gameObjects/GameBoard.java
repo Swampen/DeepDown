@@ -134,7 +134,7 @@ public class GameBoard {
                         doorSprite.render(gc);
                         break;
                     case 7:
-                        avatar = new Avatar(j*40, i*40, 30, 30, 3, true, 0, 0);
+                        avatar = new Avatar(j*40, i*40, 30, 30,  0, 0);
                         avatarSprite = new Sprite(image, avatar, Type.AVATAR, 0, 40);
                         avatarSprite.render(gc);
                         break;

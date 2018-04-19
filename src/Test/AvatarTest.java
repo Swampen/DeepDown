@@ -4,7 +4,7 @@ import deepDown.gameObjects.Avatar;
 import static org.junit.Assert.*;
 
 public class AvatarTest {
-    private Avatar test = new Avatar(0,0, 40, 40, 3, true, 0, 0);
+    private Avatar test = new Avatar(0,0, 40, 40, 0, 0);
     @Test
     public void getLives() throws Exception {
         assertEquals (3, test.getLives());
@@ -21,10 +21,5 @@ public class AvatarTest {
         assertTrue(test.isAlive());
     }
 
-    @Test
-    public void setAlive() throws Exception {
-        test.setAlive(false);
-        assertFalse(test.isAlive());
-    }
 
 }

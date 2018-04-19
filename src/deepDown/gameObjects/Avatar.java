@@ -2,17 +2,15 @@ package deepDown.gameObjects;
 
 
 public class Avatar extends DynamicGameObject {
-    private int lives;
+    private int lives = 3;
     private boolean isAlive;
     private boolean canMoveUp = true;
     private boolean canMoveDown = true;
     private boolean canMoveLeft = true;
     private boolean canMoveRight = true;
 
-    public Avatar(double x, double y, int height, int width, int lives, boolean isAlive, double xVelo, double yVelo) {
+    public Avatar(double x, double y, int height, int width, double xVelo, double yVelo) {
         super(x, y, height, width, xVelo, yVelo);
-        this.lives = lives;
-        this.isAlive = isAlive;
     }
 
     public int getLives() {
@@ -24,11 +22,16 @@ public class Avatar extends DynamicGameObject {
     }
 
     public boolean isAlive() {
-        return isAlive;
+        if(lives == 0){
+            return !isAlive;
+        } else {
+            return isAlive;
+        }
     }
 
-    public void setAlive(boolean alive) {
-        isAlive = alive;
+    public int reduceLives() {
+        --lives;
+        return lives;
     }
 
     public void setMovementState(boolean movable){

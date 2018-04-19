@@ -6,6 +6,7 @@ import deepDown.gameObjects.Enemy.HorisontalEnemy;
 import deepDown.gameObjects.Enemy.VerticalEnemy;
 import deepDown.menuControllers.PauseMenuController;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
@@ -35,11 +36,18 @@ public class LevelController {
     private AnchorPane anchor;
     @FXML
     private Label scoreLabel;
+    //@FXML
+    //private Label totScoreLabel;
+    //@FXML
+    //private Label coinCountLabel
     private GraphicsContext gc;
     private Main main = new Main();
     private int timeScore = 2000;
     private long lastCurrentTime = System.nanoTime();
     private double enemyVel = 100;
+    private int coinCount;
+    private int totScore;
+    private int avatarLives;
 
     final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     final BooleanProperty downPressed = new SimpleBooleanProperty(false);
@@ -64,8 +72,10 @@ public class LevelController {
 
     private AnimationTimer animationTimer;
 
-    public LevelController(int levelProgression){
+    public LevelController(int levelProgression, int totScore, int avatarLives){
         this.levelProgression = levelProgression;
+        this.totScore = totScore;
+        this.avatarLives = avatarLives;
     }
 
     @FXML
@@ -89,6 +99,8 @@ public class LevelController {
         vEnemySprites = level.getVEnemieSprites();
         hEnemySprites = level.getHEnemieSprites();
         coinSprites = level.getCoinSprites();
+        coinCount = 0;
+        System.out.println(totScore);
 
         //Enables key presses in Canvas
         canvas.setFocusTraversable(true);
@@ -156,7 +168,9 @@ public class LevelController {
             public void handle(long currentTime){
                 double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;  //Time since last frame
                 lastCurrentTime = currentTime;                                      //Saves the time in current frame
-                scoreLabel.setText("Time: " + Integer.toString(timeScore));                        //Updates timeScore
+                scoreLabel.setText("Time: " + Integer.toString(timeScore));     //Updates timeScore
+                //coinCountLabel.setText("Coins: " + Integer.toString(coinCount)); //Updates coinCount
+                //totScoreLabel.setText("Score: " + Integer.toString(totScore));  //Updates totScore
 
                 update(deltaTime);
                 collisionDetection(deltaTime);
@@ -172,7 +186,7 @@ public class LevelController {
 
     private void showPauseMenu() {
 
-        PauseMenuController controller = new PauseMenuController(levelProgression);
+        PauseMenuController controller = new PauseMenuController(levelProgression, totScore, avatarLives);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
         loader.setController(controller);
         Parent root = null;
@@ -223,7 +237,6 @@ public class LevelController {
                     avatar.revertYPos();
                     avatar.setCanMoveDown(false);
                 }
-                break;
             }
 
             //Goes through the ArrayList with Horisontal Enemy sprites
@@ -232,7 +245,7 @@ public class LevelController {
                 HorisontalEnemy hEnemy = (HorisontalEnemy) hEnemySprite.getGo();
                 //If the avatar collides with an Horisontal enemy
                 if (avatar.collision(hEnemy)){
-                    resetLevel();
+                    killAvatar();
                 }
                 //If a Horisontal enemy collides with a wall
                 if (hEnemy.collision(wallSprites.get(i).getGo())){
@@ -247,7 +260,7 @@ public class LevelController {
 
                 //If the Avatar collides with an Vertical Enemy
                 if (avatar.collision(vEnemy)){
-                    resetLevel();
+                    killAvatar();
                 }
                 //If a Vertical Enemy collides with a Wall
                 if (vEnemy.collision(wallSprites.get(i).getGo())){
@@ -260,6 +273,7 @@ public class LevelController {
         for (int i = 0; i < coinSprites.size(); i++){
             if(avatar.collision(coinSprites.get(i).getGo())) {
                 System.out.println("DING! you got a coin!");
+                ++coinCount;
                 coinSprites.remove(i);
             }
         }
@@ -275,6 +289,9 @@ public class LevelController {
             if (!door.isOpen()){
                 System.out.println("Find the key");
             }else{
+                System.out.println(coinCount);
+                totScore += (coinCount * 100 + timeScore);
+                System.out.println(totScore);
                 loadNextLevel();        //Loads the next level
             }
         }
@@ -314,7 +331,7 @@ public class LevelController {
 
     private void loadNextLevel() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-        LevelController controller = new LevelController(levelProgression +1);
+        LevelController controller = new LevelController(levelProgression +1, totScore, avatarLives);
         loader.setController(controller);
         Parent root = main.getRoot();
         try {
@@ -350,6 +367,17 @@ public class LevelController {
     public void drawArrayOnFrame(ArrayList<Sprite> sprites){
         for (int i = 0; i < sprites.size(); i++){
             sprites.get(i).render(gc);
+        }
+    }
+
+    public void killAvatar() {
+        if(avatarLives > 0) {
+            --avatarLives;
+            System.out.println(avatarLives);
+            resetLevel();
+        }else {
+            System.out.println("Game Over!");
+            System.out.println("Score: " + (totScore +(coinCount*100 + timeScore)));
         }
     }
 }
