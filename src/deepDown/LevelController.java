@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -22,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -202,29 +204,26 @@ public class LevelController {
             Wall wall = (Wall)wallSprite.getGo();
             if(avatar.isColliding(wall)){
                 //TODO fixing collition
-                double overlapTop = wall.getBoundary().getMaxY() - avatar.getBoundary().getMinY();
-                double overlapBottom = avatar.getBoundary().getMaxY() - wall.getBoundary().getMinY();
-                double overlapLeft =   wall.getBoundary().getMaxX() - avatar.getBoundary().getMinX();
-                double overlapRight = avatar.getBoundary().getMaxX() - wall.getBoundary().getMinX();
 
-                if (overlapTop > 0){
+                double heightOverlap = avatar.intersection(wall).getHeight();
+                double widthOverlap = avatar.intersection(wall).getWidth();
+
+                //System.out.println("Height: " + heightOverlap);
+                //System.out.println("Width : " + widthOverlap + "\n");
+
+                if (widthOverlap > heightOverlap){
                     avatar.setYVelo(0);
                     avatar.revertYPos();
+                    avatar.setCanMoveUp(false);
+                    avatar.setCanMoveDown(false);
 
                 }
-                else if (overlapBottom > 0){
-                    avatar.setYVelo(0);
-                    avatar.revertYPos();
-
-                }
-                if(overlapLeft > 0){
+                if (widthOverlap < heightOverlap){
+                    System.out.println("left");
                     avatar.setXVelo(0);
                     avatar.revertXPos();
-
-                }
-                else if(overlapRight > 0){
-                    avatar.setXVelo(0);
-                    avatar.revertXPos();
+                    avatar.setCanMoveLeft(false);
+                    avatar.setCanMoveRight(false);
 
                 }
             }

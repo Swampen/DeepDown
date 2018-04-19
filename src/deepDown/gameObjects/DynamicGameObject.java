@@ -18,14 +18,6 @@ public abstract class DynamicGameObject extends GameObject {
         this.yVelo = yVelo;
     }
 
-    public double getXVelo(){
-        return xVelo;
-    }
-
-    public double getYVelo(){
-        return yVelo;
-    }
-
     //Updates the sprites position
     public void posUpdate(double time) {
         this.setX(xVelo*time);
