@@ -289,9 +289,7 @@ public class LevelController {
             if (!door.isOpen()){
                 System.out.println("Find the key");
             }else{
-                System.out.println(coinCount);
                 totScore += (coinCount * 100 + timeScore);
-                System.out.println(totScore);
                 loadNextLevel();        //Loads the next level
             }
         }
