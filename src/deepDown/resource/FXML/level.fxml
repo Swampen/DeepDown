@@ -11,18 +11,46 @@
       <Pane prefHeight="720.0" prefWidth="1280.0">
          <children>
             <Canvas fx:id="canvas" height="720.0" width="1280.0" />
-            <AnchorPane layoutX="1080.0" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane layoutX="871.0" prefHeight="200.0" prefWidth="409.0">
                <children>
-                  <HBox fx:id="scoreHbox" layoutX="86.0" layoutY="-2.0" prefHeight="33.0" prefWidth="106.0" style="-fx-background-color: white;">
+                  <HBox fx:id="scoreHbox" layoutY="-2.0" prefHeight="33.0" prefWidth="106.0" style="-fx-background-color: white;">
                      <children>
-                        <Label fx:id="scoreLabel" prefHeight="33.0" prefWidth="220.0" text="Score: $TIME ">
+                        <Label fx:id="scoreLabel" prefHeight="33.0" prefWidth="220.0" text="Time">
                            <font>
                               <Font size="22.0" />
-                           </font></Label>
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="112.0" layoutY="-2.0" prefHeight="33.0" prefWidth="118.0">
+                     <children>
+                        <Label fx:id="coinCountLabel" prefHeight="40.0" prefWidth="119.0" style="-fx-background-color: white;" text="Coins">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="237.0" layoutY="-2.0" prefHeight="33.0" prefWidth="135.0">
+                     <children>
+                        <Label fx:id="totScoreLabel" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: white;" text="Score">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                </children>
             </AnchorPane>
+            <HBox layoutX="14.0" prefHeight="33.0" prefWidth="106.0">
+               <children>
+                  <Label fx:id="livesCounter" prefHeight="38.0" prefWidth="114.0" text="Lives" style="-fx-background-color: white;" >
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </Pane>
    </children>

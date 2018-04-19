@@ -36,10 +36,12 @@ public class LevelController {
     private AnchorPane anchor;
     @FXML
     private Label scoreLabel;
-    //@FXML
-    //private Label totScoreLabel;
-    //@FXML
-    //private Label coinCountLabel
+    @FXML
+    private Label totScoreLabel;
+    @FXML
+    private Label coinCountLabel;
+    @FXML
+    private Label livesCounter;
     private GraphicsContext gc;
     private Main main = new Main();
     private int timeScore = 2000;
@@ -169,8 +171,9 @@ public class LevelController {
                 double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;  //Time since last frame
                 lastCurrentTime = currentTime;                                      //Saves the time in current frame
                 scoreLabel.setText("Time: " + Integer.toString(timeScore));     //Updates timeScore
-                //coinCountLabel.setText("Coins: " + Integer.toString(coinCount)); //Updates coinCount
-                //totScoreLabel.setText("Score: " + Integer.toString(totScore));  //Updates totScore
+                coinCountLabel.setText("Coins: " + Integer.toString(coinCount)); //Updates coinCount
+                totScoreLabel.setText("Score: " + Integer.toString(totScore));  //Updates totScore
+                livesCounter.setText("Lives: " + Integer.toString(avatarLives)); //Updates livesCounter
 
                 update(deltaTime);
                 collisionDetection(deltaTime);
