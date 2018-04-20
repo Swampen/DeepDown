@@ -1,18 +1,13 @@
 package deepDown.gameObjects;
 
 
-import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
-
-import java.awt.*;
 
 public abstract class GameObject {
     private double x;
     private double y;
     private int h;
     private int w;
-    private double prevX;
-    private double prevY;
 
     public GameObject (double x, double y, int height, int width){
         this.x = x;
@@ -38,21 +33,11 @@ public abstract class GameObject {
     }
 
     public void setX(double x) {
-        prevX = this.x;
         this.x += x;
     }
 
     public void setY(double y) {
-        prevY = this.y;
         this.y += y;
-    }
-
-    public void revertXPos(){
-        this.x = prevX;
-    }
-
-    public void revertYPos(){
-        this.y = prevY;
     }
 
     public Rectangle2D getBoundary(){

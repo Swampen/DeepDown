@@ -250,8 +250,8 @@ public class LevelController {
                 }
                 //If a Horisontal enemy collides with a wall
                 if (hEnemy.isColliding(wall)){
-                    hEnemy.revertXPos();
                     hEnemy.reverseVelo();
+                    hEnemy.posUpdate(deltaTime);
                 }
             }
             //Goes through the ArrayList with Vertical Enemy sprites
@@ -263,8 +263,8 @@ public class LevelController {
                 }
                 //If a Vertical Enemy collides with a Wall
                 if (vEnemy.isColliding(wall)){
-                    vEnemy.revertYPos();
                     vEnemy.reverseVelo();
+                    vEnemy.posUpdate(deltaTime);
                 }
             }
         }
