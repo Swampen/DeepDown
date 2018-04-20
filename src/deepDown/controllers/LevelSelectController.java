@@ -1,10 +1,9 @@
-package deepDown.menuControllers;
+package deepDown.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
-import deepDown.LevelController;
 import deepDown.Main;
 
 import java.io.IOException;

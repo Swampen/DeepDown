@@ -1,4 +1,4 @@
-package deepDown.menuControllers;
+package deepDown.controllers;
 
 import deepDown.Main;
 import javafx.application.Platform;
@@ -8,27 +8,25 @@ import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.awt.*;
-
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 
 public class PauseMenuController {
 
-    @FXML
-    private AnchorPane anchor;
-    private Main main;
+    private Main main = new Main();
     private Stage stage;
 
-    int levelProgression;
-    int totScore;
-    int avatarLives;
+    private AnchorPane anchor;
+    private int levelProgression;
+    private int totScore;
+    private int avatarLives;
 
 
-    public PauseMenuController(Stage stage, int levelProgression, int totScore, int avatarLives){
+    public PauseMenuController(Stage stage, AnchorPane anchor, int levelProgression, int totScore, int avatarLives){
+        this.stage = stage;
+        this.anchor = anchor;
         this.levelProgression = levelProgression;
         this.totScore = totScore;
         this.avatarLives = avatarLives;
@@ -38,12 +36,18 @@ public class PauseMenuController {
         stage.close();
     }
 
-    public void backToMenuPressed(){
-
+    public void backToMenuPressed() throws IOException{
+        stage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
+        StartMenuController startMenuController = new StartMenuController();
+        loader.setController(startMenuController);
+        Parent root = main.getRoot();
+        root = loader.load();
+        anchor.getChildren().setAll(root);
     }
 
     public void saveGamePressed() throws Exception{
-        File f = new File("save.txt");
+        File f = new File("Files/save.txt");
         FileOutputStream fos = new FileOutputStream(f);
         DataOutputStream dos = new DataOutputStream(fos);
         dos.writeInt(levelProgression);

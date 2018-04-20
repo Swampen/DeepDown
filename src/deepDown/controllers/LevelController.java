@@ -1,18 +1,16 @@
-package deepDown;
+package deepDown.controllers;
 
+import deepDown.Main;
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.Enemy.Enemy;
 import deepDown.gameObjects.Enemy.HorisontalEnemy;
 import deepDown.gameObjects.Enemy.VerticalEnemy;
-import deepDown.menuControllers.PauseMenuController;
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -24,11 +22,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class LevelController {
 
@@ -189,16 +184,16 @@ public class LevelController {
         avatar.setXVelo(0);
         avatar.setYVelo(0);
         if (upPressed.getValue() && avatar.getCanMoveUp()) {
-            avatar.setYVelo(-150);
+            avatar.setYVelo(-200);
         }
         if (downPressed.getValue() && avatar.getCanMoveDown()) {
-            avatar.setYVelo(150);
+            avatar.setYVelo(200);
         }
         if (leftPressed.getValue() && avatar.getCanMoveLeft()) {
-            avatar.setXVelo(-150);
+            avatar.setXVelo(-200);
         }
         if (rightPressed.getValue() && avatar.getCanMoveRight()) {
-            avatar.setXVelo(150);
+            avatar.setXVelo(200);
         }
         avatar.posUpdate(deltaTime);                                //Updates avatar position depending on time since last frame
         avatar.setMovementState(true);                              //Updates the movement state back to true
@@ -323,7 +318,7 @@ public class LevelController {
     private void showPauseMenu() {
 
         Stage stage = new Stage();
-        PauseMenuController controller = new PauseMenuController(stage, levelProgression, totScore, avatarLives);
+        PauseMenuController controller = new PauseMenuController(stage, anchor, levelProgression, totScore, avatarLives);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
         loader.setController(controller);
         Parent root = null;

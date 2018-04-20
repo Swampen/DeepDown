@@ -1,6 +1,5 @@
-package deepDown.menuControllers;
+package deepDown.controllers;
 
-import deepDown.LevelController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -14,7 +13,6 @@ import deepDown.Main;
 
 import java.io.DataInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class StartMenuController {
@@ -24,28 +22,35 @@ public class StartMenuController {
     @FXML
     private Button newGameButton;
     private Main main;
+    private Image image;
+    private boolean newGameButtonHover = false;
+
+    private AnimationTimer animationTimer;
 
     @FXML
     public void initialize() {
         main = new Main();
 
-        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/test.png"));
+        image = new Image(getClass().getResourceAsStream("/deepDown/resource/test.png"));
         newGameButton.setGraphic(new ImageView(image));
 
-        new AnimationTimer(){
+        animationTimer = new AnimationTimer(){
                 public void handle(long now){
 
-                    if(newGameButton.isHover()){
-                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/test1.png"));
+                    if(newGameButton.isHover() && !newGameButtonHover){
+                        image = new Image(getClass().getResourceAsStream("/deepDown/resource/Menu.gif"));
 
                         newGameButton.setGraphic(new ImageView(image));
-                    }else {
-                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/test.png"));
+                        newGameButtonHover = true;
+                    }else if (!newGameButton.isHover()){
+                        image = new Image(getClass().getResourceAsStream("/deepDown/resource/test.png"));
 
                         newGameButton.setGraphic(new ImageView(image));
+                        newGameButtonHover = false;
                     }
                 }
-        }.start();
+        };
+        animationTimer.start();
     }
 
     //Opens the first level when New game is clicked
@@ -60,7 +65,7 @@ public class StartMenuController {
 
     //Loads the level the player has come to before quitting play
     public void loadGameClicked() throws IOException{
-        FileInputStream fis = new FileInputStream("save.txt");
+        FileInputStream fis = new FileInputStream("Files/save.txt");
         DataInputStream dis = new DataInputStream(fis);
         int i = dis.readInt();
         int ts = dis.readInt();
@@ -71,8 +76,6 @@ public class StartMenuController {
         Parent root = main.getRoot();
         root = loader.load();
         anchor.getChildren().setAll(root);
-
-
     }
 
     //Opens up the level select for testing of levels
@@ -97,6 +100,8 @@ public class StartMenuController {
 
     //Quits the game
     public void quitClicked(){
+        animationTimer.stop();
         Platform.exit();
+        System.exit(0);
     }
 }

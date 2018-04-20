@@ -1,4 +1,4 @@
-package deepDown.menuControllers;
+package deepDown.controllers;
 
 import deepDown.Main;
 import javafx.fxml.FXML;
