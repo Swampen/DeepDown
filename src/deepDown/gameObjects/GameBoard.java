@@ -1,15 +1,11 @@
 package deepDown.gameObjects;
 
 import deepDown.gameObjects.Enemy.Enemy;
-import deepDown.gameObjects.Enemy.HorisontalEnemy;
+import deepDown.gameObjects.Enemy.HorizontalEnemy;
 import deepDown.gameObjects.Enemy.VerticalEnemy;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,7 +18,7 @@ public class GameBoard {
     private Key key;
     private Door door;
     private VerticalEnemy vEnemy;
-    private HorisontalEnemy hEnemy;
+    private HorizontalEnemy hEnemy;
 
     private Sprite avatarSprite;
     private Sprite keySprite;
@@ -112,7 +108,7 @@ public class GameBoard {
                         coinSprites.add(coinSprite);
                         break;
                     case 3:
-                        Enemy hEnemy = new HorisontalEnemy(j*40, i*40, 40, 40, 0, 0);
+                        Enemy hEnemy = new HorizontalEnemy(j*40, i*40, 40, 40, 0, 0);
                         Sprite hEnemySprite = new Sprite(image, hEnemy, Type.HENEMY, 80, 0);
                         hEnemySprite.render(gc);
                         hEnemySprites.add(hEnemySprite);
@@ -160,7 +156,7 @@ public class GameBoard {
 
     public VerticalEnemy getVEnemy() { return this.vEnemy;}
 
-    public HorisontalEnemy getHEnemy() { return this.hEnemy;}
+    public HorizontalEnemy getHEnemy() { return this.hEnemy;}
 
     public ArrayList<Sprite> getWallSprites() {
         return this.wallSprites;
