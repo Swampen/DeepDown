@@ -184,25 +184,6 @@ public class GameBoard {
         return door;
     }
 
-<<<<<<< HEAD
-=======
-    /**
-     * Getter for vEnemy
-     * @return vEnemy
-     */
-    public VerticalEnemy getVEnemy() { return this.vEnemy;}
-
-    /**
-     * Getter for hEnemy
-     * @return hEnemy
-     */
-    public HorizontalEnemy getHEnemy() { return this.hEnemy;}
-
-    /**
-     * Getter for WallSprites
-     * @return wallSprites
-     */
->>>>>>> 86bc73ea33d5824ba945c188abfb98ae09284328
     public ArrayList<Sprite> getWallSprites() {
         return this.wallSprites;
     }
