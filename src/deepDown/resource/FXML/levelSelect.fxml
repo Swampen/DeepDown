@@ -87,9 +87,6 @@
          <padding>
             <Insets top="10.0" />
          </padding>
-         <stylesheets>
-            <URL value="@../../stylesheet.css" />
-         </stylesheets>
          <top>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>

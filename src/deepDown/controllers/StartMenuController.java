@@ -31,19 +31,19 @@ public class StartMenuController {
     public void initialize() {
         main = new Main();
 
-        image = new Image(getClass().getResourceAsStream("/deepDown/resource/test.png"));
+        image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
         newGameButton.setGraphic(new ImageView(image));
 
         animationTimer = new AnimationTimer(){
                 public void handle(long now){
 
                     if(newGameButton.isHover() && !newGameButtonHover){
-                        image = new Image(getClass().getResourceAsStream("/deepDown/resource/Menu.gif"));
+                        image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.gif"));
 
                         newGameButton.setGraphic(new ImageView(image));
                         newGameButtonHover = true;
                     }else if (!newGameButton.isHover()){
-                        image = new Image(getClass().getResourceAsStream("/deepDown/resource/test.png"));
+                        image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
 
                         newGameButton.setGraphic(new ImageView(image));
                         newGameButtonHover = false;

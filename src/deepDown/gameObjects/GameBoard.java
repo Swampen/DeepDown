@@ -40,7 +40,7 @@ public class GameBoard {
     }
 
     public void readImage(){
-        image = new Image(getClass().getResourceAsStream("/deepDown/resource/DeepDownTileSet.png"));
+        image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
     }
 
     private void readLevel(){
@@ -153,10 +153,6 @@ public class GameBoard {
     public Door getDoor() {
         return door;
     }
-
-    public VerticalEnemy getVEnemy() { return this.vEnemy;}
-
-    public HorizontalEnemy getHEnemy() { return this.hEnemy;}
 
     public ArrayList<Sprite> getWallSprites() {
         return this.wallSprites;
