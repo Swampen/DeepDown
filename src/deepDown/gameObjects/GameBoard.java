@@ -11,23 +11,21 @@ import java.util.Scanner;
 
 public class GameBoard {
 
-    private int level;
+    private final int level;
     private Scanner input;
     private Image image;
     private Avatar avatar;
     private Key key;
     private Door door;
-    private VerticalEnemy vEnemy;
-    private HorizontalEnemy hEnemy;
 
     private Sprite avatarSprite;
     private Sprite keySprite;
     private Sprite doorSprite;
 
-    private ArrayList<Sprite> wallSprites = new ArrayList<Sprite>();
-    private ArrayList<Sprite> coinSprites = new ArrayList<Sprite>();
-    private ArrayList<Sprite> hEnemySprites = new ArrayList<Sprite>();
-    private ArrayList<Sprite> vEnemySprites = new ArrayList<Sprite>();
+    private ArrayList<Sprite> wallSprites = new ArrayList<>();
+    private ArrayList<Sprite> coinSprites = new ArrayList<>();
+    private ArrayList<Sprite> hEnemySprites = new ArrayList<>();
+    private ArrayList<Sprite> vEnemySprites = new ArrayList<>();
 
     /**
      * Constructor for the GameBoard
@@ -50,7 +48,7 @@ public class GameBoard {
     /**
      * reads the tileset to use
      */
-    public void readImage(){
+    private void readImage(){
         image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
     }
 
@@ -95,14 +93,14 @@ public class GameBoard {
      * which then gets translated into what kind of sprite gets created and placed in each coordinate
      * @param gc the specified GraphicContext
      */
-    public void drawGameBoard(GraphicsContext gc){
+    private void drawGameBoard(GraphicsContext gc){
         int rows = 18;
-        int colums = 32;
-        int[][] board = new int[rows][colums];
+        int columns = 32;
+        int[][] board = new int[rows][columns];
 
         //reads the txt file to board 2D array
         for (int i=0; i<rows; i++){
-            for(int j=0; j<colums; j++){
+            for(int j=0; j<columns; j++){
                 if(input.hasNextInt()){
                     board[i][j] = input.nextInt();
                 }
@@ -111,7 +109,7 @@ public class GameBoard {
 
         //draws the objects into canvas
         for (int i=0; i<rows; i++){
-            for(int j=0; j<colums; j++){
+            for(int j=0; j<columns; j++){
 
                 switch (board[i][j]){
                     case 1:
@@ -200,7 +198,7 @@ public class GameBoard {
      * Getter for hEnemySprites
      * @return hEnemySprites
      */
-    public ArrayList<Sprite> getHEnemieSprites() {
+    public ArrayList<Sprite> getHEnemySprites() {
         return this.hEnemySprites;
     }
 
@@ -208,7 +206,7 @@ public class GameBoard {
      * Getter for vEnemySprites
      * @return vEnemySprites
      */
-    public ArrayList<Sprite> getVEnemieSprites() {
+    public ArrayList<Sprite> getVEnemySprites() {
         return this.vEnemySprites;
     }
 

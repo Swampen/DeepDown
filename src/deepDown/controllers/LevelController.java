@@ -1,6 +1,6 @@
 package deepDown.controllers;
 
-import deepDown.Main;
+
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.Enemy.Enemy;
 import deepDown.gameObjects.Enemy.HorizontalEnemy;
@@ -50,7 +50,6 @@ public class LevelController {
      * avatarLives = variable for keeping track of how many lives the player has
      */
     private GraphicsContext gc;
-    private final Main main = new Main();
     private double timeScore = 2000;
     private long lastCurrentTime = System.nanoTime();
     private int coinCount;
@@ -115,8 +114,8 @@ public class LevelController {
         doorSprite = level.getDoorSprite();
 
         wallSprites = level.getWallSprites();
-        vEnemySprites = level.getVEnemieSprites();
-        hEnemySprites = level.getHEnemieSprites();
+        vEnemySprites = level.getVEnemySprites();
+        hEnemySprites = level.getHEnemySprites();
         coinSprites = level.getCoinSprites();
         coinCount = 0;
         System.out.println(totScore);
@@ -140,7 +139,11 @@ public class LevelController {
             }
             if (e.getCode() == KeyCode.ESCAPE) {
                 escapePressed.set(true);
-                showPauseMenu();
+                try {
+                    showPauseMenu();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -334,7 +337,11 @@ public class LevelController {
                     ++avatarLives;
                 }
                 totScore += (coinCount * 100 + timeScore);
-                loadNextLevel();
+                try {
+                    loadNextLevel();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -368,19 +375,13 @@ public class LevelController {
     /**
      * Shows the Pause Menu when you hit the Escape key
      */
-    private void showPauseMenu() {
+    private void showPauseMenu() throws IOException{
 
         Stage stage = new Stage();
         PauseMenuController controller = new PauseMenuController(stage, anchor, levelProgression, totScore, avatarLives);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
         loader.setController(controller);
-        Parent root = null;
-
-        try {
-            root = loader.load();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
+        Parent root = loader.load();
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(new Scene(root));
@@ -404,17 +405,13 @@ public class LevelController {
     /**
      * Loads the next level by making a new loader and LevelController object and loading those
      */
-    private void loadNextLevel() {
+    private void loadNextLevel() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
         LevelController controller = new LevelController(levelProgression +1, totScore, avatarLives);
         loader.setController(controller);
-        Parent root = main.getRoot();
 
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Parent root = loader.load();
+
 
         anchor.getChildren().setAll(root);
         animationTimer.stop();

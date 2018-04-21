@@ -1,8 +1,6 @@
 package deepDown.controllers;
 
-import deepDown.Main;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
@@ -15,10 +13,9 @@ import java.io.IOException;
 
 public class PauseMenuController {
 
-    private Main main = new Main();
-    private Stage stage;
+    private final Stage stage;
 
-    private AnchorPane anchor;
+    private final AnchorPane anchor;
     private int levelProgression;
     private int totScore;
     private int avatarLives;
@@ -41,8 +38,7 @@ public class PauseMenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
         StartMenuController startMenuController = new StartMenuController();
         loader.setController(startMenuController);
-        Parent root = main.getRoot();
-        root = loader.load();
+        Parent root = loader.load();
         anchor.getChildren().setAll(root);
     }
 

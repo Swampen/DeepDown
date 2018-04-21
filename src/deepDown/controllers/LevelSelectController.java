@@ -4,27 +4,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
-import deepDown.Main;
 
 import java.io.IOException;
 
 public class LevelSelectController {
 
     @FXML
-    protected AnchorPane anchor;
-    private Main main;
+    private AnchorPane anchor;
 
     @FXML
     public void initialize() {
-        main = new Main();
     }
 
     public void loadLevel(int level)throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
         LevelController controller = new LevelController(level, 0, 3);
         loader.setController(controller);
-        Parent root = main.getRoot();
-        root = loader.load();
+        Parent root = loader.load();
         anchor.getChildren().setAll(root);
     }
 

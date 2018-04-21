@@ -10,8 +10,8 @@ public abstract class GameObject {
      */
     private double x;
     private double y;
-    private int h;
-    private int w;
+    private final int h;
+    private final int w;
 
     /**
      * Constructor for the GameObject class

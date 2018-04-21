@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import deepDown.Main;
 
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -18,10 +17,9 @@ import java.io.IOException;
 public class StartMenuController {
 
     @FXML
-    protected AnchorPane anchor;
+    private AnchorPane anchor;
     @FXML
     private Button newGameButton;
-    private Main main;
     private Image image;
     private boolean newGameButtonHover = false;
 
@@ -29,7 +27,6 @@ public class StartMenuController {
 
     @FXML
     public void initialize() {
-        main = new Main();
 
         image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
         newGameButton.setGraphic(new ImageView(image));
@@ -58,8 +55,7 @@ public class StartMenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
         LevelController level = new LevelController(1, 0, 3);
         loader.setController(level);
-        Parent root = main.getRoot();
-        root = loader.load();
+        Parent root = loader.load();
         anchor.getChildren().setAll(root);
     }
 
@@ -73,8 +69,7 @@ public class StartMenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
         LevelController level = new LevelController(i, ts, l);
         loader.setController(level);
-        Parent root = main.getRoot();
-        root = loader.load();
+        Parent root = loader.load();
         anchor.getChildren().setAll(root);
     }
 
@@ -83,8 +78,7 @@ public class StartMenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelSelect.fxml"));
         LevelSelectController levelSelect = new LevelSelectController();
         loader.setController(levelSelect);
-        Parent root = main.getRoot();
-        root = loader.load();
+        Parent root = loader.load();
         anchor.getChildren().setAll(root);
     }
 
@@ -93,8 +87,7 @@ public class StartMenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
         LeaderboardController controller = new LeaderboardController();
         loader.setController(controller);
-        Parent root = main.getRoot();
-        root = loader.load();
+        Parent root = loader.load();
         anchor.getChildren().setAll(root);
     }
 
