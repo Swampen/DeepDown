@@ -107,7 +107,7 @@ public class LevelController {
 
         gc = canvas.getGraphicsContext2D();
         GameBoard level = new GameBoard(levelProgression);
-        level.iniitalizeGameBoard(gc);
+        level.initializeGameBoard(gc);
 
         avatar = level.getAvatar();
         key = level.getKey();
