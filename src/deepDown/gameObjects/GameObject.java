@@ -4,11 +4,22 @@ package deepDown.gameObjects;
 import javafx.geometry.Rectangle2D;
 
 public abstract class GameObject {
+
+    /**
+     * The GameObjects position, height and width variables
+     */
     private double x;
     private double y;
     private int h;
     private int w;
 
+    /**
+     * Constructor for the GameObject class
+     * @param x GameObject's x-Coordinate
+     * @param y GameObject's y-coordinate
+     * @param height GameObject's height
+     * @param width GameObject's width
+     */
     public GameObject (double x, double y, int height, int width){
         this.x = x;
         this.y = y;
@@ -16,34 +27,63 @@ public abstract class GameObject {
         this.w = width;
     }
 
+    /**
+     * @return Returns the GameObjects x value
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * @return Returns the GameObjects y value
+     */
     public double getY() {
         return y;
     }
 
+    /**
+     * @return Returns the GameObjects h value
+     */
     public int getH() {
         return h;
     }
 
+    /**
+     * @return Returns the GameObjects w value
+     */
     public int getW() {
         return w;
     }
 
+    /**
+     * Updates the x value
+     * @param x add this value to the x value
+     */
     public void setX(double x) {
         this.x += x;
     }
 
+    /**
+     * Updates the y value
+     * @param y add this value to the y value
+     */
     public void setY(double y) {
         this.y += y;
     }
 
+    /**
+     * Get the boundary of a Rectangle2D
+     * @return Returns the boundary's x and y position and it's h and w
+     */
     public Rectangle2D getBoundary(){
         return new Rectangle2D(x, y, w, h);
     }
 
+    /**
+     * Checks for collision between two boundaries
+     * @param other gameObject to check collision for
+     * @return returns true if there is a collision and false if not
+     */
     public boolean isColliding(GameObject other){
         return this.getBoundary().intersects(other.getBoundary());
     }

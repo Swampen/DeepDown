@@ -29,20 +29,34 @@ public class GameBoard {
     private ArrayList<Sprite> hEnemySprites = new ArrayList<Sprite>();
     private ArrayList<Sprite> vEnemySprites = new ArrayList<Sprite>();
 
+    /**
+     * Constructor for the GameBoard
+     * @param level What level to load
+     */
     public GameBoard (int level){
         this.level = level;
     }
 
-    public void iniitalizeGameBoard(GraphicsContext gc){
+    /**
+     * Starts loading of the level
+     * @param gc
+     */
+    public void initializeGameBoard(GraphicsContext gc){
         readImage();
         readLevel();
         drawGameBoard(gc);
     }
 
+    /**
+     * reads the tileset to use
+     */
     public void readImage(){
         image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
     }
 
+    /**
+     * reads what level to load depending on the level variable specified in the constructor
+     */
     private void readLevel(){
         switch (this.level) {
             case 1:
@@ -76,6 +90,11 @@ public class GameBoard {
         }
     }
 
+    /**
+     * Draws the GameBoard using the file read by the readLevel() method and turns that into an array
+     * which then gets translated into what kind of sprite gets created and placed in each coordinate
+     * @param gc the specified GraphicContext
+     */
     public void drawGameBoard(GraphicsContext gc){
         int rows = 18;
         int colums = 32;
@@ -141,43 +160,97 @@ public class GameBoard {
         }
     }
 
-
+    /**
+     * Getter for Avatar
+     * @return avatar
+     */
     public Avatar getAvatar() {
         return this.avatar;
     }
 
+    /**
+     * Getter for Key
+     * @return key
+     */
     public Key getKey(){
         return this.key;
     }
 
+    /**
+     * Getter for Door
+     * @return door
+     */
     public Door getDoor() {
         return door;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Getter for vEnemy
+     * @return vEnemy
+     */
+    public VerticalEnemy getVEnemy() { return this.vEnemy;}
+
+    /**
+     * Getter for hEnemy
+     * @return hEnemy
+     */
+    public HorizontalEnemy getHEnemy() { return this.hEnemy;}
+
+    /**
+     * Getter for WallSprites
+     * @return wallSprites
+     */
+>>>>>>> 86bc73ea33d5824ba945c188abfb98ae09284328
     public ArrayList<Sprite> getWallSprites() {
         return this.wallSprites;
     }
 
+    /**
+     * Getter for CoinSprites
+     * @return coinSprites
+     */
     public ArrayList<Sprite> getCoinSprites() {
         return this.coinSprites;
     }
 
+    /**
+     * Getter for hEnemySprites
+     * @return hEnemySprites
+     */
     public ArrayList<Sprite> getHEnemieSprites() {
         return this.hEnemySprites;
     }
 
+    /**
+     * Getter for vEnemySprites
+     * @return vEnemySprites
+     */
     public ArrayList<Sprite> getVEnemieSprites() {
         return this.vEnemySprites;
     }
 
+    /**
+     * Getter for AvatarSprites
+     * @return avatarSprites
+     */
     public Sprite getAvatarSprite() {
         return this.avatarSprite;
     }
 
+    /**
+     * Getter for KeySprites
+     * @return keySprites
+     */
     public Sprite getKeySprite() {
         return this.keySprite;
     }
 
+    /**
+     * Getter for DoorSprites
+     * @return doorSprites
+     */
     public Sprite getDoorSprite() {
         return doorSprite;
     }
