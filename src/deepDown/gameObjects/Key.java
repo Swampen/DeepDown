@@ -4,15 +4,31 @@ public class Key extends GameObject {
 
     private boolean isPickedUp;
 
+    /**
+     * Constructor for Key
+     * @param x Specified x-coordinate
+     * @param y Specified y-coordinate
+     * @param height Specified height
+     * @param width Specified width
+     * @param isPickedUp if the coin is picked up
+     */
     public Key(double x, double y, int height, int width, boolean isPickedUp) {
         super(x, y, height, width);
         this.isPickedUp = isPickedUp;
     }
 
+    /**
+     * Getter for the pickedUp boolean
+     * @return pickedUp boolean
+     */
     public boolean isPickedUp(){
         return isPickedUp;
     }
 
+    /**
+     * Setter for the pickedUp boolean
+     * @param isPickedUp boolean that determines if the key is picked up
+     */
     public void setPickedUp(boolean isPickedUp){
         this.isPickedUp = isPickedUp;
     }
