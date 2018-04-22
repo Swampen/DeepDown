@@ -1,3 +1,5 @@
+package deepDown.gameObjects;
+
 import org.junit.Test;
 import deepDown.gameObjects.Key;
 

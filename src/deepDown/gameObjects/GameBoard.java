@@ -37,7 +37,7 @@ public class GameBoard {
 
     /**
      * Starts loading of the level
-     * @param gc
+     * @param gc the specified GraphicsContext
      */
     public void initializeGameBoard(GraphicsContext gc){
         readImage();

@@ -1,3 +1,5 @@
+package deepDown.gameObjects;
+
 import deepDown.gameObjects.GameBoard;
 import org.junit.Test;
 

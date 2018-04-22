@@ -37,7 +37,7 @@ public abstract class DynamicGameObject extends GameObject {
 
     /**
      * Updates the DynamicGameObject's x and y position using Velocities and time
-     * @param time
+     * @param time time used for calculating how far the object has moved
      */
     public void posUpdate(double time) {
         this.setX(xVelo*time);

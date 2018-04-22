@@ -59,7 +59,7 @@ public class PauseMenuController {
 
     /**
      * Saves the Avatar's level progress, score and life total to an external file
-     * @throws Exception throws an IOException when a file is missing
+     * @throws IOException throws an IOException when a file is missing
      */
     public void saveGamePressed() throws IOException{
         File f = new File("Files/save.txt");
