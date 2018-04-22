@@ -1,5 +1,6 @@
 package deepDown.controllers;
 
+import deepDown.MenuAnimation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -20,8 +21,21 @@ public class StartMenuController {
     private AnchorPane anchor;
     @FXML
     private Button newGameButton;
-    private Image image;
-    private boolean newGameButtonHover = false;
+    @FXML
+    private Button loadGameButton;
+    @FXML
+    private Button leaderboardButton;
+    @FXML
+    private Button quitGameButton;
+    private Image newGameImage;
+    private Image loadGameImage;
+    private Image leaderboardImage;
+    private Image quitGameImage;
+
+    private boolean newGameHover = false;
+    private boolean loadGameHover = false;
+    private boolean leaderboardHover = false;
+    private boolean quitGameHover = false;
 
     private AnimationTimer animationTimer;
 
@@ -31,23 +45,70 @@ public class StartMenuController {
     @FXML
     public void initialize() {
 
-        image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
-        newGameButton.setGraphic(new ImageView(image));
+
+
+        leaderboardImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.png"));
+        leaderboardButton.setGraphic(new ImageView(leaderboardImage));
+
+        quitGameImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.png"));
+        quitGameButton.setGraphic(new ImageView(quitGameImage));
 
         animationTimer = new AnimationTimer(){
                 public void handle(long now){
 
-                    if(newGameButton.isHover() && !newGameButtonHover){
-                        image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.gif"));
+                    if(newGameButton.isHover() && !newGameHover){
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.gif"));
+                        MenuAnimation newGame = new MenuAnimation(image, newGameButton, true);
+                        newGameButton = newGame.setButtonImage();
+                        newGameHover = newGame.isHovering();
 
-                        newGameButton.setGraphic(new ImageView(image));
-                        newGameButtonHover = true;
                     }else if (!newGameButton.isHover()){
-                        image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
-
-                        newGameButton.setGraphic(new ImageView(image));
-                        newGameButtonHover = false;
+                        newGameImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
+                        MenuAnimation newGame = new MenuAnimation(newGameImage, newGameButton, false);
+                        newGameButton = newGame.setButtonImage();
+                        newGameHover = newGame.isHovering();
                     }
+
+                    if(loadGameButton.isHover() && !loadGameHover){
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.gif"));
+                        MenuAnimation loadGame = new MenuAnimation(image, loadGameButton, true);
+                        loadGameButton = loadGame.setButtonImage();
+                        loadGameHover = loadGame.isHovering();
+
+                    }else if (!loadGameButton.isHover()){
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.png"));
+                        MenuAnimation loadGame = new MenuAnimation(image, loadGameButton, false);
+                        loadGameButton = loadGame.setButtonImage();
+                        loadGameHover = loadGame.isHovering();
+                    }
+
+                    if(leaderboardButton.isHover() && !leaderboardHover){
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.gif"));
+                        MenuAnimation leaderboard = new MenuAnimation(image, leaderboardButton, true);
+                        leaderboardButton = leaderboard.setButtonImage();
+                        leaderboardHover = leaderboard.isHovering();
+
+                    }else if (!leaderboardButton.isHover()){
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.png"));
+                        MenuAnimation leaderboard = new MenuAnimation(image, leaderboardButton, false);
+                        leaderboardButton = leaderboard.setButtonImage();
+                        leaderboardHover = leaderboard.isHovering();
+                    }
+
+                    if(quitGameButton.isHover() && !quitGameHover){
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.gif"));
+                        MenuAnimation quitGame = new MenuAnimation(image, quitGameButton, true);
+                        quitGameButton = quitGame.setButtonImage();
+                        quitGameHover = quitGame.isHovering();
+
+                    }else if (!quitGameButton.isHover()){
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.png"));
+                        MenuAnimation quitGame = new MenuAnimation(image, quitGameButton, false);
+                        quitGameButton = quitGame.setButtonImage();
+                        quitGameHover = quitGame.isHovering();
+                    }
+
+
                 }
         };
         animationTimer.start();
@@ -96,7 +157,7 @@ public class StartMenuController {
      * Opens the leaderboards where the player can check top scores achieved
      * @throws IOException throws an IOException when a file is missing
      */
-    public void leaderboardsClicked() throws IOException{
+    public void leaderboardClicked() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
         LeaderboardController controller = new LeaderboardController();
         loader.setController(controller);

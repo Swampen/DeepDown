@@ -8,12 +8,30 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import deepDown.controllers.StartMenuController;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 public class Main extends Application {
 
     public static void main(String[] args) {
+        File filesFolder = new File("Files");
+        try{
+            if (!filesFolder.exists()){
+                if (filesFolder.mkdir()){
+                    System.out.println("Files folder created");
+                }
+                else {
+                    System.out.println("Files folder not created");
+                }
+            }
+            else if (filesFolder.exists()){
+                System.out.println("Files folder already exists");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         launch(args);
     }
 

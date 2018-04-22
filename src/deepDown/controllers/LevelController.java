@@ -394,7 +394,7 @@ public class LevelController {
     /**
      * Resets all of the keypress booleans to false
      */
-    private void resetKeypresses() {
+    private void resetKeypresses(){
         escapePressed.set(false);
         upPressed.set(false);
         downPressed.set(false);
@@ -409,12 +409,8 @@ public class LevelController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
         LevelController controller = new LevelController(levelProgression +1, totScore, avatarLives);
         loader.setController(controller);
-
         Parent root = loader.load();
-
-
         anchor.getChildren().setAll(root);
-        animationTimer.stop();
         resetLevel();
     }
 
@@ -423,6 +419,7 @@ public class LevelController {
      */
     private void resetLevel() {
         lastCurrentTime = System.nanoTime();
+        animationTimer.stop();
         initialize();
     }
 
