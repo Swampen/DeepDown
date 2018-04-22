@@ -25,6 +25,9 @@ public class StartMenuController {
 
     private AnimationTimer animationTimer;
 
+    /**
+     * Loads the initial resources for the start menu and starts the animationTimer
+     */
     @FXML
     public void initialize() {
 
@@ -50,7 +53,10 @@ public class StartMenuController {
         animationTimer.start();
     }
 
-    //Opens the first level when New game is clicked
+    /**
+     * Opens the first level with 0 score and 3 lives when the New Game button is pressed
+     * @throws IOException throws an IOException when a file is missing
+     */
     public void newGameClicked() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
         LevelController level = new LevelController(1, 0, 3);
@@ -59,7 +65,11 @@ public class StartMenuController {
         anchor.getChildren().setAll(root);
     }
 
-    //Loads the level the player has come to before quitting play
+    /**
+     * Loads the level the player has come to, setting his score and lives to what it was before saving
+     * from an external file
+     * @throws IOException throws an IOException when a file is missing
+     */
     public void loadGameClicked() throws IOException{
         FileInputStream fis = new FileInputStream("Files/save.txt");
         DataInputStream dis = new DataInputStream(fis);
@@ -82,7 +92,10 @@ public class StartMenuController {
         anchor.getChildren().setAll(root);
     }
 
-    //Opens the leaderboards to see the top scores
+    /**
+     * Opens the leaderboards where the player can check top scores achieved
+     * @throws IOException throws an IOException when a file is missing
+     */
     public void leaderboardsClicked() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
         LeaderboardController controller = new LeaderboardController();
@@ -91,7 +104,9 @@ public class StartMenuController {
         anchor.getChildren().setAll(root);
     }
 
-    //Quits the game
+    /**
+     * quits the application
+     */
     public void quitClicked(){
         animationTimer.stop();
         Platform.exit();

@@ -21,6 +21,14 @@ public class PauseMenuController {
     private int avatarLives;
 
 
+    /**
+     * Constructor for PauseMenuController
+     * @param stage The specified stage 'Add More'
+     * @param anchor The specified anchor 'Add more'
+     * @param levelProgression What level is loaded which is used for saving
+     * @param totScore the players total score which is used for saving
+     * @param avatarLives the players life count which is used for saving
+     */
     public PauseMenuController(Stage stage, AnchorPane anchor, int levelProgression, int totScore, int avatarLives){
         this.stage = stage;
         this.anchor = anchor;
@@ -29,10 +37,17 @@ public class PauseMenuController {
         this.avatarLives = avatarLives;
     }
 
+    /**
+     * Exits the Pause menu and resumes the animationTimer when the Resume Game button is pressed
+     */
     public void resumeGamePressed(){
         stage.close();
     }
 
+    /**
+     * Returns to the main menu
+     * @throws IOException throws an IOException when a file is missing
+     */
     public void backToMenuPressed() throws IOException{
         stage.close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
@@ -42,7 +57,11 @@ public class PauseMenuController {
         anchor.getChildren().setAll(root);
     }
 
-    public void saveGamePressed() throws Exception{
+    /**
+     * Saves the Avatar's level progress, score and life total to an external file
+     * @throws Exception throws an IOException when a file is missing
+     */
+    public void saveGamePressed() throws IOException{
         File f = new File("Files/save.txt");
         FileOutputStream fos = new FileOutputStream(f);
         DataOutputStream dos = new DataOutputStream(fos);
@@ -52,6 +71,9 @@ public class PauseMenuController {
 
     }
 
+    /**
+     * Quit the application
+     */
     public void quitGamePressed(){
         Platform.exit();
         System.exit(0);
