@@ -2,11 +2,8 @@ package deepDown.controllers;
 
 
 import deepDown.GameBoard;
-import deepDown.Sprite;
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.enemy.Enemy;
-import deepDown.gameObjects.enemy.HorizontalEnemy;
-import deepDown.gameObjects.enemy.VerticalEnemy;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -99,7 +96,7 @@ public class LevelController {
         double enemyVel = 100;
         gc = canvas.getGraphicsContext2D();
         GameBoard level = new GameBoard(levelProgression, enemyVel);
-        level.initializeGameBoard(gc);
+        level.initializeGameBoard();
 
         avatar = level.getAvatar();
         key = level.getKey();

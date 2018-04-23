@@ -4,7 +4,6 @@ import deepDown.gameObjects.*;
 import deepDown.gameObjects.enemy.Enemy;
 import deepDown.gameObjects.enemy.HorizontalEnemy;
 import deepDown.gameObjects.enemy.VerticalEnemy;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -33,14 +32,10 @@ public class GameBoard {
         this.enemyVel = enemyVel;
     }
 
-    /**
-     * Starts loading of the level
-     * @param gc the specified GraphicsContext
-     */
-    public void initializeGameBoard(GraphicsContext gc){
+    public void initializeGameBoard(){
         readImage();
         readLevel();
-        drawGameBoard(gc);
+        drawGameBoard();
     }
 
     /**
@@ -86,12 +81,7 @@ public class GameBoard {
         }
     }
 
-    /**
-     * Draws the GameBoard using the file read by the readLevel() method and turns that into an array
-     * which then gets translated into what kind of sprite gets created and placed in each coordinate
-     * @param gc the specified GraphicContext
-     */
-    private void drawGameBoard(GraphicsContext gc){
+    private void drawGameBoard(){
         int rows = 18;
         int columns = 32;
         int[][] board = new int[rows][columns];

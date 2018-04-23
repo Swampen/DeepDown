@@ -8,20 +8,34 @@ public class MenuAnimation {
 
     private Image image;
     private Button button;
-    private boolean hovering;
+    private boolean isHovering;
 
-    public MenuAnimation(Image image, Button button, boolean hovering) {
+    /**
+     * Constructor for MenuAnimation
+     * @param image Specified image
+     * @param button Specified button
+     * @param isHovering Specified hovering
+     */
+    public MenuAnimation(Image image, Button button, boolean isHovering) {
         this.image = image;
         this.button = button;
-        this.hovering = hovering;
+        this.isHovering = isHovering;
     }
 
+    /**
+     * Setter for the button's image
+     * @return button
+     */
     public Button setButtonImage(){
         button.setGraphic(new ImageView(this.image));
         return button;
     }
 
+    /**
+     * Getter for the isHovering boolean
+     * @return isHovering boolean
+     */
     public boolean isHovering() {
-        return hovering;
+        return isHovering;
     }
 }

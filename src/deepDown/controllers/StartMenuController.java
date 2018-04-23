@@ -27,10 +27,6 @@ public class StartMenuController {
     private Button leaderboardButton;
     @FXML
     private Button quitGameButton;
-    private Image newGameImage;
-    private Image loadGameImage;
-    private Image leaderboardImage;
-    private Image quitGameImage;
 
     private boolean newGameHover = false;
     private boolean loadGameHover = false;
@@ -44,15 +40,6 @@ public class StartMenuController {
      */
     @FXML
     public void initialize() {
-
-
-
-        leaderboardImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.png"));
-        leaderboardButton.setGraphic(new ImageView(leaderboardImage));
-
-        quitGameImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.png"));
-        quitGameButton.setGraphic(new ImageView(quitGameImage));
-
         animationTimer = new AnimationTimer(){
                 public void handle(long now){
 
@@ -63,8 +50,8 @@ public class StartMenuController {
                         newGameHover = newGame.isHovering();
 
                     }else if (!newGameButton.isHover()){
-                        newGameImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
-                        MenuAnimation newGame = new MenuAnimation(newGameImage, newGameButton, false);
+                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
+                        MenuAnimation newGame = new MenuAnimation(image, newGameButton, false);
                         newGameButton = newGame.setButtonImage();
                         newGameHover = newGame.isHovering();
                     }
@@ -154,7 +141,7 @@ public class StartMenuController {
     }
 
     /**
-     * Opens the leaderboards where the player can check top scores achieved
+     * Opens the leaderboard where the player can check top scores achieved
      * @throws IOException throws an IOException when a file is missing
      */
     public void leaderboardClicked() throws IOException{
