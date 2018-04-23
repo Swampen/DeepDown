@@ -5,6 +5,7 @@ import deepDown.GameBoard;
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.enemy.Enemy;
 import javafx.animation.AnimationTimer;
+import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
@@ -14,10 +15,15 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -133,6 +139,9 @@ public class LevelController {
                     e1.printStackTrace();
                 }
             }
+            if (e.getCode() == KeyCode.K){
+                victoryScreen();
+            }
         });
 
         //Detects when keys are being released and sets their respective booleans to false
@@ -163,6 +172,10 @@ public class LevelController {
                 totScoreLabel.setText("Score: " + Integer.toString(totScore));  //Updates totScore
                 livesCounter.setText("Lives: " + Integer.toString(avatarLives)); //Updates livesCounter
                 timeScore = timeScore - deltaTime;
+
+                if (avatarLives == 0){
+                    victoryScreen();
+                }
 
                 update(deltaTime);
                 collisionDetection(deltaTime);
@@ -269,7 +282,7 @@ public class LevelController {
             if (!door.isOpen()){
                 System.out.println("Find the key");
             }else{
-                if(avatarLives<5){
+                if(avatarLives < 5){
                     ++avatarLives;
                 }
                 totScore += (coinCount * 100 + timeScore);
@@ -308,6 +321,9 @@ public class LevelController {
      * Shows the Pause Menu when you hit the Escape key
      */
     private void showPauseMenu() throws IOException{
+        Rectangle r = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
+        r.setFill(Color.rgb(0, 0, 0, 0.6));
+        anchor.getChildren().add(r);
 
         Stage stage = new Stage();
         PauseMenuController controller = new PauseMenuController(stage, anchor, levelProgression, totScore, avatarLives);
@@ -318,6 +334,7 @@ public class LevelController {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(new Scene(root));
         stage.showAndWait();
+        anchor.getChildren().remove(r);
         resetKeypresses();
         lastCurrentTime = System.nanoTime();
         animationTimer.start();
@@ -368,5 +385,21 @@ public class LevelController {
             System.out.println("Game Over!");
             System.out.println("Score: " + (totScore +(coinCount*100 + timeScore)));
         }
+    }
+
+    private void victoryScreen(){
+        animationTimer.stop();
+        Image img = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
+        ImageView victory = new ImageView(img);
+        Rectangle r = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
+        r.setFill(Color.rgb(0, 0, 0, 0.3));
+
+        victory.setX(canvas.getWidth()/2 - img.getWidth()/2);
+        victory.setY(-100);
+        anchor.getChildren().addAll(r, victory);
+
+        TranslateTransition tt = new TranslateTransition(Duration.millis(2000), victory);
+        tt.setToY(canvas.getHeight()/2 );
+        tt.play();
     }
 }
