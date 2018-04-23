@@ -1,11 +1,15 @@
 package deepDown.gameObjects;
 
+import deepDown.Sprite;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class AvatarTest {
-    Avatar testAvatar = new Avatar(0, 0, 30, 30, 0, 0);
+    private Sprite sprite;
+
+
+    Avatar testAvatar = new Avatar(0, 0, 30, 30, sprite, 0, 0);
     @Test
     public void setMovementState() throws Exception {
         testAvatar.setMovementState(false);

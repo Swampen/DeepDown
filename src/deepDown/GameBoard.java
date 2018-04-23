@@ -1,8 +1,9 @@
-package deepDown.gameObjects;
+package deepDown;
 
-import deepDown.gameObjects.Enemy.Enemy;
-import deepDown.gameObjects.Enemy.HorizontalEnemy;
-import deepDown.gameObjects.Enemy.VerticalEnemy;
+import deepDown.gameObjects.*;
+import deepDown.gameObjects.enemy.Enemy;
+import deepDown.gameObjects.enemy.HorizontalEnemy;
+import deepDown.gameObjects.enemy.VerticalEnemy;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -12,27 +13,24 @@ import java.util.Scanner;
 public class GameBoard {
 
     private final int level;
+    private double enemyVel;
     private Scanner input;
     private Image image;
     private Avatar avatar;
     private Key key;
     private Door door;
 
-    private Sprite avatarSprite;
-    private Sprite keySprite;
-    private Sprite doorSprite;
-
-    private ArrayList<Sprite> wallSprites = new ArrayList<>();
-    private ArrayList<Sprite> coinSprites = new ArrayList<>();
-    private ArrayList<Sprite> hEnemySprites = new ArrayList<>();
-    private ArrayList<Sprite> vEnemySprites = new ArrayList<>();
+    private ArrayList<Wall> walls = new ArrayList<>();
+    private ArrayList<Coin> coins = new ArrayList<>();
+    private ArrayList<Enemy> enemies = new ArrayList<>();
 
     /**
      * Constructor for the GameBoard
      * @param level What level to load
      */
-    public GameBoard (int level){
+    public GameBoard (int level , double enemyVel){
         this.level = level;
+        this.enemyVel = enemyVel;
     }
 
     /**
@@ -113,43 +111,36 @@ public class GameBoard {
 
                 switch (board[i][j]){
                     case 1:
-                        Wall wall = new Wall(j*40, i*40, 40, 40);
-                        Sprite wallSprite = new Sprite(image, wall, Type.WALL, 0, 0);
-                        wallSprite.render(gc);
-                        wallSprites.add(wallSprite);
+                        Sprite wallSprite = new Sprite(image, 0, 0);
+                        Wall wall = new Wall(j*40, i*40, 40, 40, wallSprite);
+                        walls.add(wall);
                         break;
                     case 2:
-                        Coin coin = new Coin(j*40, i*40, 40, 40, false);
-                        Sprite coinSprite = new Sprite(image, coin, Type.COIN, 40, 0);
-                        coinSprite.render(gc);
-                        coinSprites.add(coinSprite);
+                        Sprite coinSprite = new Sprite(image, 40, 0);
+                        Coin coin = new Coin(j*40, i*40, 40, 40, coinSprite, false);
+                        coins.add(coin);
                         break;
                     case 3:
-                        Enemy hEnemy = new HorizontalEnemy(j*40, i*40, 40, 40, 0, 0);
-                        Sprite hEnemySprite = new Sprite(image, hEnemy, Type.HENEMY, 80, 0);
-                        hEnemySprite.render(gc);
-                        hEnemySprites.add(hEnemySprite);
+                        Sprite hEnemySprite = new Sprite(image, 80, 0);
+                        Enemy hEnemy = new HorizontalEnemy(j*40, i*40, 40, 40, hEnemySprite, enemyVel, 0);
+                        enemies.add(hEnemy);
                         break;
                     case 4:
-                        Enemy vEnemy = new VerticalEnemy(j*40, i*40, 40, 40, 0, 0);
-                        Sprite vEnemySprite = new Sprite(image, vEnemy, Type.VENEMY, 80, 0);
-                        vEnemySprite.render(gc);
-                        vEnemySprites.add(vEnemySprite);
+                        Sprite vEnemySprite = new Sprite(image, 80, 0);
+                        Enemy vEnemy = new VerticalEnemy(j*40, i*40, 40, 40, vEnemySprite, 0, enemyVel);
+                        enemies.add(vEnemy);
                         break;
                     case 5:
-                        key = new Key(j*40,i*40,40,40, false);
-                        keySprite = new Sprite(image, key, Type.KEY, 120, 0);
-                        keySprite.render(gc);
+                        Sprite keySprite = new Sprite(image, 120, 0);
+                        key = new Key(j*40,i*40,40,40, keySprite, false);
                         break;
                     case 6:
-                        door = new Door(j*40,i*40,40,40, false);
-                        doorSprite = new Sprite(image, door, Type.DOOR, 160, 0);
-                        doorSprite.render(gc);
+                        Sprite doorSprite = new Sprite(image, 160, 0);
+                        door = new Door(j*40,i*40,40,40, doorSprite, false);
                         break;
                     case 7:
-                        avatar = new Avatar(j*40, i*40, 30, 30,  0, 0);
-                        avatarSprite = new Sprite(image, avatar, Type.AVATAR, 0, 40);
-                        avatarSprite.render(gc);
+                        Sprite avatarSprite = new Sprite(image, 0, 40);
+                        avatar = new Avatar(j*40, i*40, 30, 30, avatarSprite, 0, 0);
                         break;
                     default:
                         break;
@@ -182,55 +173,23 @@ public class GameBoard {
         return door;
     }
 
-    public ArrayList<Sprite> getWallSprites() {
-        return this.wallSprites;
+    public ArrayList<Wall> getWalls() {
+        return this.walls;
     }
 
     /**
      * Getter for CoinSprites
      * @return coinSprites
      */
-    public ArrayList<Sprite> getCoinSprites() {
-        return this.coinSprites;
+    public ArrayList<Coin> getCoins() {
+        return this.coins;
     }
 
     /**
      * Getter for hEnemySprites
      * @return hEnemySprites
      */
-    public ArrayList<Sprite> getHEnemySprites() {
-        return this.hEnemySprites;
-    }
-
-    /**
-     * Getter for vEnemySprites
-     * @return vEnemySprites
-     */
-    public ArrayList<Sprite> getVEnemySprites() {
-        return this.vEnemySprites;
-    }
-
-    /**
-     * Getter for AvatarSprites
-     * @return avatarSprites
-     */
-    public Sprite getAvatarSprite() {
-        return this.avatarSprite;
-    }
-
-    /**
-     * Getter for KeySprites
-     * @return keySprites
-     */
-    public Sprite getKeySprite() {
-        return this.keySprite;
-    }
-
-    /**
-     * Getter for DoorSprites
-     * @return doorSprites
-     */
-    public Sprite getDoorSprite() {
-        return doorSprite;
+    public ArrayList<Enemy> getEnemies() {
+        return this.enemies;
     }
 }

@@ -1,10 +1,10 @@
 package deepDown.gameObjects;
 
-import deepDown.gameObjects.GameBoard;
+import deepDown.GameBoard;
 import org.junit.Test;
 
 public class GameBoardTest {
-    GameBoard test = new GameBoard(1);
+    GameBoard test = new GameBoard(1, 100);
     @Test
     public void initializeGameBoard() throws Exception {
     }

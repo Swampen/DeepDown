@@ -1,10 +1,13 @@
 package deepDown.gameObjects;
 
+import deepDown.Sprite;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class DoorTest {
-    Door test = new Door(0, 0, 40, 40, false);
+    private Sprite sprite;
+
+    Door test = new Door(0, 0, 40, 40, sprite, false);
     @Test
     public void isOpen() throws Exception {
         assertFalse(test.isOpen());

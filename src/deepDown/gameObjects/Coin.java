@@ -1,5 +1,7 @@
 package deepDown.gameObjects;
 
+import deepDown.Sprite;
+
 public class Coin extends GameObject{
 
     private boolean isPickedUp;
@@ -8,12 +10,12 @@ public class Coin extends GameObject{
      * Constructor for Coin
      * @param x Specified x-coordinate
      * @param y Specified y-coordinate
-     * @param height Specified height
      * @param width Specified width
+     * @param height Specified height
      * @param isPickedUp if the coin is picked up
      */
-    public Coin(double x, double y, int height, int width, boolean isPickedUp) {
-        super(x, y, height, width);
+    public Coin(double x, double y, int width, int height, Sprite sprite, boolean isPickedUp) {
+        super(x, y, width, height, sprite);
         this.isPickedUp = isPickedUp;
     }
 

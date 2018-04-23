@@ -1,7 +1,9 @@
 package deepDown.gameObjects;
 
 
+import deepDown.Sprite;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.image.Image;
 
 public abstract class GameObject {
 
@@ -12,19 +14,21 @@ public abstract class GameObject {
     private double y;
     private final int h;
     private final int w;
+    private Sprite sprite;
 
     /**
      * Constructor for the GameObject class
      * @param x GameObject's x-Coordinate
      * @param y GameObject's y-coordinate
-     * @param height GameObject's height
      * @param width GameObject's width
+     * @param height GameObject's height
      */
-    public GameObject (double x, double y, int height, int width){
+    public GameObject (double x, double y, int width, int height, Sprite sprite){
         this.x = x;
         this.y = y;
-        this.h = height;
         this.w = width;
+        this.h = height;
+        this.sprite = sprite;
     }
 
     /**
@@ -42,17 +46,17 @@ public abstract class GameObject {
     }
 
     /**
-     * @return Returns the GameObjects h value
-     */
-    public int getH() {
-        return h;
-    }
-
-    /**
      * @return Returns the GameObjects w value
      */
     public int getW() {
         return w;
+    }
+
+    /**
+     * @return Returns the GameObjects h value
+     */
+    public int getH() {
+        return h;
     }
 
     /**
@@ -122,5 +126,9 @@ public abstract class GameObject {
         if (tx2 < Integer.MIN_VALUE) tx2 = Integer.MIN_VALUE;
         if (ty2 < Integer.MIN_VALUE) ty2 = Integer.MIN_VALUE;
         return new Rectangle2D(tx1, ty1, tx2, ty2);
+    }
+
+    public Sprite getSprite(){
+        return sprite;
     }
 }

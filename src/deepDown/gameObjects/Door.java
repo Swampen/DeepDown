@@ -1,5 +1,7 @@
 package deepDown.gameObjects;
 
+import deepDown.Sprite;
+
 public class Door extends GameObject {
 
     private boolean isOpen;
@@ -8,12 +10,12 @@ public class Door extends GameObject {
      * Constructor for Door
      * @param x specified x-coordinate
      * @param y specified y-coordinate
-     * @param height specified height
      * @param width specified width
+     * @param height specified height
      * @param isOpen whether the door is open
      */
-    public Door(double x, double y, int height, int width, boolean isOpen) {
-        super(x, y, height, width);
+    public Door(double x, double y, int width, int height, Sprite sprite, boolean isOpen) {
+        super(x, y, width, height, sprite);
         this.isOpen = isOpen;
     }
 

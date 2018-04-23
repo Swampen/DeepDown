@@ -1,10 +1,12 @@
 package deepDown.controllers;
 
 
+import deepDown.GameBoard;
+import deepDown.Sprite;
 import deepDown.gameObjects.*;
-import deepDown.gameObjects.Enemy.Enemy;
-import deepDown.gameObjects.Enemy.HorizontalEnemy;
-import deepDown.gameObjects.Enemy.VerticalEnemy;
+import deepDown.gameObjects.enemy.Enemy;
+import deepDown.gameObjects.enemy.HorizontalEnemy;
+import deepDown.gameObjects.enemy.VerticalEnemy;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -68,17 +70,10 @@ public class LevelController {
     private Avatar avatar;
     private Key key;
     private Door door;
-    //private VerticalEnemy vEnemy;
-    //private HorizontalEnemy hEnemy;
 
-    private Sprite avatarSprite;
-    private Sprite keySprite;
-    private Sprite doorSprite;
-
-    private ArrayList<Sprite> wallSprites;
-    private ArrayList<Sprite> vEnemySprites;
-    private ArrayList<Sprite> hEnemySprites;
-    private ArrayList<Sprite> coinSprites;
+    private ArrayList<Wall> walls;
+    private ArrayList<Coin> coins;
+    private ArrayList<Enemy> enemies;
 
     private AnimationTimer animationTimer;
 
@@ -101,22 +96,18 @@ public class LevelController {
     @FXML
     private void initialize(){
 
+        double enemyVel = 100;
         gc = canvas.getGraphicsContext2D();
-        GameBoard level = new GameBoard(levelProgression);
+        GameBoard level = new GameBoard(levelProgression, enemyVel);
         level.initializeGameBoard(gc);
 
         avatar = level.getAvatar();
         key = level.getKey();
         door = level.getDoor();
 
-        avatarSprite = level.getAvatarSprite();
-        keySprite = level.getKeySprite();
-        doorSprite = level.getDoorSprite();
-
-        wallSprites = level.getWallSprites();
-        vEnemySprites = level.getVEnemySprites();
-        hEnemySprites = level.getHEnemySprites();
-        coinSprites = level.getCoinSprites();
+        walls = level.getWalls();
+        coins = level.getCoins();
+        enemies = level.getEnemies();
         coinCount = 0;
         System.out.println(totScore);
 
@@ -163,16 +154,15 @@ public class LevelController {
             }
         });
 
-        double enemyVel = 100;
-        for (Sprite hEnemySprite : hEnemySprites) {
+    /*    for (Enemy enemy : enemies) {
             Enemy enemy = (Enemy) hEnemySprite.getGo();
             enemy.setXVelo(enemyVel);
         }
 
-        for (Sprite vEnemySprite : vEnemySprites) {
+        for (Sprite vEnemySprite : enemies) {
             VerticalEnemy enemy = (VerticalEnemy) vEnemySprite.getGo();
             enemy.setYVelo(enemyVel);
-        }
+        }*/
 
 
         //Starts the Animation Timer responsible for updating Labels and Objects
@@ -227,12 +217,7 @@ public class LevelController {
         avatar.posUpdate(deltaTime);
         avatar.setMovementState(true);
 
-        for (Sprite hEnemySprite : hEnemySprites) {
-            HorizontalEnemy enemy = (HorizontalEnemy) hEnemySprite.getGo();
-            enemy.posUpdate(deltaTime);
-        }
-        for (Sprite vEnemySprite : vEnemySprites) {
-            VerticalEnemy enemy = (VerticalEnemy) vEnemySprite.getGo();
+        for (Enemy enemy : enemies) {
             enemy.posUpdate(deltaTime);
         }
     }
@@ -246,8 +231,7 @@ public class LevelController {
 
         //Checks for collision between the AvatarSprite and WallSprites
         //and stops the AvatarSprites when it detects a collision
-        for (Sprite wallSprite : wallSprites) {
-            Wall wall = (Wall)wallSprite.getGo();
+        for (Wall wall : walls) {
             if(avatar.isColliding(wall)){
 
                 double heightOverlap = avatar.intersection(wall).getHeight();
@@ -273,33 +257,14 @@ public class LevelController {
             //between HorizontalEnemySprites and WallSprites, and between HorizontalEnemySprites and the AvatarSprite
             //When HorizontalEnemySprites encounter a wall their Velocities gets reversed and when they encounter
             //the AvatarSprites then kill it.
-            for (Sprite hEnemySprite : hEnemySprites){
-                HorizontalEnemy hEnemy = (HorizontalEnemy) hEnemySprite.getGo();
+            for (Enemy enemy : enemies){
 
-                if (avatar.isColliding(hEnemy)){
+                if (avatar.isColliding(enemy)){
                     killAvatar();
                 }
-
-                if (hEnemy.isColliding(wall)){
-                    hEnemy.reverseVelo();
-                    hEnemy.posUpdate(deltaTime);
-                }
-            }
-
-            //Iterates through the VerticalEnemySprite array list to check for collisions
-            //between VerticalEnemySprites and WallSprites, and between VerticalEnemySprites and the AvatarSprite
-            //When VerticalEnemySprites encounter a wall their Velocities gets reversed and when they encounter
-            //the AvatarSprites then kill it.
-            for (Sprite vEnemySprite : vEnemySprites){
-                VerticalEnemy vEnemy = (VerticalEnemy) vEnemySprite.getGo();
-
-                if (avatar.isColliding(vEnemy)){
-                    killAvatar();
-                }
-
-                if (vEnemy.isColliding(wall)){
-                    vEnemy.reverseVelo();
-                    vEnemy.posUpdate(deltaTime);
+                if (enemy.isColliding(wall)){
+                    enemy.reverseVelo();
+                    enemy.posUpdate(deltaTime);
                 }
             }
         }
@@ -307,11 +272,11 @@ public class LevelController {
         //Iterates through the CoinSprites array list to check for collision between
         //CoinSprites and AvatarSprite
         //When a collision occurs it will remove the coin and increment the coinCount value by 1
-        for (int i = 0; i < coinSprites.size(); i++){
-            if(avatar.isColliding(coinSprites.get(i).getGo())) {
+        for (int i = 0; i < coins.size(); i++){
+            if(avatar.isColliding(coins.get(i))) {
                 System.out.println("DING! you got a coin!");
                 ++coinCount;
-                coinSprites.remove(i);
+                coins.remove(i);
             }
         }
 
@@ -322,7 +287,7 @@ public class LevelController {
             System.out.println("Picked up key");
             key.setPickedUp(true);
             door.setOpen(true);
-            doorSprite.changeSprite(160,40);
+            door.getSprite().changeSprite(160,40);
         }
 
         //Checks for collision between the DoorSprite and the AvatarSprite
@@ -351,26 +316,32 @@ public class LevelController {
      */
     private void drawFrame(){
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());      //Clears all of Canvas
-        doorSprite.render(gc);
+        door.getSprite().render(gc, door);
         if (!key.isPickedUp()){
-            keySprite.render(gc);
+            key.getSprite().render(gc, key);
         }
-        drawArrayOnFrame(wallSprites);
-        drawArrayOnFrame(vEnemySprites);
-        drawArrayOnFrame(hEnemySprites);
-        drawArrayOnFrame(coinSprites);
-        avatarSprite.render(gc);
-    }
+        for (Wall wall : walls){
+            wall.getSprite().render(gc, wall);
+        }
+        for (Coin coin : coins){
+            coin.getSprite().render(gc, coin);
+        }
+        for (Enemy enemy : enemies){
+            enemy.getSprite().render(gc, enemy);
+        }
 
-    /**
-     * Method for drawing objects of a certain type onto the GameBoard
-     * @param sprites The type of sprite you want drawn onto the GameBoard
-     */
-    private void drawArrayOnFrame(ArrayList<Sprite> sprites){
-        for (Sprite sprite : sprites) {
-            sprite.render(gc);
-        }
+        avatar.getSprite().render(gc, avatar);
     }
+/*
+    *//**
+     * Method for drawing objects of a certain type onto the GameBoard
+     * @param gameObjects The type of sprite you want drawn onto the GameBoard
+     *//*
+    private void drawArrayOnFrame(ArrayList<GameObject> gameObjects){
+        for (GameObject gameObject : gameObjects) {
+            gameObject.getSprite().render(gc, gameObject);
+        }
+    }*/
 
     /**
      * Shows the Pause Menu when you hit the Escape key
