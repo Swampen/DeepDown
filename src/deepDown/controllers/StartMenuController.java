@@ -35,6 +35,7 @@ public class StartMenuController {
 
     private AnimationTimer animationTimer;
 
+
     /**
      * Loads the initial resources for the start menu and starts the animationTimer
      */
@@ -119,7 +120,12 @@ public class StartMenuController {
      * @throws IOException throws an IOException when a file is missing
      */
     public void loadGameClicked() throws IOException{
-        FileInputStream fis = new FileInputStream("Files/save.txt");
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream("Files/save.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
         DataInputStream dis = new DataInputStream(fis);
         int i = dis.readInt();
         int ts = dis.readInt();
