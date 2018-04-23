@@ -154,17 +154,6 @@ public class LevelController {
             }
         });
 
-    /*    for (Enemy enemy : enemies) {
-            Enemy enemy = (Enemy) hEnemySprite.getGo();
-            enemy.setXVelo(enemyVel);
-        }
-
-        for (Sprite vEnemySprite : enemies) {
-            VerticalEnemy enemy = (VerticalEnemy) vEnemySprite.getGo();
-            enemy.setYVelo(enemyVel);
-        }*/
-
-
         //Starts the Animation Timer responsible for updating Labels and Objects
         animationTimer = new AnimationTimer(){
             @Override
@@ -253,12 +242,7 @@ public class LevelController {
                 }
             }
 
-            //Iterates through the HorizontalEnemySprite array list to check for collisions
-            //between HorizontalEnemySprites and WallSprites, and between HorizontalEnemySprites and the AvatarSprite
-            //When HorizontalEnemySprites encounter a wall their Velocities gets reversed and when they encounter
-            //the AvatarSprites then kill it.
             for (Enemy enemy : enemies){
-
                 if (avatar.isColliding(enemy)){
                     killAvatar();
                 }
@@ -269,9 +253,6 @@ public class LevelController {
             }
         }
 
-        //Iterates through the CoinSprites array list to check for collision between
-        //CoinSprites and AvatarSprite
-        //When a collision occurs it will remove the coin and increment the coinCount value by 1
         for (int i = 0; i < coins.size(); i++){
             if(avatar.isColliding(coins.get(i))) {
                 System.out.println("DING! you got a coin!");
@@ -280,9 +261,6 @@ public class LevelController {
             }
         }
 
-        //Checks for Collision between the KeySprite and the AvatarSprite
-        //When the avatar collides with the key it will change the isPickedUp boolean to true
-        //and open the door to the next level
         if (avatar.isColliding(key) && !key.isPickedUp() ){
             System.out.println("Picked up key");
             key.setPickedUp(true);
@@ -290,10 +268,6 @@ public class LevelController {
             door.getSprite().changeSprite(160,40);
         }
 
-        //Checks for collision between the DoorSprite and the AvatarSprite
-        //Then the avatar collides with the door and the avatar has picked up the key
-        //it will add the timeScore and their coinCount*100 to the total score and transport them to the next level
-        //if not the door will do nothing
         if (avatar.isColliding(door)) {
             if (!door.isOpen()){
                 System.out.println("Find the key");
@@ -332,16 +306,6 @@ public class LevelController {
 
         avatar.getSprite().render(gc, avatar);
     }
-/*
-    *//**
-     * Method for drawing objects of a certain type onto the GameBoard
-     * @param gameObjects The type of sprite you want drawn onto the GameBoard
-     *//*
-    private void drawArrayOnFrame(ArrayList<GameObject> gameObjects){
-        for (GameObject gameObject : gameObjects) {
-            gameObject.getSprite().render(gc, gameObject);
-        }
-    }*/
 
     /**
      * Shows the Pause Menu when you hit the Escape key
