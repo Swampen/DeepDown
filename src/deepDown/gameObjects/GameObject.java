@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 public abstract class GameObject {
 
     /**
-     * The GameObjects position, height and width variables
+     * The GameObjects position, height, width and sprite variables
      */
     private double x;
     private double y;
@@ -22,6 +22,7 @@ public abstract class GameObject {
      * @param y GameObject's y-coordinate
      * @param width GameObject's width
      * @param height GameObject's height
+     * @param sprite GameObject's sprite
      */
     public GameObject (double x, double y, int width, int height, Sprite sprite){
         this.x = x;
@@ -128,6 +129,10 @@ public abstract class GameObject {
         return new Rectangle2D(tx1, ty1, tx2, ty2);
     }
 
+    /**
+     * Getter for sprite
+     * @return sprite tied to the GameObject
+     */
     public Sprite getSprite(){
         return sprite;
     }

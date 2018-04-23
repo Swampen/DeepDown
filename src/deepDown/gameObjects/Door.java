@@ -13,6 +13,7 @@ public class Door extends GameObject {
      * @param width specified width
      * @param height specified height
      * @param isOpen whether the door is open
+     * @param sprite Specified sprite
      */
     public Door(double x, double y, int width, int height, Sprite sprite, boolean isOpen) {
         super(x, y, width, height, sprite);

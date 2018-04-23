@@ -10,6 +10,16 @@ public class Avatar extends DynamicGameObject {
     private boolean canMoveLeft = true;
     private boolean canMoveRight = true;
 
+    /**
+     * Constructor for Avatar
+     * @param x Specified x-coordinate
+     * @param y Specified y-coordinate
+     * @param width Specified width
+     * @param height Specified height
+     * @param sprite Specified sprite
+     * @param xVelo Specified xVelo
+     * @param yVelo Specified yVelo
+     */
     public Avatar(double x, double y, int width, int height, Sprite sprite, double xVelo, double yVelo) {
         super(x, y, width, height, sprite, xVelo, yVelo);
     }
