@@ -13,6 +13,7 @@ public class Coin extends GameObject{
      * @param width Specified width
      * @param height Specified height
      * @param isPickedUp if the coin is picked up
+     * @param sprite Specified sprite
      */
     public Coin(double x, double y, int width, int height, Sprite sprite, boolean isPickedUp) {
         super(x, y, width, height, sprite);
