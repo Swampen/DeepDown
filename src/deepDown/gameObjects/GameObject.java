@@ -79,53 +79,49 @@ public abstract class GameObject {
      * Get the boundary of a Rectangle2D
      * @return Returns the boundary's x and y position and it's h and w
      */
-    public Rectangle2D getBoundary(){
+    public Rectangle2D getBoundingBox(){
         return new Rectangle2D(x, y, w, h);
     }
 
     /**
-     * Checks for collision between two boundaries
-     * @param other gameObject to check collision for
+     * Checks if there is an intersection between this {@code GameObject}
+     * and the specified {@code GameObject}.
+     * @param other thie specified {@code GameObject}
      * @return returns true if there is a collision and false if not
      */
     public boolean isColliding(GameObject other){
-        return this.getBoundary().intersects(other.getBoundary());
+        return this.getBoundingBox().intersects(other.getBoundingBox());
     }
 
     /**
-     * Computes the intersection of this {@code Rectangle} with the
-     * specified {@code Rectangle}. Returns a new {@code Rectangle}
+     * Calculates the intersection of this {@code GameObject} with the
+     * specified {@code GameObject}. Returns a new {@code Rectangle}
      * that represents the intersection of the two rectangles.
-     * If the two rectangles do not intersect, the result will be
-     * an empty rectangle.
-     *
+     * If the two GameObjects don't intersect, it will return
+     * an empty Rectangel2D
      * @param     other the specified {@code Rectangle}
-     * @return    the largest {@code Rectangle} contained in both the
-     *            specified {@code Rectangle} and in
-     *            this {@code Rectangle}; or if the rectangles
-     *            do not intersect, an empty rectangle.
+     * @return    the {@code Rectangle2D} that represents the
+     *            largest intersercion between this {@code GameObject}
      */
     public Rectangle2D intersection(GameObject other) {
-        double tx1 = this.x;
-        double ty1 = this.y;
-        double rx1 = other.x;
-        double ry1 = other.y;
-        double tx2 = tx1; tx2 += this.w;
-        double ty2 = ty1; ty2 += this.h;
-        double rx2 = rx1; rx2 += other.w;
-        double ry2 = ry1; ry2 += other.h;
-        if (tx1 < rx1) tx1 = rx1;
-        if (ty1 < ry1) ty1 = ry1;
-        if (tx2 > rx2) tx2 = rx2;
-        if (ty2 > ry2) ty2 = ry2;
-        tx2 -= tx1;
-        ty2 -= ty1;
-        // tx2,ty2 will never overflow (they will never be
-        // larger than the smallest of the two source w,h)
-        // they might underflow, though...
-        if (tx2 < Integer.MIN_VALUE) tx2 = Integer.MIN_VALUE;
-        if (ty2 < Integer.MIN_VALUE) ty2 = Integer.MIN_VALUE;
-        return new Rectangle2D(tx1, ty1, tx2, ty2);
+        double goX1 = this.x;
+        double goY1 = this.y;
+        double goX2 = other.x;
+        double goY2 = other.y;
+        double goW1 = goX1 + this.w;
+        double goH1 = goY1 + this.h;
+        double goW2 = goX2 + other.w;
+        double goH2 = goY2 + other.h;
+        if (goX1 < goX2) goX1 = goX2;
+        if (goY1 < goY2) goY1 = goY2;
+        if (goW1 > goW2) goW1 = goW2;
+        if (goH1 > goH2) goH1 = goH2;
+        goW1 -= goX1;
+        goH1 -= goY1;
+
+        if (goW1 < Integer.MIN_VALUE) goW1 = Integer.MIN_VALUE;
+        if (goH1 < Integer.MIN_VALUE) goH1 = Integer.MIN_VALUE;
+        return new Rectangle2D(goX1, goY1, goW1, goH1);
     }
 
     /**

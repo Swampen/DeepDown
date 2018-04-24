@@ -5,11 +5,13 @@ import deepDown.GameBoard;
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.enemy.Enemy;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -19,8 +21,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -114,10 +122,7 @@ public class LevelController {
         coinCount = 0;
         System.out.println(totScore);
 
-        //Enables keypresses in canvas
         canvas.setFocusTraversable(true);
-
-        //Detects when keys are being pressed and sets their respective booleans to true
         canvas.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
                 upPressed.set(true);
@@ -140,11 +145,14 @@ public class LevelController {
                 }
             }
             if (e.getCode() == KeyCode.K){
-                victoryScreen();
+                try {
+                    victoryScreen();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
-        //Detects when keys are being released and sets their respective booleans to false
         canvas.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.UP) {
                 upPressed.set(false);
@@ -160,7 +168,6 @@ public class LevelController {
             }
         });
 
-        //Starts the Animation Timer responsible for updating Labels and Objects
         animationTimer = new AnimationTimer(){
             @Override
             public void handle(long currentTime){
@@ -174,7 +181,11 @@ public class LevelController {
                 timeScore = timeScore - deltaTime;
 
                 if (avatarLives == 0){
-                    victoryScreen();
+                    try {
+                        victoryScreen();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 update(deltaTime);
@@ -222,8 +233,8 @@ public class LevelController {
     }
 
     /**
-     * Checks for collision between different objects by cycling through array lists of objects and comparing their hitbox
-     * with other objects' hitboxes
+     * Checks for collision between different objects by cycling through array lists of objects and comparing their boundingbox
+     * with other objects' boundingbox
      * @param deltaTime the difference in time between now and the last time the animationTimer ran
      */
     private void collisionDetection(double deltaTime) {
@@ -241,14 +252,12 @@ public class LevelController {
                     avatar.posUpdate(deltaTime);
                     avatar.setCanMoveUp(false);
                     avatar.setCanMoveDown(false);
-
                 }
                 if (widthOverlap < heightOverlap){
                     avatar.reverseVelo();
                     avatar.posUpdate(deltaTime);
                     avatar.setCanMoveLeft(false);
                     avatar.setCanMoveRight(false);
-
                 }
             }
 
@@ -313,7 +322,6 @@ public class LevelController {
         for (Enemy enemy : enemies){
             enemy.getSprite().render(gc, enemy);
         }
-
         avatar.getSprite().render(gc, avatar);
     }
 
@@ -387,19 +395,17 @@ public class LevelController {
         }
     }
 
-    private void victoryScreen(){
+    private void victoryScreen()throws IOException{
         animationTimer.stop();
-        Image img = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
-        ImageView victory = new ImageView(img);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/gameOverScreen.fxml"));
+        EndScreenController endScreen = new EndScreenController(totScore);
+        loader.setController(endScreen);
+        Parent root = loader.load();
+
         Rectangle r = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
-        r.setFill(Color.rgb(0, 0, 0, 0.3));
+        r.setFill(Color.rgb(0, 0, 0, 0.4));
+        anchor.getChildren().addAll(r, root);
 
-        victory.setX(canvas.getWidth()/2 - img.getWidth()/2);
-        victory.setY(-100);
-        anchor.getChildren().addAll(r, victory);
-
-        TranslateTransition tt = new TranslateTransition(Duration.millis(2000), victory);
-        tt.setToY(canvas.getHeight()/2 );
-        tt.play();
     }
 }
