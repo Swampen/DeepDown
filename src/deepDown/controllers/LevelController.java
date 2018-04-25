@@ -283,18 +283,13 @@ public class LevelController {
                     }
                 }  else {
                     //Victory();
-                    Leaderboard lb = new Leaderboard("test", totScore);
-                    File leaderboard = new File("Files/leaderboard.txt");
-                    FileOutputStream fos = null;
-                    ObjectOutputStream oos = null;
-                    try {
-                        fos = new FileOutputStream(leaderboard);
-                        oos = new ObjectOutputStream(fos);
-                        oos.writeObject(lb);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                                    }
+                    totScore += (coinCount*100 + timeScore);
+                    Leaderboard lb = new Leaderboard();
+                    lb.loadScores();
+                    lb.addScore(totScore);
+                    lb.addLevel(levelProgression);
+                    lb.saveScores();
+                }
             }
         }
     }
