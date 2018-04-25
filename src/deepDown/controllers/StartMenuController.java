@@ -9,7 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -19,6 +23,8 @@ public class StartMenuController {
 
     @FXML
     private AnchorPane anchor;
+    @FXML
+    private Pane background;
     @FXML
     private Button newGameButton;
     @FXML
@@ -35,69 +41,107 @@ public class StartMenuController {
 
     private AnimationTimer animationTimer;
 
-
     /**
      * Loads the initial resources for the start menu and starts the animationTimer
      */
     @FXML
     public void initialize() {
-        animationTimer = new AnimationTimer(){
-                public void handle(long now){
 
-                    if(newGameButton.isHover() && !newGameHover){
-                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.gif"));
-                        MenuAnimation newGame = new MenuAnimation(image, newGameButton, true);
-                        newGameButton = newGame.setButtonImage();
-                        newGameHover = newGame.isHovering();
-
-                    }else if (!newGameButton.isHover()){
-                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
-                        MenuAnimation newGame = new MenuAnimation(image, newGameButton, false);
-                        newGameButton = newGame.setButtonImage();
-                        newGameHover = newGame.isHovering();
-                    }
-
-                    if(loadGameButton.isHover() && !loadGameHover){
-                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.gif"));
-                        MenuAnimation loadGame = new MenuAnimation(image, loadGameButton, true);
-                        loadGameButton = loadGame.setButtonImage();
-                        loadGameHover = loadGame.isHovering();
-
-                    }else if (!loadGameButton.isHover()){
-                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.png"));
-                        MenuAnimation loadGame = new MenuAnimation(image, loadGameButton, false);
-                        loadGameButton = loadGame.setButtonImage();
-                        loadGameHover = loadGame.isHovering();
-                    }
-
-                    if(leaderboardButton.isHover() && !leaderboardHover){
-                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.gif"));
-                        MenuAnimation leaderboard = new MenuAnimation(image, leaderboardButton, true);
-                        leaderboardButton = leaderboard.setButtonImage();
-                        leaderboardHover = leaderboard.isHovering();
-
-                    }else if (!leaderboardButton.isHover()){
-                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.png"));
-                        MenuAnimation leaderboard = new MenuAnimation(image, leaderboardButton, false);
-                        leaderboardButton = leaderboard.setButtonImage();
-                        leaderboardHover = leaderboard.isHovering();
-                    }
-
-                    if(quitGameButton.isHover() && !quitGameHover){
-                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.gif"));
-                        MenuAnimation quitGame = new MenuAnimation(image, quitGameButton, true);
-                        quitGameButton = quitGame.setButtonImage();
-                        quitGameHover = quitGame.isHovering();
-
-                    }else if (!quitGameButton.isHover()){
-                        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.png"));
-                        MenuAnimation quitGame = new MenuAnimation(image, quitGameButton, false);
-                        quitGameButton = quitGame.setButtonImage();
-                        quitGameHover = quitGame.isHovering();
-                    }
-
-
+        anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (newGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
+                try {
+                    newGameClicked();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 }
+                e.consume();
+            }
+            if (loadGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
+                try {
+                    loadGameClicked();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                e.consume();
+            }
+            if (leaderboardButton.isFocused() && e.getCode() == KeyCode.ENTER){
+                try {
+                    leaderboardClicked();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                e.consume();
+            }
+            if (quitGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
+                quitClicked();
+                e.consume();
+            }
+        });
+
+        menuAnimation();
+    }
+
+    /**
+     * Method for changing button animation when the button is in focus
+     * or when the the user hover over a button with the mouse
+     */
+    private void menuAnimation() {
+        animationTimer = new AnimationTimer(){
+            public void handle(long now){
+
+                //TODO focus/hover samtidig
+                if((newGameButton.isHover() || newGameButton.isFocused()) && !newGameHover ){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.gif"));
+                    MenuAnimation newGame = new MenuAnimation(image, newGameButton, true);
+                    newGameButton = newGame.setButtonImage();
+                    newGameHover = newGame.isHovering();
+
+                }else if (!newGameButton.isHover() && !newGameButton.isFocused()){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
+                    MenuAnimation newGame = new MenuAnimation(image, newGameButton, false);
+                    newGameButton = newGame.setButtonImage();
+                    newGameHover = newGame.isHovering();
+                }
+
+                if((loadGameButton.isHover() || loadGameButton.isFocused()) && !loadGameHover){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.gif"));
+                    MenuAnimation loadGame = new MenuAnimation(image, loadGameButton, true);
+                    loadGameButton = loadGame.setButtonImage();
+                    loadGameHover = loadGame.isHovering();
+
+                }else if (!loadGameButton.isHover() && !loadGameButton.isFocused()){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.png"));
+                    MenuAnimation loadGame = new MenuAnimation(image, loadGameButton, false);
+                    loadGameButton = loadGame.setButtonImage();
+                    loadGameHover = loadGame.isHovering();
+                }
+
+                if((leaderboardButton.isHover() || leaderboardButton.isFocused()) && !leaderboardHover){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.gif"));
+                    MenuAnimation leaderboard = new MenuAnimation(image, leaderboardButton, true);
+                    leaderboardButton = leaderboard.setButtonImage();
+                    leaderboardHover = leaderboard.isHovering();
+
+                }else if (!leaderboardButton.isHover() && !leaderboardButton.isFocused()){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.png"));
+                    MenuAnimation leaderboard = new MenuAnimation(image, leaderboardButton, false);
+                    leaderboardButton = leaderboard.setButtonImage();
+                    leaderboardHover = leaderboard.isHovering();
+                }
+
+                if((quitGameButton.isHover() || quitGameButton.isFocused()) && !quitGameHover){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.gif"));
+                    MenuAnimation quitGame = new MenuAnimation(image, quitGameButton, true);
+                    quitGameButton = quitGame.setButtonImage();
+                    quitGameHover = quitGame.isHovering();
+
+                }else if (!quitGameButton.isHover() && !quitGameButton.isFocused()){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.png"));
+                    MenuAnimation quitGame = new MenuAnimation(image, quitGameButton, false);
+                    quitGameButton = quitGame.setButtonImage();
+                    quitGameHover = quitGame.isHovering();
+                }
+            }
         };
         animationTimer.start();
     }

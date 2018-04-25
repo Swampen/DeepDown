@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.effect.*?>
+<?import java.lang.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Rectangle height="720.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1280.0" />
       <VBox fx:id="vBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
          <children>
             <ImageView fx:id="imageView" fitHeight="203.0" fitWidth="683.0" pickOnBounds="true" preserveRatio="true" />
-            <Text fx:id="totScoreText" fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.5" text="Score: 1000">
+            <Text fx:id="totScoreText" text="Score: 1000">
                <font>
                   <Font name="Verdana Bold" size="35.0" />
                </font>
             </Text>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Play Again">
+                  <Button mnemonicParsing="false" onAction="#playAgainPressed" prefHeight="50.0" prefWidth="100.0" text="Play Again">
                      <HBox.margin>
                         <Insets right="50.0" />
                      </HBox.margin>
+                     <effect>
+                        <Reflection fraction="0.44" topOpacity="0.31" />
+                     </effect>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Quit Game" />
+                  <Button mnemonicParsing="false" onAction="#quitGamePressed" prefHeight="50.0" prefWidth="100.0" text="Quit Game" />
                </children>
             </HBox>
          </children>

@@ -5,33 +5,21 @@ import deepDown.GameBoard;
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.enemy.Enemy;
 import javafx.animation.AnimationTimer;
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,6 +49,7 @@ public class LevelController {
      * totScore = Variable for keeping track of the total score the player has achieved throughout the
      * entire game
      * avatarLives = variable for keeping track of how many lives the player has
+     * endScreen = a boolean to determine if the end screen is showing or not
      */
     private GraphicsContext gc;
     private double timeScore = 2000;
@@ -68,6 +57,7 @@ public class LevelController {
     private int coinCount;
     private int totScore;
     private int avatarLives;
+    private boolean endScreen = false;
 
     /**
      * Booleans for keeping track of which keys are being pressed
@@ -136,7 +126,7 @@ public class LevelController {
             if (e.getCode() == KeyCode.RIGHT) {
                 rightPressed.set(true);
             }
-            if (e.getCode() == KeyCode.ESCAPE) {
+            if (e.getCode() == KeyCode.ESCAPE && !endScreen) {
                 escapePressed.set(true);
                 try {
                     showPauseMenu();
@@ -146,7 +136,7 @@ public class LevelController {
             }
             if (e.getCode() == KeyCode.K){
                 try {
-                    victoryScreen();
+                    gameOverScreen();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -182,7 +172,7 @@ public class LevelController {
 
                 if (avatarLives == 0){
                     try {
-                        victoryScreen();
+                        gameOverScreen();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -395,17 +385,15 @@ public class LevelController {
         }
     }
 
-    private void victoryScreen()throws IOException{
-        animationTimer.stop();
-
+    private void gameOverScreen()throws IOException{
+        endScreen = true;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/gameOverScreen.fxml"));
         EndScreenController endScreen = new EndScreenController(totScore);
         loader.setController(endScreen);
         Parent root = loader.load();
 
-        Rectangle r = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
-        r.setFill(Color.rgb(0, 0, 0, 0.4));
-        anchor.getChildren().addAll(r, root);
+        anchor.getChildren().addAll(root);
+        animationTimer.stop();
 
     }
 }
