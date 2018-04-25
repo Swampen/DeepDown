@@ -377,8 +377,12 @@ public class LevelController {
             System.out.println(avatarLives);
             resetLevel();
         }else {
-            System.out.println("Game Over!");
-            System.out.println("Score: " + (totScore +(coinCount*100 + timeScore)));
+            totScore += (coinCount*100 + timeScore);
+            Leaderboard lb = new Leaderboard();
+            lb.loadScores();
+            lb.addScore(totScore);
+            lb.addLevel(levelProgression);
+            lb.saveScores();
         }
     }
 }
