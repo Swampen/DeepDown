@@ -14,13 +14,16 @@ public class Leaderboard {
         highScores = "Scores";
 
         topScores = new ArrayList<Integer>();
+        //topName = new ArrayList<String>();
     }
 
-    public void addScore(int score){
+    public void addScore(int score/*, String name */){
         for(int i = 0; i < topScores.size(); i++) {
             if(score >= topScores.get(i)){
                 topScores.add(i, score);
                 topScores.remove(topScores.size()-1);
+                //topName.add(i , name);
+                //topName.remove(topName.size()-1);
                 return;
             }
         }
@@ -41,6 +44,7 @@ public class Leaderboard {
 
             for (int i =0; i < scores.length; i++){
                 topScores.add(Integer.parseInt(scores[i]));
+                //topName.add(name)
             }
 
             reader.close();
@@ -57,6 +61,8 @@ public class Leaderboard {
             BufferedWriter writer = new BufferedWriter(output);
 
             writer.write(topScores.get(0) + "-" + topScores.get(1) + "-" + topScores.get(2) + "-" + topScores.get(3) + "-" + topScores.get(4));
+            //write.newLine();
+            //writer.write(topName.get(0) + "-" + topName.get(1) + "-" + topName.get(2) + "-" + topName.get(3) + "-" + topName.get(4));
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();

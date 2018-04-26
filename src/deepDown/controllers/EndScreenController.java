@@ -1,5 +1,6 @@
 package deepDown.controllers;
 
+import deepDown.Leaderboard;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -47,6 +48,11 @@ public class EndScreenController {
         totScoreText.setStroke(Color.BLACK);
         totScoreText.setStrokeWidth(1.0);
         totScoreText.setText("Total score: " + Integer.toString(totscore));
+
+        Leaderboard lb = new Leaderboard();
+        lb.loadScores();
+        lb.addScore(totscore);
+        lb.saveScores();
     }
 
     public void playAgainPressed()throws IOException{

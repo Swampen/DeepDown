@@ -298,10 +298,11 @@ public class LevelController {
                 }  else {
                     //Victory();
                     totScore += (coinCount*100 + timeScore);
-                    Leaderboard lb = new Leaderboard();
-                    lb.loadScores();
-                    lb.addScore(totScore);
-                    lb.saveScores();
+                    try{
+                        gameOverScreen();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -394,10 +395,11 @@ public class LevelController {
             resetLevel();
         }else {
             totScore += (coinCount*100 + timeScore);
-            Leaderboard lb = new Leaderboard();
-            lb.loadScores();
-            lb.addScore(totScore);
-            lb.saveScores();
+            try{
+                gameOverScreen();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
