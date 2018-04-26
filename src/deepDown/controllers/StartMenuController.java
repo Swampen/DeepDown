@@ -21,23 +21,19 @@ import java.io.IOException;
 
 public class StartMenuController {
 
-    @FXML
-    private AnchorPane anchor;
-    @FXML
-    private Pane background;
-    @FXML
-    private Button newGameButton;
-    @FXML
-    private Button loadGameButton;
-    @FXML
-    private Button leaderboardButton;
-    @FXML
-    private Button quitGameButton;
+    @FXML private AnchorPane anchor;
+    @FXML private Pane background;
+    @FXML private Button newGameButton;
+    @FXML private Button loadGameButton;
+    @FXML private Button leaderboardButton;
+    @FXML private Button quitGameButton;
+    @FXML private Button helpButton;
 
     private boolean newGameHover = false;
     private boolean loadGameHover = false;
     private boolean leaderboardHover = false;
     private boolean quitGameHover = false;
+    private boolean helpHover = false;
 
     private AnimationTimer animationTimer;
 
@@ -46,6 +42,7 @@ public class StartMenuController {
      */
     @FXML
     public void initialize() {
+        anchor.requestFocus();
 
         anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             if (newGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
@@ -76,6 +73,14 @@ public class StartMenuController {
                 quitClicked();
                 e.consume();
             }
+            if (helpButton.isFocused() && e.getCode() == KeyCode.ENTER){
+                try {
+                    helpButtonClicked();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                e.consume();
+            }
         });
 
         menuAnimation();
@@ -89,12 +94,12 @@ public class StartMenuController {
         animationTimer = new AnimationTimer(){
             public void handle(long now){
 
-                //TODO focus/hover samtidig
                 if((newGameButton.isHover() || newGameButton.isFocused()) && !newGameHover ){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.gif"));
                     MenuAnimation newGame = new MenuAnimation(image, newGameButton, true);
                     newGameButton = newGame.setButtonImage();
                     newGameHover = newGame.isHovering();
+                    newGameButton.requestFocus();
 
                 }else if (!newGameButton.isHover() && !newGameButton.isFocused()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
@@ -108,6 +113,7 @@ public class StartMenuController {
                     MenuAnimation loadGame = new MenuAnimation(image, loadGameButton, true);
                     loadGameButton = loadGame.setButtonImage();
                     loadGameHover = loadGame.isHovering();
+                    loadGameButton.requestFocus();
 
                 }else if (!loadGameButton.isHover() && !loadGameButton.isFocused()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.png"));
@@ -121,6 +127,7 @@ public class StartMenuController {
                     MenuAnimation leaderboard = new MenuAnimation(image, leaderboardButton, true);
                     leaderboardButton = leaderboard.setButtonImage();
                     leaderboardHover = leaderboard.isHovering();
+                    leaderboardButton.requestFocus();
 
                 }else if (!leaderboardButton.isHover() && !leaderboardButton.isFocused()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.png"));
@@ -134,12 +141,27 @@ public class StartMenuController {
                     MenuAnimation quitGame = new MenuAnimation(image, quitGameButton, true);
                     quitGameButton = quitGame.setButtonImage();
                     quitGameHover = quitGame.isHovering();
+                    quitGameButton.requestFocus();
 
                 }else if (!quitGameButton.isHover() && !quitGameButton.isFocused()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.png"));
                     MenuAnimation quitGame = new MenuAnimation(image, quitGameButton, false);
                     quitGameButton = quitGame.setButtonImage();
                     quitGameHover = quitGame.isHovering();
+                }
+
+                if((helpButton.isHover() || helpButton.isFocused()) && !helpHover){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Help.gif"));
+                    MenuAnimation help = new MenuAnimation(image, helpButton, true);
+                    helpButton = help.setButtonImage();
+                    helpHover = help.isHovering();
+                    helpButton.requestFocus();
+
+                }else if (!helpButton.isHover() && !helpButton.isFocused()){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Help.png"));
+                    MenuAnimation help = new MenuAnimation(image, helpButton, false);
+                    helpButton = help.setButtonImage();
+                    helpHover = help.isHovering();
                 }
             }
         };
@@ -182,7 +204,7 @@ public class StartMenuController {
     }
 
     //Opens up the level select for testing of levels
-    public void trainingModeClicked() throws IOException {
+    public void helpButtonClicked() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelSelect.fxml"));
         LevelSelectController levelSelect = new LevelSelectController();
         loader.setController(levelSelect);
