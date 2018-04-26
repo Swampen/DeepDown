@@ -166,7 +166,7 @@ public class StartMenuController {
     public void loadGameClicked() throws IOException{
         FileInputStream fis = null;
         try {
-            fis = new FileInputStream("Files/save.txt");
+            fis = new FileInputStream("Files/save");
         } catch (IOException e){
             e.printStackTrace();
         }
