@@ -23,27 +23,27 @@
                <children>
                   <VBox layoutX="14.0" layoutY="40.0" prefHeight="501.0" prefWidth="648.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1st: ">
+                        <Text fx:id="nr1" strokeType="OUTSIDE" strokeWidth="0.0" text="1st: ">
                            <font>
                               <Font size="71.0" />
                            </font>
                         </Text>
-                        <Text layoutX="10.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2nd: ">
+                        <Text fx:id="nr2" layoutX="10.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2nd: ">
                            <font>
                               <Font size="71.0" />
                            </font>
                         </Text>
-                        <Text layoutX="10.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3rd: ">
+                        <Text fx:id="nr3" layoutX="10.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3rd: ">
                            <font>
                               <Font size="71.0" />
                            </font>
                         </Text>
-                        <Text layoutX="10.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4th:">
+                        <Text fx:id="nr4" layoutX="10.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4th:">
                            <font>
                               <Font size="71.0" />
                            </font>
                         </Text>
-                        <Text layoutX="10.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5th:">
+                        <Text fx:id="nr5" layoutX="10.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5th:">
                            <font>
                               <Font size="71.0" />
                            </font>

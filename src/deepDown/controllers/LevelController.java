@@ -2,6 +2,7 @@ package deepDown.controllers;
 
 
 import deepDown.GameBoard;
+import deepDown.Leaderboard;
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.enemy.Enemy;
 import javafx.animation.AnimationTimer;
@@ -21,7 +22,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class LevelController {
@@ -282,14 +283,25 @@ public class LevelController {
             if (!door.isOpen()){
                 System.out.println("Find the key");
             }else{
-                if(avatarLives < 5){
-                    ++avatarLives;
-                }
-                totScore += (coinCount * 100 + timeScore);
-                try {
-                    loadNextLevel();
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+                if(levelProgression!=3){
+
+                    if(avatarLives<5){
+                        ++avatarLives;
+                    }
+                    totScore += (coinCount * 100 + timeScore);
+                    try {
+                        loadNextLevel();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }  else {
+                    //Victory();
+                    totScore += (coinCount*100 + timeScore);
+                    Leaderboard lb = new Leaderboard();
+                    lb.loadScores();
+                    lb.addScore(totScore);
+                    lb.saveScores();
                 }
             }
         }
@@ -381,8 +393,11 @@ public class LevelController {
             System.out.println(avatarLives);
             resetLevel();
         }else {
-            System.out.println("Game Over!");
-            System.out.println("Score: " + (totScore +(coinCount*100 + timeScore)));
+            totScore += (coinCount*100 + timeScore);
+            Leaderboard lb = new Leaderboard();
+            lb.loadScores();
+            lb.addScore(totScore);
+            lb.saveScores();
         }
     }
 
