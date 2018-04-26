@@ -287,7 +287,6 @@ public class LevelController {
                     Leaderboard lb = new Leaderboard();
                     lb.loadScores();
                     lb.addScore(totScore);
-                    lb.addLevel(levelProgression);
                     lb.saveScores();
                 }
             }
@@ -381,7 +380,6 @@ public class LevelController {
             Leaderboard lb = new Leaderboard();
             lb.loadScores();
             lb.addScore(totScore);
-            lb.addLevel(levelProgression);
             lb.saveScores();
         }
     }
