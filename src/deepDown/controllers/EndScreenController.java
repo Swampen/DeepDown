@@ -1,21 +1,33 @@
 package deepDown.controllers;
 
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.io.IOException;
+
 public class EndScreenController {
 
     @FXML private ImageView imageView;
     @FXML private VBox vBox;
+    @FXML private HBox nameHBox;
+    @FXML private HBox buttonsHBox;
     @FXML private Text totScoreText;
     @FXML private AnchorPane anchor;
+    @FXML private TextField nameInput;
     private int totscore = 0;
 
     public EndScreenController(int totscore) {
@@ -24,6 +36,9 @@ public class EndScreenController {
 
     @FXML
     public void initialize(){
+        FadeTransition ft = new FadeTransition(Duration.millis(1500), vBox);
+        ft.setToValue(1.0);
+        ft.play();
 
         Image img = new Image(getClass().getResourceAsStream("/deepDown/resource/images/GameOver.png"));
         imageView.setImage(img);
@@ -32,20 +47,26 @@ public class EndScreenController {
         totScoreText.setStroke(Color.BLACK);
         totScoreText.setStrokeWidth(1.0);
         totScoreText.setText("Total score: " + Integer.toString(totscore));
-
-        FadeTransition ft = new FadeTransition(Duration.millis(1500), vBox);
-        ft.setFromValue(0.0);
-        ft.setToValue(1.0);
-        ft.play();
     }
 
-    public void playAgainPressed(){
-        System.out.println("again");
-        anchor.getChildren().remove(anchor);
+    public void playAgainPressed()throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
+        LevelController controller = new LevelController(1, 0, 3);
+        loader.setController(controller);
+        Parent root = loader.load();
+        anchor.getChildren().setAll(root);
     }
 
     public void quitGamePressed(){
-        //TODO
-        System.out.println("quit");
+        Platform.exit();
+        System.exit(0);
+    }
+
+    public void okButtonPressed(){
+        nameHBox.setOpacity(0.0);
+        nameHBox.setDisable(true);
+        buttonsHBox.opacityProperty().setValue(1.0);
+        buttonsHBox.setDisable(false);
+        String name = nameInput.getText();
     }
 }

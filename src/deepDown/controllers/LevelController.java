@@ -99,6 +99,7 @@ public class LevelController {
 
         double enemyVel = 100;
         gc = canvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         GameBoard level = new GameBoard(levelProgression, enemyVel);
         level.initializeGameBoard();
 
@@ -392,7 +393,7 @@ public class LevelController {
         loader.setController(endScreen);
         Parent root = loader.load();
 
-        anchor.getChildren().addAll(root);
+        anchor.getChildren().setAll(root);
         animationTimer.stop();
 
     }
