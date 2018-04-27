@@ -296,7 +296,6 @@ public class LevelController {
                         e.printStackTrace();
                     }
                 }  else {
-                    //Victory();
                     totScore += (coinCount*100 + timeScore);
                     try{
                         gameOverScreen();
@@ -394,7 +393,7 @@ public class LevelController {
             System.out.println(avatarLives);
             resetLevel();
         }else {
-            totScore += (coinCount*100 + timeScore);
+            totScore += (coinCount*100);
             try{
                 gameOverScreen();
             } catch (IOException e) {
