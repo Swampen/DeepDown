@@ -49,10 +49,7 @@ public class EndScreenController {
         totScoreText.setStrokeWidth(1.0);
         totScoreText.setText("Total score: " + Integer.toString(totscore));
 
-        Leaderboard lb = new Leaderboard();
-        lb.loadScores();
-        lb.addScore(totscore);
-        lb.saveScores();
+
     }
 
     public void backToMenuPressed()throws IOException{
@@ -74,5 +71,9 @@ public class EndScreenController {
         buttonsHBox.opacityProperty().setValue(1.0);
         buttonsHBox.setDisable(false);
         String name = nameInput.getText();
+        Leaderboard lb = new Leaderboard();
+        lb.loadScores();
+        lb.addScore(totscore, name);
+        lb.saveScores();
     }
 }

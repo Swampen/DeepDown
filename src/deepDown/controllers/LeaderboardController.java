@@ -27,11 +27,11 @@ public class LeaderboardController {
     public void initialize() {
         Leaderboard lb = new Leaderboard();
         lb.loadScores();
-        nr1.setText("Nr. 1: " + Integer.toString(lb.getHighScore(0)));
-        nr2.setText("Nr. 2: " + Integer.toString(lb.getHighScore(1)));
-        nr3.setText("Nr. 3: " + Integer.toString(lb.getHighScore(2)));
-        nr4.setText("Nr. 4: " + Integer.toString(lb.getHighScore(3)));
-        nr5.setText("Nr. 5: " + Integer.toString(lb.getHighScore(4)));
+        nr1.setText("1. " + lb.getNames(0) + "................... " + Integer.toString(lb.getHighScore(0)));
+        nr2.setText("2. " + lb.getNames(1) + "................... " + Integer.toString(lb.getHighScore(1)));
+        nr3.setText("3. " + lb.getNames(2) + "................... " + Integer.toString(lb.getHighScore(2)));
+        nr4.setText("4. " + lb.getNames(3) + "................... " + Integer.toString(lb.getHighScore(3)));
+        nr5.setText("5. " + lb.getNames(4) + "................... " + Integer.toString(lb.getHighScore(4)));
 
     }
 }
