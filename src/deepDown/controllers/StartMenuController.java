@@ -186,12 +186,7 @@ public class StartMenuController {
      * @throws IOException throws an IOException when a file is missing
      */
     public void loadGameClicked() throws IOException{
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream("Files/save");
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        FileInputStream fis = new FileInputStream("Files/save");
         DataInputStream dis = new DataInputStream(fis);
         int i = dis.readInt();
         int ts = dis.readInt();

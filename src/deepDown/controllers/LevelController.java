@@ -112,7 +112,6 @@ public class LevelController {
         coins = level.getCoins();
         enemies = level.getEnemies();
         coinCount = 0;
-        System.out.println(totScore);
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(e -> {
@@ -391,7 +390,6 @@ public class LevelController {
     private void killAvatar() {
         if(avatarLives > 0) {
             --avatarLives;
-            System.out.println(avatarLives);
             resetLevel();
         }else {
             totScore += (coinCount*100 + timeScore);

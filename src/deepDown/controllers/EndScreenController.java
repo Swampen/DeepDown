@@ -55,9 +55,9 @@ public class EndScreenController {
         lb.saveScores();
     }
 
-    public void playAgainPressed()throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-        LevelController controller = new LevelController(1, 0, 3);
+    public void backToMenuPressed()throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
+        StartMenuController controller = new StartMenuController();
         loader.setController(controller);
         Parent root = loader.load();
         anchor.getChildren().setAll(root);
