@@ -26,6 +26,7 @@ public class GameBoard {
     /**
      * Constructor for the GameBoard
      * @param level What level to load
+     * @param enemyVel The enemiy's velocity on the level
      */
     public GameBoard (int level , double enemyVel){
         this.level = level;
@@ -39,14 +40,14 @@ public class GameBoard {
     }
 
     /**
-     * reads the tileset to use
+     * Reads the tileset to use
      */
     private void readImage(){
         image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
     }
 
     /**
-     * reads what level to load depending on the level variable specified in the constructor
+     * Reads what level to load depending on the level variable specified in the constructor
      */
     private void readLevel(){
         switch (this.level) {
@@ -86,7 +87,6 @@ public class GameBoard {
         int columns = 32;
         int[][] board = new int[rows][columns];
 
-        //reads the txt file to board 2D array
         for (int i=0; i<rows; i++){
             for(int j=0; j<columns; j++){
                 if(input.hasNextInt()){
@@ -95,7 +95,6 @@ public class GameBoard {
             }
         }
 
-        //draws the objects into canvas
         for (int i=0; i<rows; i++){
             for(int j=0; j<columns; j++){
 
@@ -140,7 +139,7 @@ public class GameBoard {
     }
 
     /**
-     * Getter for Avatar
+     * Getter for the {@code Avatar} for the level
      * @return avatar
      */
     public Avatar getAvatar() {
@@ -148,7 +147,7 @@ public class GameBoard {
     }
 
     /**
-     * Getter for Key
+     * Getter for the {@code Key} for the level
      * @return key
      */
     public Key getKey(){
@@ -156,28 +155,35 @@ public class GameBoard {
     }
 
     /**
-     * Getter for Door
+     * Getter for the {@code Door} for the level
      * @return door
      */
     public Door getDoor() {
         return door;
     }
 
+    /**
+     * Getter for the {@code ArrayList<Wall>} containing all the
+     * walls on the level
+     * @return walls
+     */
     public ArrayList<Wall> getWalls() {
         return this.walls;
     }
 
     /**
-     * Getter for CoinSprites
-     * @return coinSprites
+     * Getter for the {@code ArrayList<Coins>} containing all the
+     * coins on the level
+     * @return coins
      */
     public ArrayList<Coin> getCoins() {
         return this.coins;
     }
 
     /**
-     * Getter for hEnemySprites
-     * @return hEnemySprites
+     * Getter for the {@code ArrayList<Enemy>} containing all the
+     * enemies on the level
+     * @return enemies
      */
     public ArrayList<Enemy> getEnemies() {
         return this.enemies;

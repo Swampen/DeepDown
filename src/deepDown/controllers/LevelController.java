@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
@@ -33,6 +34,7 @@ public class LevelController {
     @FXML private Label totScoreLabel;
     @FXML private Label coinCountLabel;
     @FXML private Label livesCounter;
+
     /**
      * timeScore = variable for keeping track of the Time Score of the player
      * set to the initial 2000
@@ -129,11 +131,7 @@ public class LevelController {
                 }
             }
             if (e.getCode() == KeyCode.K){
-                try {
-                    setEndScreen(true);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                setEndScreen(true);
             }
         });
 
@@ -265,22 +263,18 @@ public class LevelController {
         if (avatar.isColliding(door)) {
             if (!door.isOpen()){
                 System.out.println("Find the key");
-            }else{
-
-                if(levelProgression!=3){
-
-                    if(avatarLives<5){
+            }
+            else{
+                if(levelProgression != 3){
+                    if(avatarLives < 5){
                         ++avatarLives;
                     }
                     totScore += (coinCount * 100 + timeScore);
                     loadNextLevel();
-                } else {
+                }
+                else{
                     totScore += (coinCount*100 + timeScore);
-                    try{
-                        setEndScreen(true);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    setEndScreen(true);
                 }
             }
         }
@@ -369,20 +363,20 @@ public class LevelController {
         }
         else {
             totScore += (coinCount*100);
-            try{
-                setEndScreen(false);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            setEndScreen(false);
         }
     }
 
-    private void setEndScreen(boolean gameCompleted)throws IOException{
+    private void setEndScreen(boolean gameCompleted) {
+        try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/gameOverScreen.fxml"));
         EndScreenController endScreen = new EndScreenController(totScore, gameCompleted);
         loader.setController(endScreen);
         Parent root = loader.load();
         anchor.getChildren().setAll(root);
         animationTimer.stop();
+        } catch (IOException e){
+            System.out.println("En feil skjeddde");
+        }
     }
 }
