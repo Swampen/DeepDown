@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.util.concurrent.TimeUnit;
+
 public class LeaderboardController {
 
     @FXML
@@ -25,13 +27,28 @@ public class LeaderboardController {
 
     @FXML
     public void initialize() {
+
         Leaderboard lb = new Leaderboard();
         lb.loadScores();
-        nr1.setText("1. " + lb.getNames(0) + "................... " + Integer.toString(lb.getHighScore(0)));
-        nr2.setText("2. " + lb.getNames(1) + "................... " + Integer.toString(lb.getHighScore(1)));
-        nr3.setText("3. " + lb.getNames(2) + "................... " + Integer.toString(lb.getHighScore(2)));
-        nr4.setText("4. " + lb.getNames(3) + "................... " + Integer.toString(lb.getHighScore(3)));
-        nr5.setText("5. " + lb.getNames(4) + "................... " + Integer.toString(lb.getHighScore(4)));
+        fillScores(nr1, 1, lb.getNames(0).length(), Integer.toString(lb.getHighScore(0)).length(), lb.getNames(0), Integer.toString(lb.getHighScore(0)));
+        fillScores(nr2, 2, lb.getNames(1).length(), Integer.toString(lb.getHighScore(1)).length(), lb.getNames(1), Integer.toString(lb.getHighScore(1)));
+        fillScores(nr3, 3, lb.getNames(2).length(), Integer.toString(lb.getHighScore(2)).length(), lb.getNames(2), Integer.toString(lb.getHighScore(2)));
+        fillScores(nr4, 4, lb.getNames(3).length(), Integer.toString(lb.getHighScore(3)).length(), lb.getNames(3), Integer.toString(lb.getHighScore(3)));
+        fillScores(nr5, 5, lb.getNames(4).length(), Integer.toString(lb.getHighScore(4)).length(), lb.getNames(4), Integer.toString(lb.getHighScore(4)));
+        System.out.println(nr1.getLayoutBounds().getWidth());
+        System.out.println(nr2.getLayoutBounds().getWidth());
+    }
 
+    public void fillScores(Text nr, int x, int nLength, int sLength, String name, String score) {
+        String dot = ".";
+        for(int i = 0; i < 30; i++){
+            if(nLength + sLength == i){
+                for(int j=30; j>i; j--){
+                    dot += "." ;
+                    System.out.println(dot.length());
+                }
+                nr.setText(x +". " + name + dot + score);
+            }
+        }
     }
 }
