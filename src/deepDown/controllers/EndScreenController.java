@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -27,12 +28,15 @@ public class EndScreenController {
     @FXML private HBox nameHBox;
     @FXML private HBox buttonsHBox;
     @FXML private Text totScoreText;
+    @FXML private Text nameText;
     @FXML private AnchorPane anchor;
     @FXML private TextField nameInput;
     private int totscore = 0;
+    private boolean gameCompletetd;
 
-    public EndScreenController(int totscore) {
+    public EndScreenController(int totscore, boolean gameCompletetd) {
         this.totscore = totscore;
+        this.gameCompletetd = gameCompletetd;
     }
 
     @FXML
@@ -41,15 +45,21 @@ public class EndScreenController {
         ft.setToValue(1.0);
         ft.play();
 
-        Image img = new Image(getClass().getResourceAsStream("/deepDown/resource/images/GameOver.png"));
-        imageView.setImage(img);
+        if (gameCompletetd){
+            Image img = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Victory.png"));
+            imageView.setImage(img);
+        } else {
+            Image img = new Image(getClass().getResourceAsStream("/deepDown/resource/images/GameOver.png"));
+            imageView.setImage(img);
+        }
 
         totScoreText.setFill(Color.WHITE);
         totScoreText.setStroke(Color.BLACK);
         totScoreText.setStrokeWidth(1.0);
+        nameText.setFill(Color.WHITE);
+        nameText.setStroke(Color.BLACK);
+        nameText.setStrokeWidth(1.0);
         totScoreText.setText("Total score: " + Integer.toString(totscore));
-
-
     }
 
     public void backToMenuPressed()throws IOException{

@@ -2,7 +2,6 @@ package deepDown.controllers;
 
 
 import deepDown.GameBoard;
-import deepDown.Leaderboard;
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.enemy.Enemy;
 import javafx.animation.AnimationTimer;
@@ -28,18 +27,12 @@ import java.util.ArrayList;
 public class LevelController {
 
     private int levelProgression;
-    @FXML
-    private Canvas canvas;
-    @FXML
-    private AnchorPane anchor;
-    @FXML
-    private Label scoreLabel;
-    @FXML
-    private Label totScoreLabel;
-    @FXML
-    private Label coinCountLabel;
-    @FXML
-    private Label livesCounter;
+    @FXML private Canvas canvas;
+    @FXML private AnchorPane anchor;
+    @FXML private Label scoreLabel;
+    @FXML private Label totScoreLabel;
+    @FXML private Label coinCountLabel;
+    @FXML private Label livesCounter;
     /**
      * timeScore = variable for keeping track of the Time Score of the player
      * set to the initial 2000
@@ -137,7 +130,7 @@ public class LevelController {
             }
             if (e.getCode() == KeyCode.K){
                 try {
-                    gameOverScreen();
+                    setEndScreen(true);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -171,13 +164,6 @@ public class LevelController {
                 livesCounter.setText("Lives: " + Integer.toString(avatarLives)); //Updates livesCounter
                 timeScore = timeScore - deltaTime;
 
-                if (avatarLives == 0){
-                    try {
-                        gameOverScreen();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
 
                 update(deltaTime);
                 collisionDetection(deltaTime);
@@ -230,8 +216,6 @@ public class LevelController {
      */
     private void collisionDetection(double deltaTime) {
 
-        //Checks for collision between the AvatarSprite and WallSprites
-        //and stops the AvatarSprites when it detects a collision
         for (Wall wall : walls) {
             if(avatar.isColliding(wall)){
 
@@ -289,15 +273,11 @@ public class LevelController {
                         ++avatarLives;
                     }
                     totScore += (coinCount * 100 + timeScore);
-                    try {
-                        loadNextLevel();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }  else {
+                    loadNextLevel();
+                } else {
                     totScore += (coinCount*100 + timeScore);
                     try{
-                        gameOverScreen();
+                        setEndScreen(true);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -364,12 +344,8 @@ public class LevelController {
     /**
      * Loads the next level by making a new loader and LevelController object and loading those
      */
-    private void loadNextLevel() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-        LevelController controller = new LevelController(levelProgression +1, totScore, avatarLives);
-        loader.setController(controller);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
+    private void loadNextLevel(){
+        levelProgression++;
         resetLevel();
     }
 
@@ -387,28 +363,26 @@ public class LevelController {
      * if the avatar has zero lives remaining then displays the Game Over Screen
      */
     private void killAvatar() {
-        if(avatarLives > 0) {
-            --avatarLives;
+        --avatarLives;
+        if (avatarLives > 0){
             resetLevel();
-        }else {
+        }
+        else {
             totScore += (coinCount*100);
             try{
-                gameOverScreen();
+                setEndScreen(false);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void gameOverScreen()throws IOException{
-        endScreen = true;
+    private void setEndScreen(boolean gameCompleted)throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/gameOverScreen.fxml"));
-        EndScreenController endScreen = new EndScreenController(totScore);
+        EndScreenController endScreen = new EndScreenController(totScore, gameCompleted);
         loader.setController(endScreen);
         Parent root = loader.load();
-
         anchor.getChildren().setAll(root);
         animationTimer.stop();
-
     }
 }
