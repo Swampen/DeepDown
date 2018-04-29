@@ -40,7 +40,7 @@ public class LeaderboardController {
     public void fillScores(Text nr, int x, String name, String score) {
         String dot = ".";
         for(double i = 0; i < 80; i++){
-            if(nr.getLayoutBounds().getWidth() < (1280-15.39)){
+            if(nr.getLayoutBounds().getWidth() < (1280-32)){
                 dot += "." ;
                 nr.setText(x +". " + name + dot + score);
             }
