@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -183,16 +184,21 @@ public class StartMenuController {
      * @throws IOException throws an IOException when a file is missing
      */
     public void loadGameClicked() throws IOException{
-        FileInputStream fis = new FileInputStream("Files/save");
-        DataInputStream dis = new DataInputStream(fis);
-        int i = dis.readInt();
-        int ts = dis.readInt();
-        int l = dis.readInt();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-        LevelController level = new LevelController(i, ts, l);
-        loader.setController(level);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
+        try {
+            FileInputStream fis = new FileInputStream("Files/save");
+            DataInputStream dis = new DataInputStream(fis);
+            int i = dis.readInt();
+            int ts = dis.readInt();
+            int l = dis.readInt();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
+            LevelController level = new LevelController(i, ts, l);
+            loader.setController(level);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        } catch (IOException e ){
+            Alert a = new Alert(Alert.AlertType.ERROR, "Save file missing or corrputed");
+            a.showAndWait();
+        }
     }
 
     //Opens up the level select for testing of levels
