@@ -243,7 +243,12 @@ public class LevelController {
 
             for (Enemy enemy : enemies){
                 if (avatar.isColliding(enemy)){
+                    if (avatarLives == 0){
+                        totScore += (coinCount*100);
+                        setEndScreen(false);
+                    }
                     killAvatar();
+
                 }
                 if (enemy.isColliding(wall)){
                     enemy.reverseVelo();
@@ -368,14 +373,9 @@ public class LevelController {
         if (avatarLives > 0){
             resetLevel();
         }
-        else {
-            totScore += (coinCount*100);
-            setEndScreen(false);
-        }
     }
 
     private void setEndScreen(boolean gameCompleted) {
-        animationTimer.stop();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/endScreen.fxml"));
         EndScreenController endScreen = new EndScreenController(totScore, gameCompleted);
         loader.setController(endScreen);
@@ -386,5 +386,7 @@ public class LevelController {
             e.printStackTrace();
         }
         anchor.getChildren().setAll(root);
+        animationTimer.stop();
+
     }
 }
