@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="300.0" prefWidth="600.0">
          <top>
@@ -18,22 +18,22 @@
          <center>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#resumeGamePressed" text="Resume Game">
+                  <Button fx:id="resumeGameButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#resumeGamePressed" text="Resume Game">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#backToMenuPressed" text="Back To Menu">
+                  <Button fx:id="backToMenuButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backToMenuPressed" text="Back To Menu">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#saveGamePressed" text="Save Game">
+                  <Button fx:id="saveGameButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveGamePressed" text="Save Game">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#quitGamePressed" text="Quit" />
+                  <Button fx:id="quitGameButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#quitGamePressed" text="Quit" />
                </children>
             </VBox>
          </center>

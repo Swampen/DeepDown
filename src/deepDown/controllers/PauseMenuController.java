@@ -1,8 +1,12 @@
 package deepDown.controllers;
 
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -14,27 +18,59 @@ import java.io.IOException;
 public class PauseMenuController {
 
     private final Stage stage;
-
-    private final AnchorPane anchor;
+    @FXML private Button resumeGameButton;
+    @FXML private Button backToMenuButton;
+    @FXML private Button saveGameButton;
+    @FXML private Button quitGameButton;
+    @FXML private AnchorPane anchor;
+    private final AnchorPane parentAnchor;
     private int levelProgression;
     private int totScore;
     private int avatarLives;
 
-
     /**
      * Constructor for PauseMenuController
      * @param stage The specified stage 'Add More'
-     * @param anchor The specified anchor 'Add more'
      * @param levelProgression What level is loaded which is used for saving
      * @param totScore the players total score which is used for saving
      * @param avatarLives the players life count which is used for saving
      */
-    public PauseMenuController(Stage stage, AnchorPane anchor, int levelProgression, int totScore, int avatarLives){
+    public PauseMenuController(Stage stage, AnchorPane parentAnchor, int levelProgression, int totScore, int avatarLives){
         this.stage = stage;
-        this.anchor = anchor;
+        this.parentAnchor = parentAnchor;
         this.levelProgression = levelProgression;
         this.totScore = totScore;
         this.avatarLives = avatarLives;
+    }
+
+    @FXML
+    public void initialize(){
+        anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (resumeGameButton.isFocused() && e.getCode() == KeyCode.ENTER) {
+                resumeGamePressed();
+                e.consume();
+            }
+            if (backToMenuButton.isFocused() && e.getCode() == KeyCode.ENTER) {
+                try {
+                    backToMenuPressed();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                e.consume();
+            }
+            if (saveGameButton.isFocused() && e.getCode() == KeyCode.ENTER) {
+                try {
+                    saveGamePressed();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                e.consume();
+            }
+            if (quitGameButton.isFocused() && e.getCode() == KeyCode.ENTER) {
+                quitGamePressed();
+                e.consume();
+            }
+        });
     }
 
     /**
@@ -49,12 +85,13 @@ public class PauseMenuController {
      * @throws IOException throws an IOException when a file is missing
      */
     public void backToMenuPressed() throws IOException{
-        stage.close();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
         StartMenuController startMenuController = new StartMenuController();
         loader.setController(startMenuController);
         Parent root = loader.load();
-        anchor.getChildren().setAll(root);
+        stage.close();
+        parentAnchor.getChildren().setAll(root);
     }
 
     /**
@@ -68,7 +105,6 @@ public class PauseMenuController {
         dos.writeInt(levelProgression);
         dos.writeInt(totScore);
         dos.writeInt(avatarLives);
-
     }
 
     /**

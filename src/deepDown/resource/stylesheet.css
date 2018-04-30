@@ -1,0 +1,15 @@
+#level, #nameText, #totScoreText{
+  -fx-font: 22px Verdana;
+  -fx-font-weight: bold;
+}
+
+#totScoreText{
+    -fx-font-size: 30px;
+}
+
+#scoreText, #coinText, #livesText, #timeText, #totScoreText, #nameText, #levelProgressionText{
+  -fx-fill: white;
+  -fx-stroke: black;
+  -fx-stroke-width: 1;
+}
+

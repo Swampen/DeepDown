@@ -8,12 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+
 
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -22,7 +20,6 @@ import java.io.IOException;
 public class StartMenuController {
 
     @FXML private AnchorPane anchor;
-    @FXML private Pane background;
     @FXML private Button newGameButton;
     @FXML private Button loadGameButton;
     @FXML private Button leaderboardButton;

@@ -13,12 +13,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -30,10 +31,12 @@ public class LevelController {
     private int levelProgression;
     @FXML private Canvas canvas;
     @FXML private AnchorPane anchor;
-    @FXML private Label scoreLabel;
-    @FXML private Label totScoreLabel;
-    @FXML private Label coinCountLabel;
-    @FXML private Label livesCounter;
+    @FXML private Text scoreText;
+    @FXML private Text coinText;
+    @FXML private Text livesText;
+    @FXML private Text timeText;
+    @FXML private Text levelProgressionText;
+    @FXML private ImageView coinScoreImage;
 
     /**
      * timeScore = variable for keeping track of the Time Score of the player
@@ -92,21 +95,28 @@ public class LevelController {
      */
     @FXML
     private void initialize(){
-
         double enemyVel = 100;
         gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         GameBoard level = new GameBoard(levelProgression, enemyVel);
         level.initializeGameBoard();
-
         avatar = level.getAvatar();
         key = level.getKey();
         door = level.getDoor();
-
         walls = level.getWalls();
         coins = level.getCoins();
         enemies = level.getEnemies();
         coinCount = 0;
+
+        anchor.getStylesheets().add("deepDown/resource/stylesheet.css");
+        scoreText.setText("Score: " + Integer.toString(totScore));
+        livesText.setText("Lives: " + Integer.toString(avatarLives));
+        levelProgressionText.setText("Level: " + Integer.toString(levelProgression));
+
+
+        Image coinscore = new Image("deepDown/resource/images/Coin.png");
+        coinScoreImage.setImage(coinscore);
+
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(e -> {
@@ -153,15 +163,12 @@ public class LevelController {
         animationTimer = new AnimationTimer(){
             @Override
             public void handle(long currentTime){
-                double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;  //Time since last frame
-                lastCurrentTime = currentTime;                                      //Saves the time in current frame
+                double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;
+                lastCurrentTime = currentTime;
 
-                scoreLabel.setText("Time: " + Integer.toString((int)timeScore));     //Updates timeScore
-                coinCountLabel.setText("Coins: " + Integer.toString(coinCount)); //Updates coinCount
-                totScoreLabel.setText("Score: " + Integer.toString(totScore));  //Updates totScore
-                livesCounter.setText("Lives: " + Integer.toString(avatarLives)); //Updates livesCounter
+                coinText.setText(": " + Integer.toString(coinCount));
+                timeText.setText("Time: " + Integer.toString((int)timeScore));
                 timeScore = timeScore - deltaTime;
-
 
                 update(deltaTime);
                 collisionDetection(deltaTime);
@@ -368,15 +375,16 @@ public class LevelController {
     }
 
     private void setEndScreen(boolean gameCompleted) {
-        try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/gameOverScreen.fxml"));
+        animationTimer.stop();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/endScreen.fxml"));
         EndScreenController endScreen = new EndScreenController(totScore, gameCompleted);
         loader.setController(endScreen);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
-        animationTimer.stop();
-        } catch (IOException e){
-            System.out.println("En feil skjeddde");
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        anchor.getChildren().setAll(root);
     }
 }

@@ -86,7 +86,7 @@ public abstract class GameObject {
     /**
      * Checks if there is an intersection between this {@code GameObject}
      * and the specified {@code GameObject}.
-     * @param other thie specified {@code GameObject}
+     * @param other the specified {@code GameObject}
      * @return returns true if there is a collision and false if not
      */
     public boolean isColliding(GameObject other){
@@ -98,10 +98,10 @@ public abstract class GameObject {
      * specified {@code GameObject}. Returns a new {@code Rectangle}
      * that represents the intersection of the two rectangles.
      * If the two GameObjects don't intersect, it will return
-     * an empty Rectangel2D
+     * an empty Rectangle2D
      * @param     other the specified {@code Rectangle}
      * @return    the {@code Rectangle2D} that represents the
-     *            largest intersercion between this {@code GameObject}
+     *            largest intersection between this {@code GameObject}
      */
     public Rectangle2D intersection(GameObject other) {
         double goX1 = this.x;
