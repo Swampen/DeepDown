@@ -13,20 +13,13 @@ import java.util.concurrent.TimeUnit;
 
 public class LeaderboardController {
 
-    @FXML
-    private AnchorPane anchor;
-    @FXML
-    private Button newGameButton;
-    @FXML
-    private Text nr1;
-    @FXML
-    private Text nr2;
-    @FXML
-    private Text nr3;
-    @FXML
-    private Text nr4;
-    @FXML
-    private Text nr5;
+    @FXML    private AnchorPane anchor;
+    @FXML    private Button newGameButton;
+    @FXML    private Text nr1;
+    @FXML    private Text nr2;
+    @FXML    private Text nr3;
+    @FXML    private Text nr4;
+    @FXML    private Text nr5;
 
     /**
      * Method which runs when the fxml is loaded
@@ -45,7 +38,8 @@ public class LeaderboardController {
     }
 
     /**
-     * Fills in scores and names plus checks for how much room you have left from the left edge and adds a punctuation mark until the page is filled
+     * Fills in scores and names plus checks for how much room you have left
+     * from the left edge and adds a punctuation mark until the page is filled
      * @param nr whichs text you wish to change
      * @param x what number place i.e. 1. , 2. , 3.
      * @param name Name of the player who achieved that score
