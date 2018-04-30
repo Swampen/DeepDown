@@ -28,6 +28,10 @@ public class LeaderboardController {
     @FXML
     private Text nr5;
 
+    /**
+     * Method which runs when the fxml is loaded
+     * Loads the scores file and sets each text to the appropriate score and name
+     */
     @FXML
     public void initialize() {
 
@@ -40,6 +44,13 @@ public class LeaderboardController {
         fillScores(nr5, 5, lb.getNames(4), Integer.toString(lb.getHighScore(4)));
     }
 
+    /**
+     * Fills in scores and names plus checks for how much room you have left from the left edge and adds a punctuation mark until the page is filled
+     * @param nr whichs text you wish to change
+     * @param x what number place i.e. 1. , 2. , 3.
+     * @param name Name of the player who achieved that score
+     * @param score The score the player achieved
+     */
     public void fillScores(Text nr, int x, String name, String score) {
         String dot = ".";
         for(double i = 0; i < 80; i++){
@@ -50,11 +61,19 @@ public class LeaderboardController {
         }
     }
 
-    public void backButtonPressed() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
-        StartMenuController controller = new StartMenuController();
-        loader.setController(controller);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
+    /**
+     * Method for getting back to the main menu when you press the back button
+     * @throws IOException throws an IOException if the fxml file is not found
+     */
+    public void backButtonPressed(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
+            StartMenuController controller = new StartMenuController();
+            loader.setController(controller);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
