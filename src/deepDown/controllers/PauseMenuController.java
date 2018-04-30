@@ -62,8 +62,8 @@ public class PauseMenuController {
      * @throws IOException throws an IOException when a file is missing
      */
     public void saveGamePressed() throws IOException{
-        File f = new File("Files/save");
-        FileOutputStream fos = new FileOutputStream(f);
+        File save = new File("Files/save");
+        FileOutputStream fos = new FileOutputStream(save);
         DataOutputStream dos = new DataOutputStream(fos);
         dos.writeInt(levelProgression);
         dos.writeInt(totScore);

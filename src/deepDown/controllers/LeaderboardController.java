@@ -2,10 +2,13 @@ package deepDown.controllers;
 
 import deepDown.Leaderboard;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class LeaderboardController {
@@ -45,5 +48,13 @@ public class LeaderboardController {
                 nr.setText(x +". " + name + dot + score);
             }
         }
+    }
+
+    public void backButtonPressed() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
+        StartMenuController controller = new StartMenuController();
+        loader.setController(controller);
+        Parent root = loader.load();
+        anchor.getChildren().setAll(root);
     }
 }
