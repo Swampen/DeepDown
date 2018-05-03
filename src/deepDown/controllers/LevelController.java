@@ -79,6 +79,9 @@ public class LevelController {
 
     private AnimationTimer animationTimer;
 
+    //todo remove when done
+    private int fpsLoop = 0;
+
     /**
      * Constructor for the LevelController class
      * @param levelProgression Tells it what level it has to load
@@ -109,6 +112,7 @@ public class LevelController {
         coins = level.getCoins();
         enemies = level.getEnemies();
         coinCount = 0;
+
 
         anchor.getStylesheets().add("deepDown/resource/stylesheet.css");
         scoreText.setText("Score: " + Integer.toString(totScore));
@@ -168,8 +172,14 @@ public class LevelController {
             public void handle(long currentTime){
                 double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;
                 lastCurrentTime = currentTime;
-                double fps = 1/deltaTime;
-                fpsLabel.setText(Integer.toString((int)fps));
+
+                fpsLoop += 1;
+                if (fpsLoop == 10) {
+                    double fps = 1 / deltaTime;
+                    fpsLabel.setText(Integer.toString((int)fps));
+                    fpsLoop = 0;
+                }
+
 
                 coinText.setText(": " + Integer.toString(coinCount));
                 timeText.setText("Time: " + Integer.toString((int)timeScore));

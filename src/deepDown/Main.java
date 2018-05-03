@@ -5,22 +5,17 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import deepDown.controllers.StartMenuController;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
 
+import javax.sound.sampled.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 
 public class Main extends Application {
-    private AudioClip backgroundMusic;
-
+    private static Mixer mixer;
+    private static Clip clip;
     public static void main(String[] args) {
         File filesFolder = new File("Files");
         try{
@@ -39,17 +34,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException{
 
-        AudioPlayer ap = AudioPlayer.player;
-        AudioStream BGM;
-        AudioData ad;
-        ContinuousAudioDataStream loop = null;
-        try{
-            BGM = new AudioStream(getClass().getResourceAsStream("/deepDown/resource/sounds/Untitled.wav"));
-            ad = BGM.getData();
-            loop = new ContinuousAudioDataStream(ad);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
 
         StartMenuController startMenu = new StartMenuController();
@@ -67,6 +51,35 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setTitle("Deep Down");
         stage.show();
-        ap.start(loop);
+
+        playBackgroundMusic();
+    }
+
+    private void playBackgroundMusic() {
+        Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
+        mixer = AudioSystem.getMixer(mixerInfo[0]);
+
+        DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
+        try {
+            clip = (Clip)mixer.getLine(dataInfo);
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            URL bgmURL = getClass().getResource("/deepDown/resource/sounds/Untitled.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bgmURL);
+            clip.open(audioInputStream);
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        clip.start();
+
     }
 }
