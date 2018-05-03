@@ -13,3 +13,12 @@
   -fx-stroke-width: 1;
 }
 
+#titleHelp {
+    -fx-font: 30px Verdana;
+    -fx-font-weight: bold;
+}
+
+#moveText, #enemyText, #pickupText {
+    -fx-font: 24px Verdana;
+}
+

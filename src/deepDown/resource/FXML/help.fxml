@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox layoutX="540.0" layoutY="14.0" prefHeight="53.0" prefWidth="200.0">
+            <children>
+                <Label fx:id="titleHelp" prefHeight="53.0" prefWidth="200.0" text="Label" />
+            </children>
+        </HBox>
+        <HBox layoutX="83.0" layoutY="104.0" prefHeight="136.0" prefWidth="1114.0">
+            <children>
+                <Label fx:id="movePic" prefHeight="136.0" prefWidth="255.0" text="Label" />
+                <Label fx:id="moveText" prefHeight="138.0" prefWidth="860.0" text="Label" />
+            </children>
+        </HBox>
+        <HBox layoutX="83.0" layoutY="292.0" prefHeight="136.0" prefWidth="1114.0">
+            <children>
+                <Label fx:id="enemyPic" prefHeight="136.0" prefWidth="311.0" text="Label" />
+                <Label fx:id="enemyText" prefHeight="141.0" prefWidth="912.0" text="Label" />
+            </children>
+        </HBox>
+        <HBox layoutX="83.0" layoutY="465.0" prefHeight="136.0" prefWidth="1114.0">
+            <children>
+                <Label fx:id="pickupPic" prefHeight="136.0" prefWidth="276.0" text="Label" />
+                <Label fx:id="pickupText" prefHeight="141.0" prefWidth="871.0" text="Label" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>
