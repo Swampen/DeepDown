@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -36,6 +37,7 @@ public class LevelController {
     @FXML private Text livesText;
     @FXML private Text timeText;
     @FXML private Text levelProgressionText;
+    @FXML private Label fpsLabel;
     @FXML private ImageView coinScoreImage;
 
     /**
@@ -118,6 +120,7 @@ public class LevelController {
         coinScoreImage.setImage(coinscore);
 
 
+
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
@@ -165,6 +168,8 @@ public class LevelController {
             public void handle(long currentTime){
                 double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;
                 lastCurrentTime = currentTime;
+                double fps = 1/deltaTime;
+                fpsLabel.setText(Integer.toString((int)fps));
 
                 coinText.setText(": " + Integer.toString(coinCount));
                 timeText.setText("Time: " + Integer.toString((int)timeScore));
