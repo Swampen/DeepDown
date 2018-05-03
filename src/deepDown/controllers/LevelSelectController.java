@@ -41,4 +41,24 @@ public class LevelSelectController {
     public void level3Selected(){
         loadLevel(3);
     }
+
+    public void level4Selected(){
+        loadLevel(4);
+    }
+
+    public void level5Selected(){
+        loadLevel(5);
+    }
+
+    public void level6Selected(){
+        loadLevel(6);
+    }
+
+    public void level7Selected(){
+        loadLevel(7);
+    }
+
+    public void level8Selected(){
+        loadLevel(8);
+    }
 }

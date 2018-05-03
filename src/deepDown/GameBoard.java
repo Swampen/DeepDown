@@ -61,13 +61,13 @@ public class GameBoard {
                 input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level3.txt"));
                 break;
             case 4:
-                //input = new Scanner(new File("src/deepDown/level4.txt"));
+                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level4.txt"));
                 break;
             case 5:
-                //input = new Scanner(new File("src/deepDown/level5.txt"));
+                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level5.txt"));
                 break;
             case 6:
-                //input = new Scanner(new File("src/deepDown/level6.txt"));
+                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level6.txt"));
                 break;
             case 7:
                 break;
