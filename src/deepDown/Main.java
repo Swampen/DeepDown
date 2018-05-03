@@ -8,14 +8,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import deepDown.controllers.StartMenuController;
 
-import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 public class Main extends Application {
-    private static Mixer mixer;
-    private static Clip clip;
     public static void main(String[] args) {
         File filesFolder = new File("Files");
         try{
@@ -34,8 +31,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException{
 
-
-
         StartMenuController startMenu = new StartMenuController();
         URL url = getClass().getResource("/deepDown/resource/FXML/startMenu.fxml");
         FXMLLoader loader = new FXMLLoader(url);
@@ -52,34 +47,7 @@ public class Main extends Application {
         stage.setTitle("Deep Down");
         stage.show();
 
-        playBackgroundMusic();
-    }
-
-    private void playBackgroundMusic() {
-        Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
-        mixer = AudioSystem.getMixer(mixerInfo[0]);
-
-        DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
-        try {
-            clip = (Clip)mixer.getLine(dataInfo);
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
-            URL bgmURL = getClass().getResource("/deepDown/resource/sounds/Untitled.wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bgmURL);
-            clip.open(audioInputStream);
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        clip.start();
-
+        Sound sound = new Sound();
+        sound.playBackgroundMusic();
     }
 }

@@ -1,6 +1,7 @@
 package deepDown.controllers;
 
 import deepDown.Leaderboard;
+import deepDown.Sound;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -42,6 +43,7 @@ public class EndScreenController {
 
     @FXML
     public void initialize(){
+        Sound.getClip().stop();
         anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             if (backToMenuButton.isFocused() && e.getCode() == KeyCode.ENTER) {
                 try {

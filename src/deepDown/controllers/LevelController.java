@@ -149,6 +149,7 @@ public class LevelController {
             }
             if (e.getCode() == KeyCode.K){
                 setEndScreen(true);
+
             }
         });
 
