@@ -26,6 +26,7 @@ public class StartMenuController {
     @FXML private Button leaderboardButton;
     @FXML private Button quitGameButton;
     @FXML private Button helpButton;
+    @FXML private Button levelSelect;
 
     private boolean newGameHover = false;
     private boolean loadGameHover = false;
@@ -201,11 +202,11 @@ public class StartMenuController {
         }
     }
 
-    //Opens up the level select for testing of levels
+    //Opens up the help screen for instructions to play the game
     public void helpButtonClicked() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelSelect.fxml"));
-        LevelSelectController levelSelect = new LevelSelectController();
-        loader.setController(levelSelect);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/help.fxml"));
+        HelpController help = new HelpController();
+        loader.setController(help);
         Parent root = loader.load();
         anchor.getChildren().setAll(root);
     }
@@ -218,6 +219,14 @@ public class StartMenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
         LeaderboardController controller = new LeaderboardController();
         loader.setController(controller);
+        Parent root = loader.load();
+        anchor.getChildren().setAll(root);
+    }
+
+    public void levelSelectClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelSelect.fxml"));
+        LevelSelectController levelSelect = new LevelSelectController();
+        loader.setController(levelSelect);
         Parent root = loader.load();
         anchor.getChildren().setAll(root);
     }
