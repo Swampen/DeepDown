@@ -21,6 +21,9 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
+/**
+ * @author Ole-Martin Heggen
+ */
 public class EndScreenController {
 
     @FXML private ImageView imageView;
@@ -41,8 +44,7 @@ public class EndScreenController {
         this.ganeCompleted = gameCompleted;
     }
 
-    @FXML
-    public void initialize(){
+    @FXML public void initialize(){
         Sound.getClip().stop();
         anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             if (backToMenuButton.isFocused() && e.getCode() == KeyCode.ENTER) {

@@ -7,14 +7,14 @@ public abstract class DynamicGameObject extends GameObject {
     private double yVelo;
 
     /**
-     * Constructor for DynamicGameObject
-     * @param x Specified x-coordinate
-     * @param y Specified y-coordinate
-     * @param width Specified width
-     * @param height Specified height
-     * @param xVelo Specified xVelocity
-     * @param yVelo Specified yVelocity
-     * @param sprite Specified sprite
+     * Constructor.
+     * @param x Specified x-coordinate.
+     * @param y Specified y-coordinate.
+     * @param width Specified width.
+     * @param height Specified height.
+     * @param sprite Specified {@code Sprite}.
+     * @param xVelo Specified velocity on the X-axis.
+     * @param yVelo Specified velocity on the Y-axis.
      */
     public DynamicGameObject(double x, double y, int width, int height, Sprite sprite, double xVelo, double yVelo) {
         super(x, y, width, height, sprite);
@@ -23,24 +23,26 @@ public abstract class DynamicGameObject extends GameObject {
     }
 
     /**
-     * Sets the xVelocity
-     * @param xVelo Value to assign the xVelo to
+     * Sets the value of the property xVelo.
+     * @param xVelo The velocity the {@code DynamicGameObject} will
+     *              have on the X-axis.
      */
     public void setXVelo(double xVelo) {
         this.xVelo = xVelo;
     }
 
     /**
-     * Sets the yVelocity
-     * @param yVelo Value to assign the yVelo to
+     * Sets the value of the property yVelo.
+     * @param yVelo The velocity the {@code DynamicGameObject} will
+     *              have on the Y-axis.
      */
     public void setYVelo(double yVelo) {
         this.yVelo = yVelo;
     }
 
     /**
-     * Updates the DynamicGameObject's x and y position using Velocities and time
-     * @param time time used for calculating how far the object has moved
+     * Updates this {@code DynamicGameObjects}'s x and y position using velocities and time.
+     * @param time Defines how much time since last frame.
      */
     public void posUpdate(double time) {
         this.setX(xVelo*time);
@@ -48,7 +50,7 @@ public abstract class DynamicGameObject extends GameObject {
     }
 
     /**
-     * Reverses the DynamicGameObjects x and y velocities
+     * Reverses this {@code DynamicGameObject}'s velocity on the X- and Y-axis.
      */
     public void reverseVelo(){
         this.xVelo = -xVelo;

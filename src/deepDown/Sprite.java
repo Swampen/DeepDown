@@ -4,6 +4,9 @@ import deepDown.gameObjects.GameObject;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * @author Ole-Martin Heggen
+ */
 public class Sprite{
 
     private Image image;

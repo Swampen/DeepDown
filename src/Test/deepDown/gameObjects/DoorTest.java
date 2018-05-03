@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class DoorTest {
     private Sprite sprite;
 
-    Door test = new Door(0, 0, 40, 40, sprite, false);
+    Door test = new Door(0, 0, 40, 40, sprite);
     @Test
     public void isOpen() throws Exception {
         assertFalse(test.isOpen());

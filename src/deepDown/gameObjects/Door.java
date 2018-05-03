@@ -4,35 +4,34 @@ import deepDown.Sprite;
 
 public class Door extends GameObject {
 
-    private boolean isOpen;
+    private boolean isOpen = false;
 
     /**
-     * Constructor for Door
-     * @param x specified x-coordinate
-     * @param y specified y-coordinate
-     * @param width specified width
-     * @param height specified height
-     * @param isOpen whether the door is open
-     * @param sprite Specified sprite
+     * Constructor.
+     * @param x Specified x-coordinate.
+     * @param y Specified y-coordinate.
+     * @param width Specified width.
+     * @param height Specified height.
+     * @param sprite Specified {@code Sprite}.
      */
-    public Door(double x, double y, int width, int height, Sprite sprite, boolean isOpen) {
+    public Door(double x, double y, int width, int height, Sprite sprite) {
         super(x, y, width, height, sprite);
-        this.isOpen = isOpen;
     }
 
     /**
-     * Getter for the isOpen boolean
-     * @return isOpen
-     */
-    public boolean isOpen() {
-        return isOpen;
-    }
-
-    /**
-     * Setter for the isOpen boolean
-     * @param open what boolean value to set it to
+     * Sets the value of the property isOpen.
+     * @param open Defines if the {@code Door} is open.
      */
     public void setOpen(boolean open) {
         isOpen = open;
+    }
+
+    /**
+     * Gets the value of the property isOpen.
+     * @return {@code true} if the {@code Door} is open,
+     *         {@code false} by default.
+     */
+    public boolean isOpen() {
+        return isOpen;
     }
 }

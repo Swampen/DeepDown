@@ -5,10 +5,6 @@ import deepDown.Sprite;
 import javafx.geometry.Rectangle2D;
 
 public abstract class GameObject {
-
-    /**
-     * The GameObjects position, height, width and sprite variables
-     */
     private double x;
     private double y;
     private final int h;
@@ -16,12 +12,12 @@ public abstract class GameObject {
     private Sprite sprite;
 
     /**
-     * Constructor for the GameObject class
-     * @param x GameObject's x-Coordinate
-     * @param y GameObject's y-coordinate
-     * @param width GameObject's width
-     * @param height GameObject's height
-     * @param sprite GameObject's sprite
+     * Constructor.
+     * @param x Specified x-coordinate.
+     * @param y Specified y-coordinate.
+     * @param width Specified width.
+     * @param height Specified height.
+     * @param sprite Specified {@code Sprite}.
      */
     public GameObject (double x, double y, int width, int height, Sprite sprite){
         this.x = x;
@@ -32,7 +28,8 @@ public abstract class GameObject {
     }
 
     /**
-     * @return Returns the GameObjects x value
+     * Gets the value of the property x.
+     * @return Returns the {@code GameObjects} x value
      */
     public double getX() {
         return x;
@@ -46,37 +43,37 @@ public abstract class GameObject {
     }
 
     /**
-     * @return Returns the GameObjects w value
+     * @return Returns the {@code GameObjects} w value
      */
     public int getW() {
         return w;
     }
 
     /**
-     * @return Returns the GameObjects h value
+     * @return Returns the {@code GameObjects} h value
      */
     public int getH() {
         return h;
     }
 
     /**
-     * Updates the x value
-     * @param x add this value to the x value
+     * Makes a new x by adding the parameter
+     * @param x to be added to this x value
      */
     public void setX(double x) {
         this.x += x;
     }
 
     /**
-     * Updates the y value
-     * @param y add this value to the y value
+     * Makes a new y by adding the parameter
+     * @param y to be added to this y value
      */
     public void setY(double y) {
         this.y += y;
     }
 
     /**
-     * Get the boundary of a Rectangle2D
+     * Get the boundary of a {@link Rectangle2D}
      * @return Returns the boundary's x and y position and it's h and w
      */
     public Rectangle2D getBoundingBox(){
@@ -95,10 +92,10 @@ public abstract class GameObject {
 
     /**
      * Calculates the intersection of this {@code GameObject} with the
-     * specified {@code GameObject}. Returns a new {@code Rectangle}
+     * specified {@code GameObject}. Returns a new {@link Rectangle2D}
      * that represents the intersection of the two rectangles.
      * If the two GameObjects don't intersect, it will return
-     * an empty Rectangle2D
+     * an empty {@link Rectangle2D}
      * @param     other the specified {@code Rectangle}
      * @return    the {@code Rectangle2D} that represents the
      *            largest intersection between this {@code GameObject}
@@ -126,7 +123,7 @@ public abstract class GameObject {
 
     /**
      * Getter for sprite
-     * @return sprite tied to the GameObject
+     * @return {@code Sprite} for this {@code GameObject}
      */
     public Sprite getSprite(){
         return sprite;

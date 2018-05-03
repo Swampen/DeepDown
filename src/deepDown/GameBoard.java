@@ -106,7 +106,7 @@ public class GameBoard {
                         break;
                     case 2:
                         Sprite coinSprite = new Sprite(image, 40, 0);
-                        Coin coin = new Coin(j*40, i*40, 40, 40, coinSprite, false);
+                        Coin coin = new Coin(j*40, i*40, 40, 40, coinSprite);
                         coins.add(coin);
                         break;
                     case 3:
@@ -121,11 +121,11 @@ public class GameBoard {
                         break;
                     case 5:
                         Sprite keySprite = new Sprite(image, 120, 0);
-                        key = new Key(j*40,i*40,40,40, keySprite, false);
+                        key = new Key(j*40,i*40,40,40, keySprite);
                         break;
                     case 6:
                         Sprite doorSprite = new Sprite(image, 160, 0);
-                        door = new Door(j*40,i*40,40,40, doorSprite, false);
+                        door = new Door(j*40,i*40,40,40, doorSprite);
                         break;
                     case 7:
                         Sprite avatarSprite = new Sprite(image, 0, 40);

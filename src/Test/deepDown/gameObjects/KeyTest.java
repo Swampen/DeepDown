@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class KeyTest {
     private Sprite sprite;
 
-    private Key testKey = new Key(0,0,40,40, sprite, false);
+    private Key testKey = new Key(0,0,40,40, sprite);
 
     @Test
     public void isPickedUp() throws Exception {

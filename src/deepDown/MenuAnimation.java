@@ -23,7 +23,7 @@ public class MenuAnimation {
     }
 
     /**
-     * Setter for the button's image
+     * Setter for this button's image
      * @return button
      */
     public Button setButtonImage(){

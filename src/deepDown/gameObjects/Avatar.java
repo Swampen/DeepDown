@@ -4,29 +4,28 @@ package deepDown.gameObjects;
 import deepDown.Sprite;
 
 public class Avatar extends DynamicGameObject {
-    private boolean isAlive;
     private boolean canMoveUp = true;
     private boolean canMoveDown = true;
     private boolean canMoveLeft = true;
     private boolean canMoveRight = true;
 
     /**
-     * Constructor for Avatar
-     * @param x Specified x-coordinate
-     * @param y Specified y-coordinate
-     * @param width Specified width
-     * @param height Specified height
-     * @param sprite Specified sprite
-     * @param xVelo Specified xVelo
-     * @param yVelo Specified yVelo
+     * Constructor.
+     * @param x Specified x-coordinate.
+     * @param y Specified y-coordinate.
+     * @param width Specified width.
+     * @param height Specified height.
+     * @param sprite Specified {@code Sprite}.
+     * @param xVelo Specified velocity on the X-axis.
+     * @param yVelo Specified velocity on the Y-axis.
      */
     public Avatar(double x, double y, int width, int height, Sprite sprite, double xVelo, double yVelo) {
         super(x, y, width, height, sprite, xVelo, yVelo);
     }
 
     /**
-     * Sets whether the avatar can move in any of the cardinal directions
-     * @param movable boolean that determines if the avatar can move that direction
+     * Sets the value of the property canMoveUp, canMoveDown, canMoveLeft and canMoveRight.
+     * @param movable Defines if the {@code Avatar} can move at all.
      */
     public void setMovementState(boolean movable){
         this.canMoveUp = movable;
@@ -36,65 +35,65 @@ public class Avatar extends DynamicGameObject {
     }
 
     /**
-     * Sets whether the avatar can move up
-     * @param movable boolean that determines if the avatar can move up
+     * Sets the value of the property canMoveUp.
+     * @param movable Defines if the {@code Avatar} can move up.
      */
     public void setCanMoveUp(boolean movable){
         this.canMoveUp = movable;
     }
 
     /**
-     * Sets whether the avatar can move down
-     * @param movable boolean that determines if the avatar can move down
+     * Sets the value of the property canMoveDown.
+     * @param movable Defines if the {@code Avatar} can move down.
      */
     public void setCanMoveDown(boolean movable){
         this.canMoveDown = movable;
     }
 
     /**
-     * Sets whether the avatar can move left
-     * @param movable boolean that determines if the avatar can move left
+     * Sets the value of the property canMoveLeft,
+     * @param movable Defines if the {@code Avatar} can move left.
      */
     public void setCanMoveLeft(boolean movable){
         this.canMoveLeft = movable;
     }
 
     /**
-     * Sets whether the avatar can move right
-     * @param movable boolean that determines if the avatar can move right
+     * Sets the value of the property canMoveRight.
+     * @param movable Defines if the {@code Avatar} can move right.
      */
     public void setCanMoveRight (boolean movable){
         this.canMoveRight = movable;
     }
 
     /**
-     * Getter for canMoveUp
-     * @return returns the boolean for being able to move up
+     * Gets the value of the property canMoveUp.
+     * @return {@code true} if the {@code Avatar} can move up, {@code false} otherwise.
      */
     public boolean getCanMoveUp(){
         return canMoveUp;
     }
 
     /**
-     * Getter for canMoveDown
-     * @return returns the boolean for being able to move down
+     * Gets the value of the property canMoveDown.
+     * @return {@code true} if the {@code Avatar} can move down, {@code false} otherwise.
      */
     public boolean getCanMoveDown(){
         return canMoveDown;
     }
 
     /**
-     * Getter for canMoveLeft
-     * @return returns the boolean for being able to move left
+     * Gets the value of the property canMoveLeft.
+     * @return {@code true} if the {@code Avatar} can move left, {@code false} otherwise.
      */
     public boolean getCanMoveLeft(){
         return canMoveLeft;
     }
 
     /**
-     * Getter for canMoveRight
-     * @return returns the boolean for being able to move right
-     */
+     * Gets the value of the property canMoveRight.
+     * @return {@code true} if the {@code Avatar} can move right, {@code false} otherwise.
+     * */
     public boolean getCanMoveRight(){
         return canMoveRight;
     }
