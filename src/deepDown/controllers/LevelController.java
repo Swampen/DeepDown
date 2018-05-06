@@ -273,7 +273,6 @@ public class LevelController {
         for (int i = 0; i < coins.size(); i++){
             if(avatar.isColliding(coins.get(i))) {
                 Sound.playCoinMedia();
-                System.out.println("DING! you got a coin!");
                 ++coinCount;
                 coins.remove(i);
             }
@@ -288,7 +287,6 @@ public class LevelController {
 
         if (avatar.isColliding(door)) {
             if (!door.isOpen()){
-                System.out.println("Find the key");
             }
             else{
                 if(levelProgression != 8){

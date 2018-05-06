@@ -77,10 +77,10 @@ public class Leaderboard {
      * Writes the scores and names in the ArrayLists to the scores file.
      */
     public void saveScores(){
-        FileWriter output = null;
+
         try {
             File f = new File(filePath, highScores);
-            output = new FileWriter(f);
+            FileWriter output = new FileWriter(f);
             BufferedWriter writer = new BufferedWriter(output);
 
             writer.write(topScores.get(0) + "-" + topScores.get(1) + "-" + topScores.get(2) + "-" + topScores.get(3) + "-" + topScores.get(4));
