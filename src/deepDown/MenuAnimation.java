@@ -6,34 +6,44 @@ import javafx.scene.image.ImageView;
 
 public class MenuAnimation {
 
-    private Image image;
-    private Button button;
-    private boolean isHovering;
+    private final Button button;
+    private boolean isHovering = false;
 
     /**
-     * Constructor for MenuAnimation
-     * @param image Specified image
-     * @param button Specified button
-     * @param isHovering Specified hovering
+     * Constructor.
+     * @param button Specified button.
      */
-    public MenuAnimation(Image image, Button button, boolean isHovering) {
-        this.image = image;
+    public MenuAnimation(Button button) {
         this.button = button;
-        this.isHovering = isHovering;
     }
 
     /**
-     * Setter for this button's image
-     * @return button
+     * Sets the value of the property image.
+     * @param image Assign the image to this {@code Button}.
      */
-    public Button setButtonImage(){
-        button.setGraphic(new ImageView(this.image));
+    public void setButtonImage(Image image){
+        button.setGraphic(new ImageView(image));
+    }
+
+    /**
+     * Gets the {@code Button} for this {@code MenuAnimation}.
+     * @return the button with a image assigned to it.
+     */
+    public Button getButton() {
         return button;
     }
 
     /**
-     * Getter for the isHovering boolean
-     * @return isHovering boolean
+     * Sets the value of the property isHovering.
+     * @param isHovering Defines if the {@code Button} is being hovered by the mouse.
+     */
+    public void setHovering(boolean isHovering){
+        this.isHovering = isHovering;
+    }
+
+    /**
+     * Gets the value of the property isHovering.
+     * @return {@code true} if the mouse is hovering over the {@code Button}, {@code false} otherwise.
      */
     public boolean isHovering() {
         return isHovering;

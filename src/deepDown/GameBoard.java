@@ -9,6 +9,9 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author Ole-Martin Heggen
+ */
 public class GameBoard {
 
     private final int level;
@@ -24,15 +27,18 @@ public class GameBoard {
     private ArrayList<Enemy> enemies = new ArrayList<>();
 
     /**
-     * Constructor for the GameBoard
-     * @param level What level to load
-     * @param enemyVel The enemiy's velocity on the level
+     * Constructor.
+     * @param level What level to load.
+     * @param enemyVel The enemiy's velocity on the level.
      */
     public GameBoard (int level , double enemyVel){
         this.level = level;
         this.enemyVel = enemyVel;
     }
 
+    /**
+     * Runs the methods necessary to initialize the gameboard.
+     */
     public void initializeGameBoard(){
         readImage();
         readLevel();
@@ -40,14 +46,14 @@ public class GameBoard {
     }
 
     /**
-     * Reads the tileset to use
+     * Reads the tileset to use for sprites.
      */
     private void readImage(){
         image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
     }
 
     /**
-     * Reads what level to load depending on the level variable specified in the constructor
+     * Reads the level array for this level.
      */
     private void readLevel(){
         switch (this.level) {
@@ -139,51 +145,42 @@ public class GameBoard {
     }
 
     /**
-     * Getter for the {@code Avatar} for the level
-     * @return avatar
+     * Gets the {@code Avatar} associated with this level.
      */
     public Avatar getAvatar() {
         return this.avatar;
     }
 
     /**
-     * Getter for the {@code Key} for the level
-     * @return key
+     * Gets the {@code Key} associated with this level.
      */
     public Key getKey(){
         return this.key;
     }
 
     /**
-     * Getter for the {@code Door} for the level
-     * @return door
+     * Gets the {@code Door} associated with this level.
      */
     public Door getDoor() {
         return door;
     }
 
     /**
-     * Getter for the {@code ArrayList<Wall>} containing all the
-     * walls on the level
-     * @return walls
+     * Gets an {@code ArrayList<>} containing the walls associated with this level.
      */
     public ArrayList<Wall> getWalls() {
         return this.walls;
     }
 
     /**
-     * Getter for the {@code ArrayList<Coins>} containing all the
-     * coins on the level
-     * @return coins
+     * Gets an {@code ArrayList<>} containing the coins associated with this level.
      */
     public ArrayList<Coin> getCoins() {
         return this.coins;
     }
 
     /**
-     * Getter for the {@code ArrayList<Enemy>} containing all the
-     * enemies on the level
-     * @return enemies
+     * Gets an {@code ArrayList<>} containing the enemies associated with this level.
      */
     public ArrayList<Enemy> getEnemies() {
         return this.enemies;

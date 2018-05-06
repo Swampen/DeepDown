@@ -34,50 +34,49 @@ public class StartMenuController {
     private boolean quitGameHover = false;
     private boolean helpHover = false;
 
+    private MenuAnimation newGame;
+    private MenuAnimation loadGame;
+    private MenuAnimation leaderboard;
+    private MenuAnimation quit;
+    private MenuAnimation help;
+
     private AnimationTimer animationTimer;
 
     /**
-     * Loads the initial resources for the start menu and starts the animationTimer
+     * Method which runs when the fxml is loaded.
+     * Loads the initial resources for the start menu, enables
+     * the possibility to use the Enter key on buttons and starts {@code AnimationTimer}
      */
     @FXML
     public void initialize() {
+        newGame = new MenuAnimation(newGameButton);
+        loadGame = new MenuAnimation(loadGameButton);
+        leaderboard = new MenuAnimation(leaderboardButton);
+        quit = new MenuAnimation(quitGameButton);
+        help = new MenuAnimation(helpButton);
+
         anchor.requestFocus();
 
         anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             if (newGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                try {
-                    newGameClicked();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+
+                newGameClicked();
                 e.consume();
             }
             if (loadGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                try {
-                    loadGameClicked();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                loadGameClicked();
                 e.consume();
             }
             if (leaderboardButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                try {
-                    leaderboardClicked();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                e.consume();
+               leaderboardClicked();
+               e.consume();
             }
             if (quitGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
                 quitClicked();
                 e.consume();
             }
             if (helpButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                try {
-                    helpButtonClicked();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                helpButtonClicked();
                 e.consume();
             }
         });
@@ -87,80 +86,81 @@ public class StartMenuController {
 
     /**
      * Method for changing button animation when the button is in focus
-     * or when the the user hover over a button with the mouse
+     * or when the the user hover over a button with the mouse.
      */
     private void menuAnimation() {
+
         animationTimer = new AnimationTimer(){
             public void handle(long now){
 
-                if((newGameButton.isHover() || newGameButton.isFocused()) && !newGameHover ){
+                if((newGameButton.isHover() || newGameButton.isFocused()) && !newGame.isHovering()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.gif"));
-                    MenuAnimation newGame = new MenuAnimation(image, newGameButton, true);
-                    newGameButton = newGame.setButtonImage();
-                    newGameHover = newGame.isHovering();
+                    newGame.setButtonImage(image);
+                    newGameButton = newGame.getButton();
+                    newGame.setHovering(true);
+
                     newGameButton.requestFocus();
 
                 }else if (!newGameButton.isHover() && !newGameButton.isFocused()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
-                    MenuAnimation newGame = new MenuAnimation(image, newGameButton, false);
-                    newGameButton = newGame.setButtonImage();
-                    newGameHover = newGame.isHovering();
+                    newGame.setButtonImage(image);
+                    newGameButton = newGame.getButton();
+                    newGame.setHovering(false);
                 }
 
-                if((loadGameButton.isHover() || loadGameButton.isFocused()) && !loadGameHover){
+                if((loadGameButton.isHover() || loadGameButton.isFocused()) && !loadGame.isHovering()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.gif"));
-                    MenuAnimation loadGame = new MenuAnimation(image, loadGameButton, true);
-                    loadGameButton = loadGame.setButtonImage();
-                    loadGameHover = loadGame.isHovering();
+                    loadGame.setButtonImage(image);
+                    loadGameButton = loadGame.getButton();
+                    loadGame.setHovering(true);
                     loadGameButton.requestFocus();
-
                 }else if (!loadGameButton.isHover() && !loadGameButton.isFocused()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.png"));
-                    MenuAnimation loadGame = new MenuAnimation(image, loadGameButton, false);
-                    loadGameButton = loadGame.setButtonImage();
-                    loadGameHover = loadGame.isHovering();
+                    loadGame.setButtonImage(image);
+                    loadGameButton = loadGame.getButton();
+                    loadGame.setHovering(false);
                 }
 
-                if((leaderboardButton.isHover() || leaderboardButton.isFocused()) && !leaderboardHover){
+                if((leaderboardButton.isHover() || leaderboardButton.isFocused()) && !leaderboard.isHovering()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.gif"));
-                    MenuAnimation leaderboard = new MenuAnimation(image, leaderboardButton, true);
-                    leaderboardButton = leaderboard.setButtonImage();
-                    leaderboardHover = leaderboard.isHovering();
+                    leaderboard.setButtonImage(image);
+                    leaderboardButton = leaderboard.getButton();
+                    leaderboard.setHovering(true);
                     leaderboardButton.requestFocus();
 
                 }else if (!leaderboardButton.isHover() && !leaderboardButton.isFocused()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.png"));
-                    MenuAnimation leaderboard = new MenuAnimation(image, leaderboardButton, false);
-                    leaderboardButton = leaderboard.setButtonImage();
-                    leaderboardHover = leaderboard.isHovering();
+                    leaderboard.setButtonImage(image);
+                    leaderboardButton = leaderboard.getButton();
+                    leaderboard.setHovering(false);
                 }
 
-                if((quitGameButton.isHover() || quitGameButton.isFocused()) && !quitGameHover){
+                if((quitGameButton.isHover() || quitGameButton.isFocused()) && !quit.isHovering()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.gif"));
-                    MenuAnimation quitGame = new MenuAnimation(image, quitGameButton, true);
-                    quitGameButton = quitGame.setButtonImage();
-                    quitGameHover = quitGame.isHovering();
+                    quit.setButtonImage(image);
+                    quitGameButton = quit.getButton();
+                    quit.setHovering(true);
                     quitGameButton.requestFocus();
 
                 }else if (!quitGameButton.isHover() && !quitGameButton.isFocused()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.png"));
-                    MenuAnimation quitGame = new MenuAnimation(image, quitGameButton, false);
-                    quitGameButton = quitGame.setButtonImage();
-                    quitGameHover = quitGame.isHovering();
+                    quit.setButtonImage(image);
+                    quitGameButton = quit.getButton();
+                    quit.setHovering(false);
                 }
 
-                if((helpButton.isHover() || helpButton.isFocused()) && !helpHover){
+                if((helpButton.isHover() || helpButton.isFocused()) && !help.isHovering()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Help.gif"));
-                    MenuAnimation help = new MenuAnimation(image, helpButton, true);
-                    helpButton = help.setButtonImage();
-                    helpHover = help.isHovering();
+                    help.setButtonImage(image);
+                    helpButton = help.getButton();
+                    help.setHovering(true);
                     helpButton.requestFocus();
 
                 }else if (!helpButton.isHover() && !helpButton.isFocused()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Help.png"));
-                    MenuAnimation help = new MenuAnimation(image, helpButton, false);
-                    helpButton = help.setButtonImage();
-                    helpHover = help.isHovering();
+                    help.setButtonImage(image);
+                    helpButton = help.getButton();
+                    help.setHovering(false);
                 }
             }
         };
@@ -168,23 +168,27 @@ public class StartMenuController {
     }
 
     /**
-     * Opens the first level with 0 score and 3 lives when the New Game button is pressed
-     * @throws IOException throws an IOException when a file is missing
+     * The action when the "New Game" button is pressed.
+     * Loads the FXML for the first level with score of 0 and 3 lives.
      */
-    public void newGameClicked() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-        LevelController level = new LevelController(1, 0, 3);
-        loader.setController(level);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
+    private void newGameClicked(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
+            LevelController level = new LevelController(1, 0, 3);
+            loader.setController(level);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     * Loads the level the player has come to, setting his score and lives to what it was before saving
-     * from an external file
-     * @throws IOException throws an IOException when a file is missing
+     * The action when the "Load Game" button is pressed.
+     * Loads the FXML for the level that the player saved, with the
+     * stored score and lives from the save file.
      */
-    public void loadGameClicked() throws IOException{
+    private void loadGameClicked(){
         try {
             FileInputStream fis = new FileInputStream("Files/save");
             DataInputStream dis = new DataInputStream(fis);
@@ -202,25 +206,23 @@ public class StartMenuController {
         }
     }
 
-    //Opens up the help screen for instructions to play the game
-    public void helpButtonClicked() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/help.fxml"));
-        HelpController help = new HelpController();
-        loader.setController(help);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
-    }
+
 
     /**
-     * Opens the leaderboard where the player can check top scores achieved
-     * @throws IOException throws an IOException when a file is missing
+     * The action when the "Leaderboard" button is pressed.
+     * Loads the FXML for the leaderboard where the player
+     * can check the top scores achieved.
      */
-    public void leaderboardClicked() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
-        LeaderboardController controller = new LeaderboardController();
-        loader.setController(controller);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
+    private void leaderboardClicked(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
+            LeaderboardController controller = new LeaderboardController();
+            loader.setController(controller);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void levelSelectClicked() throws IOException {
@@ -232,11 +234,29 @@ public class StartMenuController {
     }
 
     /**
-     * quits the application
+     * The action when the "Quit Game" button is pressed.
+     * Stops and closes the javaFX application.
      */
-    public void quitClicked(){
+    private void quitClicked(){
         animationTimer.stop();
         Platform.exit();
         System.exit(0);
+    }
+
+    /**
+     * The action when the "Help?" button is pressed.
+     * Loads the FXML for the help screen for instructions on how to play the game.
+     */
+
+    private void helpButtonClicked(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/help.fxml"));
+            HelpController help = new HelpController();
+            loader.setController(help);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

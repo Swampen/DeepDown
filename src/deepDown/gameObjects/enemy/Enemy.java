@@ -3,6 +3,7 @@ package deepDown.gameObjects.enemy;
 import deepDown.Sprite;
 import deepDown.gameObjects.DynamicGameObject;
 
+@SuppressWarnings("ALL")
 public abstract class Enemy extends DynamicGameObject {
 
     /**

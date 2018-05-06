@@ -12,17 +12,12 @@ public class LevelSelectController {
     @FXML
     private AnchorPane anchor;
 
-    @FXML
-    public void initialize() {
-    }
-
     public void loadLevel(int level) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
             LevelController controller = new LevelController(level, 0, 3);
             loader.setController(controller);
-            Parent root = null;
-            root = loader.load();
+            Parent root = loader.load();
             anchor.getChildren().setAll(root);
         } catch (IOException e) {
 

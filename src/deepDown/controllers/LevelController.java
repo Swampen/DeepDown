@@ -2,6 +2,7 @@ package deepDown.controllers;
 
 
 import deepDown.GameBoard;
+import deepDown.Sound;
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.enemy.Enemy;
 import javafx.animation.AnimationTimer;
@@ -95,6 +96,7 @@ public class LevelController {
     }
 
     /**
+     * Method which runs when the fxml is loaded.
      * Initializes the level by getting all of the objects needed from the GameBoard class
      * and starts the animationTimer
      */
@@ -199,8 +201,8 @@ public class LevelController {
     }
 
     /**
-     * Updates all DynamicGameObjects positions and velocities using the animationTimer
-     * @param deltaTime the difference in time between now and the last time the animationTimer ran
+     * Updates all DynamicGameObjects positions and velocities.
+     * @param deltaTime the time since last frame.
      */
     private void update(double deltaTime) {
 
@@ -231,9 +233,8 @@ public class LevelController {
     }
 
     /**
-     * Checks for collision between different objects by cycling through array lists of objects and comparing their boundingbox
-     * with other objects' boundingbox
-     * @param deltaTime the difference in time between now and the last time the animationTimer ran
+     * Checks for collision between different GameObjects.
+     * @param deltaTime the time since last frame.
      */
     private void collisionDetection(double deltaTime) {
 
@@ -246,14 +247,14 @@ public class LevelController {
                 if (widthOverlap > heightOverlap){
                     avatar.reverseVelo();
                     avatar.posUpdate(deltaTime);
-                    avatar.setCanMoveUp(false);
-                    avatar.setCanMoveDown(false);
+                    avatar.setMoveUp(false);
+                    avatar.setMoveDown(false);
                 }
                 if (widthOverlap < heightOverlap){
                     avatar.reverseVelo();
                     avatar.posUpdate(deltaTime);
-                    avatar.setCanMoveLeft(false);
-                    avatar.setCanMoveRight(false);
+                    avatar.setMoveLeft(false);
+                    avatar.setMoveRight(false);
                 }
             }
 
@@ -275,6 +276,7 @@ public class LevelController {
 
         for (int i = 0; i < coins.size(); i++){
             if(avatar.isColliding(coins.get(i))) {
+                Sound.playCoinMedia();
                 System.out.println("DING! you got a coin!");
                 ++coinCount;
                 coins.remove(i);
@@ -282,7 +284,7 @@ public class LevelController {
         }
 
         if (avatar.isColliding(key) && !key.isPickedUp() ){
-            System.out.println("Picked up key");
+            Sound.playDoorMedia();
             key.setPickedUp(true);
             door.setOpen(true);
             door.getSprite().changeSprite(160,40);
@@ -309,7 +311,7 @@ public class LevelController {
     }
 
     /**
-     * Draws all of the objects onto the GameBoard
+     * Draws all of the objects onto the {@code Canvas}.
      */
     private void drawFrame(){
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());      //Clears all of Canvas
@@ -330,7 +332,7 @@ public class LevelController {
     }
 
     /**
-     * Shows the Pause Menu when you hit the Escape key
+     * Shows the Pause Menu and stops the {@code AnimationTimer}.
      */
     private void showPauseMenu() throws IOException{
         Rectangle r = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -353,7 +355,7 @@ public class LevelController {
     }
 
     /**
-     * Resets all of the keypress booleans to false
+     * Resets all of the keypress booleans to false.
      */
     private void resetKeypresses(){
         escapePressed.set(false);
@@ -364,7 +366,8 @@ public class LevelController {
     }
 
     /**
-     * Loads the next level by making a new loader and LevelController object and loading those
+     * Loads the next level by increasing the levelProgression
+     * with one, and resets the level.
      */
     private void loadNextLevel(){
         levelProgression++;
@@ -372,7 +375,8 @@ public class LevelController {
     }
 
     /**
-     * Resets the level to it's initial state
+     * Resets the level by stopping the {@code AnimationTimer}
+     * and initialize the level again.
      */
     private void resetLevel() {
         lastCurrentTime = System.nanoTime();
@@ -381,16 +385,20 @@ public class LevelController {
     }
 
     /**
-     * If the avatar has more than zero lives remaining then it resets the level
-     * if the avatar has zero lives remaining then displays the Game Over Screen
+     * If the avatar has more than zero lives remaining then it resets the level.
      */
     private void killAvatar() {
         --avatarLives;
         if (avatarLives > 0){
+            Sound.playEnemyMedia();
             resetLevel();
         }
     }
 
+    /**
+     * Loads the FXML for the end screen and stops the {@code AnimationTimer}.
+     * @param gameCompleted Defines if the player completed all levels.
+     */
     private void setEndScreen(boolean gameCompleted) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/endScreen.fxml"));
         EndScreenController endScreen = new EndScreenController(totScore, gameCompleted);
@@ -403,6 +411,5 @@ public class LevelController {
         }
         anchor.getChildren().setAll(root);
         animationTimer.stop();
-
     }
 }
