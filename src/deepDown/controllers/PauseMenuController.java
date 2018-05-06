@@ -30,11 +30,11 @@ public class PauseMenuController {
     private int avatarLives;
 
     /**
-     * Constructor for PauseMenuController
-     * @param stage The specified stage 'Add More'
-     * @param levelProgression What level is loaded which is used for saving
-     * @param totScore the players total score which is used for saving
-     * @param avatarLives the players life count which is used for saving
+     * Constructor.
+     * @param stage The specified stage 'Add More'.
+     * @param levelProgression What level is loaded which is used for saving.
+     * @param totScore the players total score which is used for saving.
+     * @param avatarLives the players life count which is used for saving.
      */
     public PauseMenuController(Stage stage, AnchorPane parentAnchor, int levelProgression, int totScore, int avatarLives){
         this.stage = stage;
@@ -44,6 +44,10 @@ public class PauseMenuController {
         this.avatarLives = avatarLives;
     }
 
+    /**
+     * Method which runs when the fxml is loaded.
+     * Enables the possibility to use Enter key on the buttons.
+     */
     @FXML
     public void initialize(){
         anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
@@ -67,15 +71,16 @@ public class PauseMenuController {
     }
 
     /**
-     * Exits the Pause menu and resumes the animationTimer when the Resume Game button is pressed
+     * The action preformed when the "Resume Game" button is pressed.
+     * Exits the Pause menu and starts the {@code AnimationTimer}.
      */
     public void resumeGamePressed(){
         stage.close();
     }
 
     /**
-     * Returns to the main menu
-     * @throws IOException throws an IOException when a file is missing
+     * The action preformed when the "Back to Menu" button is pressed.
+     * Loads the start menu with FXML.
      */
     public void backToMenuPressed(){
         try {
@@ -85,14 +90,14 @@ public class PauseMenuController {
             Parent root = loader.load();
             stage.close();
             parentAnchor.getChildren().setAll(root);
-        }  catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Saves the Avatar's level progress, score and life total to an external file
-     * @throws IOException throws an IOException when a file is missing
+     * The action preformed when the "Save Game" button is pressed.
+     * Saves the Avatar's level progress, score and life total to an external file.
      */
     public void saveGamePressed(){
         try {
@@ -110,7 +115,8 @@ public class PauseMenuController {
     }
 
     /**
-     * Quit the application
+     * The action when the "Quit Game" button is pressed.
+     * Stops and closes the javaFX application.
      */
     public void quitGamePressed(){
         Platform.exit();

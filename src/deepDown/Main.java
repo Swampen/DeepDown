@@ -46,11 +46,12 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setTitle("Deep Down");
             stage.show();
-        }  catch (IOException e) {
+
+        } catch (IOException e) {
+
             e.printStackTrace();
         }
 
-        Sound sound = new Sound();
-        sound.playBackgroundMusic();
+        Sound.playBackgroundMedia();
     }
 }

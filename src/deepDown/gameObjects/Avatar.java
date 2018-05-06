@@ -3,6 +3,7 @@ package deepDown.gameObjects;
 
 import deepDown.Sprite;
 
+@SuppressWarnings("ALL")
 public class Avatar extends DynamicGameObject {
     private boolean canMoveUp = true;
     private boolean canMoveDown = true;
@@ -38,7 +39,7 @@ public class Avatar extends DynamicGameObject {
      * Sets the value of the property canMoveUp.
      * @param movable Defines if the {@code Avatar} can move up.
      */
-    public void setCanMoveUp(boolean movable){
+    public void setMoveUp(boolean movable){
         this.canMoveUp = movable;
     }
 
@@ -46,7 +47,7 @@ public class Avatar extends DynamicGameObject {
      * Sets the value of the property canMoveDown.
      * @param movable Defines if the {@code Avatar} can move down.
      */
-    public void setCanMoveDown(boolean movable){
+    public void setMoveDown(boolean movable){
         this.canMoveDown = movable;
     }
 
@@ -54,7 +55,7 @@ public class Avatar extends DynamicGameObject {
      * Sets the value of the property canMoveLeft,
      * @param movable Defines if the {@code Avatar} can move left.
      */
-    public void setCanMoveLeft(boolean movable){
+    public void setMoveLeft(boolean movable){
         this.canMoveLeft = movable;
     }
 
@@ -62,7 +63,7 @@ public class Avatar extends DynamicGameObject {
      * Sets the value of the property canMoveRight.
      * @param movable Defines if the {@code Avatar} can move right.
      */
-    public void setCanMoveRight (boolean movable){
+    public void setMoveRight(boolean movable){
         this.canMoveRight = movable;
     }
 

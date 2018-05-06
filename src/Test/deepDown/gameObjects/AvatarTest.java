@@ -21,25 +21,25 @@ public class AvatarTest {
 
     @Test
     public void setCanMoveUp() throws Exception {
-        testAvatar.setCanMoveUp(false);
+        testAvatar.setMoveUp(false);
         assertFalse(testAvatar.getCanMoveUp());
     }
 
     @Test
     public void setCanMoveDown() throws Exception {
-        testAvatar.setCanMoveDown(false);
+        testAvatar.setMoveDown(false);
         assertFalse(testAvatar.getCanMoveDown());
     }
 
     @Test
     public void setCanMoveLeft() throws Exception {
-        testAvatar.setCanMoveLeft(false);
+        testAvatar.setMoveLeft(false);
         assertFalse(testAvatar.getCanMoveLeft());
     }
 
     @Test
     public void setCanMoveRight() throws Exception {
-        testAvatar.setCanMoveRight(false);
+        testAvatar.setMoveRight(false);
         assertFalse(testAvatar.getCanMoveRight());
     }
 

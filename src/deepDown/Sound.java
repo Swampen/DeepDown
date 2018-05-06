@@ -1,38 +1,53 @@
 package deepDown;
 
-import javax.sound.sampled.*;
-import java.io.IOException;
-import java.net.URL;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
+import java.io.File;
+
+/**
+ * @author Ole-Martin Heggen
+ */
 public class Sound {
-    private static Mixer mixer;
-    private static Clip clip;
+    private static MediaPlayer mediaPlayer;
 
-    public void playBackgroundMusic() {
-        Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
-        mixer = AudioSystem.getMixer(mixerInfo[0]);
-
-        DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
-        try {
-            clip = (Clip)mixer.getLine(dataInfo);
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
-            URL bgmURL = getClass().getResource("/deepDown/resource/sounds/Untitled.wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bgmURL);
-            clip.open(audioInputStream);
-        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-            e.printStackTrace();
-        }
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        clip.start();
-
+    /**
+     *
+     */
+    public static void playBackgroundMedia(){
+        String path = "src/deepDown/resource/sounds/backgroundMusic.mp3";
+        Media backgroundMedia = new Media(new File(path).toURI().toString());
+        mediaPlayer = new MediaPlayer(backgroundMedia);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
     }
 
-    public static Clip getClip() {
-        return clip;
+    public static void playCoinMedia(){
+        String path = "src/deepDown/resource/sounds/coin.mp3";
+        Media coinMedia = new Media(new File(path).toURI().toString());
+        mediaPlayer = new MediaPlayer(coinMedia);
+        mediaPlayer.play();
+    }
+
+    public static void playEnemyMedia(){
+        String path = "src/deepDown/resource/sounds/enemy.mp3";
+        Media enemyMedia = new Media(new File(path).toURI().toString());
+        mediaPlayer = new MediaPlayer(enemyMedia);
+        mediaPlayer.play();
+    }
+
+    public static void playDoorMedia(){
+        String path = "src/deepDown/resource/sounds/door.mp3";
+        Media doorMedia = new Media(new File(path).toURI().toString());
+        mediaPlayer = new MediaPlayer(doorMedia);
+        mediaPlayer.play();
+    }
+
+
+    /**
+     * Stops what the {@code MediaPlayer} is playing.
+     */
+    public static void stopMedia(){
+        mediaPlayer.stop();
     }
 }

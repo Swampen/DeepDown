@@ -37,15 +37,20 @@ public class EndScreenController {
     @FXML private Button backToMenuButton;
     @FXML private Button quitGameButton;
     private int totscore = 0;
-    private boolean ganeCompleted;
+    private boolean gameCompleted;
 
     public EndScreenController(int totscore, boolean gameCompleted) {
         this.totscore = totscore;
-        this.ganeCompleted = gameCompleted;
+        this.gameCompleted = gameCompleted;
     }
 
-    @FXML public void initialize(){
-        Sound.getClip().stop();
+    /**
+     * Method which runs when the fxml is loaded.
+     * Enables the possibility to use the Enter key on buttons
+     * and plays fade transition.
+     */
+    @FXML
+    public void initialize(){
         anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             if (backToMenuButton.isFocused() && e.getCode() == KeyCode.ENTER) {
                 backToMenuPressed();
@@ -62,7 +67,7 @@ public class EndScreenController {
         ft.setToValue(1.0);
         ft.play();
 
-        if (ganeCompleted){
+        if (gameCompleted){
             Image img = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Victory.png"));
             imageView.setImage(img);
         }else{
@@ -75,6 +80,11 @@ public class EndScreenController {
         totScoreText.setText("Total score: " + Integer.toString(totscore));
     }
 
+
+    /**
+     * The action when the "Back to Menu" button is pressed.
+     * Resets the background music and loads the start menu with FXML.
+     */
     public void backToMenuPressed(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
@@ -82,16 +92,25 @@ public class EndScreenController {
             loader.setController(controller);
             Parent root = loader.load();
             anchor.getChildren().setAll(root);
-        }  catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * The action when the "Quit Game" button is pressed.
+     * Stops and closes the javaFX application.
+     */
     public void quitGamePressed(){
         Platform.exit();
         System.exit(0);
     }
 
+    /**
+     * The action when the "OK" button next to the name field is pressed.
+     * Confirms the {@code String} the user has typed in the input field
+     * and adds it to the leaderboard.
+     */
     public void okButtonPressed(){
         nameHBox.setOpacity(0.0);
         nameHBox.setDisable(true);
