@@ -45,27 +45,15 @@ public class StartMenuController {
 
         anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             if (newGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                try {
-                    newGameClicked();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                newGameClicked();
                 e.consume();
             }
             if (loadGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                try {
-                    loadGameClicked();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                loadGameClicked();
                 e.consume();
             }
             if (leaderboardButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                try {
-                    leaderboardClicked();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                leaderboardClicked();
                 e.consume();
             }
             if (quitGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
@@ -73,11 +61,7 @@ public class StartMenuController {
                 e.consume();
             }
             if (helpButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                try {
-                    helpButtonClicked();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                helpButtonClicked();
                 e.consume();
             }
         });
@@ -171,12 +155,16 @@ public class StartMenuController {
      * Opens the first level with 0 score and 3 lives when the New Game button is pressed
      * @throws IOException throws an IOException when a file is missing
      */
-    public void newGameClicked() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-        LevelController level = new LevelController(1, 0, 3);
-        loader.setController(level);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
+    public void newGameClicked(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
+            LevelController level = new LevelController(1, 0, 3);
+            loader.setController(level);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -184,7 +172,7 @@ public class StartMenuController {
      * from an external file
      * @throws IOException throws an IOException when a file is missing
      */
-    public void loadGameClicked() throws IOException{
+    public void loadGameClicked(){
         try {
             FileInputStream fis = new FileInputStream("Files/save");
             DataInputStream dis = new DataInputStream(fis);
@@ -203,32 +191,44 @@ public class StartMenuController {
     }
 
     //Opens up the help screen for instructions to play the game
-    public void helpButtonClicked() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/help.fxml"));
-        HelpController help = new HelpController();
-        loader.setController(help);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
+    public void helpButtonClicked(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/help.fxml"));
+            HelpController help = new HelpController();
+            loader.setController(help);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Opens the leaderboard where the player can check top scores achieved
      * @throws IOException throws an IOException when a file is missing
      */
-    public void leaderboardClicked() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
-        LeaderboardController controller = new LeaderboardController();
-        loader.setController(controller);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
+    public void leaderboardClicked(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
+            LeaderboardController controller = new LeaderboardController();
+            loader.setController(controller);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void levelSelectClicked() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelSelect.fxml"));
-        LevelSelectController levelSelect = new LevelSelectController();
-        loader.setController(levelSelect);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
+    public void levelSelectClicked(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelSelect.fxml"));
+            LevelSelectController levelSelect = new LevelSelectController();
+            loader.setController(levelSelect);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

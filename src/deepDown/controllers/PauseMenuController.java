@@ -51,19 +51,11 @@ public class PauseMenuController {
                 e.consume();
             }
             if (backToMenuButton.isFocused() && e.getCode() == KeyCode.ENTER) {
-                try {
-                    backToMenuPressed();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                backToMenuPressed();
                 e.consume();
             }
             if (saveGameButton.isFocused() && e.getCode() == KeyCode.ENTER) {
-                try {
-                    saveGamePressed();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                saveGamePressed();
                 e.consume();
             }
             if (quitGameButton.isFocused() && e.getCode() == KeyCode.ENTER) {
@@ -84,27 +76,34 @@ public class PauseMenuController {
      * Returns to the main menu
      * @throws IOException throws an IOException when a file is missing
      */
-    public void backToMenuPressed() throws IOException{
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
-        StartMenuController startMenuController = new StartMenuController();
-        loader.setController(startMenuController);
-        Parent root = loader.load();
-        stage.close();
-        parentAnchor.getChildren().setAll(root);
+    public void backToMenuPressed(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
+            StartMenuController startMenuController = new StartMenuController();
+            loader.setController(startMenuController);
+            Parent root = loader.load();
+            stage.close();
+            parentAnchor.getChildren().setAll(root);
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Saves the Avatar's level progress, score and life total to an external file
      * @throws IOException throws an IOException when a file is missing
      */
-    public void saveGamePressed() throws IOException{
-        File save = new File("Files/save");
-        FileOutputStream fos = new FileOutputStream(save);
-        DataOutputStream dos = new DataOutputStream(fos);
-        dos.writeInt(levelProgression);
-        dos.writeInt(totScore);
-        dos.writeInt(avatarLives);
+    public void saveGamePressed(){
+        try {
+            File save = new File("Files/save");
+            FileOutputStream fos = new FileOutputStream(save);
+            DataOutputStream dos = new DataOutputStream(fos);
+            dos.writeInt(levelProgression);
+            dos.writeInt(totScore);
+            dos.writeInt(avatarLives);
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

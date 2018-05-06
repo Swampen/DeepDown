@@ -70,6 +70,7 @@ public class GameBoard {
                 input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level6.txt"));
                 break;
             case 7:
+                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level7.txt"));
                 break;
             case 8:
                 break;

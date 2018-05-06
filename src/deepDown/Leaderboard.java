@@ -32,8 +32,13 @@ public class Leaderboard {
             if(score >= topScores.get(i)){
                 topScores.add(i, score);
                 topScores.remove(topScores.size()-1);
-                topName.add(i , name);
-                topName.remove(topName.size()-1);
+                if(name.isEmpty()){
+                    topName.add(i, "Anonymous");
+                    topName.remove(topName.size()-1);
+                }else {
+                    topName.add(i, name);
+                    topName.remove(topName.size() - 1);
+                }
                 return;
             }
         }

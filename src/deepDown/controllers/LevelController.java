@@ -141,11 +141,7 @@ public class LevelController {
             }
             if (e.getCode() == KeyCode.ESCAPE && !endScreen) {
                 escapePressed.set(true);
-                try {
                     showPauseMenu();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
             }
             if (e.getCode() == KeyCode.K){
                 setEndScreen(true);
@@ -332,24 +328,28 @@ public class LevelController {
     /**
      * Shows the Pause Menu when you hit the Escape key
      */
-    private void showPauseMenu() throws IOException{
+    private void showPauseMenu(){
         Rectangle r = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
         r.setFill(Color.rgb(0, 0, 0, 0.6));
         anchor.getChildren().add(r);
+        try {
+            Stage stage = new Stage();
+            PauseMenuController controller = new PauseMenuController(stage, anchor, levelProgression, totScore, avatarLives);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
+            loader.setController(controller);
+            Parent root = loader.load();
 
-        Stage stage = new Stage();
-        PauseMenuController controller = new PauseMenuController(stage, anchor, levelProgression, totScore, avatarLives);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
-        loader.setController(controller);
-        Parent root = loader.load();
 
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-        anchor.getChildren().remove(r);
-        resetKeypresses();
-        lastCurrentTime = System.nanoTime();
-        animationTimer.start();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            anchor.getChildren().remove(r);
+            resetKeypresses();
+            lastCurrentTime = System.nanoTime();
+            animationTimer.start();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     /**

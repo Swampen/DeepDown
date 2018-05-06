@@ -48,11 +48,7 @@ public class EndScreenController {
         Sound.getClip().stop();
         anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             if (backToMenuButton.isFocused() && e.getCode() == KeyCode.ENTER) {
-                try {
-                    backToMenuPressed();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                backToMenuPressed();
                 e.consume();
             }
             if (quitGameButton.isFocused() && e.getCode() == KeyCode.ENTER) {
@@ -79,12 +75,16 @@ public class EndScreenController {
         totScoreText.setText("Total score: " + Integer.toString(totscore));
     }
 
-    public void backToMenuPressed()throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
-        StartMenuController controller = new StartMenuController();
-        loader.setController(controller);
-        Parent root = loader.load();
-        anchor.getChildren().setAll(root);
+    public void backToMenuPressed(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
+            StartMenuController controller = new StartMenuController();
+            loader.setController(controller);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void quitGamePressed(){
