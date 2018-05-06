@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
-
-<AnchorPane fx:id="anchor" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Pane style="-fx-background-image: url(deepDown/resource/images/background.png); -fx-background-size: 100% 100%; ">
-         <children>
-            <Rectangle height="720.0" opacity="0.68" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1280.0" />
-            <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: transparent;">
-               <children>
-                  <VBox alignment="CENTER" layoutY="99.0" prefHeight="500.0" prefWidth="1280.0" style="-fx-background-color: transparent;">
-                     <children>
-                        <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" minHeight="51.0" mnemonicParsing="false" onAction="#newGameClicked" prefWidth="264.0" style="-fx-background-color: transparent;">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <VBox.margin>
-                              <Insets bottom="25.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button fx:id="loadGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0" layoutY="143.0" minHeight="51.0" mnemonicParsing="false" onAction="#loadGameClicked" prefWidth="264.0" style="-fx-background-color: transparent;">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <VBox.margin>
-                              <Insets bottom="25.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button fx:id="leaderboardButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0" layoutY="286.0" minHeight="51.0" mnemonicParsing="false" onAction="#leaderboardClicked" prefWidth="264.0" style="-fx-background-color: transparent;">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <VBox.margin>
-                              <Insets bottom="25.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button fx:id="quitGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0" layoutY="286.0" minHeight="51.0" mnemonicParsing="false" onAction="#quitClicked" prefWidth="264.0" style="-fx-background-color: transparent;">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <VBox.margin>
-                              <Insets bottom="25.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button fx:id="helpButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0" layoutY="117.0" minHeight="51.0" mnemonicParsing="false" onAction="#helpButtonClicked" prefWidth="264.0" style="-fx-background-color: transparent;">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <VBox.margin>
-                              <Insets bottom="25.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="51.0" prefWidth="100.0">
-                     <children>
-                        <Button fx:id="levelSelect" mnemonicParsing="false" onAction="#levelSelectClicked" opacity="0.0" prefHeight="19.0" prefWidth="28.0" text="Button" />
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-         </children>
-      </Pane>
-   </children>
+<AnchorPane fx:id="anchor" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1">
+   <Pane style="-fx-background-image: url(deepDown/resource/images/background.png); -fx-background-size: 100% 100%; ">
+      <Rectangle height="720.0" opacity="0.68" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1280.0"/>
+      <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: transparent;">
+         <VBox alignment="CENTER" layoutY="99.0" prefHeight="500.0" prefWidth="1280.0"
+               style="-fx-background-color: transparent;">
+            <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" minHeight="51.0"
+                    mnemonicParsing="false" onAction="#newGameClicked" prefWidth="264.0"
+                    style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+               <VBox.margin>
+                  <Insets bottom="25.0"/>
+               </VBox.margin>
+            </Button>
+            <Button fx:id="loadGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0"
+                    layoutY="143.0" minHeight="51.0" mnemonicParsing="false" onAction="#loadGameClicked"
+                    prefWidth="264.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+               <VBox.margin>
+                  <Insets bottom="25.0"/>
+               </VBox.margin>
+            </Button>
+            <Button fx:id="leaderboardButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0"
+                    layoutY="286.0" minHeight="51.0" mnemonicParsing="false" onAction="#leaderboardClicked"
+                    prefWidth="264.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+               <VBox.margin>
+                  <Insets bottom="25.0"/>
+               </VBox.margin>
+            </Button>
+            <Button fx:id="quitGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0"
+                    layoutY="286.0" minHeight="51.0" mnemonicParsing="false" onAction="#quitClicked"
+                    prefWidth="264.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+               <VBox.margin>
+                  <Insets bottom="25.0"/>
+               </VBox.margin>
+            </Button>
+            <Button fx:id="helpButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0"
+                    layoutY="117.0" minHeight="51.0" mnemonicParsing="false" onAction="#helpButtonClicked"
+                    prefWidth="264.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+               <VBox.margin>
+                  <Insets bottom="25.0"/>
+               </VBox.margin>
+            </Button>
+         </VBox>
+         <VBox prefHeight="51.0" prefWidth="100.0">
+            <Button fx:id="levelSelect" mnemonicParsing="false" onAction="#levelSelectClicked" opacity="0.0"
+                    prefHeight="19.0" prefWidth="28.0" text="Button"/>
+         </VBox>
+      </AnchorPane>
+   </Pane>
 </AnchorPane>

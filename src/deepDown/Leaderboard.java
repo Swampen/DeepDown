@@ -17,13 +17,13 @@ public class Leaderboard {
         filePath = new File("Files").getAbsolutePath();
         highScores = "scores";
 
-        topScores = new ArrayList<Integer>();
-        topName = new ArrayList<String>();
+        topScores = new ArrayList<>();
+        topName = new ArrayList<>();
     }
 
     /**
-     * Method for adding scores to the leaderboard by checking if the supplied score is greater than any
-     * of those already on the leaderboards.
+     * Method for adding scores to the leaderboard by checking if the
+     * supplied score is greater than any of those already on the leaderboard.
      * @param score Supplied score
      * @param name Supplied name
      */

@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 public class LeaderboardController {
 
@@ -46,10 +45,10 @@ public class LeaderboardController {
      * @param score The score the player achieved
      */
     public void fillScores(Text nr, int x, String name, String score) {
-        String dot = ".";
+        StringBuilder dot = new StringBuilder(".");
         for(double i = 0; i < 80; i++){
             if(nr.getLayoutBounds().getWidth() < (1280-32)){
-                dot += "." ;
+                dot.append(".");
                 nr.setText(x +". " + name + dot + score);
             }
         }
@@ -57,7 +56,6 @@ public class LeaderboardController {
 
     /**
      * Method for getting back to the main menu when you press the back button
-     * @throws IOException throws an IOException if the fxml file is not found
      */
     public void backButtonPressed(){
         try {

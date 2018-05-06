@@ -97,7 +97,6 @@ public class StartMenuController {
                     newGame.setButtonImage(image);
                     newGameButton = newGame.getButton();
                     newGame.setHovering(true);
-
                     newGameButton.requestFocus();
 
                 }else if (!newGameButton.isHover() && !newGameButton.isFocused()){
