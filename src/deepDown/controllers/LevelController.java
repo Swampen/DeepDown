@@ -293,7 +293,7 @@ public class LevelController {
                 System.out.println("Find the key");
             }
             else{
-                if(levelProgression != 3){
+                if(levelProgression != 6){
                     if(avatarLives < 5){
                         ++avatarLives;
                     }

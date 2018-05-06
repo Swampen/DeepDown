@@ -22,3 +22,6 @@
     -fx-font: 24px Verdana;
 }
 
+#movePic, #enemyPic, #pickupPic {
+    -fx-background-size: 100% 100%;
+}
