@@ -11,7 +11,7 @@ public class Leaderboard {
     private ArrayList<String> topName;
 
     /**
-     * Constructor which makes/locates the file and allocates the ArrayLists
+     * Constructor which makes/locates the file and allocates the ArrayLists.
      */
     public Leaderboard() {
         filePath = new File("Files").getAbsolutePath();
@@ -23,7 +23,7 @@ public class Leaderboard {
 
     /**
      * Method for adding scores to the leaderboard by checking if the supplied score is greater than any
-     * of those already on the leaderboards
+     * of those already on the leaderboards.
      * @param score Supplied score
      * @param name Supplied name
      */
@@ -46,7 +46,7 @@ public class Leaderboard {
 
     /**
      * Loads the scores already stored and also checks if the scores file exists
-     * if is doesn't then it runs the createSaveData() method
+     * if is doesn't then it runs the createSaveData() method.
      */
     public void loadScores() {
         try {
@@ -74,7 +74,7 @@ public class Leaderboard {
     }
 
     /**
-     * Writes the scores and names in the ArrayLists to the scores file
+     * Writes the scores and names in the ArrayLists to the scores file.
      */
     public void saveScores(){
         FileWriter output = null;
@@ -94,7 +94,7 @@ public class Leaderboard {
     }
 
     /**
-     *Creates an empty scores file
+     *Creates an empty scores file.
      */
     private void createSaveData(){
         FileWriter output = null;
@@ -114,18 +114,18 @@ public class Leaderboard {
     }
 
     /**
-     * Getter for the score in the index i of the topScores ArrayList
-     * @param i the index for the ArrayList
-     * @return Returns the score value of that index
+     * Getter for the score in the index i of the topScores ArrayList.
+     * @param i the index for the ArrayList.
+     * @return score value of that index.
      */
     public int getHighScore(int i) {
         return topScores.get(i);
     }
 
     /**
-     * Getter for the name in the index i of the topNames ArrayList
-     * @param i the index for the ArrayList
-     * @return Returns the name value of that index
+     * Getter for the name in the index i of the topNames ArrayList.
+     * @param i the index for the ArrayList.
+     * @return name value of that index.
      */
     public String getNames(int i) {
         return topName.get(i);

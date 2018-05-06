@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -101,6 +102,8 @@ public class PauseMenuController {
             dos.writeInt(levelProgression);
             dos.writeInt(totScore);
             dos.writeInt(avatarLives);
+            Alert conf = new Alert(Alert.AlertType.CONFIRMATION, "Game saved");
+            conf.showAndWait();
         }  catch (IOException e) {
             e.printStackTrace();
         }

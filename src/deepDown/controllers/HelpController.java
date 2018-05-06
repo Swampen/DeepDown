@@ -25,6 +25,9 @@ public class HelpController {
     @FXML private Button backButton;
 
 
+    /**
+     * Method which runs when the controller is loaded and sets all labels.
+     */
     public void initialize(){
         anchor.getStylesheets().add("deepDown/resource/stylesheet.css");
         titleHelp.setText("Help");
@@ -40,6 +43,9 @@ public class HelpController {
 
     }
 
+    /**
+     * Returns to the main menu.
+     */
     public void backButtonPressed() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
