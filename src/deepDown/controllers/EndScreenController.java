@@ -84,7 +84,7 @@ public class EndScreenController {
      * The action when the "Back to Menu" button is pressed.
      * Resets the background music and loads the start menu with FXML.
      */
-    private void backToMenuPressed(){
+    public void backToMenuPressed(){
         Sound.stopMedia();
         Sound.playBackgroundMedia();
         try {
@@ -102,7 +102,7 @@ public class EndScreenController {
      * The action when the "Quit Game" button is pressed.
      * Stops and closes the javaFX application.
      */
-    private void quitGamePressed(){
+    public void quitGamePressed(){
         Platform.exit();
         System.exit(0);
     }

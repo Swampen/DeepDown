@@ -73,7 +73,7 @@ public class PauseMenuController {
      * The action preformed when the "Resume Game" button is pressed.
      * Exits the Pause menu and starts the {@code AnimationTimer}.
      */
-    private void resumeGamePressed(){
+    public void resumeGamePressed(){
         stage.close();
     }
 
@@ -81,7 +81,7 @@ public class PauseMenuController {
      * The action preformed when the "Back to Menu" button is pressed.
      * Loads the start menu with FXML.
      */
-    private void backToMenuPressed(){
+    public void backToMenuPressed(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
             StartMenuController startMenuController = new StartMenuController();
@@ -98,7 +98,7 @@ public class PauseMenuController {
      * The action preformed when the "Save Game" button is pressed.
      * Saves the Avatar's level progress, score and life total to an external file.
      */
-    private void saveGamePressed(){
+    public void saveGamePressed(){
         try {
             File save = new File("Files/save");
             FileOutputStream fos = new FileOutputStream(save);
@@ -115,7 +115,7 @@ public class PauseMenuController {
      * The action when the "Quit Game" button is pressed.
      * Stops and closes the javaFX application.
      */
-    private void quitGamePressed(){
+    public void quitGamePressed(){
         Platform.exit();
         System.exit(0);
     }

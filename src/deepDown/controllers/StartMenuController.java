@@ -171,7 +171,7 @@ public class StartMenuController {
      * The action when the "New Game" button is pressed.
      * Loads the FXML for the first level with score of 0 and 3 lives.
      */
-    private void newGameClicked(){
+    public void newGameClicked(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
             LevelController level = new LevelController(1, 0, 3);
@@ -188,7 +188,7 @@ public class StartMenuController {
      * Loads the FXML for the level that the player saved, with the
      * stored score and lives from the save file.
      */
-    private void loadGameClicked(){
+    public void loadGameClicked(){
         try {
             FileInputStream fis = new FileInputStream("Files/save");
             DataInputStream dis = new DataInputStream(fis);
@@ -213,7 +213,7 @@ public class StartMenuController {
      * Loads the FXML for the leaderboard where the player
      * can check the top scores achieved.
      */
-    private void leaderboardClicked(){
+    public void leaderboardClicked(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
             LeaderboardController controller = new LeaderboardController();
@@ -237,7 +237,7 @@ public class StartMenuController {
      * The action when the "Quit Game" button is pressed.
      * Stops and closes the javaFX application.
      */
-    private void quitClicked(){
+    public void quitClicked(){
         animationTimer.stop();
         Platform.exit();
         System.exit(0);
@@ -248,7 +248,7 @@ public class StartMenuController {
      * Loads the FXML for the help screen for instructions on how to play the game.
      */
 
-    private void helpButtonClicked(){
+    public void helpButtonClicked(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/help.fxml"));
             HelpController help = new HelpController();
