@@ -54,7 +54,6 @@ public class Leaderboard {
             if(!f.isFile()){
                 createSaveData();
             }
-
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
 
             topScores.clear();
@@ -66,7 +65,6 @@ public class Leaderboard {
                 topScores.add(Integer.parseInt(scores[i]));
                 topName.add(names[i]);
             }
-
             reader.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +75,6 @@ public class Leaderboard {
      * Writes the scores and names in the ArrayLists to the scores file.
      */
     public void saveScores(){
-
         try {
             File f = new File(filePath, highScores);
             FileWriter output = new FileWriter(f);
@@ -90,17 +87,15 @@ public class Leaderboard {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
-     *Creates an empty scores file.
+     * Creates an empty scores file.
      */
     private void createSaveData(){
-        FileWriter output = null;
         try {
             File f = new File(filePath, highScores);
-            output = new FileWriter(f);
+            FileWriter output = new FileWriter(f);
             BufferedWriter writer = new BufferedWriter(output);
 
             writer.write("0-0-0-0-0");
@@ -110,7 +105,6 @@ public class Leaderboard {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**

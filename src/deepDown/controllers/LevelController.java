@@ -145,7 +145,7 @@ public class LevelController {
                 escapePressed.set(true);
                     showPauseMenu();
             }
-            if (e.getCode() == KeyCode.K){
+            if (e.getCode() == KeyCode.K){ //todo remove when done
                 setEndScreen(true);
 
             }
@@ -172,13 +172,13 @@ public class LevelController {
                 double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;
                 lastCurrentTime = currentTime;
 
+                //todo remove when done
                 fpsLoop += 1;
                 if (fpsLoop == 10) {
                     double fps = 1 / deltaTime;
                     fpsLabel.setText(Integer.toString((int)fps));
                     fpsLoop = 0;
                 }
-
 
                 coinText.setText(": " + Integer.toString(coinCount));
                 timeText.setText("Time: " + Integer.toString((int)timeScore));
@@ -201,22 +201,18 @@ public class LevelController {
      * @param deltaTime the time since last frame.
      */
     private void update(double deltaTime) {
-
         avatar.setXVelo(0);
         avatar.setYVelo(0);
 
         if (upPressed.getValue() && avatar.getCanMoveUp()) {
             avatar.setYVelo(-200);
         }
-
         if (downPressed.getValue() && avatar.getCanMoveDown()) {
             avatar.setYVelo(200);
         }
-
         if (leftPressed.getValue() && avatar.getCanMoveLeft()) {
             avatar.setXVelo(-200);
         }
-
         if (rightPressed.getValue() && avatar.getCanMoveRight()) {
             avatar.setXVelo(200);
         }
@@ -236,7 +232,6 @@ public class LevelController {
 
         for (Wall wall : walls) {
             if(avatar.isColliding(wall)){
-
                 double heightOverlap = avatar.intersection(wall).getHeight();
                 double widthOverlap = avatar.intersection(wall).getWidth();
 
@@ -261,7 +256,6 @@ public class LevelController {
                         setEndScreen(false);
                     }
                     killAvatar();
-
                 }
                 if (enemy.isColliding(wall)){
                     enemy.reverseVelo();
@@ -286,9 +280,7 @@ public class LevelController {
         }
 
         if (avatar.isColliding(door)) {
-            if (!door.isOpen()){
-            }
-            else{
+            if (door.isOpen()){
                 if(levelProgression != 8){
                     if(avatarLives < 5){
                         ++avatarLives;
@@ -338,7 +330,6 @@ public class LevelController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
             loader.setController(controller);
             Parent root = loader.load();
-
 
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
