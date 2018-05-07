@@ -4,6 +4,9 @@ package deepDown.gameObjects;
 import deepDown.Sprite;
 import javafx.geometry.Rectangle2D;
 
+/**
+ * @author Michael Mobæk Thoresen and Ole-Martin Heggen
+ */
 public abstract class GameObject {
     private double x;
     private double y;

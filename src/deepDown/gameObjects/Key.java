@@ -2,6 +2,9 @@ package deepDown.gameObjects;
 
 import deepDown.Sprite;
 
+/**
+ * @author Michael Mobæk Thoresen and Ole-Martin Heggen
+ */
 public class Key extends Pickup {
 
     /**

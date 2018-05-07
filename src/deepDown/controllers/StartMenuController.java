@@ -18,6 +18,9 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * @author Michael Mobæk Thoresen and Ole-Martin Heggen
+ */
 public class StartMenuController {
 
     @FXML private AnchorPane anchor;

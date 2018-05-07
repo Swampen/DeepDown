@@ -4,6 +4,9 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * @author Ole-Martin Heggen
+ */
 public class MenuAnimation {
 
     private final Button button;

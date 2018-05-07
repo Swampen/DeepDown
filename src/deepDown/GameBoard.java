@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * @author Ole-Martin Heggen
+ * @author Michael Mobæk Thoresen and Ole-Martin Heggen
  */
 public class GameBoard {
 

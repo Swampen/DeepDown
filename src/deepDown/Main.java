@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * @author Michael Mobæk Thoresen and Ole-Martin Heggen
+ */
 public class Main extends Application {
     public static void main(String[] args) {
         File filesFolder = new File("Files");
