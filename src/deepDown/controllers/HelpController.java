@@ -12,6 +12,9 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 
+/**
+ * @author Michael Mobæk Thoresen
+ */
 public class HelpController {
 
     @FXML private AnchorPane anchor;

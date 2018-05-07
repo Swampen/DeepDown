@@ -10,6 +10,10 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
+
+/**
+ * @author Michael Mobæk Thoresen
+ */
 public class LeaderboardController {
 
     @FXML    private AnchorPane anchor;
@@ -39,12 +43,12 @@ public class LeaderboardController {
     /**
      * Fills in scores and names plus checks for how much room you have left
      * from the left edge and adds a punctuation mark until the page is filled
-     * @param nr whichs text you wish to change
+     * @param nr which text you wish to change
      * @param x what number place i.e. 1. , 2. , 3.
      * @param name Name of the player who achieved that score
      * @param score The score the player achieved
      */
-    public void fillScores(Text nr, int x, String name, String score) {
+    private void fillScores(Text nr, int x, String name, String score) {
         StringBuilder dot = new StringBuilder(".");
         for(double i = 0; i < 80; i++){
             if(nr.getLayoutBounds().getWidth() < (1280-32)){

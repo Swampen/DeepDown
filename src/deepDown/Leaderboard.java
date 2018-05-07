@@ -3,6 +3,9 @@ package deepDown;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * @author Michael Mobæk Thoresen
+ */
 public class Leaderboard {
     private String filePath;
     private String highScores;

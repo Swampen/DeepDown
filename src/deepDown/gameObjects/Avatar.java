@@ -3,6 +3,9 @@ package deepDown.gameObjects;
 
 import deepDown.Sprite;
 
+/**
+ * @author Michael Mobæk Thoresen and Ole-Martin Heggen
+ */
 @SuppressWarnings("ALL")
 public class Avatar extends DynamicGameObject {
     private boolean canMoveUp = true;

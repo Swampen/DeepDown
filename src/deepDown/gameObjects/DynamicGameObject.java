@@ -2,6 +2,9 @@ package deepDown.gameObjects;
 
 import deepDown.Sprite;
 
+/**
+ * @author Michael Mobæk Thoresen and Ole-Martin Heggen
+ */
 public abstract class DynamicGameObject extends GameObject {
     private double xVelo;
     private double yVelo;

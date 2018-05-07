@@ -28,6 +28,9 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * @author Michael Mobæk Thoresen and Ole-Martin Heggen
+ */
 public class LevelController {
 
     private int levelProgression;
@@ -54,7 +57,7 @@ public class LevelController {
      * endScreen = a boolean to determine if the end screen is showing or not
      */
     private GraphicsContext gc;
-    private double timeScore = 2000;
+    private double timeScore;
     private long lastCurrentTime = System.nanoTime();
     private int coinCount;
     private int totScore;
@@ -103,6 +106,7 @@ public class LevelController {
     @FXML
     private void initialize(){
         double enemyVel = 100;
+        timeScore = 200;
         gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         GameBoard level = new GameBoard(levelProgression, enemyVel);
@@ -285,11 +289,11 @@ public class LevelController {
                     if(avatarLives < 5){
                         ++avatarLives;
                     }
-                    totScore += (coinCount * 100 + timeScore);
+                    totScore += (coinCount * 100 + timeScore*10);
                     loadNextLevel();
                 }
                 else{
-                    totScore += (coinCount*100 + timeScore);
+                    totScore += (coinCount*100 + timeScore*10);
                     setEndScreen(true);
                 }
             }
@@ -389,16 +393,15 @@ public class LevelController {
      * @param gameCompleted Defines if the player completed all levels.
      */
     private void setEndScreen(boolean gameCompleted) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/endScreen.fxml"));
-        EndScreenController endScreen = new EndScreenController(totScore, gameCompleted);
-        loader.setController(endScreen);
-        Parent root = null;
+        animationTimer.stop();
         try {
-            root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/endScreen.fxml"));
+            EndScreenController endScreen = new EndScreenController(totScore, gameCompleted);
+            loader.setController(endScreen);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        anchor.getChildren().setAll(root);
-        animationTimer.stop();
     }
 }

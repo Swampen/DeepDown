@@ -71,7 +71,7 @@ public class PauseMenuController {
     }
 
     /**
-     * The action preformed when the "Resume Game" button is pressed.
+     * The action performed when the "Resume Game" button is pressed.
      * Exits the Pause menu and starts the {@code AnimationTimer}.
      */
     public void resumeGamePressed(){
@@ -79,7 +79,7 @@ public class PauseMenuController {
     }
 
     /**
-     * The action preformed when the "Back to Menu" button is pressed.
+     * The action performed when the "Back to Menu" button is pressed.
      * Loads the start menu with FXML.
      */
     public void backToMenuPressed(){
@@ -96,7 +96,7 @@ public class PauseMenuController {
     }
 
     /**
-     * The action preformed when the "Save Game" button is pressed.
+     * The action performed when the "Save Game" button is pressed.
      * Saves the Avatar's level progress, score and life total to an external file.
      */
     public void saveGamePressed(){
