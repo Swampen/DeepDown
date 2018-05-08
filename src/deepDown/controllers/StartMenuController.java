@@ -173,6 +173,7 @@ public class StartMenuController {
      * Loads the FXML for the first level with score of 0 and 3 lives.
      */
     public void newGameClicked(){
+        animationTimer.stop();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
             LevelController level = new LevelController(1, 0, 3);
@@ -191,6 +192,7 @@ public class StartMenuController {
      * stored score and lives from the save file.
      */
     public void loadGameClicked(){
+        animationTimer.stop();
         try {
             FileInputStream fis = new FileInputStream("Files/save");
             DataInputStream dis = new DataInputStream(fis);
@@ -214,6 +216,7 @@ public class StartMenuController {
      * can check the top scores achieved.
      */
     public void leaderboardClicked(){
+        animationTimer.stop();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
             LeaderboardController controller = new LeaderboardController();
@@ -226,6 +229,7 @@ public class StartMenuController {
     }
 
     public void levelSelectClicked(){
+        animationTimer.stop();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelSelect.fxml"));
             LevelSelectController levelSelect = new LevelSelectController();
@@ -253,6 +257,7 @@ public class StartMenuController {
      */
 
     public void helpButtonClicked(){
+        animationTimer.stop();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/help.fxml"));
             HelpController help = new HelpController();
