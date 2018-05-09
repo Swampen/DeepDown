@@ -14,14 +14,21 @@
 }
 
 #titleHelp {
-    -fx-font: 30px Verdana;
+    -fx-font: 45px Verdana;
     -fx-font-weight: bold;
+    -fx-text-fill: white;
 }
 
 #moveText, #enemyText, #pickupText {
     -fx-font: 24px Verdana;
+    -fx-label-padding: 4px;
+    -fx-text-fill: black;
 }
 
+
 #movePic, #enemyPic, #pickupPic {
-    -fx-background-size: 100% 100%;
+}
+
+#nr1, #nr2, #nr3, #nr4, #nr5, #leaderTitle {
+   -fx-fill: white;
 }

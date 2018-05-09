@@ -37,12 +37,14 @@ public class HelpController {
         moveText.setText("Use the arrow keys to move around");
         enemyText.setText("Avoid enemies, if you hit one the level gets reset");
         pickupText.setText("Coins increase score and the key opens the trapdoor");
-        Image moveImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/help/1.png"), 150, 150, false, false);
-        Image enemyImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/help/2.png"), 150, 150, false, false);
-        Image pickupImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/help/3.png"), 150, 150, false, false);
+        Image moveImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/help/1.png"), 125, 125, false, false);
+        Image enemyImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/help/2.png"), 125, 125, false, false);
+        Image pickupImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/help/3.png"), 125, 125, false, false);
         movePic.setGraphic(new ImageView(moveImage));
         enemyPic.setGraphic(new ImageView(enemyImage));
         pickupPic.setGraphic(new ImageView(pickupImage));
+        Image button = new Image(getClass().getResourceAsStream("/deepDown/resource/images/BackArrow.png"), 100, 75, false, false);
+        backButton.setGraphic(new ImageView(button));
 
     }
 

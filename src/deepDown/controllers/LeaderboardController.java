@@ -5,7 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -17,12 +20,13 @@ import java.io.IOException;
 public class LeaderboardController {
 
     @FXML    private AnchorPane anchor;
-    @FXML    private Button newGameButton;
+    @FXML    private Button backButton;
     @FXML    private Text nr1;
     @FXML    private Text nr2;
     @FXML    private Text nr3;
     @FXML    private Text nr4;
     @FXML    private Text nr5;
+    @FXML    private Text leaderTitle;
 
     /**
      * Method which runs when the fxml is loaded
@@ -30,7 +34,6 @@ public class LeaderboardController {
      */
     @FXML
     public void initialize() {
-
         Leaderboard lb = new Leaderboard();
         lb.loadScores();
         fillScores(nr1, 1, lb.getNames(0), Integer.toString(lb.getHighScore(0)));
@@ -38,6 +41,11 @@ public class LeaderboardController {
         fillScores(nr3, 3, lb.getNames(2), Integer.toString(lb.getHighScore(2)));
         fillScores(nr4, 4, lb.getNames(3), Integer.toString(lb.getHighScore(3)));
         fillScores(nr5, 5, lb.getNames(4), Integer.toString(lb.getHighScore(4)));
+        Image button = new Image(getClass().getResourceAsStream("/deepDown/resource/images/BackArrow.png"), 100, 75, false, false);
+        backButton.setGraphic(new ImageView(button));
+
+        anchor.getStylesheets().add("deepDown/resource/stylesheet.css");
+
     }
 
     /**
