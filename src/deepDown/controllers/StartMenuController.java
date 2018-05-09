@@ -232,8 +232,8 @@ public class StartMenuController {
     public void levelSelectClicked(){
         animationTimer.stop();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelSelect.fxml"));
-            LevelSelectController levelSelect = new LevelSelectController();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelEditor.fxml"));
+            LevelEditorController levelSelect = new LevelEditorController();
             loader.setController(levelSelect);
             Parent root = loader.load();
             anchor.getChildren().setAll(root);
