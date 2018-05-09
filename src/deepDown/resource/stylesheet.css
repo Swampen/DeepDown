@@ -16,7 +16,7 @@
 #titleHelp {
     -fx-font: 45px Verdana;
     -fx-font-weight: bold;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #moveText, #enemyText, #pickupText {
