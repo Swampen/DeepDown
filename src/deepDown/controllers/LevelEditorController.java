@@ -6,11 +6,16 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+
+import java.io.IOException;
 
 public class LevelEditorController {
 
@@ -44,7 +49,7 @@ public class LevelEditorController {
         levelArray = levelEditor.getLevelArray();
 
         editorCanvas.setOnMouseDragged(e -> {
-            if (selectedTile == 1 || selectedTile == 2) {
+            if (selectedTile == 0 || selectedTile == 1 || selectedTile == 2) {
                 yMouseClicked = e.getY();
                 xMouseClicked = e.getX();
             }
@@ -118,23 +123,49 @@ public class LevelEditorController {
     }
 
     public void saveLevelPressed(){
-
+        //todo save level to Files folder name "customLevel.txt"
     }
 
     public void loadLevelPressed(){
-        //todo load the saved file from the /Files folder
+        //todo load the saved file from the /Files folder (customLevel.txt)
     }
 
     public void playLevelPressed(){
-        //todo start the level created
+        animationTimer.stop();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
+            LevelController level = new LevelController(9, 0, 3);
+            level.setCustomLevel(true);
+            loader.setController(level);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+
+        } catch (IOException e) {
+            Alert a = new Alert(Alert.AlertType.ERROR, "Corrupted or no custom level");
+            a.show();
+            e.printStackTrace();
+        }
     }
 
     public void backToMenuPressed(){
-        //todo goes back to menu
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
+            StartMenuController controller = new StartMenuController();
+            loader.setController(controller);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void discardPressed(){
         levelArray = levelEditor.getLevelArray();
+    }
+
+    public void eraserButtonPressed(){
+        selectedTile = 0;
+        System.out.println("eraser: " + selectedTile);
     }
 
     public void wallButtonPressed(){

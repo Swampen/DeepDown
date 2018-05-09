@@ -4,8 +4,12 @@ import deepDown.gameObjects.*;
 import deepDown.gameObjects.enemy.Enemy;
 import deepDown.gameObjects.enemy.HorizontalEnemy;
 import deepDown.gameObjects.enemy.VerticalEnemy;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -82,8 +86,15 @@ public class GameBoard {
                 input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level8.txt"));
                 break;
             case 9:
-                break;
-            case 10:
+                try {
+                    String filepath = new File("Files").getAbsolutePath();
+                    String file = "customLevel.txt";
+                    File f = new File(filepath, file);
+                    input = new Scanner(f);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
                 break;
             default:
                 break;

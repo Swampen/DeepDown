@@ -55,6 +55,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        //Sound.playBackgroundMedia();
+        Sound.playBackgroundMedia();
     }
 }

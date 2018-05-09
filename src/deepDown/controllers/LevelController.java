@@ -63,6 +63,7 @@ public class LevelController {
     private int totScore;
     private int avatarLives;
     private boolean endScreen = false;
+    private boolean isCustomLevel = false;
 
     /**
      * Booleans for keeping track of which keys are being pressed
@@ -96,6 +97,10 @@ public class LevelController {
         this.levelProgression = levelProgression;
         this.totScore = totScore;
         this.avatarLives = avatarLives;
+    }
+
+    public void setCustomLevel(boolean isCustomLevel) {
+         this.isCustomLevel = isCustomLevel;
     }
 
     /**
@@ -285,12 +290,23 @@ public class LevelController {
 
         if (avatar.isColliding(door)) {
             if (door.isOpen()){
-                if(levelProgression != 8){
+                if(levelProgression > 8){
                     if(avatarLives < 5){
                         ++avatarLives;
                     }
                     totScore += (coinCount * 100 + timeScore*10);
                     loadNextLevel();
+                }else if (levelProgression == 9){
+                    animationTimer.stop();
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelEditor.fxml"));
+                        LevelEditorController levelSelect = new LevelEditorController();
+                        loader.setController(levelSelect);
+                        Parent root = loader.load();
+                        anchor.getChildren().setAll(root);
+                    }  catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 else{
                     totScore += (coinCount*100 + timeScore*10);
