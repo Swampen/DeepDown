@@ -37,7 +37,7 @@ public class MenuAnimation {
     }
 
     /**
-     * Sets the value of the property isHovering.
+     * Sets the value of the property isNotHovering.
      * @param isHovering Defines if the {@code Button} is being hovered by the mouse.
      */
     public void setHovering(boolean isHovering){
@@ -45,10 +45,10 @@ public class MenuAnimation {
     }
 
     /**
-     * Gets the value of the property isHovering.
+     * Gets the value of the property isNotHovering.
      * @return {@code true} if the mouse is hovering over the {@code Button}, {@code false} otherwise.
      */
-    public boolean isHovering() {
-        return isHovering;
+    public boolean isNotHovering() {
+        return !isHovering;
     }
 }

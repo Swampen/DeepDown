@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
 
 
 import java.io.DataInputStream;
@@ -24,6 +24,7 @@ import java.io.IOException;
 public class StartMenuController {
 
     @FXML private AnchorPane anchor;
+    @FXML private Pane level;
     @FXML private Button newGameButton;
     @FXML private Button loadGameButton;
     @FXML private Button leaderboardButton;
@@ -95,7 +96,7 @@ public class StartMenuController {
         animationTimer = new AnimationTimer(){
             public void handle(long now){
 
-                if((newGameButton.isHover() || newGameButton.isFocused()) && !newGame.isHovering()){
+                if((newGameButton.isHover() || newGameButton.isFocused()) && newGame.isNotHovering()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.gif"));
                     newGame.setButtonImage(image);
                     newGameButton = newGame.getButton();
@@ -109,7 +110,7 @@ public class StartMenuController {
                     newGame.setHovering(false);
                 }
 
-                if((loadGameButton.isHover() || loadGameButton.isFocused()) && !loadGame.isHovering()){
+                if((loadGameButton.isHover() || loadGameButton.isFocused()) && loadGame.isNotHovering()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.gif"));
                     loadGame.setButtonImage(image);
                     loadGameButton = loadGame.getButton();
@@ -122,7 +123,7 @@ public class StartMenuController {
                     loadGame.setHovering(false);
                 }
 
-                if((leaderboardButton.isHover() || leaderboardButton.isFocused()) && !leaderboard.isHovering()){
+                if((leaderboardButton.isHover() || leaderboardButton.isFocused()) && leaderboard.isNotHovering()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.gif"));
                     leaderboard.setButtonImage(image);
                     leaderboardButton = leaderboard.getButton();
@@ -136,7 +137,7 @@ public class StartMenuController {
                     leaderboard.setHovering(false);
                 }
 
-                if((quitGameButton.isHover() || quitGameButton.isFocused()) && !quit.isHovering()){
+                if((quitGameButton.isHover() || quitGameButton.isFocused()) && quit.isNotHovering()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.gif"));
                     quit.setButtonImage(image);
                     quitGameButton = quit.getButton();
@@ -150,7 +151,7 @@ public class StartMenuController {
                     quit.setHovering(false);
                 }
 
-                if((helpButton.isHover() || helpButton.isFocused()) && !help.isHovering()){
+                if((helpButton.isHover() || helpButton.isFocused()) && help.isNotHovering()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Help.gif"));
                     help.setButtonImage(image);
                     helpButton = help.getButton();
@@ -187,7 +188,7 @@ public class StartMenuController {
     }
 
     /**
-     * The action when the "Load Game" button is pressed.
+     * The action performed when the "Load Game" button is pressed.
      * Loads the FXML for the level that the player saved, with the
      * stored score and lives from the save file.
      */
@@ -211,7 +212,7 @@ public class StartMenuController {
     }
 
     /**
-     * The action when the "Leaderboard" button is pressed.
+     * The action performed when the "Leaderboard" button is pressed.
      * Loads the FXML for the leaderboard where the player
      * can check the top scores achieved.
      */
@@ -242,7 +243,7 @@ public class StartMenuController {
     }
 
     /**
-     * The action when the "Quit Game" button is pressed.
+     * The action performed when the "Quit Game" button is pressed.
      * Stops and closes the javaFX application.
      */
     public void quitClicked(){
@@ -252,7 +253,7 @@ public class StartMenuController {
     }
 
     /**
-     * The action when the "Help?" button is pressed.
+     * The action performed when the "Help?" button is pressed.
      * Loads the FXML for the help screen for instructions on how to play the game.
      */
 
