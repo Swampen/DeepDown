@@ -27,6 +27,7 @@
 
 
 #movePic, #enemyPic, #pickupPic {
+    -fx-background-color: white;
 }
 
 #nr1, #nr2, #nr3, #nr4, #nr5, #leaderTitle {
