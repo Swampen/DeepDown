@@ -17,12 +17,11 @@ public class LevelEditor {
 
     /**
      * Constructor.
-     * @param image Specified image used to draw the objects on {@code Canvas}.
      * @param gc Specified {@code GraphicsContext} from the {@code LevelEditorController}
      */
-    public LevelEditor(Image image, GraphicsContext gc){
-        this.image = image;
+    public LevelEditor(GraphicsContext gc){
         this.gc = gc;
+        image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
     }
 
     /**

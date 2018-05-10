@@ -40,6 +40,10 @@ public class LevelReader {
      * @return The 2D int array made from the .txt file.
      */
     public static int[][] readCustomLevel(){
+        LevelRequirements.setKeyLimit(false);
+        LevelRequirements.setDoorLimit(false);
+        LevelRequirements.setAvatarLimit(false);
+
         int rows = 18;
         int columns = 32;
         int[][] level = new int[rows][columns];

@@ -111,9 +111,10 @@ public class EndScreenController {
      * and adds it to the leaderboard.
      */
     public void okButtonPressed(){
-        nameHBox.setOpacity(0.0);
+        nameHBox.setVisible(false);
         nameHBox.setDisable(true);
         buttonsHBox.opacityProperty().setValue(1.0);
+        buttonsHBox.setVisible(true);
         buttonsHBox.setDisable(false);
         String name = nameInput.getText();
         Leaderboard lb = new Leaderboard();

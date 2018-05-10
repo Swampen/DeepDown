@@ -1,6 +1,7 @@
 package deepDown.controllers;
 
 
+import deepDown.Loader;
 import deepDown.level.GameBoard;
 import deepDown.Sound;
 import deepDown.gameObjects.*;
@@ -147,7 +148,17 @@ public class LevelController {
             }
             if (e.getCode() == KeyCode.ESCAPE && !endScreen) {
                 escapePressed.set(true);
-                    showPauseMenu();
+                animationTimer.stop();
+                if (levelProgression < 9){
+                    Loader.loadPauseMenu(anchor, levelProgression, totScore, avatarLives);
+
+                }else {
+                    Loader.loadPauseMenuCustomLevel(anchor, levelProgression, totScore, avatarLives);
+
+                }
+                resetKeypresses();
+                lastCurrentTime = System.nanoTime();
+                animationTimer.start();
             }
             if (e.getCode() == KeyCode.K){ //todo remove when done
                 setEndScreen(true);
@@ -191,10 +202,6 @@ public class LevelController {
                 update(deltaTime);
                 collisionDetection(deltaTime);
                 drawFrame();
-
-                if (escapePressed.get()){
-                    stop();
-                }
             }
         };
         animationTimer.start();
@@ -293,15 +300,7 @@ public class LevelController {
                     loadNextLevel();
                 }else if (levelProgression == 9){
                     animationTimer.stop();
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelEditor.fxml"));
-                        LevelEditorController levelSelect = new LevelEditorController();
-                        loader.setController(levelSelect);
-                        Parent root = loader.load();
-                        anchor.getChildren().setAll(root);
-                    }  catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    Loader.loadLevelEditor(anchor);
                 }
                 else{
                     totScore += (coinCount*100 + timeScore*10);
@@ -330,32 +329,6 @@ public class LevelController {
             enemy.getSprite().render(gc, enemy);
         }
         avatar.getSprite().render(gc, avatar);
-    }
-
-    /**
-     * Shows the Pause Menu and stops the {@code AnimationTimer}.
-     */
-    private void showPauseMenu(){
-        Rectangle r = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
-        r.setFill(Color.rgb(0, 0, 0, 0.6));
-        anchor.getChildren().add(r);
-        try {
-            Stage stage = new Stage();
-            PauseMenuController controller = new PauseMenuController(stage, anchor, levelProgression, totScore, avatarLives);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/pauseMenu.fxml"));
-            loader.setController(controller);
-            Parent root = loader.load();
-
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-            anchor.getChildren().remove(r);
-            resetKeypresses();
-            lastCurrentTime = System.nanoTime();
-            animationTimer.start();
-        } catch(IOException e){
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -405,14 +378,6 @@ public class LevelController {
      */
     private void setEndScreen(boolean gameCompleted) {
         animationTimer.stop();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/endScreen.fxml"));
-            EndScreenController endScreen = new EndScreenController(totScore, gameCompleted);
-            loader.setController(endScreen);
-            Parent root = loader.load();
-            anchor.getChildren().setAll(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Loader.loadEndScreen(anchor, totScore, gameCompleted);
     }
 }

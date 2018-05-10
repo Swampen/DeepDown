@@ -1,6 +1,7 @@
 package deepDown.controllers;
 
 import deepDown.Alerts;
+import deepDown.Loader;
 import deepDown.level.LevelEditor;
 import deepDown.level.LevelReader;
 import deepDown.level.LevelRequirements;
@@ -42,15 +43,14 @@ public class LevelEditorController {
     /**
      * Method which runs when the fxml is loaded.
      * Initializes the editor, sets action on mouse clicked or dragged
-     * and starts the animationTimer
+     * and starts the animationTimer.
      */
     @FXML
     public void initialize(){
         GraphicsContext gc = editorCanvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, editorCanvas.getWidth(), editorCanvas.getHeight());
-        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
-        levelEditor = new LevelEditor(image, gc);
+        levelEditor = new LevelEditor(gc);
 
         filepath = new File("Files").getAbsolutePath();
         file = "customLevel.txt";
@@ -137,16 +137,7 @@ public class LevelEditorController {
         if (LevelRequirements.isValidLevel(levelArray)) {
             levelEditor.saveCustomLevel(levelArray, custom);
             animationTimer.stop();
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-                LevelController level = new LevelController(9, 0, 3);
-                loader.setController(level);
-                Parent root = loader.load();
-                anchor.getChildren().setAll(root);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Loader.loadLevel(anchor, 9, 0, 40);
         }else {
             Alerts.notValidLevel();
         }
@@ -174,15 +165,7 @@ public class LevelEditorController {
      * Loads the start menu with FXML.
      */
     public void backToMenuPressed(){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
-            StartMenuController controller = new StartMenuController();
-            loader.setController(controller);
-            Parent root = loader.load();
-            anchor.getChildren().setAll(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Loader.loadStartMenu(anchor);
     }
 
     /**

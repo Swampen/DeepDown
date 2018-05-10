@@ -1,5 +1,6 @@
 package deepDown.controllers;
 
+import deepDown.Loader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,14 +53,6 @@ public class HelpController {
      * Returns to the main menu.
      */
     public void backButtonPressed() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
-            StartMenuController controller = new StartMenuController();
-            loader.setController(controller);
-            Parent root = loader.load();
-            anchor.getChildren().setAll(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Loader.loadStartMenu(anchor);
     }
 }
