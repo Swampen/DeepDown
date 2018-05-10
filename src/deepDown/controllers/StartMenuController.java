@@ -185,7 +185,7 @@ public class StartMenuController {
 
     /**
      * The action when the "New Game" button is pressed.
-     * Loads the FXML for the first level with score of 0 and 3 lives.
+     * Method for loading a new game.
      */
     public void newGamePressed(){
         animationTimer.stop();
@@ -194,8 +194,8 @@ public class StartMenuController {
 
     /**
      * The action performed when the "Load Game" button is pressed.
-     * Loads the FXML for the level that the player saved, with the
-     * stored score and lives from the save file.
+     * Method for loading a previously saved game with the players
+     * stored score and lives.
      */
     public void loadGamePressed(){
         animationTimer.stop();
@@ -215,7 +215,7 @@ public class StartMenuController {
 
     /**
      * The action performed when the "Leaderboard" button is pressed.
-     * Loads the FXML for the leaderboard where the player
+     * Method for loading the leaderboard screen where the player
      * can check the top scores achieved.
      */
     public void leaderboardButtonPressed(){
@@ -240,7 +240,7 @@ public class StartMenuController {
 
     /**
      * The action performed when the "Help?" button is pressed.
-     * Loads the FXML for the help screen for instructions on how to play the game.
+     * Loads the help page where the player gets instructed on what to do in the game
      */
 
     public void helpButtonPressed(){
