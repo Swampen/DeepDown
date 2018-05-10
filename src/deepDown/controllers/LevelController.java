@@ -1,7 +1,7 @@
 package deepDown.controllers;
 
 
-import deepDown.GameBoard;
+import deepDown.level.GameBoard;
 import deepDown.Sound;
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.enemy.Enemy;
@@ -63,7 +63,6 @@ public class LevelController {
     private int totScore;
     private int avatarLives;
     private boolean endScreen = false;
-    private boolean isCustomLevel = false;
 
     /**
      * Booleans for keeping track of which keys are being pressed
@@ -97,10 +96,6 @@ public class LevelController {
         this.levelProgression = levelProgression;
         this.totScore = totScore;
         this.avatarLives = avatarLives;
-    }
-
-    public void setCustomLevel(boolean isCustomLevel) {
-         this.isCustomLevel = isCustomLevel;
     }
 
     /**
@@ -290,7 +285,7 @@ public class LevelController {
 
         if (avatar.isColliding(door)) {
             if (door.isOpen()){
-                if(levelProgression > 8){
+                if(levelProgression < 8){
                     if(avatarLives < 5){
                         ++avatarLives;
                     }

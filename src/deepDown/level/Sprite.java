@@ -1,4 +1,4 @@
-package deepDown;
+package deepDown.level;
 
 import deepDown.gameObjects.GameObject;
 import javafx.scene.canvas.GraphicsContext;

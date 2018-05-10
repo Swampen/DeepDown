@@ -1,6 +1,5 @@
-package deepDown;
+package deepDown.level;
 
-import deepDown.controllers.LevelEditorController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -9,15 +8,28 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * @author Michael Mobæk Thoresen and Ole-Martin Heggen
+ */
 public class LevelEditor {
     private final Image image;
     private final GraphicsContext gc;
 
+    /**
+     * Constructor.
+     * @param image Specified image used to draw the objects on {@code Canvas}.
+     * @param gc Specified {@code GraphicsContext} from the {@code LevelEditorController}
+     */
     public LevelEditor(Image image, GraphicsContext gc){
         this.image = image;
         this.gc = gc;
     }
 
+    /**
+     * Makes a new {@code int[18][32]}  with an integer
+     * of 1 around the edges of the 2D array.
+     * @return 2D int array containing the clean level.
+     */
     public int[][] getLevelArray(){
         int[][] levelArray = new int[18][32];
         for (int i = 0; i < levelArray.length; i++) {
@@ -34,7 +46,11 @@ public class LevelEditor {
         return levelArray;
     }
 
-    public void updateArray(int[][] levelArray){
+    /**
+     * Draws an 2D int array onto the {@code LevelEditorCanvas}.
+     * @param levelArray The 2D int array to be drawn onto the {@code Canvas}.
+     */
+    public void updateEditorCanvas(int[][] levelArray){
         for (int i = 1; i < levelArray.length - 1; i++) {
             for (int j = 1; j < levelArray[i].length - 1; j++) {
                 int arrayInteger = levelArray[i][j];
@@ -52,27 +68,28 @@ public class LevelEditor {
                 }else if (arrayInteger == 4) {
                     gc.fillRect(j * 32, i * 32, 32, 32);
                     gc.drawImage(image, 80, 0, 40, 40, j * 32, i * 32, 32, 32);
-                }else if (arrayInteger == 5 && !Limit.isKeyLimit()) {
+                }else if (arrayInteger == 5 && !LevelRequirements.isKeyLimit()) {
                     gc.fillRect(j * 32, i * 32, 32, 32);
                     gc.drawImage(image, 120, 0, 40, 40, j * 32, i * 32, 32, 32);
-                    Limit.setKeyLimit(true);
-                }else if (arrayInteger == 6 && !Limit.isDoorLimit()) {
+                    LevelRequirements.setKeyLimit(true);
+                }else if (arrayInteger == 6 && !LevelRequirements.isDoorLimit()) {
                     gc.fillRect(j * 32, i * 32, 32, 32);
                     gc.drawImage(image, 160, 0, 40, 40, j * 32, i * 32, 32, 32);
-                    Limit.setDoorLimit(true);
-                }else if (arrayInteger == 7 && !Limit.isAvatarLimit()) {
+                    LevelRequirements.setDoorLimit(true);
+                }else if (arrayInteger == 7 && !LevelRequirements.isAvatarLimit()) {
                     gc.fillRect(j * 32, i * 32, 32, 32);
                     gc.drawImage(image, 0, 40, 30, 30, j * 32 + 4, i * 32 + 4, 24, 24);
-                    Limit.setAvatarLimit(true);
+                    LevelRequirements.setAvatarLimit(true);
                 }
-                System.out.print(levelArray[i][j]);
             }
-            System.out.println();
         }
-        System.out.println();
     }
 
-    public void saveLevel(int[][] array) {
+    /**
+     * Saves the custom level to the Files folder.
+     * @param array The 2D int array to be saved.
+     */
+    public void saveCustomLevel(int[][] array) {
         try {
             File custom = new File("Files/customLevel.txt");
             StringBuilder builder = new StringBuilder();

@@ -1,17 +1,12 @@
-package deepDown;
+package deepDown.level;
 
 import deepDown.gameObjects.*;
 import deepDown.gameObjects.enemy.Enemy;
 import deepDown.gameObjects.enemy.HorizontalEnemy;
 import deepDown.gameObjects.enemy.VerticalEnemy;
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * @author Michael Mobæk Thoresen and Ole-Martin Heggen
@@ -20,11 +15,11 @@ public class GameBoard {
 
     private final int level;
     private double enemyVel;
-    private Scanner input;
-    private Image image;
+    private final Image image;
     private Avatar avatar;
     private Key key;
     private Door door;
+    private int[][] levelArray;
 
     private ArrayList<Wall> walls = new ArrayList<>();
     private ArrayList<Coin> coins = new ArrayList<>();
@@ -38,86 +33,34 @@ public class GameBoard {
     public GameBoard (int level , double enemyVel){
         this.level = level;
         this.enemyVel = enemyVel;
+        image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
     }
 
     /**
      * Runs the methods necessary to initialize the gameboard.
      */
     public void initializeGameBoard(){
-        readImage();
-        readLevel();
+        if (level < 9){
+            String path = "/deepDown/level/levels/level" + Integer.toString(level) + ".txt";
+            System.out.println(path);
+            levelArray = LevelReader.readLevel(path);
+
+        }else {
+            levelArray = LevelReader.readCustomLevel();
+        }
         drawGameBoard();
     }
 
     /**
-     * Reads the tileset to use for sprites.
+     * Goes through the an {@code int[][]} and makes
+     * an object for each {@code Integer} inside
+     * the array that is not a 0.
      */
-    private void readImage(){
-        image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
-    }
-
-    /**
-     * Reads the level array for this level.
-     */
-    private void readLevel(){
-        switch (this.level) {
-            case 1:
-                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level1.txt"));
-                break;
-            case 2:
-                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level2.txt"));
-                break;
-            case 3:
-                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level3.txt"));
-                break;
-            case 4:
-                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level4.txt"));
-                break;
-            case 5:
-                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level5.txt"));
-                break;
-            case 6:
-                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level6.txt"));
-                break;
-            case 7:
-                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level7.txt"));
-                break;
-            case 8:
-                input = new Scanner(getClass().getResourceAsStream("/deepDown/levels/level8.txt"));
-                break;
-            case 9:
-                try {
-                    String filepath = new File("Files").getAbsolutePath();
-                    String file = "customLevel.txt";
-                    File f = new File(filepath, file);
-                    input = new Scanner(f);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                break;
-            default:
-                break;
-        }
-    }
-
     private void drawGameBoard(){
-        int rows = 18;
-        int columns = 32;
-        int[][] board = new int[rows][columns];
+        for (int i=0; i<levelArray.length; i++){
+            for(int j=0; j<levelArray[i].length; j++){
 
-        for (int i=0; i<rows; i++){
-            for(int j=0; j<columns; j++){
-                if(input.hasNextInt()){
-                    board[i][j] = input.nextInt();
-                }
-            }
-        }
-
-        for (int i=0; i<rows; i++){
-            for(int j=0; j<columns; j++){
-
-                switch (board[i][j]){
+                switch (levelArray[i][j]){
                     case 1:
                         Sprite wallSprite = new Sprite(image, 0, 0);
                         Wall wall = new Wall(j*40, i*40, 40, 40, wallSprite);

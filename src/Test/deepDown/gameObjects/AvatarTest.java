@@ -1,6 +1,6 @@
 package deepDown.gameObjects;
 
-import deepDown.Sprite;
+import deepDown.level.Sprite;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

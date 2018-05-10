@@ -1,7 +1,9 @@
 package deepDown.controllers;
 
-import deepDown.LevelEditor;
-import deepDown.Limit;
+import deepDown.Alerts;
+import deepDown.level.LevelEditor;
+import deepDown.level.LevelReader;
+import deepDown.level.LevelRequirements;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -10,40 +12,40 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
+/**
+ * @author Ole-Martin Heggen
+ */
 public class LevelEditorController {
 
     @FXML private Canvas editorCanvas;
     @FXML private AnchorPane anchor;
 
-    private GraphicsContext gc;
     private double xMouseClicked;
     private double yMouseClicked;
     private AnimationTimer animationTimer;
-    private Image image;
     private int[][] levelArray;
     private int selectedTile;
-
-    private boolean avatarLimit = false;
-    private boolean doorLimit = false;
-    private boolean keyLimit = false;
     private final BooleanProperty mouseClicked = new SimpleBooleanProperty(false);
     private final BooleanProperty mouseDragged = new SimpleBooleanProperty(false);
-
     private LevelEditor levelEditor;
 
+    /**
+     * Method which runs when the fxml is loaded.
+     * Initializes the editor, sets action on mouse clicked or dragged
+     * and starts the animationTimer
+     */
     @FXML
     public void initialize(){
-        gc = editorCanvas.getGraphicsContext2D();
+        GraphicsContext gc = editorCanvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, editorCanvas.getWidth(), editorCanvas.getHeight());
-        image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
+        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
         levelEditor = new LevelEditor(image, gc);
 
         levelArray = levelEditor.getLevelArray();
@@ -67,11 +69,6 @@ public class LevelEditorController {
             xMouseClicked = e.getX();
         });
 
-        update();
-        animationTimer.start();
-    }
-
-    private void update() {
         animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -89,65 +86,76 @@ public class LevelEditorController {
                         xToDraw += 32;
                         levelArrayX += 1;
                     }
+                    int selectedGrid = levelArray[levelArrayY][levelArrayX];
 
-                    if (Limit.isKeyLimit() && levelArray[levelArrayY][levelArrayX] != 5 && selectedTile != 5) {
-                        Limit.setKeyLimit(false);
+                    if (LevelRequirements.isKeyLimit() && selectedGrid == 5 && selectedTile != 5) {
+                        LevelRequirements.setKeyLimit(false);
                     }
-                    if (Limit.isDoorLimit() && levelArray[levelArrayY][levelArrayX] != 6 && selectedTile != 6) {
-                        Limit.setDoorLimit(false);
+                    if (LevelRequirements.isDoorLimit() && selectedGrid == 6 && selectedTile != 6) {
+                        LevelRequirements.setDoorLimit(false);
                     }
-                    if (Limit.isAvatarLimit() && levelArray[levelArrayY][levelArrayX] != 7 && selectedTile != 7) {
-                        Limit.setAvatarLimit(false);
+                    if (LevelRequirements.isAvatarLimit() && selectedGrid == 7 && selectedTile != 7) {
+                        LevelRequirements.setAvatarLimit(false);
                     }
 
-                    if (Limit.isKeyLimit() && selectedTile == 5) {
-                        System.out.println("Key already exist");
-                    }
-                    else if (Limit.isDoorLimit() && selectedTile == 6) {
-                        System.out.println("Door already exist");
-                    }
-                    else if (Limit.isAvatarLimit() && selectedTile == 7){
-                        System.out.println("Avatar already exist");
-                    }
-                    else {
+                    if (!(LevelRequirements.isKeyLimit() && selectedTile == 5) &&
+                            !(LevelRequirements.isDoorLimit() && selectedTile == 6) &&
+                            !(LevelRequirements.isAvatarLimit() && selectedTile == 7)){
                         levelArray[levelArrayY][levelArrayX] = selectedTile;
                     }
 
-
-
-
-                levelEditor.updateArray(levelArray);
+                    levelEditor.updateEditorCanvas(levelArray);
                 }
             }
         };
+        animationTimer.start();
     }
 
-    public void saveLevelPressed(){
-        //todo save level to Files folder name "customLevel.txt"
-        levelEditor.saveLevel(levelArray);
-    }
-
-    public void loadLevelPressed(){
-        //todo load the saved file from the /Files folder (customLevel.txt)
-    }
-
+    /**
+     * The action performed when the "Play Level" button is pressed.
+     * Starts the custom level in it's state.
+     * Shows an error if the level requirements is not met.
+     */
     public void playLevelPressed(){
-        animationTimer.stop();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-            LevelController level = new LevelController(9, 0, 3);
-            level.setCustomLevel(true);
-            loader.setController(level);
-            Parent root = loader.load();
-            anchor.getChildren().setAll(root);
+        if (LevelRequirements.isValidLevel(levelArray)) {
+            levelEditor.saveCustomLevel(levelArray);
+            animationTimer.stop();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
+                LevelController level = new LevelController(9, 0, 3);
+                loader.setController(level);
+                Parent root = loader.load();
+                anchor.getChildren().setAll(root);
 
-        } catch (IOException e) {
-            Alert a = new Alert(Alert.AlertType.ERROR, "Corrupted or no custom level");
-            a.show();
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else {
+            Alerts.notValidLevel();
         }
     }
 
+    /**
+     * The action performed when the "Save Level" button is pressed.
+     * Saves the custom level in its current state.
+     */
+    public void saveLevelPressed(){
+        levelEditor.saveCustomLevel(levelArray);
+    }
+
+    /**
+     * The action performed when the "Load Level" button is pressed.
+     * Loads a saved custom level if it exists.
+     */
+    public void loadLevelPressed(){
+        levelArray = LevelReader.readCustomLevel();
+        levelEditor.updateEditorCanvas(levelArray);
+    }
+
+    /**
+     * The action performed when the "Back to Menu" button is pressed.
+     * Loads the start menu with FXML.
+     */
     public void backToMenuPressed(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
@@ -160,45 +168,83 @@ public class LevelEditorController {
         }
     }
 
+    /**
+     * The action performed when the "Discard" button is pressed.
+     * Shows an alertbox, and discards the custom level based on the response.
+     */
     public void discardPressed(){
-        levelArray = levelEditor.getLevelArray();
+        if (Alerts.discardCustomLevel()) {
+            levelArray = levelEditor.getLevelArray();
+        }
     }
 
+    /**
+     * The action performed when the "Eracer" button is pressed.
+     * Selects the eraser tool.
+     */
     public void eraserButtonPressed(){
         selectedTile = 0;
         System.out.println("eraser: " + selectedTile);
     }
 
+    /**
+     * The action performed when the "Wall" button is pressed.
+     * Selects the wall tool.
+     */
     public void wallButtonPressed(){
         selectedTile = 1;
         System.out.println("wall: " + selectedTile);
     }
 
+    /**
+     * The action performed when the "Coin" button is pressed.
+     * Selects the coin tool.
+     */
     public void coinButtonPressed(){
         selectedTile = 2;
         System.out.println("coin: " + selectedTile);
     }
 
+    /**
+     * The action performed when the "Horizontal Enemy" button is pressed.
+     * Selects the horizontal enemy tool.
+     */
     public void horizontalEnemyButtonPressed(){
         selectedTile = 3;
         System.out.println("enemy: " + selectedTile);
     }
 
+    /**
+     * The action performed when the "Vertical Enemy" button is pressed.
+     * Selects the vertical enemy tool.
+     */
     public void verticalEnemyButtonPressed(){
         selectedTile = 4;
         System.out.println("enemy: " + selectedTile);
     }
 
+    /**
+     * The action performed when the "Key" button is pressed.
+     * Selects the key enemy tool.
+     */
     public void keyButtonPressed(){
         selectedTile = 5;
         System.out.println("key: " + selectedTile);
     }
 
+    /**
+     * The action performed when the "Door" button is pressed.
+     * Selects the door enemy tool.
+     */
     public void doorButtonPressed(){
         selectedTile = 6;
         System.out.println("door: " + selectedTile);
     }
 
+    /**
+     * The action performed when the "Avatar" button is pressed.
+     * Selects the avatar enemy tool.
+     */
     public void avatarButtonPressed(){
         selectedTile = 7;
         System.out.println("avatar: " + selectedTile);

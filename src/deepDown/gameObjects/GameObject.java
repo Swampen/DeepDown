@@ -1,7 +1,7 @@
 package deepDown.gameObjects;
 
 
-import deepDown.Sprite;
+import deepDown.level.Sprite;
 import javafx.geometry.Rectangle2D;
 
 /**

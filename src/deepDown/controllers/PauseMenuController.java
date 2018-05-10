@@ -1,5 +1,6 @@
 package deepDown.controllers;
 
+import deepDown.Alerts;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -107,8 +108,7 @@ public class PauseMenuController {
             dos.writeInt(levelProgression);
             dos.writeInt(totScore);
             dos.writeInt(avatarLives);
-            Alert conf = new Alert(Alert.AlertType.CONFIRMATION, "Game saved");
-            conf.showAndWait();
+            Alerts.gameSaved();
         }  catch (IOException e) {
             e.printStackTrace();
         }

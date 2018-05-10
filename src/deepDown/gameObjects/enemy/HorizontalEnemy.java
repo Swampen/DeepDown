@@ -1,6 +1,6 @@
 package deepDown.gameObjects.enemy;
 
-import deepDown.Sprite;
+import deepDown.level.Sprite;
 
 /**
  * @author Michael Mobæk Thoresen and Ole-Martin Heggen

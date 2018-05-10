@@ -1,6 +1,6 @@
 package deepDown.gameObjects;
 
-import deepDown.GameBoard;
+import deepDown.level.GameBoard;
 import org.junit.Test;
 
 public class GameBoardTest {

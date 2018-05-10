@@ -2,7 +2,7 @@ package deepDown.gameObjects;
 
 
 
-import deepDown.Sprite;
+import deepDown.level.Sprite;
 import org.junit.Test;
 
 import javafx.scene.image.Image;

@@ -1,5 +1,6 @@
 package deepDown.controllers;
 
+import deepDown.Alerts;
 import deepDown.MenuAnimation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -206,8 +207,8 @@ public class StartMenuController {
             Parent root = loader.load();
             anchor.getChildren().setAll(root);
         } catch (IOException e ){
-            Alert a = new Alert(Alert.AlertType.ERROR, "Save file missing or corrputed");
-            a.showAndWait();
+            Alerts.noSaveFile();
+            e.printStackTrace();
         }
     }
 

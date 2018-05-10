@@ -48,16 +48,9 @@ public class Sound {
      * plays it once.
      */
     public static void playDoorMedia(){
-        String mediaString = Sound.class.getResource("/deepDown/resource/sounds/backgroundMusic.mp3").toExternalForm();
+        String mediaString = Sound.class.getResource("/deepDown/resource/sounds/door.mp3").toExternalForm();
         Media doorMedia = new Media(mediaString);
         mediaPlayer = new MediaPlayer(doorMedia);
         mediaPlayer.play();
-    }
-
-    /**
-     * Stops everything the {@code MediaPlayer} is playing.
-     */
-    public static void stopMedia(){
-        mediaPlayer.stop();
     }
 }

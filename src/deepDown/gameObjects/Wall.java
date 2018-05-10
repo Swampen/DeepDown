@@ -1,7 +1,7 @@
 package deepDown.gameObjects;
 
 
-import deepDown.Sprite;
+import deepDown.level.Sprite;
 
 /**
  * @author Michael Mobæk Thoresen and Ole-Martin Heggen

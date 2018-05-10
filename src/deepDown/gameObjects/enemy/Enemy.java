@@ -1,6 +1,6 @@
 package deepDown.gameObjects.enemy;
 
-import deepDown.Sprite;
+import deepDown.level.Sprite;
 import deepDown.gameObjects.DynamicGameObject;
 
 /**
