@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -34,6 +35,9 @@ public class LevelEditorController {
     private final BooleanProperty mouseClicked = new SimpleBooleanProperty(false);
     private final BooleanProperty mouseDragged = new SimpleBooleanProperty(false);
     private LevelEditor levelEditor;
+    private File custom;
+    private String filepath;
+    private String file;
 
     /**
      * Method which runs when the fxml is loaded.
@@ -48,7 +52,19 @@ public class LevelEditorController {
         Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
         levelEditor = new LevelEditor(image, gc);
 
-        levelArray = levelEditor.getLevelArray();
+        filepath = new File("Files").getAbsolutePath();
+        file = "customLevel.txt";
+        custom = new File(filepath, file);
+        try {
+            if(custom.exists()) {
+                loadLevelPressed();
+            } else if(!custom.exists()){
+                levelArray = levelEditor.getLevelArray();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         editorCanvas.setOnMouseDragged(e -> {
             if (selectedTile == 0 || selectedTile == 1 || selectedTile == 2) {
@@ -68,6 +84,7 @@ public class LevelEditorController {
             yMouseClicked = e.getY();
             xMouseClicked = e.getX();
         });
+
 
         animationTimer = new AnimationTimer() {
             @Override
@@ -118,7 +135,7 @@ public class LevelEditorController {
      */
     public void playLevelPressed(){
         if (LevelRequirements.isValidLevel(levelArray)) {
-            levelEditor.saveCustomLevel(levelArray);
+            levelEditor.saveCustomLevel(levelArray, custom);
             animationTimer.stop();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
@@ -140,7 +157,7 @@ public class LevelEditorController {
      * Saves the custom level in its current state.
      */
     public void saveLevelPressed(){
-        levelEditor.saveCustomLevel(levelArray);
+        levelEditor.saveCustomLevel(levelArray, custom);
     }
 
     /**

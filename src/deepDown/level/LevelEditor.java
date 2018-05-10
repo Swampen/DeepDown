@@ -51,8 +51,8 @@ public class LevelEditor {
      * @param levelArray The 2D int array to be drawn onto the {@code Canvas}.
      */
     public void updateEditorCanvas(int[][] levelArray){
-        for (int i = 1; i < levelArray.length - 1; i++) {
-            for (int j = 1; j < levelArray[i].length - 1; j++) {
+        for (int i = 0; i < levelArray.length; i++) {
+            for (int j = 0; j < levelArray[i].length; j++) {
                 int arrayInteger = levelArray[i][j];
                 if (arrayInteger == 0){
                     gc.fillRect(j * 32, i * 32, 32, 32);
@@ -89,9 +89,8 @@ public class LevelEditor {
      * Saves the custom level to the Files folder.
      * @param array The 2D int array to be saved.
      */
-    public void saveCustomLevel(int[][] array) {
+    public void saveCustomLevel(int[][] array, File f) {
         try {
-            File custom = new File("Files/customLevel.txt");
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < 18; i++) {
                 for (int j = 0; j < 32; j++) {
@@ -102,11 +101,12 @@ public class LevelEditor {
                 }
                 builder.append(System.getProperty("line.separator"));
             }
-            BufferedWriter writer = new BufferedWriter(new FileWriter(custom));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(f));
             writer.write(builder.toString());
             writer.close();
         } catch (IOException e){
             e.printStackTrace();
         }
     }
+
 }
