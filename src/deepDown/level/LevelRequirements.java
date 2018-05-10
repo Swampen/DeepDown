@@ -36,16 +36,13 @@ public class LevelRequirements {
 
     public static Boolean isValidLevel(int[][] levelArray){
         int coinCount = 0;
-        int enemyCount = 0;
         for (int i = 1; i < levelArray.length - 1; i++) {
             for (int j = 1; j < levelArray[i].length - 1; j++) {
                 if (levelArray[i][j] == 2){
                     coinCount++;
-                }else if (levelArray[i][j] == 3 || levelArray[i][j] == 4){
-                    enemyCount++;
                 }
             }
         }
-        return coinCount > 0 && enemyCount > 0 && keyLimit && doorLimit && avatarLimit;
+        return coinCount > 0 && keyLimit && doorLimit && avatarLimit;
     }
 }

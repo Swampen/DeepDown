@@ -45,7 +45,6 @@ public class Alerts {
         a.setHeaderText("The level is not valid");
         a.setContentText("Please make sure you have the following: \n" +
                             "  - At least one Coin\n" +
-                            "  - At least one Enemy\n" +
                             "  - One Key\n" +
                             "  - One Door\n" +
                             "  - One Avatar\n");
