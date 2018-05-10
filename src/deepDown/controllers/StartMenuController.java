@@ -26,7 +26,6 @@ import java.util.logging.Level;
 public class StartMenuController {
 
     @FXML private AnchorPane anchor;
-    @FXML private Pane level;
     @FXML private Button newGameButton;
     @FXML private Button loadGameButton;
     @FXML private Button leaderboardButton;
@@ -34,14 +33,9 @@ public class StartMenuController {
     @FXML private Button helpButton;
     @FXML private Button levelEditorButton;
 
-    private boolean newGameHover = false;
-    private boolean loadGameHover = false;
-    private boolean leaderboardHover = false;
-    private boolean quitGameHover = false;
-    private boolean helpHover = false;
-
     private MenuAnimation newGame;
     private MenuAnimation loadGame;
+    private MenuAnimation levelEditor;
     private MenuAnimation leaderboard;
     private MenuAnimation quit;
     private MenuAnimation help;
@@ -57,6 +51,7 @@ public class StartMenuController {
     public void initialize() {
         newGame = new MenuAnimation(newGameButton);
         loadGame = new MenuAnimation(loadGameButton);
+        levelEditor = new MenuAnimation(levelEditorButton);
         leaderboard = new MenuAnimation(leaderboardButton);
         quit = new MenuAnimation(quitButton);
         help = new MenuAnimation(helpButton);
@@ -70,6 +65,10 @@ public class StartMenuController {
             }
             if (loadGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
                 loadGamePressed();
+                e.consume();
+            }
+            if (levelEditorButton.isFocused() && e.getCode() == KeyCode.ENTER){
+                levelEditorButtonPressed();
                 e.consume();
             }
             if (leaderboardButton.isFocused() && e.getCode() == KeyCode.ENTER){
@@ -123,6 +122,19 @@ public class StartMenuController {
                     loadGame.setButtonImage(image);
                     loadGameButton = loadGame.getButton();
                     loadGame.setHovering(false);
+                }
+
+                if((levelEditorButton.isHover() || levelEditorButton.isFocused()) && levelEditor.isNotHovering()){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LevelEditor.gif"));
+                    levelEditor.setButtonImage(image);
+                    levelEditorButton = levelEditor.getButton();
+                    levelEditor.setHovering(true);
+                    levelEditorButton.requestFocus();
+                }else if (!levelEditorButton.isHover() && !levelEditorButton.isFocused()){
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LevelEditor.png"));
+                    levelEditor.setButtonImage(image);
+                    levelEditorButton = levelEditor.getButton();
+                    levelEditor.setHovering(false);
                 }
 
                 if((leaderboardButton.isHover() || leaderboardButton.isFocused()) && leaderboard.isNotHovering()){
