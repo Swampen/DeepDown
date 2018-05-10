@@ -1,6 +1,7 @@
 package deepDown.controllers;
 
 import deepDown.Alerts;
+import deepDown.Loader;
 import deepDown.level.LevelEditor;
 import deepDown.level.LevelReader;
 import deepDown.level.LevelRequirements;
@@ -136,16 +137,7 @@ public class LevelEditorController {
         if (LevelRequirements.isValidLevel(levelArray)) {
             levelEditor.saveCustomLevel(levelArray, custom);
             animationTimer.stop();
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-                LevelController level = new LevelController(9, 0, 3);
-                loader.setController(level);
-                Parent root = loader.load();
-                anchor.getChildren().setAll(root);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Loader.loadLevel(anchor, 9, 0, 40);
         }else {
             Alerts.notValidLevel();
         }
@@ -173,15 +165,7 @@ public class LevelEditorController {
      * Loads the start menu with FXML.
      */
     public void backToMenuPressed(){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
-            StartMenuController controller = new StartMenuController();
-            loader.setController(controller);
-            Parent root = loader.load();
-            anchor.getChildren().setAll(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Loader.loadStartMenu(anchor);
     }
 
     /**

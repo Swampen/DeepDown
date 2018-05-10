@@ -1,13 +1,13 @@
 package deepDown.controllers;
 
 import deepDown.Alerts;
+import deepDown.Loader;
 import deepDown.MenuAnimation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -18,6 +18,7 @@ import javafx.scene.layout.*;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.logging.Level;
 
 /**
  * @author Michael Mobæk Thoresen and Ole-Martin Heggen
@@ -29,9 +30,9 @@ public class StartMenuController {
     @FXML private Button newGameButton;
     @FXML private Button loadGameButton;
     @FXML private Button leaderboardButton;
-    @FXML private Button quitGameButton;
+    @FXML private Button quitButton;
     @FXML private Button helpButton;
-    @FXML private Button levelSelect;
+    @FXML private Button levelEditorButton;
 
     private boolean newGameHover = false;
     private boolean loadGameHover = false;
@@ -57,30 +58,30 @@ public class StartMenuController {
         newGame = new MenuAnimation(newGameButton);
         loadGame = new MenuAnimation(loadGameButton);
         leaderboard = new MenuAnimation(leaderboardButton);
-        quit = new MenuAnimation(quitGameButton);
+        quit = new MenuAnimation(quitButton);
         help = new MenuAnimation(helpButton);
 
         anchor.requestFocus();
 
         anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             if (newGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                newGameClicked();
+                newGamePressed();
                 e.consume();
             }
             if (loadGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                loadGameClicked();
+                loadGamePressed();
                 e.consume();
             }
             if (leaderboardButton.isFocused() && e.getCode() == KeyCode.ENTER){
-               leaderboardClicked();
+                leaderboardButtonPressed();
                e.consume();
             }
-            if (quitGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                quitClicked();
+            if (quitButton.isFocused() && e.getCode() == KeyCode.ENTER){
+                quitButtonPressed();
                 e.consume();
             }
             if (helpButton.isFocused() && e.getCode() == KeyCode.ENTER){
-                helpButtonClicked();
+                helpButtonPressed();
                 e.consume();
             }
         });
@@ -138,17 +139,17 @@ public class StartMenuController {
                     leaderboard.setHovering(false);
                 }
 
-                if((quitGameButton.isHover() || quitGameButton.isFocused()) && quit.isNotHovering()){
+                if((quitButton.isHover() || quitButton.isFocused()) && quit.isNotHovering()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.gif"));
                     quit.setButtonImage(image);
-                    quitGameButton = quit.getButton();
+                    quitButton = quit.getButton();
                     quit.setHovering(true);
-                    quitGameButton.requestFocus();
+                    quitButton.requestFocus();
 
-                }else if (!quitGameButton.isHover() && !quitGameButton.isFocused()){
+                }else if (!quitButton.isHover() && !quitButton.isFocused()){
                     Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.png"));
                     quit.setButtonImage(image);
-                    quitGameButton = quit.getButton();
+                    quitButton = quit.getButton();
                     quit.setHovering(false);
                 }
 
@@ -174,18 +175,9 @@ public class StartMenuController {
      * The action when the "New Game" button is pressed.
      * Loads the FXML for the first level with score of 0 and 3 lives.
      */
-    public void newGameClicked(){
+    public void newGamePressed(){
         animationTimer.stop();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-            LevelController level = new LevelController(1, 0, 3);
-            loader.setController(level);
-            Parent root = loader.load();
-            anchor.getChildren().setAll(root);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Loader.loadLevel(anchor, 1, 0, 3);
     }
 
     /**
@@ -193,19 +185,16 @@ public class StartMenuController {
      * Loads the FXML for the level that the player saved, with the
      * stored score and lives from the save file.
      */
-    public void loadGameClicked(){
+    public void loadGamePressed(){
         animationTimer.stop();
         try {
             FileInputStream fis = new FileInputStream("Files/save");
             DataInputStream dis = new DataInputStream(fis);
-            int i = dis.readInt();
-            int ts = dis.readInt();
-            int l = dis.readInt();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/level.fxml"));
-            LevelController level = new LevelController(i, ts, l);
-            loader.setController(level);
-            Parent root = loader.load();
-            anchor.getChildren().setAll(root);
+            int levelProgression = dis.readInt();
+            int totScore = dis.readInt();
+            int avatarLives = dis.readInt();
+
+            Loader.loadLevel(anchor, levelProgression, totScore, avatarLives);
         } catch (IOException e ){
             Alerts.noSaveFile();
             e.printStackTrace();
@@ -217,37 +206,21 @@ public class StartMenuController {
      * Loads the FXML for the leaderboard where the player
      * can check the top scores achieved.
      */
-    public void leaderboardClicked(){
+    public void leaderboardButtonPressed(){
         animationTimer.stop();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/leaderboard.fxml"));
-            LeaderboardController controller = new LeaderboardController();
-            loader.setController(controller);
-            Parent root = loader.load();
-            anchor.getChildren().setAll(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Loader.loadLeaderboard(anchor);
     }
 
-    public void levelSelectClicked(){
+    public void levelEditorButtonPressed(){
         animationTimer.stop();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/levelEditor.fxml"));
-            LevelEditorController levelSelect = new LevelEditorController();
-            loader.setController(levelSelect);
-            Parent root = loader.load();
-            anchor.getChildren().setAll(root);
-        }  catch (IOException e) {
-            e.printStackTrace();
-        }
+        Loader.loadLevelEditor(anchor);
     }
 
     /**
      * The action performed when the "Quit Game" button is pressed.
      * Stops and closes the javaFX application.
      */
-    public void quitClicked(){
+    public void quitButtonPressed(){
         animationTimer.stop();
         Platform.exit();
         System.exit(0);
@@ -258,16 +231,8 @@ public class StartMenuController {
      * Loads the FXML for the help screen for instructions on how to play the game.
      */
 
-    public void helpButtonClicked(){
+    public void helpButtonPressed(){
         animationTimer.stop();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/help.fxml"));
-            HelpController help = new HelpController();
-            loader.setController(help);
-            Parent root = loader.load();
-            anchor.getChildren().setAll(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Loader.loadHelp(anchor);
     }
 }

@@ -1,7 +1,6 @@
 package deepDown;
 
-import deepDown.controllers.LevelEditorController;
-import deepDown.controllers.PauseMenuController;
+import deepDown.controllers.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,13 +26,38 @@ public class Loader {
         }
     }
 
-    public static void loadLevelEditorPause(AnchorPane anchor, Stage stage){
+    public static void loadLevelEditorFromPause(AnchorPane anchor, Stage stage){
         try {
             FXMLLoader loader = new FXMLLoader(Loader.class.getResource("/deepDown/resource/FXML/levelEditor.fxml"));
             LevelEditorController levelSelect = new LevelEditorController();
             loader.setController(levelSelect);
             Parent root = loader.load();
+            anchor.getChildren().setAll(root);
             stage.close();
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadStartMenuFromPause(AnchorPane anchor, Stage stage){
+        try {
+            FXMLLoader loader = new FXMLLoader(Loader.class.getResource("/deepDown/resource/FXML/startMenu.fxml"));
+            StartMenuController levelSelect = new StartMenuController();
+            loader.setController(levelSelect);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+            stage.close();
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadStartMenu(AnchorPane anchor){
+        try {
+            FXMLLoader loader = new FXMLLoader(Loader.class.getResource("/deepDown/resource/FXML/startMenu.fxml"));
+            StartMenuController levelSelect = new StartMenuController();
+            loader.setController(levelSelect);
+            Parent root = loader.load();
             anchor.getChildren().setAll(root);
         }  catch (IOException e) {
             e.printStackTrace();
@@ -79,4 +103,55 @@ public class Loader {
             e.printStackTrace();
         }
     }
+
+    public static void loadEndScreen(AnchorPane anchor, int totScore, boolean gameCompleted){
+        try {
+            FXMLLoader loader = new FXMLLoader(Loader.class.getResource("/deepDown/resource/FXML/endScreen.fxml"));
+            EndScreenController endScreen = new EndScreenController(totScore, gameCompleted);
+            loader.setController(endScreen);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadLevel(AnchorPane anchor, int levelProgression, int totScore, int avatarLives){
+        try {
+            FXMLLoader loader = new FXMLLoader(Loader.class.getResource("/deepDown/resource/FXML/level.fxml"));
+            LevelController level = new LevelController(levelProgression, totScore, avatarLives);
+            loader.setController(level);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadLeaderboard(AnchorPane anchor){
+        try {
+            FXMLLoader loader = new FXMLLoader(Loader.class.getResource("/deepDown/resource/FXML/leaderboard.fxml"));
+            LeaderboardController controller = new LeaderboardController();
+            loader.setController(controller);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadHelp(AnchorPane anchor){
+        try {
+            FXMLLoader loader = new FXMLLoader(Loader.class.getResource("/deepDown/resource/FXML/help.fxml"));
+            HelpController help = new HelpController();
+            loader.setController(help);
+            Parent root = loader.load();
+            anchor.getChildren().setAll(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

@@ -13,7 +13,7 @@
          <VBox alignment="CENTER" layoutY="99.0" prefHeight="500.0" prefWidth="1280.0"
                style="-fx-background-color: transparent;">
             <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" minHeight="51.0"
-                    mnemonicParsing="false" onAction="#newGameClicked" prefWidth="264.0"
+                    mnemonicParsing="false" onAction="#newGamePressed" prefWidth="264.0"
                     style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND"/>
@@ -23,7 +23,7 @@
                </VBox.margin>
             </Button>
             <Button fx:id="loadGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0"
-                    layoutY="143.0" minHeight="51.0" mnemonicParsing="false" onAction="#loadGameClicked"
+                    layoutY="143.0" minHeight="51.0" mnemonicParsing="false" onAction="#loadGamePressed"
                     prefWidth="264.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND"/>
@@ -33,7 +33,7 @@
                </VBox.margin>
             </Button>
             <Button fx:id="leaderboardButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0"
-                    layoutY="286.0" minHeight="51.0" mnemonicParsing="false" onAction="#leaderboardClicked"
+                    layoutY="286.0" minHeight="51.0" mnemonicParsing="false" onAction="#leaderboardButtonPressed"
                     prefWidth="264.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND"/>
@@ -42,8 +42,8 @@
                   <Insets bottom="25.0"/>
                </VBox.margin>
             </Button>
-            <Button fx:id="quitGameButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0"
-                    layoutY="286.0" minHeight="51.0" mnemonicParsing="false" onAction="#quitClicked"
+            <Button fx:id="quitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0"
+                    layoutY="286.0" minHeight="51.0" mnemonicParsing="false" onAction="#quitButtonPressed"
                     prefWidth="264.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND"/>
@@ -53,7 +53,7 @@
                </VBox.margin>
             </Button>
             <Button fx:id="helpButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0"
-                    layoutY="117.0" minHeight="51.0" mnemonicParsing="false" onAction="#helpButtonClicked"
+                    layoutY="117.0" minHeight="51.0" mnemonicParsing="false" onAction="#helpButtonPressed"
                     prefWidth="264.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND"/>
@@ -64,7 +64,7 @@
             </Button>
          </VBox>
          <VBox prefHeight="51.0" prefWidth="100.0">
-            <Button fx:id="levelSelect" mnemonicParsing="false" onAction="#levelSelectClicked" opacity="0.0"
+            <Button fx:id="levelEditorButton" mnemonicParsing="false" onAction="#levelEditorButtonPressed" opacity="0.0"
                     prefHeight="19.0" prefWidth="28.0" text="Button"/>
          </VBox>
       </AnchorPane>

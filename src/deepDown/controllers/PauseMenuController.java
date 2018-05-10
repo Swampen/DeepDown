@@ -4,9 +4,6 @@ import deepDown.Alerts;
 import deepDown.Loader;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -90,20 +87,11 @@ public class PauseMenuController {
      * Loads the start menu with FXML.
      */
     public void backToMenuPressed(){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/startMenu.fxml"));
-            StartMenuController startMenuController = new StartMenuController();
-            loader.setController(startMenuController);
-            Parent root = loader.load();
-            stage.close();
-            parentAnchor.getChildren().setAll(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Loader.loadStartMenuFromPause(parentAnchor, stage);
     }
 
     public void backToLEButtonPressed(){
-        Loader.loadLevelEditorPause(parentAnchor, stage);
+        Loader.loadLevelEditorFromPause(parentAnchor, stage);
     }
 
     /**

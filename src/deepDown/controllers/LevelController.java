@@ -378,14 +378,6 @@ public class LevelController {
      */
     private void setEndScreen(boolean gameCompleted) {
         animationTimer.stop();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/deepDown/resource/FXML/endScreen.fxml"));
-            EndScreenController endScreen = new EndScreenController(totScore, gameCompleted);
-            loader.setController(endScreen);
-            Parent root = loader.load();
-            anchor.getChildren().setAll(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Loader.loadEndScreen(anchor, totScore, gameCompleted);
     }
 }
