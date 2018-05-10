@@ -124,6 +124,7 @@ public class LevelEditorController {
 
     public void saveLevelPressed(){
         //todo save level to Files folder name "customLevel.txt"
+        levelEditor.saveLevel(levelArray);
     }
 
     public void loadLevelPressed(){
@@ -202,4 +203,5 @@ public class LevelEditorController {
         selectedTile = 7;
         System.out.println("avatar: " + selectedTile);
     }
+
 }

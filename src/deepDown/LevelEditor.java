@@ -1,7 +1,13 @@
 package deepDown;
 
+import deepDown.controllers.LevelEditorController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class LevelEditor {
     private final Image image;
@@ -64,5 +70,26 @@ public class LevelEditor {
             System.out.println();
         }
         System.out.println();
+    }
+
+    public void saveLevel(int[][] array) {
+        try {
+            File custom = new File("Files/customLevel.txt");
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < 18; i++) {
+                for (int j = 0; j < 32; j++) {
+                    builder.append(array[i][j]);
+                    if (j < 31) {
+                        builder.append(" ");
+                    }
+                }
+                builder.append(System.getProperty("line.separator"));
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(custom));
+            writer.write(builder.toString());
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }
