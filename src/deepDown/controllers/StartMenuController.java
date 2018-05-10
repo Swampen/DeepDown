@@ -6,8 +6,6 @@ import deepDown.MenuAnimation;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -18,7 +16,6 @@ import javafx.scene.layout.*;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.logging.Level;
 
 /**
  * @author Michael Mobæk Thoresen and Ole-Martin Heggen
@@ -32,6 +29,7 @@ public class StartMenuController {
     @FXML private Button quitButton;
     @FXML private Button helpButton;
     @FXML private Button levelEditorButton;
+    @FXML private VBox buttonVbox;
 
     private MenuAnimation newGame;
     private MenuAnimation loadGame;
@@ -58,7 +56,14 @@ public class StartMenuController {
 
         anchor.requestFocus();
 
+        anchor.setOnMouseMoved(e -> {
+           buttonVbox.setMouseTransparent(false);
+        });
         anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.UP || e.getCode() == KeyCode.DOWN ||
+                    e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.RIGHT){
+                buttonVbox.setMouseTransparent(true);
+            }
             if (newGameButton.isFocused() && e.getCode() == KeyCode.ENTER){
                 newGamePressed();
                 e.consume();
@@ -98,82 +103,82 @@ public class StartMenuController {
             public void handle(long now){
 
                 if((newGameButton.isHover() || newGameButton.isFocused()) && newGame.isNotHovering()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.gif"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/NewGame.gif"));
                     newGame.setButtonImage(image);
                     newGameButton = newGame.getButton();
                     newGame.setHovering(true);
                     newGameButton.requestFocus();
 
                 }else if (!newGameButton.isHover() && !newGameButton.isFocused()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/NewGame.png"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/NewGame.png"));
                     newGame.setButtonImage(image);
                     newGameButton = newGame.getButton();
                     newGame.setHovering(false);
                 }
 
                 if((loadGameButton.isHover() || loadGameButton.isFocused()) && loadGame.isNotHovering()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.gif"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/LoadGame.gif"));
                     loadGame.setButtonImage(image);
                     loadGameButton = loadGame.getButton();
                     loadGame.setHovering(true);
                     loadGameButton.requestFocus();
                 }else if (!loadGameButton.isHover() && !loadGameButton.isFocused()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LoadGame.png"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/LoadGame.png"));
                     loadGame.setButtonImage(image);
                     loadGameButton = loadGame.getButton();
                     loadGame.setHovering(false);
                 }
 
                 if((levelEditorButton.isHover() || levelEditorButton.isFocused()) && levelEditor.isNotHovering()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LevelEditor.gif"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/LevelEditor.gif"));
                     levelEditor.setButtonImage(image);
                     levelEditorButton = levelEditor.getButton();
                     levelEditor.setHovering(true);
                     levelEditorButton.requestFocus();
                 }else if (!levelEditorButton.isHover() && !levelEditorButton.isFocused()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/LevelEditor.png"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/LevelEditor.png"));
                     levelEditor.setButtonImage(image);
                     levelEditorButton = levelEditor.getButton();
                     levelEditor.setHovering(false);
                 }
 
                 if((leaderboardButton.isHover() || leaderboardButton.isFocused()) && leaderboard.isNotHovering()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.gif"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/Leaderboard.gif"));
                     leaderboard.setButtonImage(image);
                     leaderboardButton = leaderboard.getButton();
                     leaderboard.setHovering(true);
                     leaderboardButton.requestFocus();
 
                 }else if (!leaderboardButton.isHover() && !leaderboardButton.isFocused()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Leaderboard.png"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/Leaderboard.png"));
                     leaderboard.setButtonImage(image);
                     leaderboardButton = leaderboard.getButton();
                     leaderboard.setHovering(false);
                 }
 
                 if((quitButton.isHover() || quitButton.isFocused()) && quit.isNotHovering()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.gif"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/QuitGame.gif"));
                     quit.setButtonImage(image);
                     quitButton = quit.getButton();
                     quit.setHovering(true);
                     quitButton.requestFocus();
 
                 }else if (!quitButton.isHover() && !quitButton.isFocused()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/QuitGame.png"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/QuitGame.png"));
                     quit.setButtonImage(image);
                     quitButton = quit.getButton();
                     quit.setHovering(false);
                 }
 
                 if((helpButton.isHover() || helpButton.isFocused()) && help.isNotHovering()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Help.gif"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/Help.gif"));
                     help.setButtonImage(image);
                     helpButton = help.getButton();
                     help.setHovering(true);
                     helpButton.requestFocus();
 
                 }else if (!helpButton.isHover() && !helpButton.isFocused()){
-                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Help.png"));
+                    Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/startMenu/Help.png"));
                     help.setButtonImage(image);
                     helpButton = help.getButton();
                     help.setHovering(false);

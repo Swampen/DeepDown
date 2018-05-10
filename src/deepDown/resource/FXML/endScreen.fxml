@@ -1,46 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Rectangle height="720.0" opacity="0.5" width="1280.0" />
-      <VBox fx:id="vBox" alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
-         <children>
-            <ImageView fx:id="imageView" />
-            <Text fx:id="totScoreText" text="Score: 1000" />
-            <HBox fx:id="nameHBox" alignment="CENTER">
-               <children>
-                  <Text fx:id="nameText" text="Name:" />
-                  <TextField fx:id="nameInput" onAction="#okButtonPressed" promptText="Enter your name" />
-                  <Button fx:id="ok" alignment="CENTER" onAction="#okButtonPressed" text="OK" />
-               </children>
-            </HBox>
-            <HBox fx:id="buttonsHBox" alignment="CENTER" disable="true" visible="false">
-               <children>
-                  <Button fx:id="backToMenuButton" onAction="#backToMenuPressed" prefHeight="50.0" prefWidth="100.0" text="Back to Menu">
-                     <HBox.margin>
-                        <Insets right="50.0" />
-                     </HBox.margin>
-                     <effect>
-                        <Reflection fraction="0.44" topOpacity="0.31" />
-                     </effect>
-                  </Button>
-                  <Button fx:id="quitGameButton" onAction="#quitGamePressed" prefHeight="50.0" prefWidth="100.0" text="Quit Game">
-                  <effect>
-                     <Reflection fraction="0.44" topOpacity="0.31" />
-                  </effect>
-               </Button>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            style="-fx-background-image: url(deepDown/resource/images/LevelBackground.png); -fx-background-size: 100% 100%;">
+   <Rectangle height="720.0" opacity="0.75" width="1280.0"/>
+   <VBox fx:id="vBox" alignment="CENTER" prefHeight="720.0" prefWidth="1280.0">
+      <ImageView fx:id="imageView"/>
+      <Text fx:id="totScoreText" text="Score: 1000"/>
+      <HBox fx:id="nameHBox" alignment="CENTER">
+         <Text fx:id="nameText" text="Name:"/>
+         <TextField fx:id="nameInput" onAction="#okButtonPressed" promptText="Enter your name"/>
+         <Button fx:id="ok" alignment="CENTER" onAction="#okButtonPressed" text="OK"/>
+      </HBox>
+      <HBox fx:id="buttonsHBox" alignment="CENTER" disable="true" visible="false">
+         <Button fx:id="backToMenuButton" onAction="#backToMenuPressed" prefHeight="50.0" prefWidth="100.0"
+                 text="Back to Menu">
+            <HBox.margin>
+               <Insets right="50.0"/>
+            </HBox.margin>
+            <effect>
+               <Reflection fraction="0.44" topOpacity="0.31"/>
+            </effect>
+         </Button>
+         <Button fx:id="quitGameButton" onAction="#quitGamePressed" prefHeight="50.0" prefWidth="100.0"
+                 text="Quit Game">
+         <effect>
+            <Reflection fraction="0.44" topOpacity="0.31"/>
+         </effect>
+      </Button>
+      </HBox>
+   </VBox>
 </AnchorPane>

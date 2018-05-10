@@ -3,49 +3,48 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <BorderPane prefHeight="720.0" prefWidth="1280.0">
-         <center>
+<?import javafx.scene.shape.Rectangle?>
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            style="-fx-background-image: url(deepDown/resource/images/LevelEditorBackground.png); -fx-background-size: 10% 10%;">
+    <Rectangle height="720.0" opacity="0.75" width="1280.0"/>
+    <BorderPane prefHeight="720.0" prefWidth="1280.0">
+        <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Canvas fx:id="editorCanvas" height="576.0" layoutX="1.0" layoutY="72.0" width="1024.0" />
-               </children>
+                <Canvas fx:id="editorCanvas" height="576.0" layoutX="1.0" layoutY="72.0" width="1024.0"/>
             </AnchorPane>
-         </center>
-         <left>
+        </center>
+        <left>
             <VBox alignment="CENTER" prefHeight="720.0" prefWidth="254.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button layoutX="117.0" layoutY="270.0" mnemonicParsing="false" onAction="#eraserButtonPressed" text="Eraser" />
-                  <Button onAction="#wallButtonPressed" text="Wall" />
-                  <Button layoutX="117.0" layoutY="358.0" mnemonicParsing="false" onAction="#coinButtonPressed" text="Coin" />
-                  <Button layoutX="117.0" layoutY="345.0" mnemonicParsing="false" onAction="#horizontalEnemyButtonPressed" text="Horizontal Enemy" />
-                  <Button layoutX="117.0" layoutY="383.0" mnemonicParsing="false" onAction="#verticalEnemyButtonPressed" text="Vertical Enemy" />
-                  <Button layoutX="117.0" layoutY="395.0" mnemonicParsing="false" onAction="#keyButtonPressed" text="Key" />
-                  <Button layoutX="117.0" layoutY="408.0" mnemonicParsing="false" onAction="#doorButtonPressed" text="Door" />
-                  <Button layoutX="117.0" layoutY="420.0" mnemonicParsing="false" onAction="#avatarButtonPressed" text="Avatar" />
-               </children>
+                <Button layoutX="117.0" layoutY="270.0" mnemonicParsing="false" onAction="#eraserButtonPressed"
+                        text="Eraser"/>
+                <Button onAction="#wallButtonPressed" text="Wall"/>
+                <Button layoutX="117.0" layoutY="358.0" mnemonicParsing="false" onAction="#coinButtonPressed"
+                        text="Coin"/>
+                <Button layoutX="117.0" layoutY="345.0" mnemonicParsing="false"
+                        onAction="#horizontalEnemyButtonPressed" text="Horizontal Enemy"/>
+                <Button layoutX="117.0" layoutY="383.0" mnemonicParsing="false" onAction="#verticalEnemyButtonPressed"
+                        text="Vertical Enemy"/>
+                <Button layoutX="117.0" layoutY="395.0" mnemonicParsing="false" onAction="#keyButtonPressed"
+                        text="Key"/>
+                <Button layoutX="117.0" layoutY="408.0" mnemonicParsing="false" onAction="#doorButtonPressed"
+                        text="Door"/>
+                <Button layoutX="117.0" layoutY="420.0" mnemonicParsing="false" onAction="#avatarButtonPressed"
+                        text="Avatar"/>
             </VBox>
-         </left>
-         <top>
+        </left>
+        <top>
             <MenuBar BorderPane.alignment="CENTER">
-              <menus>
                 <Menu mnemonicParsing="false" text="File">
-                  <items>
-                        <MenuItem mnemonicParsing="false" onAction="#playLevelPressed" text="Play Level" />
-                    <MenuItem mnemonicParsing="false" onAction="#saveLevelPressed" text="Save Level" />
-                        <MenuItem mnemonicParsing="false" onAction="#loadLevelPressed" text="Load Level" />
-                        <MenuItem mnemonicParsing="false" onAction="#backToMenuPressed" text="Back to Menu" />
-                  </items>
+                    <MenuItem mnemonicParsing="false" onAction="#playLevelPressed" text="Play Level"/>
+                    <MenuItem mnemonicParsing="false" onAction="#saveLevelPressed" text="Save Level"/>
+                    <MenuItem mnemonicParsing="false" onAction="#loadLevelPressed" text="Load Level"/>
+                    <MenuItem mnemonicParsing="false" onAction="#backToMenuPressed" text="Back to Menu"/>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                        <MenuItem mnemonicParsing="false" onAction="#discardPressed" text="Discard" />
-                  </items>
+                    <MenuItem mnemonicParsing="false" onAction="#discardPressed" text="Discard"/>
                 </Menu>
-              </menus>
             </MenuBar>
-         </top>
-      </BorderPane>
-   </children>
+        </top>
+    </BorderPane>
 </AnchorPane>

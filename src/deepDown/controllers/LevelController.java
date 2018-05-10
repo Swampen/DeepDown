@@ -2,6 +2,7 @@ package deepDown.controllers;
 
 
 import deepDown.Loader;
+import deepDown.level.Animation;
 import deepDown.level.GameBoard;
 import deepDown.Sound;
 import deepDown.gameObjects.*;

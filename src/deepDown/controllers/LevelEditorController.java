@@ -105,13 +105,13 @@ public class LevelEditorController {
                     }
                     int selectedGrid = levelArray[levelArrayY][levelArrayX];
 
-                    if (LevelRequirements.isKeyLimit() && selectedGrid == 5 && selectedTile != 5) {
+                    if (LevelRequirements.isKeyLimit() && selectedGrid != 5 && selectedTile != 5) {
                         LevelRequirements.setKeyLimit(false);
                     }
-                    if (LevelRequirements.isDoorLimit() && selectedGrid == 6 && selectedTile != 6) {
+                    if (LevelRequirements.isDoorLimit() && selectedGrid != 6 && selectedTile != 6) {
                         LevelRequirements.setDoorLimit(false);
                     }
-                    if (LevelRequirements.isAvatarLimit() && selectedGrid == 7 && selectedTile != 7) {
+                    if (LevelRequirements.isAvatarLimit() && selectedGrid != 7 && selectedTile != 7) {
                         LevelRequirements.setAvatarLimit(false);
                     }
 
@@ -184,7 +184,6 @@ public class LevelEditorController {
      */
     public void eraserButtonPressed(){
         selectedTile = 0;
-        System.out.println("eraser: " + selectedTile);
     }
 
     /**
@@ -193,7 +192,6 @@ public class LevelEditorController {
      */
     public void wallButtonPressed(){
         selectedTile = 1;
-        System.out.println("wall: " + selectedTile);
     }
 
     /**
@@ -202,7 +200,6 @@ public class LevelEditorController {
      */
     public void coinButtonPressed(){
         selectedTile = 2;
-        System.out.println("coin: " + selectedTile);
     }
 
     /**
@@ -211,7 +208,6 @@ public class LevelEditorController {
      */
     public void horizontalEnemyButtonPressed(){
         selectedTile = 3;
-        System.out.println("enemy: " + selectedTile);
     }
 
     /**
@@ -220,7 +216,6 @@ public class LevelEditorController {
      */
     public void verticalEnemyButtonPressed(){
         selectedTile = 4;
-        System.out.println("enemy: " + selectedTile);
     }
 
     /**
@@ -229,7 +224,6 @@ public class LevelEditorController {
      */
     public void keyButtonPressed(){
         selectedTile = 5;
-        System.out.println("key: " + selectedTile);
     }
 
     /**
@@ -238,7 +232,6 @@ public class LevelEditorController {
      */
     public void doorButtonPressed(){
         selectedTile = 6;
-        System.out.println("door: " + selectedTile);
     }
 
     /**
@@ -247,7 +240,6 @@ public class LevelEditorController {
      */
     public void avatarButtonPressed(){
         selectedTile = 7;
-        System.out.println("avatar: " + selectedTile);
     }
 
 }

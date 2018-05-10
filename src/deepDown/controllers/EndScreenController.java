@@ -1,6 +1,7 @@
 package deepDown.controllers;
 
 import deepDown.Leaderboard;
+import deepDown.level.Animation;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -61,10 +62,7 @@ public class EndScreenController {
             }
         });
 
-        FadeTransition ft = new FadeTransition(Duration.millis(1500), vBox);
-        ft.setFromValue(0.0);
-        ft.setToValue(1.0);
-        ft.play();
+        Animation.endScreenAnimation(vBox);
 
         if (gameCompleted){
             Image img = new Image(getClass().getResourceAsStream("/deepDown/resource/images/Victory.png"));
