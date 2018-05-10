@@ -17,7 +17,7 @@
             <VBox alignment="CENTER" prefHeight="720.0" prefWidth="254.0" BorderPane.alignment="CENTER">
                <children>
                   <Button layoutX="117.0" layoutY="270.0" mnemonicParsing="false" onAction="#eraserButtonPressed" text="Eraser" />
-                  <Button mnemonicParsing="false" onAction="#wallButtonPressed" text="Wall" />
+                  <Button onAction="#wallButtonPressed" text="Wall" />
                   <Button layoutX="117.0" layoutY="358.0" mnemonicParsing="false" onAction="#coinButtonPressed" text="Coin" />
                   <Button layoutX="117.0" layoutY="345.0" mnemonicParsing="false" onAction="#horizontalEnemyButtonPressed" text="Horizontal Enemy" />
                   <Button layoutX="117.0" layoutY="383.0" mnemonicParsing="false" onAction="#verticalEnemyButtonPressed" text="Vertical Enemy" />

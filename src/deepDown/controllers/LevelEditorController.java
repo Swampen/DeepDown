@@ -38,15 +38,14 @@ public class LevelEditorController {
     /**
      * Method which runs when the fxml is loaded.
      * Initializes the editor, sets action on mouse clicked or dragged
-     * and starts the animationTimer
+     * and starts the animationTimer.
      */
     @FXML
     public void initialize(){
         GraphicsContext gc = editorCanvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, editorCanvas.getWidth(), editorCanvas.getHeight());
-        Image image = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownTileSet.png"));
-        levelEditor = new LevelEditor(image, gc);
+        levelEditor = new LevelEditor(gc);
 
         levelArray = levelEditor.getLevelArray();
 

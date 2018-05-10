@@ -33,7 +33,7 @@
                             <Insets bottom="10.0" />
                         </VBox.margin>
                       </Button>
-                      <Button fx:id="saveGameButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#saveGamePressed" text="Save Game">
+                      <Button fx:id="backToLEButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backToLEButtonPressed" text="Back to Level Editor">
                         <VBox.margin>
                             <Insets bottom="10.0" />
                         </VBox.margin>

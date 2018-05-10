@@ -42,7 +42,6 @@ public class GameBoard {
     public void initializeGameBoard(){
         if (level < 9){
             String path = "/deepDown/level/levels/level" + Integer.toString(level) + ".txt";
-            System.out.println(path);
             levelArray = LevelReader.readLevel(path);
 
         }else {

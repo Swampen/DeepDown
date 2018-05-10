@@ -1,6 +1,7 @@
 package deepDown.controllers;
 
 import deepDown.Alerts;
+import deepDown.Loader;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ public class PauseMenuController {
     private final Stage stage;
     @FXML private Button resumeGameButton;
     @FXML private Button backToMenuButton;
+    @FXML private Button backToLEButton;
     @FXML private Button saveGameButton;
     @FXML private Button quitGameButton;
     @FXML private AnchorPane anchor;
@@ -60,6 +62,10 @@ public class PauseMenuController {
                 backToMenuPressed();
                 e.consume();
             }
+            if (backToLEButton.isFocused() && e.getCode() == KeyCode.ENTER) {
+                backToLEButtonPressed();
+                e.consume();
+            }
             if (saveGameButton.isFocused() && e.getCode() == KeyCode.ENTER) {
                 saveGamePressed();
                 e.consume();
@@ -94,6 +100,10 @@ public class PauseMenuController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void backToLEButtonPressed(){
+        Loader.loadLevelEditorPause(parentAnchor, stage);
     }
 
     /**
