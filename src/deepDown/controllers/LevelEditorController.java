@@ -34,7 +34,6 @@ public class LevelEditorController {
     private int[][] levelArray;
     private int selectedTile;
     private final BooleanProperty mouseClicked = new SimpleBooleanProperty(false);
-    private final BooleanProperty mouseDragged = new SimpleBooleanProperty(false);
     private LevelEditor levelEditor;
     private File custom;
     private String filepath;
@@ -68,21 +67,25 @@ public class LevelEditorController {
 
         editorCanvas.setOnMouseDragged(e -> {
             if (selectedTile == 0 || selectedTile == 1 || selectedTile == 2) {
-                yMouseClicked = e.getY();
                 xMouseClicked = e.getX();
+                yMouseClicked = e.getY();
+            }
+            if (e.getX() < 40 || e.getX() > editorCanvas.getWidth() - 40 ||
+                    e.getY() < 40 || e.getY() > editorCanvas.getHeight() - 40 ){
+                mouseClicked.set(false);
             }
         });
         editorCanvas.setOnMousePressed(e -> {
-            mouseClicked.set(true);
-            yMouseClicked = e.getY();
+            if (e.getX() > 40 && e.getX() < editorCanvas.getWidth() - 40 &&
+                    e.getY() > 40 && e.getY() < editorCanvas.getHeight() - 40 ){
+                mouseClicked.set(true);
+            }
             xMouseClicked = e.getX();
+            yMouseClicked = e.getY();
         });
 
         editorCanvas.setOnMouseReleased(e -> {
-            mouseDragged.set(false);
             mouseClicked.set(false);
-            yMouseClicked = e.getY();
-            xMouseClicked = e.getX();
         });
 
 
@@ -90,18 +93,18 @@ public class LevelEditorController {
             @Override
             public void handle(long now) {
                 if (mouseClicked.get()) {
-                    int yToDraw = 0;
                     int xToDraw = 0;
-                    int levelArrayY = -1;
+                    int yToDraw = 0;
                     int levelArrayX = -1;
+                    int levelArrayY = -1;
 
-                    while (yToDraw < yMouseClicked){
-                        yToDraw += 32;
-                        levelArrayY += 1;
-                    }
                     while (xToDraw < xMouseClicked){
                         xToDraw += 32;
                         levelArrayX += 1;
+                    }
+                    while (yToDraw < yMouseClicked){
+                        yToDraw += 32;
+                        levelArrayY += 1;
                     }
                     int selectedGrid = levelArray[levelArrayY][levelArrayX];
 
