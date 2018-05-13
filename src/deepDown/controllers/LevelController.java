@@ -11,9 +11,6 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -21,13 +18,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
-import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -43,21 +35,10 @@ public class LevelController {
     @FXML private Text livesText;
     @FXML private Text timeText;
     @FXML private Text levelProgressionText;
+    @FXML private Text deathText;
     @FXML private Label fpsLabel;
     @FXML private ImageView coinScoreImage;
 
-    /**
-     * timeScore = variable for keeping track of the Time Score of the player
-     * set to the initial 2000
-     * lastCurrentTime = variable that gets time from the system clock and uses it for calculating
-     * time difference
-     * enemyVel =  The velocity value for the all enemies on the board
-     * coinCount = Variable for keeping track of how many coins the player has collected during a level
-     * totScore = Variable for keeping track of the total score the player has achieved throughout the
-     * entire game
-     * avatarLives = variable for keeping track of how many lives the player has
-     * endScreen = a boolean to determine if the end screen is showing or not
-     */
     private GraphicsContext gc;
     private double timeScore;
     private long lastCurrentTime = System.nanoTime();
@@ -66,9 +47,6 @@ public class LevelController {
     private int avatarLives;
     private boolean endScreen = false;
 
-    /**
-     * Booleans for keeping track of which keys are being pressed
-     */
     private final BooleanProperty upPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty downPressed = new SimpleBooleanProperty(false);
     private final BooleanProperty leftPressed = new SimpleBooleanProperty(false);
@@ -85,14 +63,11 @@ public class LevelController {
 
     private AnimationTimer animationTimer;
 
-    //todo remove when done
-    private int fpsLoop = 0;
-
     /**
-     * Constructor for the LevelController class
-     * @param levelProgression Tells it what level it has to load
-     * @param totScore Tells it what score the player has achieved so far
-     * @param avatarLives Tells it how many lives the player has left
+     * Constructor.
+     * @param levelProgression Tells it what level it has to load.
+     * @param totScore Tells it what score the player has achieved so far.
+     * @param avatarLives Tells it how many lives the player has left.
      */
     public LevelController(int levelProgression, int totScore, int avatarLives){
         this.levelProgression = levelProgression;
@@ -103,7 +78,7 @@ public class LevelController {
     /**
      * Method which runs when the fxml is loaded.
      * Initializes the level by getting all of the objects needed from the GameBoard class
-     * and starts the animationTimer
+     * and starts the animationTimer.
      */
     @FXML
     private void initialize(){
@@ -121,17 +96,13 @@ public class LevelController {
         enemies = level.getEnemies();
         coinCount = 0;
 
-
         anchor.getStylesheets().add("deepDown/resource/stylesheet.css");
         scoreText.setText("Score: " + Integer.toString(totScore));
         livesText.setText("Lives: " + Integer.toString(avatarLives));
         levelProgressionText.setText("Level: " + Integer.toString(levelProgression));
 
-
         Image coinscore = new Image("deepDown/resource/images/Coin.png");
         coinScoreImage.setImage(coinscore);
-
-
 
         canvas.setFocusTraversable(true);
         canvas.setOnKeyPressed(e -> {
@@ -161,10 +132,6 @@ public class LevelController {
                 lastCurrentTime = System.nanoTime();
                 animationTimer.start();
             }
-            if (e.getCode() == KeyCode.K){ //todo remove when done
-                setEndScreen(true);
-
-            }
         });
 
         canvas.setOnKeyReleased(e -> {
@@ -187,14 +154,6 @@ public class LevelController {
             public void handle(long currentTime){
                 double deltaTime = (currentTime - lastCurrentTime) / 1000000000.0;
                 lastCurrentTime = currentTime;
-
-                //todo remove when done
-                fpsLoop += 1;
-                if (fpsLoop == 10) {
-                    double fps = 1 / deltaTime;
-                    fpsLabel.setText(Integer.toString((int)fps));
-                    fpsLoop = 0;
-                }
 
                 coinText.setText(": " + Integer.toString(coinCount));
                 timeText.setText("Time: " + Integer.toString((int)timeScore));
@@ -363,12 +322,18 @@ public class LevelController {
     }
 
     /**
-     * If the avatar has more than zero lives remaining then it resets the level.
+     * Retracts one life from avatarLives.
+     * If the avatar has more lives remaining,
+     * a death sound and animation plays,
+     * then the level resets.
      */
     private void killAvatar() {
         --avatarLives;
         if (avatarLives > 0){
             Sound.playEnemyMedia();
+            animationTimer.start();
+            Animation.deathAnimation(deathText);
+            animationTimer.start();
             resetLevel();
         }
     }

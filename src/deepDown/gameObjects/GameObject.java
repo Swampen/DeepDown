@@ -32,62 +32,64 @@ public abstract class GameObject {
 
     /**
      * Gets the value of the property x.
-     * @return Returns the {@code GameObjects} x value
+     * @return Returns the {@code GameObject} x coordinate.
      */
     public double getX() {
         return x;
     }
 
     /**
-     * @return Returns the GameObjects y value
+     * Gets the value of the property y.
+     * @return Returns the {@code GameObject} y coordinate.
      */
     public double getY() {
         return y;
     }
 
     /**
-     * @return Returns the {@code GameObjects} w value
+     * Gets the value of the property w.
+     * @return Returns the {@code GameObject} width value.
      */
     public int getW() {
         return w;
     }
 
     /**
-     * @return Returns the {@code GameObjects} h value
+     * @return Returns the {@code GameObject} height value.
      */
     public int getH() {
         return h;
     }
 
     /**
-     * Makes a new x by adding the parameter
-     * @param x to be added to this x value
+     * Makes a new x by adding the parameter.
+     * @param x to be added to this x value.
      */
     public void setX(double x) {
         this.x += x;
     }
 
     /**
-     * Makes a new y by adding the parameter
-     * @param y to be added to this y value
+     * Makes a new y by adding the parameter.
+     * @param y to be added to this y value.
      */
     public void setY(double y) {
         this.y += y;
     }
 
     /**
-     * Get the boundary of a {@link Rectangle2D}
-     * @return Returns the boundary's x and y position and it's h and w
+     * Get the boundary of a {@link Rectangle2D}.
+     * @return Returns the boundary's x and y position and it's h and w.
      */
-    public Rectangle2D getBoundingBox(){
+    private Rectangle2D getBoundingBox(){
         return new Rectangle2D(x, y, w, h);
     }
 
     /**
-     * Checks if there is an intersection between this {@code GameObject}
+     * Checks if there is an intersection between this {@code GameObject}.
      * and the specified {@code GameObject}.
-     * @param other the specified {@code GameObject}
-     * @return returns true if there is a collision and false if not
+     * @param other the specified {@code GameObject}.
+     * @return returns true if there is a collision and false if not.
      */
     public boolean isColliding(GameObject other){
         return this.getBoundingBox().intersects(other.getBoundingBox());
@@ -98,10 +100,10 @@ public abstract class GameObject {
      * specified {@code GameObject}. Returns a new {@link Rectangle2D}
      * that represents the intersection of the two rectangles.
      * If the two GameObjects don't intersect, it will return
-     * an empty {@link Rectangle2D}
-     * @param     other the specified {@code Rectangle}
+     * an empty {@link Rectangle2D}.
+     * @param     other the specified {@code Rectangle}.
      * @return    the {@code Rectangle2D} that represents the
-     *            largest intersection between this {@code GameObject}
+     *            largest intersection between this {@code GameObject}.
      */
     public Rectangle2D intersection(GameObject other) {
         double goX1 = this.x;
@@ -125,8 +127,8 @@ public abstract class GameObject {
     }
 
     /**
-     * Getter for sprite
-     * @return {@code Sprite} for this {@code GameObject}
+     * Gets the sprite for this {@code GameObject}.
+     * @return the visual representation of this {@code GameObject}.
      */
     public Sprite getSprite(){
         return sprite;

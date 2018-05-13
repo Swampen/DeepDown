@@ -14,6 +14,7 @@ import java.io.IOException;
 public class LevelEditor {
     private final Image image;
     private final GraphicsContext gc;
+    private int gridSize = 32;
 
     /**
      * Constructor.
@@ -54,30 +55,30 @@ public class LevelEditor {
             for (int j = 0; j < levelArray[i].length; j++) {
                 int arrayInteger = levelArray[i][j];
                 if (arrayInteger == 0){
-                    gc.fillRect(j * 32, i * 32, 32, 32);
+                    gc.fillRect(j * gridSize, i * gridSize, gridSize, gridSize);
                 }else if (arrayInteger == 1) {
-                    gc.fillRect(j * 32, i * 32, 32, 32);
-                    gc.drawImage(image, 0, 0, 40, 40, j * 32, i * 32, 32, 32);
+                    gc.fillRect(j * gridSize, i * gridSize, gridSize, gridSize);
+                    gc.drawImage(image, 0, 0, 40, 40, j * gridSize, i * gridSize, gridSize, gridSize);
                 }else if (arrayInteger == 2) {
-                    gc.fillRect(j * 32, i * 32, 32, 32);
-                    gc.drawImage(image, 40, 0, 40, 40, j * 32, i * 32, 32, 32);
+                    gc.fillRect(j * gridSize, i * gridSize, gridSize, gridSize);
+                    gc.drawImage(image, 40, 0, 40, 40, j * gridSize, i * gridSize, gridSize, gridSize);
                 }else if (arrayInteger == 3) {
-                    gc.fillRect(j * 32, i * 32, 32, 32);
-                    gc.drawImage(image, 80, 0, 40, 40, j * 32, i * 32, 32, 32);
+                    gc.fillRect(j * 32, i * gridSize, gridSize, gridSize);
+                    gc.drawImage(image, 80, 0, 40, 40, j * gridSize, i * gridSize, gridSize, gridSize);
                 }else if (arrayInteger == 4) {
-                    gc.fillRect(j * 32, i * 32, 32, 32);
-                    gc.drawImage(image, 80, 0, 40, 40, j * 32, i * 32, 32, 32);
+                    gc.fillRect(j * gridSize, i * gridSize, gridSize, gridSize);
+                    gc.drawImage(image, 80, 0, 40, 40, j * 32, i * gridSize, gridSize, gridSize);
                 }else if (arrayInteger == 5 && !LevelRequirements.isKeyLimit()) {
-                    gc.fillRect(j * 32, i * 32, 32, 32);
-                    gc.drawImage(image, 120, 0, 40, 40, j * 32, i * 32, 32, 32);
+                    gc.fillRect(j * gridSize, i * gridSize, gridSize, gridSize);
+                    gc.drawImage(image, 120, 0, 40, 40, j * gridSize, i * gridSize, gridSize, gridSize);
                     LevelRequirements.setKeyLimit(true);
                 }else if (arrayInteger == 6 && !LevelRequirements.isDoorLimit()) {
-                    gc.fillRect(j * 32, i * 32, 32, 32);
-                    gc.drawImage(image, 160, 0, 40, 40, j * 32, i * 32, 32, 32);
+                    gc.fillRect(j * gridSize, i * gridSize, gridSize, gridSize);
+                    gc.drawImage(image, 160, 0, 40, 40, j * gridSize, i * gridSize, gridSize, gridSize);
                     LevelRequirements.setDoorLimit(true);
                 }else if (arrayInteger == 7 && !LevelRequirements.isAvatarLimit()) {
-                    gc.fillRect(j * 32, i * 32, 32, 32);
-                    gc.drawImage(image, 0, 40, 30, 30, j * 32 + 4, i * 32 + 4, 24, 24);
+                    gc.fillRect(j * gridSize, i * gridSize, gridSize, gridSize);
+                    gc.drawImage(image, 0, 40, 30, 30, j * gridSize + 4, i * gridSize + 4, 24, 24);
                     LevelRequirements.setAvatarLimit(true);
                 }
             }
@@ -106,6 +107,14 @@ public class LevelEditor {
         } catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Gets the value of the property gridSize.
+     * @return Returns the Level Editor's grid size value.
+     */
+    public int getGridSize(){
+        return gridSize;
     }
 
 }

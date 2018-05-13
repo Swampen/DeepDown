@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Loader {
 
     /**
-     * Loads FXML for the Level Editor from the main menu using an FXMLLoaser
+     * Loads FXML for the Level Editor from the main menu using an FXMLLoader.
      * @param anchor Which {@code AnchorPane} the scene should be attached to.
      */
     public static void loadLevelEditor(AnchorPane anchor){

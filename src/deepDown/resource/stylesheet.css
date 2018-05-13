@@ -1,35 +1,43 @@
+/*level*/
 #level, #nameText, #totScoreText{
   -fx-font: 30px Verdana;
   -fx-font-weight: bold;
 }
 
-#totScoreText{
-    -fx-font-size: 30px;
+/*level death*/
+#deathText{
+    -fx-font: 75px Verdana;
+    -fx-font-weight: bold;
 }
 
-#scoreText, #coinText, #livesText, #timeText, #totScoreText, #nameText, #levelProgressionText{
+
+/*level and endScreen*/
+#scoreText, #coinText, #livesText, #timeText, #totScoreText, #nameText, #levelProgressionText, #deathText{
   -fx-fill: white;
   -fx-stroke: black;
   -fx-stroke-width: 1;
 }
 
+/*help*/
 #titleHelp {
     -fx-font: 45px Verdana;
     -fx-font-weight: bold;
     -fx-text-fill: black;
 }
 
+/*help*/
 #moveText, #enemyText, #pickupText {
     -fx-font: 24px Verdana;
     -fx-label-padding: 4px;
     -fx-text-fill: black;
 }
 
-
+/*help*/
 #movePic, #enemyPic, #pickupPic {
     -fx-background-color: white;
 }
 
+/*leaderboard*/
 #nr1, #nr2, #nr3, #nr4, #nr5, #leaderTitle {
    -fx-fill: white;
 }

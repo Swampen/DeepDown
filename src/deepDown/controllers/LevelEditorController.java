@@ -9,16 +9,12 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * @author Ole-Martin Heggen
@@ -38,6 +34,7 @@ public class LevelEditorController {
     private File custom;
     private String filepath;
     private String file;
+    private int gridSize;
 
     /**
      * Method which runs when the fxml is loaded.
@@ -50,6 +47,7 @@ public class LevelEditorController {
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, editorCanvas.getWidth(), editorCanvas.getHeight());
         levelEditor = new LevelEditor(gc);
+        gridSize = levelEditor.getGridSize();
 
         filepath = new File("Files").getAbsolutePath();
         file = "customLevel.txt";
@@ -70,23 +68,23 @@ public class LevelEditorController {
                 xMouseClicked = e.getX();
                 yMouseClicked = e.getY();
             }
-            if (e.getX() < 40 || e.getX() > editorCanvas.getWidth() - 40 ||
-                    e.getY() < 40 || e.getY() > editorCanvas.getHeight() - 40 ){
+            if (e.getX() <= gridSize || e.getX() >= editorCanvas.getWidth() - gridSize ||
+                    e.getY() <= gridSize || e.getY() >= editorCanvas.getHeight() - gridSize ){
                 mouseClicked.set(false);
+            }else {
+                mouseClicked.set(true);
             }
         });
         editorCanvas.setOnMousePressed(e -> {
-            if (e.getX() > 40 && e.getX() < editorCanvas.getWidth() - 40 &&
-                    e.getY() > 40 && e.getY() < editorCanvas.getHeight() - 40 ){
+            if (e.getX() > gridSize && e.getX() < editorCanvas.getWidth() - gridSize &&
+                    e.getY() > gridSize && e.getY() < editorCanvas.getHeight() - gridSize ){
                 mouseClicked.set(true);
             }
             xMouseClicked = e.getX();
             yMouseClicked = e.getY();
         });
 
-        editorCanvas.setOnMouseReleased(e -> {
-            mouseClicked.set(false);
-        });
+        editorCanvas.setOnMouseReleased(e -> mouseClicked.set(false));
 
 
         animationTimer = new AnimationTimer() {
@@ -95,6 +93,7 @@ public class LevelEditorController {
                 if (mouseClicked.get()) {
                     int xToDraw = 0;
                     int yToDraw = 0;
+
                     int levelArrayX = -1;
                     int levelArrayY = -1;
 
@@ -182,7 +181,7 @@ public class LevelEditorController {
     }
 
     /**
-     * The action performed when the "Eracer" button is pressed.
+     * The action performed when the "Eraser" button is pressed.
      * Selects the eraser tool.
      */
     public void eraserButtonPressed(){
