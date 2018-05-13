@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 /**
  * @author Ole-Martin Heggen
  */
-public class MenuAnimation {
+public class ButtonProperty {
 
     private final Button button;
     private boolean isHovering = false;
@@ -16,20 +16,32 @@ public class MenuAnimation {
      * Constructor.
      * @param button Specified button.
      */
-    public MenuAnimation(Button button) {
+    public ButtonProperty(Button button) {
         this.button = button;
     }
 
     /**
-     * Sets the value of the property image.
-     * @param image Assign the image to this {@code Button}.
+     * Sets the image for the button.
+     * @param path The the image to this {@code Button}.
      */
-    public void setButtonImage(Image image){
+    public void setButtonImage(String path){
+        Image image = new Image(getClass().getResourceAsStream(path));
         button.setGraphic(new ImageView(image));
     }
 
     /**
-     * Gets the {@code Button} for this {@code MenuAnimation}.
+     * Sets the image for the button without the need of an object.
+     * @param path The the image to this {@code Button}.
+     * @param button The {@code Button} the image is applied to.
+     */
+    public static Button setStaticButtonImage(String path, Button button){
+        Image image = new Image(ButtonProperty.class.getResourceAsStream(path));
+        button.setGraphic(new ImageView(image));
+        return button;
+    }
+
+    /**
+     * Gets the {@code Button} for this {@code ButtonProperty}.
      * @return the button with a image assigned to it.
      */
     public Button getButton() {

@@ -7,7 +7,8 @@ import javafx.scene.media.MediaPlayer;
  * @author Ole-Martin Heggen
  */
 public class Sound {
-    private static MediaPlayer mediaPlayer;
+    private static MediaPlayer gameSoundMediaPlayer;
+
 
     /**
      * Reads the path to a MP3 file, then the {@code MediaPlayer}
@@ -16,9 +17,9 @@ public class Sound {
     public static void playBackgroundMedia(){
         String mediaString = Sound.class.getResource("/deepDown/resource/sounds/backgroundMusic.mp3").toExternalForm();
         Media backgroundMedia = new Media(mediaString);
-        mediaPlayer = new MediaPlayer(backgroundMedia);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.play();
+        MediaPlayer bgMusicMediaPlayer = new MediaPlayer(backgroundMedia);
+        bgMusicMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        bgMusicMediaPlayer.play();
     }
 
     /**
@@ -28,8 +29,8 @@ public class Sound {
     public static void playCoinMedia(){
         String mediaString = Sound.class.getResource("/deepDown/resource/sounds/coin.mp3").toExternalForm();
         Media coinMedia = new Media(mediaString);
-        mediaPlayer = new MediaPlayer(coinMedia);
-        mediaPlayer.play();
+        gameSoundMediaPlayer = new MediaPlayer(coinMedia);
+        gameSoundMediaPlayer.play();
     }
 
     /**
@@ -39,8 +40,8 @@ public class Sound {
     public static void playEnemyMedia(){
         String mediaString = Sound.class.getResource("/deepDown/resource/sounds/enemy.mp3").toExternalForm();
         Media enemyMedia = new Media(mediaString);
-        mediaPlayer = new MediaPlayer(enemyMedia);
-        mediaPlayer.play();
+        gameSoundMediaPlayer = new MediaPlayer(enemyMedia);
+        gameSoundMediaPlayer.play();
     }
 
     /**
@@ -50,7 +51,7 @@ public class Sound {
     public static void playDoorMedia(){
         String mediaString = Sound.class.getResource("/deepDown/resource/sounds/door.mp3").toExternalForm();
         Media doorMedia = new Media(mediaString);
-        mediaPlayer = new MediaPlayer(doorMedia);
-        mediaPlayer.play();
+        gameSoundMediaPlayer = new MediaPlayer(doorMedia);
+        gameSoundMediaPlayer.play();
     }
 }

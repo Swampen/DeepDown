@@ -1,6 +1,7 @@
 package deepDown.controllers;
 
 import deepDown.Alerts;
+import deepDown.ButtonProperty;
 import deepDown.Loader;
 import deepDown.level.LevelEditor;
 import deepDown.level.LevelReader;
@@ -11,6 +12,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
@@ -23,6 +25,14 @@ public class LevelEditorController {
 
     @FXML private Canvas editorCanvas;
     @FXML private AnchorPane anchor;
+    @FXML private Button eraserButton;
+    @FXML private Button wallButton;
+    @FXML private Button coinButton;
+    @FXML private Button horizontalEnemyButton;
+    @FXML private Button verticalEnemyButton;
+    @FXML private Button keyButton;
+    @FXML private Button doorButton;
+    @FXML private Button avatarButton;
 
     private double xMouseClicked;
     private double yMouseClicked;
@@ -43,11 +53,32 @@ public class LevelEditorController {
      */
     @FXML
     public void initialize(){
+
         GraphicsContext gc = editorCanvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, editorCanvas.getWidth(), editorCanvas.getHeight());
         levelEditor = new LevelEditor(gc);
         gridSize = levelEditor.getGridSize();
+
+        eraserButton = ButtonProperty.setStaticButtonImage
+                ("/deepDown/resource/images/levelEditor/Eraser.png", eraserButton);
+        wallButton = ButtonProperty.setStaticButtonImage
+                ("/deepDown/resource/images/levelEditor/Wall.png", wallButton);
+        coinButton = ButtonProperty.setStaticButtonImage
+                ("/deepDown/resource/images/levelEditor/Coin.png", coinButton);
+        horizontalEnemyButton = ButtonProperty.setStaticButtonImage
+                ("/deepDown/resource/images/levelEditor/HorizontalEnemy.png", horizontalEnemyButton);
+        verticalEnemyButton = ButtonProperty.setStaticButtonImage
+                ("/deepDown/resource/images/levelEditor/VerticalEnemy.png", verticalEnemyButton);
+        keyButton = ButtonProperty.setStaticButtonImage
+                ("/deepDown/resource/images/levelEditor/Key.png", keyButton);
+        doorButton = ButtonProperty.setStaticButtonImage
+                ("/deepDown/resource/images/levelEditor/Door.png", doorButton);
+        avatarButton = ButtonProperty.setStaticButtonImage
+                ("/deepDown/resource/images/levelEditor/Avatar.png", avatarButton);
+
+        anchor.getStylesheets().add("deepDown/resource/stylesheet.css");
+
 
         filepath = new File("Files").getAbsolutePath();
         file = "customLevel.txt";
@@ -172,7 +203,7 @@ public class LevelEditorController {
 
     /**
      * The action performed when the "Discard" button is pressed.
-     * Shows an alertbox, and discards the custom level based on the response.
+     * Shows an alert box, and discards the custom level based on the response.
      */
     public void discardPressed(){
         if (Alerts.discardCustomLevel()) {
