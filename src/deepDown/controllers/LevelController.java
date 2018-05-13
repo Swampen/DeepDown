@@ -83,7 +83,7 @@ public class LevelController {
     @FXML
     private void initialize(){
         double enemyVel = 100;
-        timeScore = 200;
+        timeScore = 20;
         gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         GameBoard level = new GameBoard(levelProgression, enemyVel);
@@ -161,6 +161,7 @@ public class LevelController {
 
                 update(deltaTime);
                 collisionDetection(deltaTime);
+                checkForTimeout(timeScore);
                 drawFrame();
             }
         };
@@ -202,17 +203,17 @@ public class LevelController {
     private void collisionDetection(double deltaTime) {
 
         for (Wall wall : walls) {
-            if(avatar.isColliding(wall)){
+            if (avatar.isColliding(wall)) {
                 double heightOverlap = avatar.intersection(wall).getHeight();
                 double widthOverlap = avatar.intersection(wall).getWidth();
 
-                if (widthOverlap > heightOverlap){
+                if (widthOverlap > heightOverlap) {
                     avatar.reverseVelo();
                     avatar.posUpdate(deltaTime);
                     avatar.setMoveUp(false);
                     avatar.setMoveDown(false);
                 }
-                if (widthOverlap < heightOverlap){
+                if (widthOverlap < heightOverlap) {
                     avatar.reverseVelo();
                     avatar.posUpdate(deltaTime);
                     avatar.setMoveLeft(false);
@@ -220,55 +221,55 @@ public class LevelController {
                 }
             }
 
-            for (Enemy enemy : enemies){
-                if (avatar.isColliding(enemy)){
-                    if (avatarLives == 0){
-                        totScore += (coinCount*100);
+            for (Enemy enemy : enemies) {
+                if (avatar.isColliding(enemy)) {
+                    if (avatarLives == 0) {
+                        totScore += (coinCount * 100);
                         setEndScreen(false);
                     }
                     killAvatar();
                 }
-                if (enemy.isColliding(wall)){
+                if (enemy.isColliding(wall)) {
                     enemy.reverseVelo();
                     enemy.posUpdate(deltaTime);
                 }
             }
         }
 
-        for (int i = 0; i < coins.size(); i++){
-            if(avatar.isColliding(coins.get(i))) {
+        for (int i = 0; i < coins.size(); i++) {
+            if (avatar.isColliding(coins.get(i))) {
                 Sound.playCoinMedia();
                 ++coinCount;
                 coins.remove(i);
             }
         }
 
-        if (avatar.isColliding(key) && !key.isPickedUp() ){
+        if (avatar.isColliding(key) && !key.isPickedUp()) {
             Sound.playDoorMedia();
             key.setPickedUp(true);
             door.setOpen(true);
-            door.getSprite().changeSprite(160,40);
+            door.getSprite().changeSprite(160, 40);
         }
 
         if (avatar.isColliding(door)) {
-            if (door.isOpen()){
-                if(levelProgression < 8){
-                    if(avatarLives < 5){
+            if (door.isOpen()) {
+                if (levelProgression < 8) {
+                    if (avatarLives < 5) {
                         ++avatarLives;
                     }
-                    totScore += (coinCount * 100 + timeScore*10);
+                    totScore += (coinCount * 100 + timeScore * 10);
                     loadNextLevel();
-                }else if (levelProgression == 9){
+                } else if (levelProgression == 9) {
                     animationTimer.stop();
                     Loader.loadLevelEditor(anchor);
-                }
-                else{
-                    totScore += (coinCount*100 + timeScore*10);
+                } else {
+                    totScore += (coinCount * 100 + timeScore * 10);
                     setEndScreen(true);
                 }
             }
         }
     }
+
 
     /**
      * Draws all of the objects onto the {@code Canvas}.
@@ -345,5 +346,15 @@ public class LevelController {
     private void setEndScreen(boolean gameCompleted) {
         animationTimer.stop();
         Loader.loadEndScreen(anchor, totScore, gameCompleted);
+    }
+
+    /**
+     * Checks if the Timer hits zero and if it does then the killAvatar method is called.
+     * @param time the ingame timer
+     */
+    private void checkForTimeout(double time){
+        if(time<=0) {
+            killAvatar();
+        }
     }
 }
