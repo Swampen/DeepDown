@@ -1,5 +1,5 @@
-/*level*/
-#level, #nameText, #totScoreText{
+/*level, levelEditor*/
+#level, #nameText, #totScoreText, #requiredText{
   -fx-font: 30px Verdana;
   -fx-font-weight: bold;
 }
@@ -11,8 +11,9 @@
 }
 
 
-/*level and endScreen*/
-#scoreText, #coinText, #livesText, #timeText, #totScoreText, #nameText, #levelProgressionText, #deathText{
+/*level, endScreen, levelEditor*/
+#scoreText, #coinText, #livesText, #timeText, #totScoreText,
+#nameText, #levelProgressionText, #deathText, #requiredText{
   -fx-fill: white;
   -fx-stroke: black;
   -fx-stroke-width: 1;
