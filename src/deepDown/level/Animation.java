@@ -7,6 +7,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+/**
+ * @author Ole-Martin Heggen
+ */
 public class Animation {
 
     /**

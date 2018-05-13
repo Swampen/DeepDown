@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class GameBoard {
 
     private final int level;
-    private double enemyVel;
+    private final double enemyVel;
     private final Image image;
     private Avatar avatar;
     private Key key;

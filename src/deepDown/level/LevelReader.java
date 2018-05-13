@@ -14,7 +14,7 @@ public class LevelReader {
     /**
      * Reads a .txt file and makes and 2D int array from the context.
      * @param path The path to the level.txt file.
-     * @return The 2D int array made from the .txt file
+     * @return The 2D int array made from the .txt file.
      */
     public static int[][] readLevel(String path){
         Scanner input = new Scanner(LevelReader.class.getResourceAsStream(path));

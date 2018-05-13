@@ -42,8 +42,6 @@ public class LevelEditorController {
     private final BooleanProperty mouseClicked = new SimpleBooleanProperty(false);
     private LevelEditor levelEditor;
     private File custom;
-    private String filepath;
-    private String file;
     private int gridSize;
 
     /**
@@ -80,8 +78,8 @@ public class LevelEditorController {
         anchor.getStylesheets().add("deepDown/resource/stylesheet.css");
 
 
-        filepath = new File("Files").getAbsolutePath();
-        file = "customLevel.txt";
+        String filepath = new File("Files").getAbsolutePath();
+        String file = "customLevel.txt";
         custom = new File(filepath, file);
         try {
             if(custom.exists()) {
