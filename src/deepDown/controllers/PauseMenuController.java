@@ -96,7 +96,7 @@ public class PauseMenuController {
 
     /**
      * The action performed when the "Save Game" button is pressed.
-     * Saves the Avatar's level progress, score and life total to an external file.
+     * Saves the player's level progress, score and life total to an external file.
      */
     public void saveGamePressed(){
         try {

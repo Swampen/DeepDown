@@ -31,7 +31,7 @@ public class Loader {
     }
 
     /**
-     * Loads FXML for the Level Editor from the pause menu using an FXMLLoader
+     * Loads FXML for the Level Editor from the pause menu using an FXMLLoader.
      * @param anchor Which {@code AnchorPane} the scene should be attached to.
      * @param stage The window for the pause menu
      */
@@ -49,7 +49,7 @@ public class Loader {
     }
 
     /**
-     * Loads the main menu from the pause menu using an FXMLLoader
+     * Loads the main menu from the pause menu using an FXMLLoader.
      * @param anchor Which {@code AnchorPane} the scene should be attached to.
      * @param stage The window for the pause menu
      */
@@ -67,7 +67,7 @@ public class Loader {
     }
 
     /**
-     * Loads the start menu when you start the game using an FXMLLoader
+     * Loads the start menu when you start the game using an FXMLLoader.
      * @param anchor Which {@code AnchorPane} the scene should be attached to.
      */
     public static void loadStartMenu(AnchorPane anchor){

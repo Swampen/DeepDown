@@ -350,7 +350,7 @@ public class LevelController {
 
     /**
      * Checks if the Timer hits zero and if it does then the killAvatar method is called.
-     * @param time the ingame timer
+     * @param time the ingame timer.
      */
     private void checkForTimeout(double time){
         if(time<=0) {

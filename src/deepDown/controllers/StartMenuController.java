@@ -200,7 +200,7 @@ public class StartMenuController {
 
     /**
      * The action performed when the "Load Game" button is pressed.
-     * Method for loading a previously saved game with the players
+     * Method for loading a previously saved game with the player's
      * stored score and lives.
      */
     public void loadGamePressed(){
@@ -229,6 +229,11 @@ public class StartMenuController {
         Loader.loadLeaderboard(anchor);
     }
 
+    /**
+     * The action performed when the "Level Editor" button is pressed.
+     * Method for loading the Level editor where the player
+     * can make their own custom levels.
+     */
     public void levelEditorButtonPressed(){
         animationTimer.stop();
         Loader.loadLevelEditor(anchor);

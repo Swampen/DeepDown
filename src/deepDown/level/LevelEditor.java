@@ -18,7 +18,7 @@ public class LevelEditor {
 
     /**
      * Constructor.
-     * @param gc Specified {@code GraphicsContext} from the {@code LevelEditorController}
+     * @param gc Specified {@code GraphicsContext} from the {@code LevelEditorController}.
      */
     public LevelEditor(GraphicsContext gc){
         this.gc = gc;

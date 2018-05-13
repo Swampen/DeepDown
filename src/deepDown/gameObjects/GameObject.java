@@ -55,6 +55,7 @@ public abstract class GameObject {
     }
 
     /**
+     * Gets the value of the property h.
      * @return Returns the {@code GameObject} height value.
      */
     public int getH() {

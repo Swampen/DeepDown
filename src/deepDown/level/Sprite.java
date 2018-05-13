@@ -26,7 +26,7 @@ public class Sprite{
     }
 
     /**
-     * Draws a sprite onto the specified GraphicsContext
+     * Draws a sprite onto the specified GraphicsContext.
      * @param gc The specified {@code GraphicsContext}.
      * @param go The {@code GameObject} to render.
      */
