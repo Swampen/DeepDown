@@ -14,7 +14,7 @@ import java.io.IOException;
 public class LevelEditor {
     private final Image image;
     private final GraphicsContext gc;
-    private int gridSize = 32;
+    private final int gridSize = 32;
 
     /**
      * Constructor.
@@ -47,7 +47,7 @@ public class LevelEditor {
     }
 
     /**
-     * Draws an 2D int array onto the {@code LevelEditorCanvas}.
+     * Draws an 2D int array onto the level editor's {@code Canvas}.
      * @param levelArray The 2D int array to be drawn onto the {@code Canvas}.
      */
     public void updateEditorCanvas(int[][] levelArray){
@@ -111,7 +111,7 @@ public class LevelEditor {
 
     /**
      * Gets the value of the property gridSize.
-     * @return Returns the Level Editor's grid size value.
+     * @return Returns the Level Editor's gridSize value.
      */
     public int getGridSize(){
         return gridSize;

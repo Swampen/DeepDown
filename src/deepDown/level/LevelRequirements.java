@@ -44,7 +44,8 @@ public class LevelRequirements {
 
     /**
      * Gets the value of the property avatarLimit.
-     * @return {@code true} if the avatar limit is reached, {@code false} otherwise.
+     * @return {@code true} if the avatar limit is reached,
+     * {@code false} by default.
      */
     public static boolean isAvatarLimit() {
         return avatarLimit;

@@ -20,7 +20,9 @@ public class Main extends Application {
         File filesFolder = new File("Files");
         try{
             if (!filesFolder.exists()){
-               filesFolder.mkdir();
+               if(filesFolder.mkdir()){
+                   System.out.println("Folder made");
+               }
             }
             else if (filesFolder.exists()){
                 System.out.println("Files folder already exists");

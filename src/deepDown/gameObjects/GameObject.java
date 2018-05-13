@@ -12,7 +12,7 @@ public abstract class GameObject {
     private double y;
     private final int h;
     private final int w;
-    private Sprite sprite;
+    private final Sprite sprite;
 
     /**
      * Constructor.
@@ -102,6 +102,7 @@ public abstract class GameObject {
      * that represents the intersection of the two rectangles.
      * If the two GameObjects don't intersect, it will return
      * an empty {@link Rectangle2D}.
+     * (Similar method with {@link java.awt.Rectangle}'s intersection method).
      * @param     other the specified {@code Rectangle}.
      * @return    the {@code Rectangle2D} that represents the
      *            largest intersection between this {@code GameObject}.

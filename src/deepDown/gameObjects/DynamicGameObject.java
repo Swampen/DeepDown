@@ -44,7 +44,7 @@ public abstract class DynamicGameObject extends GameObject {
     }
 
     /**
-     * Updates this {@code DynamicGameObjects}'s x and y position using velocities and time.
+     * Update this {@code DynamicGameObject}'s x and y position using velocities and time.
      * @param time Defines how much time since last frame.
      */
     public void posUpdate(double time) {
@@ -53,7 +53,7 @@ public abstract class DynamicGameObject extends GameObject {
     }
 
     /**
-     * Reverses this {@code DynamicGameObject}'s velocity on the X- and Y-axis.
+     * Reverse this {@code DynamicGameObject}'s velocity on the X- and Y-axis.
      */
     public void reverseVelo(){
         this.xVelo = -xVelo;
