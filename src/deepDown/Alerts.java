@@ -71,6 +71,10 @@ public class Alerts {
         return option.isPresent() && option.get() == ButtonType.OK;
     }
 
+    /**
+     * Shows and waits for an alert box when the player is about to quit the game
+     * @return {@code true} if the user press the OK button, {@code false} otherwise.
+     */
     public static Boolean quitGameConfirmation(){
         Alert a = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want quit the game?");
         Optional<ButtonType> option = a.showAndWait();
