@@ -101,6 +101,7 @@ public class GameBoard {
 
     /**
      * Gets the {@code Avatar} associated with this level.
+     * @return the avatar
      */
     public Avatar getAvatar() {
         return this.avatar;
@@ -108,6 +109,7 @@ public class GameBoard {
 
     /**
      * Gets the {@code Key} associated with this level.
+     * @return the key
      */
     public Key getKey(){
         return this.key;
@@ -115,6 +117,7 @@ public class GameBoard {
 
     /**
      * Gets the {@code Door} associated with this level.
+     * @return the door
      */
     public Door getDoor() {
         return door;
@@ -122,6 +125,7 @@ public class GameBoard {
 
     /**
      * Gets an {@code ArrayList<>} containing the walls associated with this level.
+     * @return the walls arraylist
      */
     public ArrayList<Wall> getWalls() {
         return this.walls;
@@ -129,6 +133,7 @@ public class GameBoard {
 
     /**
      * Gets an {@code ArrayList<>} containing the coins associated with this level.
+     * @return the coin array list
      */
     public ArrayList<Coin> getCoins() {
         return this.coins;
@@ -136,6 +141,7 @@ public class GameBoard {
 
     /**
      * Gets an {@code ArrayList<>} containing the enemies associated with this level.
+     * @return the enemy array list
      */
     public ArrayList<Enemy> getEnemies() {
         return this.enemies;
