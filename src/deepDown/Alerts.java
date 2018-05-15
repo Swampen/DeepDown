@@ -54,7 +54,6 @@ public class Alerts {
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setHeaderText("The level is not valid");
         a.setContentText("Please make sure you have the following: \n" +
-                            "  - At least one Coin\n" +
                             "  - One Key\n" +
                             "  - One Door\n" +
                             "  - One Avatar\n");
@@ -68,6 +67,12 @@ public class Alerts {
      */
     public static Boolean discardCustomLevel(){
         Alert a = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to discard your level?");
+        Optional<ButtonType> option = a.showAndWait();
+        return option.isPresent() && option.get() == ButtonType.OK;
+    }
+
+    public static Boolean quitGameConfirmation(){
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want quit the game?");
         Optional<ButtonType> option = a.showAndWait();
         return option.isPresent() && option.get() == ButtonType.OK;
     }
