@@ -1,41 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.*?>
-
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Pane id="level" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url(deepDown/resource/images/LevelBackground.png); -fx-background-size: 100% 100%;">
-         <children>
-            <Rectangle height="720.0" opacity="0.75" width="1280.0" />
-            <Canvas fx:id="canvas" height="720.0" width="1280.0" />
-            <AnchorPane id="labels" prefHeight="50.0" prefWidth="1280.0">
-               <children>
-                  <Text fx:id="scoreText" layoutX="14.0" layoutY="25.0" text="Score: 10000" />
-                  <Text fx:id="coinText" layoutX="335.0" layoutY="25.0" text="C: 10" />
-                  <Text fx:id="livesText" layoutX="880.0" layoutY="25.0" text="Lives: 3" />
-                  <Text fx:id="timeText" layoutX="1076.0" layoutY="25.0" text="Time: 2000" />
-                  <ImageView fx:id="coinScoreImage" layoutX="295.0" layoutY="-6.0" />
-               </children>
-            </AnchorPane>
-            <HBox alignment="CENTER" layoutY="685.0" prefHeight="25.0" prefWidth="1280.0">
-               <children>
-                  <Text fx:id="levelProgressionText" text="Level: 01" />
-               </children>
-            </HBox>
-            <Text fx:id="deathText" layoutX="634.0" layoutY="300.0" opacity="0.0" text="-1" />
-         </children>
-      </Pane>
-   </children>
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1">
+   <Pane id="level" prefHeight="720.0" prefWidth="1280.0"
+         style="-fx-background-image: url(deepDown/resource/images/LevelBackground.png); -fx-background-size: 100% 100%;">
+      <Rectangle height="720.0" opacity="0.75" width="1280.0"/>
+      <Canvas fx:id="canvas" height="720.0" width="1280.0"/>
+      <AnchorPane id="labels" prefHeight="50.0" prefWidth="1280.0">
+         <Text fx:id="scoreText" layoutX="14.0" layoutY="25.0" text="Score: 10000"/>
+         <Text fx:id="coinText" layoutX="335.0" layoutY="25.0" text="C: 10"/>
+         <Text fx:id="livesText" layoutX="880.0" layoutY="25.0" text="Lives: 3"/>
+         <Text fx:id="timeText" layoutX="1076.0" layoutY="25.0" text="Time: 2000"/>
+         <ImageView fx:id="coinScoreImage" layoutX="295.0" layoutY="-6.0"/>
+      </AnchorPane>
+      <HBox alignment="CENTER" layoutY="685.0" prefHeight="25.0" prefWidth="1280.0">
+         <Text fx:id="levelProgressionText" text="Level: 01"/>
+      </HBox>
+      <Text fx:id="deathText" layoutX="634.0" layoutY="300.0" opacity="0.0" text="-1"/>
+   </Pane>
 </AnchorPane>

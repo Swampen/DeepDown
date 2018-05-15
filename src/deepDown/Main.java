@@ -43,10 +43,8 @@ public class Main extends Application {
             Parent root = loader.load();
 
             stage.setOnCloseRequest(event -> {
-                if(Alerts.quitGameConfirmation()) {
-                    Platform.exit();
-                    System.exit(0);
-                }
+                Platform.exit();
+                System.exit(0);
             });
 
             Scene scene = new Scene(root);

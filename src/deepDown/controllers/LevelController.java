@@ -121,10 +121,8 @@ public class LevelController {
                 animationTimer.stop();
                 if (levelProgression < 9){
                     Loader.loadPauseMenu(anchor, levelProgression, totScore, avatarLives);
-
                 }else {
                     Loader.loadPauseMenuCustomLevel(anchor, levelProgression, totScore, avatarLives);
-
                 }
                 resetKeypresses();
                 lastCurrentTime = System.nanoTime();

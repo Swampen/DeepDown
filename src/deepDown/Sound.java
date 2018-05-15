@@ -6,6 +6,7 @@ import javafx.scene.media.MediaPlayer;
 /**
  * @author Ole-Martin Heggen
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class Sound {
     private static MediaPlayer bgMusicMediaPlayer;
     private static MediaPlayer gameSoundMediaPlayer;

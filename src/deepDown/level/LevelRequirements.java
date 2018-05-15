@@ -59,7 +59,7 @@ public class LevelRequirements {
         LevelRequirements.avatarLimit = avatarLimit;
     }
 
-    public static Boolean isValidLevel(int[][] levelArray){
+    public static Boolean isValidLevel(){
         return keyLimit && doorLimit && avatarLimit;
     }
 }

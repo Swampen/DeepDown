@@ -64,8 +64,7 @@ public class StartMenuController {
         anchor.setOnMouseMoved(e -> buttonVBox.setMouseTransparent(false));
 
         anchor.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-            if (e.getCode() == KeyCode.UP || e.getCode() == KeyCode.DOWN ||
-                    e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.RIGHT){
+            if (e.getCode() == KeyCode.UP || e.getCode() == KeyCode.DOWN){
                 buttonVBox.setMouseTransparent(true);
             }
             if (newGameButton.isFocused() && e.getCode() == KeyCode.ENTER){

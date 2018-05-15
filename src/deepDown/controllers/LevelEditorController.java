@@ -165,7 +165,7 @@ public class LevelEditorController {
      * Shows an error if the level requirements is not met.
      */
     public void playLevelPressed(){
-        if (LevelRequirements.isValidLevel(levelArray)) {
+        if (LevelRequirements.isValidLevel()) {
             levelEditor.saveCustomLevel(levelArray, custom);
             animationTimer.stop();
             Loader.loadLevel(anchor, 9, 0, 40);
