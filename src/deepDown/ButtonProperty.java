@@ -31,8 +31,9 @@ public class ButtonProperty {
 
     /**
      * Sets the image for the button without the need of an object.
-     * @param path The the image to this {@code Button}.
+     * @param path The image to this {@code Button}.
      * @param button The {@code Button} the image is applied to.
+     * @return the button with assigned image.
      */
     public static Button setStaticButtonImage(String path, Button button){
         Image image = new Image(ButtonProperty.class.getResourceAsStream(path));
