@@ -83,7 +83,7 @@ public class LevelController {
     @FXML
     private void initialize(){
         double enemyVel = 100;
-        timeScore = 20;
+        timeScore = 200;
         gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         GameBoard level = new GameBoard(levelProgression, enemyVel);
