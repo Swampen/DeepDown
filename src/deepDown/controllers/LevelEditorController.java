@@ -196,6 +196,7 @@ public class LevelEditorController {
      * Loads the start menu with FXML.
      */
     public void backToMenuPressed(){
+        animationTimer.stop();
         Loader.loadStartMenu(anchor);
     }
 
