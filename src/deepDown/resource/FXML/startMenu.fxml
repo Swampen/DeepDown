@@ -1,74 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
-<AnchorPane fx:id="anchor" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1">
-    <Pane style="-fx-background-image: url(deepDown/resource/images/Background.png); -fx-background-size: 100% 100%; ">
-        <Rectangle height="720.0" opacity="0.68" width="1280.0"/>
-        <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: transparent;">
-            <VBox fx:id="buttonVBox" alignment="CENTER" layoutX="-6.0" layoutY="143.0" prefHeight="500.0" prefWidth="1280.0"
-                  style="-fx-background-color: transparent;">
-                <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                        onAction="#newGamePressed" style="-fx-background-color: transparent;">
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                    <VBox.margin>
-                        <Insets/>
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="loadGameButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                        onAction="#loadGamePressed" style="-fx-background-color: transparent;">
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                    <VBox.margin>
-                        <Insets/>
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="levelEditorButton" alignment="CENTER" contentDisplay="CENTER"
-                        mnemonicParsing="false" onAction="#levelEditorButtonPressed"
-                        style="-fx-background-color: transparent;">
-                    <VBox.margin>
-                        <Insets/>
-                    </VBox.margin>
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                </Button>
-                <Button fx:id="leaderboardButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0"
-                        mnemonicParsing="false" onAction="#leaderboardButtonPressed"
-                        style="-fx-background-color: transparent;">
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                    <VBox.margin>
-                        <Insets/>
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="quitButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                        onAction="#quitButtonPressed" style="-fx-background-color: transparent;">
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                    <VBox.margin>
-                        <Insets/>
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="helpButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
-                        onAction="#helpButtonPressed" style="-fx-background-color: transparent;">
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                    <VBox.margin>
-                        <Insets/>
-                    </VBox.margin>
-                </Button>
-            </VBox>
-        </AnchorPane>
-    </Pane>
+
+<AnchorPane fx:id="anchor" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <Pane style="-fx-background-image: url(deepDown/resource/images/Background.png); -fx-background-size: 100% 100%; ">
+          <children>
+              <Rectangle height="720.0" opacity="0.68" width="1280.0" />
+              <AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: transparent;">
+                 <children>
+                     <VBox fx:id="buttonVBox" alignment="CENTER" layoutX="-6.0" prefHeight="643.0" prefWidth="1280.0" style="-fx-background-color: transparent;">
+                        <children>
+                        <ImageView fx:id="logo" fitHeight="144.0" fitWidth="713.0" pickOnBounds="true" preserveRatio="true" />
+                            <Button fx:id="newGameButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newGamePressed" style="-fx-background-color: transparent;">
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor>
+                                <VBox.margin>
+                                    <Insets />
+                                </VBox.margin>
+                            </Button>
+                            <Button fx:id="loadGameButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadGamePressed" style="-fx-background-color: transparent;">
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor>
+                                <VBox.margin>
+                                    <Insets />
+                                </VBox.margin>
+                            </Button>
+                            <Button fx:id="levelEditorButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#levelEditorButtonPressed" style="-fx-background-color: transparent;">
+                                <VBox.margin>
+                                    <Insets />
+                                </VBox.margin>
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor>
+                            </Button>
+                            <Button fx:id="leaderboardButton" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0" mnemonicParsing="false" onAction="#leaderboardButtonPressed" style="-fx-background-color: transparent;">
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor>
+                                <VBox.margin>
+                                    <Insets />
+                                </VBox.margin>
+                            </Button>
+                            <Button fx:id="quitButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#quitButtonPressed" style="-fx-background-color: transparent;">
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor>
+                                <VBox.margin>
+                                    <Insets />
+                                </VBox.margin>
+                            </Button>
+                            <Button fx:id="helpButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#helpButtonPressed" style="-fx-background-color: transparent;">
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor>
+                                <VBox.margin>
+                                    <Insets />
+                                </VBox.margin>
+                            </Button>
+                        </children>
+                     </VBox>
+                 </children>
+              </AnchorPane>
+          </children>
+       </Pane>
+   </children>
 </AnchorPane>

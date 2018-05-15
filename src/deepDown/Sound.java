@@ -7,6 +7,7 @@ import javafx.scene.media.MediaPlayer;
  * @author Ole-Martin Heggen
  */
 public class Sound {
+    private static MediaPlayer bgMusicMediaPlayer;
     private static MediaPlayer gameSoundMediaPlayer;
 
 
@@ -17,7 +18,7 @@ public class Sound {
     public static void playBackgroundMedia(){
         String mediaString = Sound.class.getResource("/deepDown/resource/sounds/backgroundMusic.mp3").toExternalForm();
         Media backgroundMedia = new Media(mediaString);
-        MediaPlayer bgMusicMediaPlayer = new MediaPlayer(backgroundMedia);
+        bgMusicMediaPlayer = new MediaPlayer(backgroundMedia);
         bgMusicMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         bgMusicMediaPlayer.play();
     }

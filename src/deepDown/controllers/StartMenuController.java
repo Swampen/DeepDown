@@ -7,6 +7,8 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -22,6 +24,7 @@ import java.io.IOException;
 public class StartMenuController {
 
     @FXML private AnchorPane anchor;
+    @FXML private ImageView logo;
     @FXML private Button newGameButton;
     @FXML private Button loadGameButton;
     @FXML private Button leaderboardButton;
@@ -46,6 +49,9 @@ public class StartMenuController {
      */
     @FXML
     public void initialize() {
+        Image logoImage = new Image(getClass().getResourceAsStream("/deepDown/resource/images/DeepDownLogo.png"));
+        logo.setImage(logoImage);
+
         newGame = new ButtonProperty(newGameButton);
         loadGame = new ButtonProperty(loadGameButton);
         levelEditor = new ButtonProperty(levelEditorButton);

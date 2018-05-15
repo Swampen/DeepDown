@@ -13,7 +13,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
  */
 public class LevelController {
 
-    private int levelProgression;
     @FXML private Canvas canvas;
     @FXML private AnchorPane anchor;
     @FXML private Text scoreText;
@@ -36,15 +34,15 @@ public class LevelController {
     @FXML private Text timeText;
     @FXML private Text levelProgressionText;
     @FXML private Text deathText;
-    @FXML private Label fpsLabel;
     @FXML private ImageView coinScoreImage;
 
     private GraphicsContext gc;
+    private int levelProgression;
+    private int totScore;
+    private int avatarLives;
     private double timeScore;
     private long lastCurrentTime = System.nanoTime();
     private int coinCount;
-    private int totScore;
-    private int avatarLives;
     private boolean endScreen = false;
 
     private final BooleanProperty upPressed = new SimpleBooleanProperty(false);
