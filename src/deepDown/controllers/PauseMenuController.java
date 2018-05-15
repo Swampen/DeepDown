@@ -196,6 +196,10 @@ public class PauseMenuController {
         Loader.loadStartMenuFromPause(parentAnchor, stage);
     }
 
+    /**
+     * The action performed when the "Back To Level Editor" button is pressed.
+     * Loads the level editor with FXML.
+     */
     public void backToLEButtonPressed(){
         animationTimer.stop();
         Loader.loadLevelEditorFromPause(parentAnchor, stage);

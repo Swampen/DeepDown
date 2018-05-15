@@ -93,15 +93,6 @@ public class StartMenuController {
             }
         });
 
-        menuAnimation();
-    }
-
-    /**
-     * Method for changing button animation when the button is in focus
-     * or when the the user hover over a button with the mouse.
-     */
-    private void menuAnimation() {
-
         animationTimer = new AnimationTimer(){
             public void handle(long now){
 
@@ -178,6 +169,7 @@ public class StartMenuController {
         };
         animationTimer.start();
     }
+
 
     /**
      * The action when the "New Game" button is pressed.
