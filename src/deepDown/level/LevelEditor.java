@@ -89,6 +89,7 @@ public class LevelEditor {
     /**
      * Saves the custom level to the Files folder.
      * @param array The 2D int array to be saved.
+     * @param f The custom file path.
      */
     public void saveCustomLevel(int[][] array, File f) {
         try {

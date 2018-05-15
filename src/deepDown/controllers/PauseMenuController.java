@@ -48,6 +48,7 @@ public class PauseMenuController {
     /**
      * Constructor.
      * @param stage The specified stage 'Add More'.
+     * @param parentAnchor The specified {@code AnchorPane} from the staged that called the constructor.
      * @param levelProgression What level is loaded which is used for saving.
      * @param totScore the players total score which is used for saving.
      * @param avatarLives the players life count which is used for saving.
