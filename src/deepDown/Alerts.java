@@ -11,7 +11,7 @@ import java.util.Optional;
 public class Alerts {
 
     /**
-     * Shows and waits for an alert box containing an error.
+     * Shows and waits for an alert box when no customLevel is present.
      */
     public static void noCustomLevel(){
         Alert a = new Alert(Alert.AlertType.ERROR, "Corrupted or no custom level");
@@ -20,7 +20,7 @@ public class Alerts {
     }
 
     /**
-     * Shows and waits for an alert box containing a message.
+     * Shows and waits for an alert box when you successfully save the game.
      */
     public static void gameSaved(){
         Alert a = new Alert(Alert.AlertType.INFORMATION, "Game saved");
@@ -29,7 +29,16 @@ public class Alerts {
     }
 
     /**
-     * Shows and waits for an alert box containing an error.
+     * Shows and waits an alert when you successfully save a level.
+     */
+    public static void levelSaved() {
+        Alert a = new Alert(Alert.AlertType.INFORMATION, "Level Saved");
+        a.setHeaderText(null);
+        a.showAndWait();
+    }
+
+    /**
+     * Shows and waits for an alert box when there is no save file present.
      */
     public static void noSaveFile(){
         Alert a = new Alert(Alert.AlertType.ERROR, "Save file missing or corrupted");
@@ -38,7 +47,8 @@ public class Alerts {
     }
 
     /**
-     * Shows and waits for an alert box containing an error.
+     * Shows and waits for an alert box when you make a custom level without
+     * the required sprites.
      */
     public static void notValidLevel(){
         Alert a = new Alert(Alert.AlertType.ERROR);
@@ -52,7 +62,8 @@ public class Alerts {
     }
 
     /**
-     * Shows and waits for an alert box containing a message.
+     * Shows and waits for an alert box when the player is about to discard
+     * the custom level.
      * @return {@code true} if the user pressed the OK button, {@code false} otherwise.
      */
     public static Boolean discardCustomLevel(){
