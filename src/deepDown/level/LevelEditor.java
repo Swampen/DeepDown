@@ -1,5 +1,6 @@
 package deepDown.level;
 
+import deepDown.Alerts;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -104,6 +105,7 @@ public class LevelEditor {
             BufferedWriter writer = new BufferedWriter(new FileWriter(f));
             writer.write(builder.toString());
             writer.close();
+            Alerts.levelSaved();
         } catch (IOException e){
             e.printStackTrace();
         }

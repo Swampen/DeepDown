@@ -235,9 +235,11 @@ public class StartMenuController {
      * Stops and closes the javaFX application.
      */
     public void quitButtonPressed(){
-        animationTimer.stop();
-        Platform.exit();
-        System.exit(0);
+        if(Alerts.quitGameConfirmation()) {
+            animationTimer.stop();
+            Platform.exit();
+            System.exit(0);
+        }
     }
 
     /**

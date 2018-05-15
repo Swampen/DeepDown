@@ -60,6 +60,7 @@ public class Leaderboard {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
 
             topScores.clear();
+            topName.clear();
 
             String[] scores = reader.readLine().split("-");
             String[] names = reader.readLine().split("-");

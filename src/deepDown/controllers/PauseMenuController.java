@@ -117,7 +117,9 @@ public class PauseMenuController {
      * Stops and closes the javaFX application.
      */
     public void quitGamePressed(){
-        Platform.exit();
-        System.exit(0);
+        if (Alerts.quitGameConfirmation()) {
+            Platform.exit();
+            System.exit(0);
+        }
     }
 }

@@ -54,11 +54,9 @@ public class LeaderboardController {
      */
     private void fillScores(Text nr, int x, String name, String score) {
         StringBuilder dot = new StringBuilder(".");
-        for(double i = 0; i < 80; i++){
-            if(nr.getLayoutBounds().getWidth() < (1280-32)){
-                dot.append(".");
-                nr.setText(x +". " + name + dot + score);
-            }
+        while(nr.getLayoutBounds().getWidth() < (1280-32)){
+            dot.append(".");
+            nr.setText(x +". " + name + dot + score);
         }
     }
 
