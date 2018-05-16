@@ -58,11 +58,13 @@ public class LevelReader {
             while (input.hasNextLine()){
                 String columnsRead = input.nextLine();
                 if (columnsRead.length() != 63){
+                    Alerts.noCustomLevel();
                     return null;
                 }
                 rowsRead++;
             }
             if (rowsRead != rows){
+                Alerts.noCustomLevel();
                 return null;
             }
 
@@ -75,8 +77,9 @@ public class LevelReader {
                 }
             }
         } catch (FileNotFoundException e) {
-            Alerts.noCustomLevel();
             e.printStackTrace();
+            Alerts.noCustomLevel();
+            return null;
         }
         return level;
     }
