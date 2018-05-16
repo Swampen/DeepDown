@@ -188,6 +188,10 @@ public class LevelEditorController {
      */
     public void loadLevelPressed(){
         levelArray = LevelReader.readCustomLevel();
+        if (levelArray == null){
+            levelArray = levelEditor.getLevelArray();
+            Alerts.noCustomLevel();
+        }
         levelEditor.updateEditorCanvas(levelArray);
     }
 

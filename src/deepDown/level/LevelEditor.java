@@ -39,8 +39,8 @@ public class LevelEditor {
                     levelArray[i][j] = 1;
                     gc.drawImage(image, 0, 0, 40, 40, j * 32, i * 32, 32, 32);
                 } else {
-                    gc.fillRect(j * 32, i * 32, 32, 32);
                     levelArray[i][j] = 0;
+                    gc.fillRect(j * 32, i * 32, 32, 32);
                 }
             }
         }

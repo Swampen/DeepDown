@@ -4,6 +4,7 @@ import deepDown.Alerts;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -46,6 +47,8 @@ public class LevelReader {
 
         int rows = 18;
         int columns = 32;
+        int rowsRead = 0;
+        String columnsRead = null;
         int[][] level = new int[rows][columns];
 
         try {
@@ -53,6 +56,19 @@ public class LevelReader {
             String file = "customLevel.txt";
             File f = new File(filepath, file);
             Scanner input = new Scanner(f);
+
+            while (input.hasNextLine()){
+                columnsRead = input.nextLine();
+                if (columnsRead.length() != 63){
+                    return null;
+                }
+                rowsRead++;
+            }
+            if (rowsRead != rows){
+                return null;
+            }
+
+            input = new Scanner(f);
             for (int i=0; i<rows; i++){
                 for(int j=0; j<columns; j++){
                     if(input.hasNextInt()){

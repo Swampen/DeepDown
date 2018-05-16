@@ -11,7 +11,7 @@ import java.util.Optional;
 public class Alerts {
 
     /**
-     * Shows and waits for an alert box when no customLevel is present.
+     * Shows and waits for an alert box when no customLevel is present or corrupted.
      */
     public static void noCustomLevel(){
         Alert a = new Alert(Alert.AlertType.ERROR, "Corrupted or no custom level");
